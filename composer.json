@@ -1,10 +1,9 @@
 {
    "require": {
 	    "solarium/solarium": "3.2.0",
-      	"kriswallsmith/assetic": "1.2.0"
-   },
+      "stolz/assets": "dev-master"
+	},
    "config": {
       "vendor-dir": "extensions/vendors/"
   } 
 }
-

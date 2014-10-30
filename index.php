@@ -38,6 +38,7 @@ if(file_exists(XIMDEX_ROOT_PATH . '/conf/install-params.conf.php') )
 
 include_once(XIMDEX_ROOT_PATH."/inc/modules/ModulesManager.class.php");
 require_once(XIMDEX_ROOT_PATH . '/inc/fsutils/DiskUtils.class.php');
+require_once(XIMDEX_ROOT_PATH . '/extensions/vendors/autoload.php');
 
 ModulesManager::file('/inc/utils.inc');
 ModulesManager::file('/inc/persistence/XSession.class.php');
