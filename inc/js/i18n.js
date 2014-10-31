@@ -24,5 +24,9 @@
  */
  
 var _ = t = translate = function(input) {	
-	return X.i18nStrings[input] || input;
+	if ( typeof X.i18nStrings === 'undefined' ){
+		return input ;
+	} else {
+		return   X.i18nStrings[input]; 
+	}
 };
