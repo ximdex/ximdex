@@ -25,17 +25,21 @@
  */
 
 
-
-
-if (!defined('XIMDEX_ROOT_PATH'))
+if (!defined('XIMDEX_ROOT_PATH')) {
 	define('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) . "/../../"));
+}
 
-if (!defined('CLI_MODE'))
+if (!defined('CLI_MODE')) {
 	define('CLI_MODE', 0);
+}
+
+// Composer AutoLoad
+include_once(XIMDEX_ROOT_PATH . '/extensions/vendors/autoload.php');
 
 include_once(XIMDEX_ROOT_PATH . '/inc/modules/modules.const');
 include_once(XIMDEX_ROOT_PATH . '/inc/modules/ModulesConfig.class.php');
 include_once(XIMDEX_ROOT_PATH . '/inc/fsutils/FsUtils.class.php');
+
 ModulesManager::file( '/conf/extensions.conf.php');
 ModulesManager::file(MODULES_INSTALL_PARAMS);
 
@@ -49,6 +53,8 @@ class ModulesManager {
 	private static $core_modules = array("ximIO", "ximSYNC");
 	private static $deprecated_modules = array("ximDAV", "ximTRASH","ximLOADERDEVEL","ximTHEMES","ximOTF","ximPAS","ximSIR","ximDEMOS","ximPORTA","ximTEST","ximTAINT");
 	public static $msg = null;
+	public static $loadedFiles = array();
+
 
 	/**
 		Core modules are specials: 
@@ -146,9 +152,11 @@ class ModulesManager {
 
 	function hasMetaParent($name) {
 		$metaParent = self::getMetaParent();
-		if(!empty($metaParent) && in_array($name, array_keys($metaParent)) && $this->caller != $metaParent[$name])
+		if(!empty($metaParent) && isset( $metaParent[ $name ] ) && $this->caller != $metaParent[$name]) {
 			return $metaParent;
-		return false;
+		} else {
+			return false;
+		}
 	}
 
 	function moduleExists($name) {
@@ -369,29 +377,23 @@ class ModulesManager {
 	public static function file($_file, $_module = 'XIMDEX') {
 		if("XIMDEX" == $_module) {
 			$dir = '';
-	    	}else {
+	    }else {
 			$dir = self::path($_module);
-	    	}
+	    }
+	    
+	    $filePath = XIMDEX_ROOT_PATH."{$dir}{$_file}" ;
+	    // only load new files
+	    if ( in_array( $filePath, self::$loadedFiles)) {
+	    	error_log( 'SI_Cargado: ' . $filePath ) ;
+	    	return true ;
+	    }
 
-		 //$trace = debug_backtrace();
-		if(file_exists(XIMDEX_ROOT_PATH."{$dir}{$_file}")){
-	    		if( ( self::isEnabled($_module) || 'XIMDEX' == $_module) ) {
-				// $from =  $trace[0]["file"]." in line ".$trace[0]["line"];
-			     //XMD_Log::info(" load file: <em>$_file</em> <strong>{$_module}</strong>  in $from <br>");
-		//	 	echo " load file: <em>$_file</em> <strong>{$_module}</strong>  in $from <br>";
-			 	return require_once(XIMDEX_ROOT_PATH."{$dir}{$_file}");
-	    		}else {
-        //	$from =  $trace[1]["file"]." in line ".$trace[1]["line"];
-	      //XMD_Log::info("Not load file: <em>$_file</em> necesita <strong> {$_module}</strong>  in $from ");
-		  // 	echo "Not load file: <em>$_file</em> necesita <strong>{$_module}</strong>  in $from <br>";
-	    		}
-
-		}
-		else{
-
-			//$from =  $trace[0]["file"]." in line ".$trace[0]["line"];
-			//echo "File not found: <em>$_file</em> of <strong>{$_module}</strong> module in $from <br>";
-		}
+		if ( file_exists( $filePath ) && ( self::isEnabled($_module) || 'XIMDEX' == $_module) ) {
+			// put filename on list of loaded files
+			array_push( self::$loadedFiles , $filePath );
+  			error_log( 'NO_Cargado: ' . count( self::$loadedFiles ) . ' ' . $filePath    ) ;
+	 		return require_once($filePath);
+	    }
+		
 	}	
 }
-?>
