@@ -40,6 +40,37 @@ require_once(XIMDEX_ROOT_PATH . '/inc/model/ActionsStats.class.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/notifications/AbstractNotificationStrategy.class.php');
 
 
+class AssetManager  extends \Stolz\Assets\Manager {
+
+
+	public function getMinJsFile( ) {
+		$timestamp = (intval($this->pipeline) > 1) ? '?' . $this->pipeline : null;
+		$file = md5($timestamp . implode($this->js)).'.js';
+		$relative_path = "{$this->js_dir}/{$this->pipeline_dir}/$file";
+		$absolute_path = $this->public_dir . DIRECTORY_SEPARATOR . $this->js_dir . DIRECTORY_SEPARATOR . $this->pipeline_dir . DIRECTORY_SEPARATOR . $file;
+
+		// If pipeline exist return it
+		if(file_exists($absolute_path))
+			return $relative_path . $timestamp;
+
+		// Create destination directory
+		$directory = $this->public_dir . DIRECTORY_SEPARATOR . $this->js_dir . DIRECTORY_SEPARATOR . $this->pipeline_dir;
+		if( ! is_dir($directory))
+			mkdir($directory, 0777, true);
+
+		// Concatenate files
+		$buffer = $this->gatherLinks($this->js);
+
+		// Minifiy
+		// $min = \JSMin::minify($buffer);
+		$min  =   $buffer ;
+		// Write file
+		file_put_contents($absolute_path, $min);
+
+		return $relative_path . $timestamp;
+	}
+}
+
 /**
  *
  * @brief Base abstract class for Actions
@@ -233,6 +264,37 @@ class ActionAbstract extends IController {
 		$this->request->setParam("locale", XSession::get('locale'));
 
 		$getTextJs = new ParsingJsGetText();
+
+		// only create an asset package where js files are more than 3 
+		if ( false &&  count( $this->_js ) > 3 ) {
+
+ 
+			$assetConfig = array(
+				'collections' => array(),
+    			'autoload' => array(),
+			    'pipeline' => 10,
+			    'public_dir' => XIMDEX_ROOT_PATH ,
+			    'js_dir' => '' ,
+			    'pipeline_dir' => '/data/tmp/cache/js/min/' ,
+			);
+ 		
+
+ 			$assets = new AssetManager($assetConfig);
+ 			foreach( $this->_js as $item ) {  
+ 				if ( substr( $item, 0, 1) == '/') {
+ 					$item = substr( $item, 1 ) ;
+ 				}
+ 				$assets->addJs(  $item  );
+ 				error_log( 'adding: ' .  $item  ) ;
+ 			 
+ 			}
+ 			$this->_js = array( $assets->getMinJsFile() ) ;
+//  			error_log( json_encode( $assets->js() )) ;
+
+		}
+
+
+
 
 		$this->request->setParam("js_files",  $getTextJs->getTextArrayOfJs($this->_js));
 		$this->request->setParam("css_files", $this->_css);
