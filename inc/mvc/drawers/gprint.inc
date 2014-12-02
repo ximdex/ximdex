@@ -225,8 +225,8 @@ function gPrintBodyBegin()
 
 function gPrintBodyEnd()
 	{
-	$actionID = Request::get("actionid");
-	$nodeID = Request::get("nodeid");
+	$actionID = \Ximdex\Utils\Request::get("actionid");
+	$nodeID = \Ximdex\Utils\Request::get("nodeid");
 
 	if($nodeID && $actionID)
 		{

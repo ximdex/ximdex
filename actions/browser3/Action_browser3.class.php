@@ -347,7 +347,7 @@ class Action_browser3 extends ActionAbstract
     protected function _search($handler, $output, $query)
     {
 
-        $request = new Request();
+        $request = new \Ximdex\Utils\Request();
         $request->setParameters(array(
             'handler' => $handler,
             'output' => $output,

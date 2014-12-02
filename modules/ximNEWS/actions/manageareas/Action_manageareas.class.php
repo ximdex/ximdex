@@ -104,8 +104,8 @@ class Action_manageareas extends ActionAbstract
 
     public function createArea() {
 
-		$name = Request::post("area_name");
-		$description = Request::post("area_description");
+		$name = \Ximdex\Utils\Request::post("area_name");
+		$description = \Ximdex\Utils\Request::post("area_description");
 
 		if(!ximNEWS_Adapter::createArea($name, $description)) {
 			$this->messages->add(_("Category creation failed. The operation was NOT performed successfully"), MSG_TYPE_NOTICE);
@@ -118,9 +118,9 @@ class Action_manageareas extends ActionAbstract
 
     public function modifyArea() {
 
-		$idArea = Request::post("area_id");
-		$name = Request::post("area_name");
-		$description = Request::post("area_description");
+		$idArea = \Ximdex\Utils\Request::post("area_id");
+		$name = \Ximdex\Utils\Request::post("area_name");
+		$description = \Ximdex\Utils\Request::post("area_description");
 
 		$objAreas = new XimNewsAreas($idArea);
 		$objAreas->set('Name', \Ximdex\XML\Base::recodeSrc($name, \Ximdex\XML\XML::UTF8));
@@ -135,4 +135,3 @@ class Action_manageareas extends ActionAbstract
 		$this->render(array('messages' => $this->messages->messages), '', 'messages.tpl');
     }
 }
-?>

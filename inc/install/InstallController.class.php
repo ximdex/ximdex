@@ -23,8 +23,6 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
-require_once(XIMDEX_ROOT_PATH . '/inc/mvc/Request.class.php');
-require_once(XIMDEX_ROOT_PATH . '/inc/mvc/Response.class.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/mvc/mvc.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/install/InstallStepFactory.class.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/install/managers/InstallManager.class.php');
@@ -48,8 +46,8 @@ class InstallController extends IController {
 	 */
 	public function __construct(){
 		$this->installManager = new InstallManager(InstallManager::WEB_MODE);
-		$this->request = new Request();
-		$this->response = new Response();
+		$this->request = new \Ximdex\Utils\Request();
+		$this->response = new \Ximdex\Utils\Response();
 		$this->steps = $this->installManager->getSteps();
 		$currentState = $this->installManager->getCurrentState();
 		if (!$currentState){

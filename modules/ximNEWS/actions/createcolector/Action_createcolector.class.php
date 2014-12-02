@@ -70,26 +70,26 @@ class Action_createcolector extends ActionAbstract {
 
 	   	$data = array();
 
-	   	$namelst = Request::post("namelst");
-	   	$idNode = Request::post("nodeid");
-	   	$lista = Request::post("listaid");
-	   	$tipo = Request::post("tipo");
-	   	$data['colector'] = Request::post("colector");
-	   	$template = Request::post("template");
-	   	$data['languages'] = Request::post("langidlst");
-	   	$data['aliasLang'] = Request::post("namelst");
-	   	$data['channels'] = Request::post("channellst");
-	   	$timeToGenerateEnable = (int) Request::post("timetogenerateenable");
-	   	$newsToGenerateEnable = (int) Request::post("newstogenerateenable");
-	   	$timeToGenerate = Request::post("timetogenerate");
-	   	$newsToGenerate = Request::post("newstogenerate");
-	   	$newsPerBull = Request::post("newsperbull");
-	   	$data['master'] = Request::post("master");
-			$data['sortnews'] = Request::post("order");
-	   	$canalCorreo = Request::post("canal_correo");
-	   	$data['idarea'] = (int) Request::post("idarea");
-	   	$data['global'] = Request::post("global");
-	   	$data['paginacion'] = strtolower(Request::post("paginacion")) == 'si' ? true : false;
+	   	$namelst = \Ximdex\Utils\Request::post("namelst");
+	   	$idNode = \Ximdex\Utils\Request::post("nodeid");
+	   	$lista = \Ximdex\Utils\Request::post("listaid");
+	   	$tipo = \Ximdex\Utils\Request::post("tipo");
+	   	$data['colector'] = \Ximdex\Utils\Request::post("colector");
+	   	$template = \Ximdex\Utils\Request::post("template");
+	   	$data['languages'] = \Ximdex\Utils\Request::post("langidlst");
+	   	$data['aliasLang'] = \Ximdex\Utils\Request::post("namelst");
+	   	$data['channels'] = \Ximdex\Utils\Request::post("channellst");
+	   	$timeToGenerateEnable = (int) \Ximdex\Utils\Request::post("timetogenerateenable");
+	   	$newsToGenerateEnable = (int) \Ximdex\Utils\Request::post("newstogenerateenable");
+	   	$timeToGenerate = \Ximdex\Utils\Request::post("timetogenerate");
+	   	$newsToGenerate = \Ximdex\Utils\Request::post("newstogenerate");
+	   	$newsPerBull = \Ximdex\Utils\Request::post("newsperbull");
+	   	$data['master'] = \Ximdex\Utils\Request::post("master");
+		$data['sortnews'] = \Ximdex\Utils\Request::post("order");
+	   	$canalCorreo = \Ximdex\Utils\Request::post("canal_correo");
+	   	$data['idarea'] = (int) \Ximdex\Utils\Request::post("idarea");
+	   	$data['global'] = \Ximdex\Utils\Request::post("global");
+	   	$data['paginacion'] = strtolower(\Ximdex\Utils\Request::post("paginacion")) == 'si' ? true : false;
 
 	   	$ximNewsColector = new XimNewsColector($idNode);
 	   	$node = new Node($idNode);

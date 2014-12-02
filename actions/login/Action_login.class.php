@@ -24,8 +24,6 @@
  *                                                                            *
  ******************************************************************************/
 
-require_once(XIMDEX_ROOT_PATH . '/inc/fsutils/FsUtils.class.php');
-require_once(XIMDEX_ROOT_PATH . '/inc/mvc/Request.class.php');
 //
 require_once(XIMDEX_ROOT_PATH . '/inc/auth/Authenticator.class.php');
 require_once(XIMDEX_ROOT_PATH . '/conf/stats.conf');
@@ -101,10 +99,10 @@ class Action_login extends ActionAbstract {
 
 	function check() {
 		$stopper = file_exists(\App::getValue( "AppRoot") . \App::getValue( "TempRoot") . "/login.stop");
-		$user_lower = strtolower(Request::post('user'));
-		$user = Request::post('user');
-		$password = Request::post('password');
-		$formsent = Request::post('login');
+		$user_lower = strtolower(\Ximdex\Utils\Request::post('user'));
+		$user = \Ximdex\Utils\Request::post('user');
+		$password = \Ximdex\Utils\Request::post('password');
+		$formsent = \Ximdex\Utils\Request::post('login');
 
 		$this->check_disk_space();
 		setcookie("expired","",time()-3600);
@@ -132,8 +130,8 @@ class Action_login extends ActionAbstract {
 			\Ximdex\Utils\Session::set('context', 'ximdex');
 			$this->logSuccessAction();
 
-			if (Request::get('backto')) {
-				header(sprintf('Location: %s', base64_decode(Request::get('backto'))));
+			if (\Ximdex\Utils\Request::get('backto')) {
+				header(sprintf('Location: %s', base64_decode(\Ximdex\Utils\Request::get('backto'))));
 			}else {
 					header(sprintf("Location: %s", \App::getValue( 'UrlRoot')));
 			}

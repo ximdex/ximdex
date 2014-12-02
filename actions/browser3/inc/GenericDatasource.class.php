@@ -137,7 +137,7 @@ class GenericDatasource extends AbstractDatasource {
 		$entities = !is_array($entities) ? array($entities) : $entities;
 
 		$ret = array();
-		$request = new Request();
+		$request = new \Ximdex\Utils\Request();
 		foreach ($entities as $entity) {
 
 			if (empty($entity)) {

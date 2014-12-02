@@ -20,15 +20,13 @@
  *
  *  If not, visit http://gnu.org/licenses/agpl-3.0.html.
  *
- *  @author Ximdex DevTeam <dev@ximdex.com>
- *  @version $Revision$
+ * @author Ximdex DevTeam <dev@ximdex.com>
+ * @version $Revision$
  */
 
 
-
-
 if (!defined('XIMDEX_ROOT_PATH')) {
-	define('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) .  "/../../"));
+    define('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) . "/../../"));
 }
 
 require_once(XIMDEX_ROOT_PATH . '/services/pull/Pull.class.php');
@@ -38,21 +36,23 @@ require_once(XIMDEX_ROOT_PATH . '/services/pull/Pull.class.php');
 if (\Ximdex\Utils\Session::check()) {
 
 
-	\Ximdex\Utils\Session::set('context', 'ximdex');
+    \Ximdex\Utils\Session::set('context', 'ximdex');
 
-	$args = array('idportal' => Request::get('idportal'), 'idnode' => Request::get('idnode'),
-			'idchannel' => Request::get('idchannel'));
+    $args = array(
+        'idportal' => \Ximdex\Utils\Request::get('idportal'),
+        'idnode' => \Ximdex\Utils\Request::get('idnode'),
+        'idchannel' => \Ximdex\Utils\Request::get('idchannel')
+    );
 
-	$method = Request::get('method');
-	$method = empty($method) ? 'getcontent' : $method;
+    $method = \Ximdex\Utils\Request::get('method');
+    $method = empty($method) ? 'getcontent' : $method;
 
-	$pull = new Pull();
+    $pull = new Pull();
 
-	$idPortalVersion = Request::get('idportalversion');
-	$args['idportalversion'] = empty($idPortalVersion) ? $pull->get_current_portal_version($args) : $idPortalVersion;
+    $idPortalVersion = \Ximdex\Utils\Request::get('idportalversion');
+    $args['idportalversion'] = empty($idPortalVersion) ? $pull->get_current_portal_version($args) : $idPortalVersion;
 
-	echo $pull->$method($args);
+    echo $pull->$method($args);
 } else {
-	echo 'Access denied';
+    echo 'Access denied';
 }
-?>

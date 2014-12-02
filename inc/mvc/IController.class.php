@@ -26,9 +26,6 @@
 
 
 
-require_once(XIMDEX_ROOT_PATH . '/inc/mvc/Request.class.php');
-require_once(XIMDEX_ROOT_PATH . '/inc/mvc/Response.class.php');
-
 /**
  *
  * @brief Controller pseudo abstract class for Actions, Applications and Controllers
@@ -72,8 +69,8 @@ class IController {
     function __construct() {
     	$this->hasError = false;
     	$this->messages = new \Ximdex\Utils\Messages();
-		$this->request = new Request();
-		$this->response = new Response();
+		$this->request = new  \Ximdex\Utils\Request();
+		$this->response = new \Ximdex\Utils\Response();
     }
 
 	/**
@@ -113,5 +110,4 @@ class IController {
 		// Registra un apunte en el log
 		XMD_Log::error($msg);
 	}
-}
-?>
+} 

@@ -30,7 +30,6 @@ if (!defined('XIMDEX_ROOT_PATH')) {
     define ('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
 }
 
-require_once(XIMDEX_ROOT_PATH . '/inc/mvc/Response.class.php');
 
 /** @const DEFAULT_SESSION - Name of default session */
 define('DEFAULT_SESSION', 'SessionID');
@@ -174,7 +173,7 @@ class Session {
 
         if (!self::exists('logged') && "installer" != $_GET["action"]) {
             if($redirect) {
-                $response = new \Response();
+                $response = new \Ximdex\Utils\Response();
                 $response->sendStatus(sprintf("Location: %s/", \App::getValue( 'UrlRoot')), true, 301);
                 setcookie("expired", "1", time() + 60);
                 die();

@@ -385,7 +385,7 @@ class Action_common implements APIRestAction, SecuredAction{
 
     /**
      * <p>Creates an error response, finishing the execution of the script</p>
-     * @param Response $response The response object
+     * @param \Ximdex\Utils\Response $response The response object
      * @param string $message The message of the response
      * @param int $code The code of the response
      * 
@@ -397,5 +397,3 @@ class Action_common implements APIRestAction, SecuredAction{
     }
 
 }
-
-?>

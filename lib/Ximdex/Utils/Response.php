@@ -24,9 +24,8 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
-if (!defined('XIMDEX_ROOT_PATH')) {
-    define('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) . '/../../'));
-}
+
+namespace Ximdex\Utils ;
 
 /**
  *
@@ -57,7 +56,6 @@ class Response {
      * A�adimos un valor a un array
      * @param $key
      * @param $value
-     * @return unknown_type
      */
     public function set($key, $value) {
         $this->_headers->set($key, $value);
@@ -66,7 +64,7 @@ class Response {
     /**
      *
      * @param $key
-     * @return unknown_type
+     * @return mixed
      */
     public function get($key) {
         return $this->_headers->get($key);
@@ -74,7 +72,6 @@ class Response {
 
     /**
      *
-     * @return unknown_type
      */
     public function sendHeaders() {
         echo ob_get_clean(); // asegura que no ha habido escritura antes de enviar las cabeceras
@@ -102,7 +99,7 @@ class Response {
 
     /**
      *
-     * @return unknown_type
+     * @return string
      */
     public function getContent() {
         return $this->_content;
@@ -111,7 +108,6 @@ class Response {
     /**
      *
      * @param $content
-     * @return unknown_type
      */
     public function setContent($content) {
         $this->_content = $content;
@@ -187,5 +183,3 @@ class Response {
     }
 
 }
-
-?>

@@ -50,10 +50,10 @@ class ResponseBuilder {
  
     /**
      * <p>Response builder using the response given as parameter or creating a new one</p>
-     * @param Response $response 
+     * @param \Ximdex\Utils\Response $response
      */
-    public function __construct(Response $response = null) {
-        $this->response = $response == NULL ? new Response() : $response;
+    public function __construct(\Ximdex\Utils\Response $response = null) {
+        $this->response = $response == NULL ? new \Ximdex\Utils\Response() : $response;
         $this->responseArray = array('error' => 0 , 'data' => array());
     }
     
@@ -94,7 +94,7 @@ class ResponseBuilder {
     
     /**
      * <p>Builds the response and return it</p>
-     * @return Response the created or modified response object
+     * @return \Ximdex\Utils\Response the created or modified response object
      */
     public function build() {
         return $this->response;
@@ -102,13 +102,11 @@ class ResponseBuilder {
     
     /**
      * <p>Sets the Response instance to be used to generate the response</p>
-     * @param Response $response the response
+     * @param \Ximdex\Utils\Response $response the response
      * @return ResponseBuilder
      */
-    public function setResponse(Response $response) {
+    public function setResponse(\Ximdex\Utils\Response $response) {
         $this->response = $response;
         return $this;
     }
 }
-
-?>
