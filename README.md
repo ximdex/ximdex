@@ -49,18 +49,20 @@ Ximdex CMS is a Semantic Content Management System (CMS) that allows the manipul
   -  In the client side: Firefox (>= 5.0) with Javascript and cookies enabled.
   -  An internet connection if you want to use automatic recommendations (as semantic annotations) or publishing into the cloud.
  
-### Ximdex developer's guide
+* Ximdex developer's guide
+  ------------------------
 
-This repo contains all the required dependencies to use Ximdex. If you want to execute tests, you have to download the developer dependecies using:
-
+  This repo contains all the required dependencies to use Ximdex. If you want to execute tests, you have to download the developer dependecies using:
+    
 ```{r, engine='bash'}
-composer install --dev
+  composer install --dev
 ```
 
-#### Important
+* Important
+  ------------------------
 
-If you are going to do a pull request ensure that you don't commit the developer dependencies. You can remove them using:
-
+  If you are going to do a pull request ensure that you don't commit the developer dependencies. You can remove them using:
+    
 ```{r, engine='bash'}
-composer install --no-dev
+    composer install --no-dev
 ```
