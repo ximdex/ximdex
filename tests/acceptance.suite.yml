@@ -18,11 +18,3 @@ modules:
              window_size: 1124x850
         - Db:
              cleanup: true
-
-
-    config:
-        Db:
-            dsn: 'mysql:host=db;dbname=ximdex'
-            user: 'ximdex'
-            password: 'ximdex'
-            dump: 'tests/_data/dump.sql'

@@ -15,7 +15,7 @@ extensions:
 modules:
     config:
         Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: tests/_data/dump.sql
+            dsn: 'mysql:host=db;dbname=ximdex'
+            user: 'ximdex'
+            password: 'ximdex'
+            dump: 'tests/_data/dump.sql'
