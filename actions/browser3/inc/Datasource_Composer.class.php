@@ -34,7 +34,7 @@ ModulesManager::file('/actions/composer/Action_composer.class.php');
 
  // Standard data source.
 
-class Datasource_Composer extends AbstractDatasource implements IDatasource {
+class Datasource_Composer extends AbstractDatasource {
 
 	private $fc = null;
 

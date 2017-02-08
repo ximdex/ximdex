@@ -61,7 +61,12 @@ class GenericDatasource extends AbstractDatasource {
 
 //		if (self::$datasource === null) {
 			if (self::$confFile === null) {
-				self::$confFile =  ModulesManager::file('/conf/browser.php');
+				self::$confFile =  array(
+                    'defaultDatasource' => 'Composer',
+                    'datasources' => array(
+                        'Composer' => array()
+                    )
+                );
 			}
 
 			$datasource = self::$confFile['defaultDatasource'];
