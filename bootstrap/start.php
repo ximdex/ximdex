@@ -98,8 +98,6 @@ App::setValue( 'class::definition::DB',             '/inc/db/DB.class.php' );
 
 // Extensions setup
 
-include_once( App::getValue('XIMDEX_ROOT_PATH') . '/conf/extensions.conf.php');
-
 $mManager = new ModulesManager;
 
 /**

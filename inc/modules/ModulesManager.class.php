@@ -37,7 +37,6 @@ require_once (XIMDEX_ROOT_PATH . '/extensions/vendors/autoload.php');
 
 include_once(XIMDEX_ROOT_PATH . '/inc/modules/modules.const');
 include_once(XIMDEX_ROOT_PATH . '/inc/modules/ModulesConfig.class.php');
-ModulesManager::file( '/conf/extensions.conf.php');
 ModulesManager::file(MODULES_INSTALL_PARAMS);
 
 /**

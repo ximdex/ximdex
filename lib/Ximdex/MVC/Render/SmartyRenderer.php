@@ -27,7 +27,7 @@
 
 namespace Ximdex\MVC\Render;
 
-use Extensions;
+use Ximdex\Utils\Extensions as Extensions;
 use ModulesManager;
 use Smarty;
  use Ximdex\Widgets\Widget;
@@ -73,7 +73,7 @@ class SmartyRenderer extends AbstractRenderer
 		//default theme: "ximdex_theme"
 		$smarty->assign("theme", "ximdex_theme");
 		//Assign extensions class
-		$smarty->registerClass("EXTENSIONS", "Extensions");
+		$smarty->registerClass("EXTENSIONS", "Ximdex\\Utils\\Extensions");
 
 		//Encode the template about the config value
 		$smarty->autoload_filters = array('pre' => array('encodingTemplate'));

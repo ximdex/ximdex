@@ -36,6 +36,7 @@ use Ximdex\Parsers\ParsingRng;
 use Ximdex\Parsers\ParsingXsl;
 use Ximdex\Parsers\PVD2RNG\PVD2RNG;
 use Ximdex\Runtime\DataFactory;
+use Ximdex\Utils\Extensions;
 use Ximdex\Utils\FsUtils;
 use Ximdex\Utils\PipelineManager;
 use Ximdex\Utils\Sync\SynchroFacade;

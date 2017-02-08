@@ -26,6 +26,7 @@
 
 
 use Ximdex\MVC\ActionAbstract;
+use Ximdex\Utils\Extensions;
 
 ModulesManager::file('/inc/model/List.class.php');
 

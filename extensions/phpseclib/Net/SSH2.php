@@ -67,6 +67,7 @@
  * @version    $Id: SSH2.php,v 1.53 2010-10-24 01:24:30 terrafrost Exp $
  * @link       http://phpseclib.sourceforge.net
  */
+use Ximdex\Utils\Extensions;
 
 /**
  * Include Math_BigInteger

@@ -35,6 +35,7 @@ use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\Db;
 use Ximdex\Runtime\Request;
+use Ximdex\Utils\Extensions;
 use Ximdex\Utils\Serializer;
 use Ximdex\Utils\Session;
 use Ximdex\Logger as XMD_Log;
