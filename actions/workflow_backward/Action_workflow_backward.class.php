@@ -78,7 +78,11 @@ class Action_workflow_backward extends ActionAbstract {
             return ;
         }
 
-        $conf = ModulesManager::file('/conf/notifications.php');
+        $conf = array(
+            'required' => false,
+            'defaultMessage' => _('The document %doc is going to be moved to the state %state.')
+        );
+
         $defaultMessage=$this->buildMessage($conf["defaultMessage"], $prevStateName,$node->GetNodeName());
 
 

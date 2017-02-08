@@ -150,7 +150,11 @@ class Action_workflow_forward extends ActionAbstract {
         $nextStateName = $workflowNext->GetName();
 
         //Loading Notifications default values
-        $conf = ModulesManager::file('/conf/notifications.php');
+        $conf = array(
+            'required' => false,
+            'defaultMessage' => _('The document %doc is going to be moved to the state %state.')
+        );
+
         $defaultMessage = $this->buildMessage($conf["defaultMessage"], $nextStateName, $node->get('Name'));
         $values = array(
             'group_state_info' => Group::getSelectableGroupsInfo($idNode),
@@ -239,7 +243,10 @@ class Action_workflow_forward extends ActionAbstract {
         $idNode = $this->request->getParam('nodeid');
         $nextState = $this->request->getParam('nextstate');
 
-        $conf = ModulesManager::file('/conf/notifications.php');
+        $conf = array(
+            'required' => false,
+            'defaultMessage' => _('The document %doc is going to be moved to the state %state.')
+        );
 
         $node = new Node($idNode);
         $workflow = new WorkFlow($idNode, $nextState);
