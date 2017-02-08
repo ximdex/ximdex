@@ -48,14 +48,7 @@ Ximdex\Modules\Manager::file( Ximdex\Modules\Manager::get_modules_install_params
 // setup log
 class_alias('Ximdex\Logger', 'XMD_Log');
 
-$log = new Logger('XMD');
-$log->pushHandler(new StreamHandler(App::getValue('XIMDEX_ROOT_PATH') .'/logs/xmd.log', Logger::DEBUG, true, 0766));
-Ximdex\Logger::addLog( $log );
-$log = new Logger('Actions');
-$log->pushHandler(new StreamHandler(App::getValue('XIMDEX_ROOT_PATH') .'/logs/actions.log', Logger::DEBUG));
-Ximdex\Logger::addLog( $log , 'actions' ) ;
-
-XMD_Log::setActiveLog();
+include_once XIMDEX_ROOT_PATH . '/conf/log.php';
 
 // read install-modules.php
 $modulesConfString = "";

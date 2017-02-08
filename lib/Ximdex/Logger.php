@@ -21,84 +21,67 @@ Class Logger
     }
 
     /**
-     * @param $logger
+     * @param $logger \Monolog\Logger
      * @param string $loggerInstance
      */
-    public static function addLog($logger, $loggerInstance = 'default')
+    public static function addLog($logger)
     {
-        self::$instances[$loggerInstance] = new Logger($logger);
+        self::$instances[$logger->getName()] = $logger;
         if (count(self::$instances) == 1) {
             self::$active = $loggerInstance;
         }
     }
 
-    public static function get()
-    {
-        $loggerInstance = self::$active;
-        if (!isset(self::$instances[$loggerInstance]) || !self::$instances[$loggerInstance] instanceof self) {
-            throw \Exception('Logger need to be initilized');
+    public static function get($loggerInstance = 'XMD') {
+        if ( !isset( self::$instances[ $loggerInstance ] ) || !self::$instances[ $loggerInstance ] instanceof \Monolog\Logger ) {
+            throw \Exception( 'Logger need to be initilized' );
             return;
         }
-        return self::$instances[$loggerInstance];
+        return self::$instances[ $loggerInstance ];
     }
 
-    /**
-     * @param string $loggerInstance
-     * @return Logger
-     * @throws
-     */
-    public static function setActiveLog($loggerInstance = 'default')
-    {
-        if (!isset(self::$instances[$loggerInstance])) {
-            throw \Exception('Logger Instance not found');
-            return;
-        }
-        self::$active = $loggerInstance;
-        return self::$instances[$loggerInstance];
-    }
-
-    public static function error($string, $object = array())
+    public static function error($string, $object = array(), $loggerInstance = 'XMD')
     {
         try{
-            return self::get()->logger->addError($string, $object);
+            return self::$instances[$loggerInstance]->addError($string, $object);
         }catch (\Exception $e){
             error_log($e->getMessage());
         }
     }
 
-    public static function warning($string)
+    public static function warning($string, $loggerInstance = 'XMD')
     {
-        return self::get()->logger->addWarning($string);
+        return self::$instances[$loggerInstance]->addWarning($string);
     }
 
-    public static function debug($string)
+    public static function debug($string, $loggerInstance = 'XMD')
     {
         try{
-            return self::get()->logger->addDebug($string);
+            return self::$instances[$loggerInstance]->addDebug($string);
         }catch (\Exception $e){
             error_log($e->getMessage());
         }
     }
 
-    public static function fatal($string)
+    public static function fatal($string, $loggerInstance = 'XMD')
     {
         try{
-            return self::get()->logger->addWarning($string);
+            return self::$instances[$loggerInstance]->addWarning($string);
         }catch (\Exception $e){
             error_log($e->getMessage());
         }
     }
 
-    public static function info($string)
+    public static function info($string, $loggerInstance = 'XMD')
     {
         try{
-            return self::get()->logger->addInfo($string);
+            return self::$instances[$loggerInstance]->addInfo($string);
         }catch (\Exception $e){
             error_log($e->getMessage());
         }
     }
 
-    public static function logTrace($string)
+    public static function logTrace($string, $loggerInstance = 'XMD')
     {
         $trace = debug_backtrace(false);
         $t1 = $trace[1];
@@ -110,6 +93,6 @@ Class Logger
             'function' => $t2['class'] . $t2['type'] . $t2['function']
         );
         $result = $string . PHP_EOL . sprintf("on %s:%s [%s]\n", $trace['file'], $trace['line'], $trace['function']);
-        return self::get()->logger->addInfo( $result );
+        return self::$instances[$loggerInstance]->addInfo( $result );
     }
 }

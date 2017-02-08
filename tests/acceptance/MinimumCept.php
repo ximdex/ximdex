@@ -94,6 +94,8 @@ $I->wait(1);
 
 $I->click("Publish", "#angular-content");
 
+$I->wait(1);
+
 $I->see("State has been successfully changed", "#angular-content");
 
 $I->wait(60);

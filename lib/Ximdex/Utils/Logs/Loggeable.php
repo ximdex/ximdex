@@ -28,6 +28,8 @@
 namespace Ximdex\Utils\Logs;
 
 
+use Ximdex\Logger;
+
 class Loggeable
 
 {
@@ -35,12 +37,12 @@ class Loggeable
 
     /**
      * @param $loggerName
-     * @return mixed
+     * @return \Monolog\Logger
      * TODO repair
      */
     private static function _getLogger($loggerName )
     {
-        return null    ;
+        return  Logger::get($loggerName);
      //   return $loggerName;
     }
 
@@ -52,7 +54,32 @@ class Loggeable
     public static function write($msg, $loggerName, $level = LOGGER_LEVEL_INFO)
     {
         $logger = Loggeable::_getLogger($loggerName);
-        if (!is_null($logger)) $logger->write($msg, $level);
+        if (!is_null($logger)){
+            switch ($level){
+            case LOGGER_LEVEL_ALL:
+                $logger->addDebug($msg);
+                break;
+            case LOGGER_LEVEL_DEBUG:
+                $logger->addDebug($msg);
+                break;
+            case LOGGER_LEVEL_INFO:
+                $logger->addInfo($msg);
+                break;
+            case LOGGER_LEVEL_WARNING:
+                $logger->addWarning($msg);
+                break;
+            case LOGGER_LEVEL_ERROR:
+                $logger->addError($msg);
+                break;
+            case LOGGER_LEVEL_FATAL:
+                $logger->addCritical($msg);
+                break;
+            case LOGGER_LEVEL_NONE:
+                $logger->addEmergency($msg);
+                break;
+            }
+
+        }
     }
 
 
@@ -63,7 +90,7 @@ class Loggeable
     public static function debug($msg, $loggerName)
     {
         $logger = Loggeable::_getLogger($loggerName);
-        if (!is_null($logger)) $logger->debug($msg);
+        if (!is_null($logger)) $logger->addDebug($msg);
     }
 
     /**
@@ -74,7 +101,7 @@ class Loggeable
     {
         $logger = Loggeable::_getLogger($loggerName);
         if (!is_null($logger)) {
-            $logger->info($msg);
+            $logger->addInfo($msg);
         }
     }
 
@@ -86,7 +113,7 @@ class Loggeable
     public static function warning($msg, $loggerName)
     {
         $logger = Loggeable::_getLogger($loggerName);
-        if (!is_null($logger)) $logger->warning($msg);
+        if (!is_null($logger)) $logger->addWarning($msg);
     }
 
 
@@ -97,7 +124,7 @@ class Loggeable
     public static function error($msg, $loggerName)
     {
         $logger = Loggeable::_getLogger($loggerName);
-        if (!is_null($logger)) $logger->error($msg);
+        if (!is_null($logger)) $logger->addError($msg);
     }
 
 
@@ -111,7 +138,7 @@ class Loggeable
     public static function fatal($msg, $loggerName)
     {
         $logger = Loggeable::_getLogger($loggerName);
-        if (!is_null($logger)) $logger->fatal($msg);
+        if (!is_null($logger)) $logger->addCritical($msg);
     }
 
 }
