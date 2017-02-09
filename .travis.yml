@@ -21,3 +21,10 @@ script:
   - cd tests
   - sed -i -e 's/{{PHP_VERSION}}/'"$PHP_VERSION"'/g' php-fpm/Dockerfile
   - docker-compose run test
+  
+notifications:
+  email:
+    recipients:
+      - travis@ximdex.com
+    on_success: change # default: change
+    on_failure: always # default: always
