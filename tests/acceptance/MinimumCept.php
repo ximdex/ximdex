@@ -86,7 +86,20 @@ $I->click("Publish", "#angular-content");
 
 $I->waitForText("State has been successfully changed", 3, "#angular-content");
 
-$I->wait(60);
+function fileExistAndIsNotEmpty($path){
+    return file_exists($path) && filesize($path);
+}
+
+$count = 0;
+while(!fileExistAndIsNotEmpty('data/previos/css/default.css') && $count < 30){
+    sleep(2);
+    $count++;
+}
+
+while(!fileExistAndIsNotEmpty('data/previos/picasso-iden-idhtml.html') && $count < 30){
+    sleep(2);
+    $count++;
+}
 
 $I->seeFileFound('default.css','data/previos/css');
 $I->seeFileFound('picasso-iden-idhtml.html','data/previos');
