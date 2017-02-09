@@ -1,0 +1,52 @@
+version: "2"
+services:
+  phpfpm:
+    build: php-fpm
+    volumes:
+      - ./php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - ../:/var/www/html
+    links:
+      - db:db
+
+  # NGINX
+  ximdex:
+    restart: always
+    image: nginx:alpine
+    links:
+      - phpfpm:phpfpm
+    volumes:
+      - ./nginx-conf/vhost.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx-conf/nginx.conf:/etc/nginx/nginx.conf
+      - ../:/var/www/html
+
+  # MYSQL
+  db:
+    restart: always
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: ximdex
+      MYSQL_USER: ximdex
+      MYSQL_PASSWORD: ximdex
+      MYSQL_DATABASE: ximdex
+
+  phantomjs:
+    image: wernight/phantomjs
+    ports:
+      - 9000:9000
+    command: phantomjs --webdriver=9000
+    links:
+      - ximdex:ximdex
+
+  test:
+      build: php-fpm
+      links:
+        - ximdex:ximdex
+        - phantomjs:phantomjs
+        - db:db
+      volumes:
+        - ../:/var/www/html
+        - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+      command: sh -c "sleep 10s && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && composer install --dev && extensions/vendors/bin/codecept run --steps"
+
+

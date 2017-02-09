@@ -11,10 +11,10 @@ modules:
         - \Codeception\Module\Filesystem
 
         - WebDriver:
-             url: 'http://192.168.100.206/'
+             url: 'http://ximdex/'
              browser: phantomjs
              port: 9000
-             host: localhost
+             host: phantomjs
              window_size: 1124x850
         - Db:
              cleanup: true
