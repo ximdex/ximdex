@@ -32,21 +32,19 @@ services:
 
   phantomjs:
     image: wernight/phantomjs
-    ports:
-      - 9000:9000
     command: phantomjs --webdriver=9000
     links:
       - ximdex:ximdex
 
   test:
-      build: php-fpm
-      links:
-        - ximdex:ximdex
-        - phantomjs:phantomjs
-        - db:db
-      volumes:
-        - ../:/var/www/html
-        - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
-      command: sh -c "sleep 10s && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && composer install --dev && extensions/vendors/bin/codecept run --steps"
+    build: php-fpm
+    links:
+      - ximdex:ximdex
+      - phantomjs:phantomjs
+      - db:db
+    volumes:
+      - ../:/var/www/html
+      - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+    command: sh -c "sleep 10s && chmod -R 777 data logs conf && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && composer install --dev && extensions/vendors/bin/codecept run --steps"
 
 
