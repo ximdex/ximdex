@@ -21,7 +21,7 @@ services:
 
   # MYSQL
   db:
-    image: "mysql:${MYSLQ_VERSION}"
+    image: "mysql:${MYSQL_VERSION}"
     environment:
       MYSQL_ROOT_PASSWORD: ximdex
       MYSQL_USER: ximdex
