@@ -29,7 +29,7 @@ services:
       MYSQL_DATABASE: ximdex
 
   phantomjs:
-    image: wernight/phantomjs
+    image: wernight/phantomjs:2
     command: phantomjs --webdriver=9000
     links:
       - ximdex:ximdex
