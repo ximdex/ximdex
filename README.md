@@ -3,7 +3,7 @@
 
 # Ximdex 3.* - README
 
-[https://travis-ci.org/XIMDEX/ximdex.svg|Build Status]
+![Build Status](https://travis-ci.org/XIMDEX/ximdex.svg)
 
 Ximdex CMS is a Visual Headless Content & Data Management System (CMS / DMS) with Semantic Web technologies that allows the edition and transformation of content and data to be published in different target technologies (PHP, J2EE, .NET, XML/XSLT, JS, RDF, JSON, RoR, ...) and sync to the cloud as web, datesets, ebooks or as hybrid apps for mobile devices.
 
