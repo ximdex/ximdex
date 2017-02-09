@@ -19,5 +19,5 @@ before_install:
 
 script:
   - cd tests
-  - sed -e 's/{{PHP_VERSION}}/'"$PHP_VERSION"'/g' php-fpm/Dockerfile
+  - sed -i -e 's/{{PHP_VERSION}}/'"$PHP_VERSION"'/g' php-fpm/Dockerfile
   - docker-compose run test
