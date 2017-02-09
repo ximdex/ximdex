@@ -113,6 +113,9 @@ class CreateDB extends Base
             }
 
         } catch (PDOException $e) {
+
+            error_log($e->getMessage());
+
             $this->addError(
                 sprintf("Unable to create tables "),
                 sprintf("Unable to create tables and data, database must be empty, Check database permissions"),

@@ -668,8 +668,8 @@ CREATE TABLE `StructuredDocuments` (
   `IdDoc` int(12) unsigned NOT NULL DEFAULT '0',
   `Name` varchar(255) DEFAULT NULL,
   `IdCreator` int(12) unsigned DEFAULT '0',
-  `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `UpdateDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `IdLanguage` int(12) DEFAULT '0',
   `IdTemplate` int(12) unsigned NOT NULL DEFAULT '0',
   `TargetLink` int(12) unsigned DEFAULT NULL,
@@ -784,3 +784,4 @@ CREATE TABLE `Versions` (
   KEY `Version` (`SubVersion`,`IdNode`,`Version`),
   KEY `IdNode` (`IdNode`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Table of contents and version management';
+

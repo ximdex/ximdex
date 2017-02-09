@@ -6,7 +6,7 @@ services:
   - docker
 
 env:
-#  - COMPOSE_VERSION=1.11.0 PHP_VERSION=7 MYSQL_VERSION=5.7
+  - COMPOSE_VERSION=1.11.0 PHP_VERSION=7 MYSQL_VERSION=5.7
   - COMPOSE_VERSION=1.11.0 PHP_VERSION=7 MYSQL_VERSION=5.6
 #  - COMPOSE_VERSION=1.11.0 PHP_VERSION=5.6 MYSQL_VERSION=5.7
 #  - COMPOSE_VERSION=1.11.0 PHP_VERSION=5.6 MYSQL_VERSION=5.6
@@ -20,6 +20,7 @@ before_install:
 script:
   - cd tests
   - sed -i -e 's/{{PHP_VERSION}}/'"$PHP_VERSION"'/g' php-fpm/Dockerfile
+  - docker-compose up -d ximdex
   - docker-compose run test
   
 notifications:
