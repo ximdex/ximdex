@@ -40,10 +40,10 @@ Class Logger
         return self::$instances[ $loggerInstance ];
     }
 
-    public static function error($string, $object = array(), $loggerInstance = 'XMD')
+    public static function error($string, $loggerInstance = 'XMD')
     {
         try{
-            return self::$instances[$loggerInstance]->addError($string, $object);
+            return self::$instances[$loggerInstance]->addError($string);
         }catch (\Exception $e){
             error_log($e->getMessage());
         }

@@ -31,7 +31,6 @@ if (!defined('XIMDEX_ROOT_PATH')) {
 }
 
 include_once XIMDEX_ROOT_PATH . '/inc/db/datamodel_config.php';
-include_once XIMDEX_ROOT_PATH . '/inc/db/DB_Log.class.php';
 // Include config.
 
 if (isset($DB_TYPE_USAGE) && $DB_TYPE_USAGE == ADODB) {

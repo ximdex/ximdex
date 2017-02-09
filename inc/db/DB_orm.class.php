@@ -25,6 +25,8 @@
  */
 
 
+use Ximdex\Logger;
+
 if (!defined('DB_LOADED')) {
     define("DB_LOADED", 1);
 } else {
@@ -116,7 +118,7 @@ class DB_ORM
             $debug = $this->useLog;
             $dbConnection->Connect($DBHOST . ":" . $DBPORT, $DBUSER, $DBPASSWD, $DBNAME, true);
             if ($dbConnection->ErrorNo() > 0) {
-                DB_Log::error(sprintf('Connect [host: %s] [port: %s] [user: %s] [pwd: %s] [dbname: %s]', $DBHOST, $DBPORT, $DBUSER, $DBPASSWD, $DBNAME));
+                Logger::error(sprintf('Connect [host: %s] [port: %s] [user: %s] [pwd: %s] [dbname: %s]', $DBHOST, $DBPORT, $DBUSER, $DBPASSWD, $DBNAME), 'sql_logger');
                 $this->numErr = $dbConnection->ErrorNo();
                 $this->desErr = $dbConnection->ErrorMsg();
             }
@@ -171,7 +173,7 @@ class DB_ORM
             $this->numErr = $dbConnection->ErrorNo();
             $this->desErr = $dbConnection->ErrorMsg();
         }
-        if ($this->useLog) DB_Log::debug($query);
+        if ($this->useLog) Logger::debug($query, 'sql_logger');
         return $this->numErr > 0 ? false : true;
     }
 
@@ -197,7 +199,7 @@ class DB_ORM
         }
         $insertId = $dbConnection->Insert_ID();
         if ($insertId > 0) $this->newID = $insertId;
-        if ($this->useLog) DB_Log::debug($query);
+        if ($this->useLog) Logger::debug($query, 'sql_logger');
         return $this->numErr > 0 ? false : true;
     }
 
@@ -340,7 +342,7 @@ class DB_ORM
                     $this->numRows = 0;
                     $this->EOF = true;
                     if ($this->debug) {
-                        DB_Log::error("Query:" . $msg);
+                        Logger::error("Query:" . $msg, 'sql_logger');
                     }
                     return;
                 }
@@ -360,7 +362,7 @@ class DB_ORM
                 if ($this->debug) {
                     $msgDebug = "Query: [" . $sql . "] => ";
                     $msgDebug .= "(" . $this->numRows . ") fila/s";
-                    DB_Log::error($msgDebug);
+                    Logger::error($msgDebug, 'sql_logger');
                 }
 
                 $i = 0;
