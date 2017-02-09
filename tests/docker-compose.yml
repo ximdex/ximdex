@@ -1,7 +1,7 @@
 version: "2"
 services:
   phpfpm:
-    build: php-fpm
+    image: ximdex/php:${PHP_VERSION}
     volumes:
       - ./php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
       - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
@@ -35,7 +35,7 @@ services:
       - ximdex:ximdex
 
   test:
-    build: php-fpm
+    image: ximdex/php:${PHP_VERSION}
     links:
       - ximdex:ximdex
       - phantomjs:phantomjs
