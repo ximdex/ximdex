@@ -1,7 +1,7 @@
 # Ximdex 3.* - README
 
 
-Ximdex CMS is a Semantic Content Management System (CMS) that allows the manipulation and generation of content, data and apps to be published in different target technologies: PHP, J2EE, .NET, XML/XSLT, JS, RDF, JSON, RoR, ...
+Ximdex CMS is a Visual Headless Content & Data Management System (CMS / DMS) with Semantic Web technologies that allows the edition and transformation of content and data to be published in different target technologies (PHP, J2EE, .NET, XML/XSLT, JS, RDF, JSON, RoR, ...) and sync to the cloud as web, datesets, ebooks or as hybrid apps for mobile devices.
 
 * Description
   -----------
@@ -21,7 +21,7 @@ Ximdex CMS is a Semantic Content Management System (CMS) that allows the manipul
   - Multichannel in the cloud
   - Visual Edition of XML + automatic transformation of XML
   - Visual Role/User/Workflow edition in an object-action UI
-  - Its neutrality and flexibility allows to use any application server or language for the deployment of portals and web applications: .NET, PHP, ASP, J2EE, XML/XSLT, flash, XHTML, HTML5, ...
+  - Its neutrality and flexibility allows to use any application server or language for the deployment of portals and web applications: .NET, PHP, ASP, J2EE, XML/XSLT, XHTML, HTML5, DITTA, ... Also as: EPUB, APPS ...
   - Multiple languages, multiple channels (Digital TV, Web, smartphones and tablets, ...) and multiple application servers
 
 
@@ -46,7 +46,7 @@ Ximdex CMS is a Semantic Content Management System (CMS) that allows the manipul
 * Ximdex Core Requirements
   ------------------------
   -  A Unix based system with PHP(>= 5.3, and some extra modules), Apache 2 webserver (with modules described in the installation guide) and MySQL(>= 5.1) database.
-  -  In the client side: Firefox (>= 5.0) with Javascript and cookies enabled.
+  -  In the client side: a modern web browser (chrome, firefox) with Javascript and cookies enabled.
   -  An internet connection if you want to use automatic recommendations (as semantic annotations) or publishing into the cloud.
  
 * Ximdex developer's guide
