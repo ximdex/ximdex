@@ -6,15 +6,12 @@ services:
   - docker
 
 env:
-  - COMPOSE_VERSION=1.11.0 PHP_VERSION=7 MYSQL_VERSION=5.7
-  - COMPOSE_VERSION=1.11.0 PHP_VERSION=7 MYSQL_VERSION=5.6
-  - COMPOSE_VERSION=1.11.0 PHP_VERSION=5.6 MYSQL_VERSION=5.7
-  - COMPOSE_VERSION=1.11.0 PHP_VERSION=5.6 MYSQL_VERSION=5.6
-
+  - PHP_VERSION=7 MYSQL_VERSION=5.7
+  - PHP_VERSION=7 MYSQL_VERSION=5.6
+  - PHP_VERSION=5.6 MYSQL_VERSION=5.7
+  - PHP_VERSION=5.6 MYSQL_VERSION=5.6
 
 before_install:
-  # Load cached docker images
-  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
   - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
@@ -30,14 +27,3 @@ notifications:
       - travis@ximdex.com
     on_success: change # default: change
     on_failure: always # default: always
-
-cache:
-  bundler: true
-  directories:
-    - $HOME/docker
-
-before_cache:
-  # Save tagged docker images
-  - >
-    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
