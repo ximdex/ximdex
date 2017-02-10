@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Action;
 use Ximdex\Models\Group;
 use Ximdex\Models\Node;
@@ -38,8 +39,7 @@ use Ximdex\Utils\Serializer;
 use Ximdex\Utils\Session;
 use Ximdex\Widgets\Widget;
 use Ximdex\XML\Base;
-use Ximdex\Logger as XMD_Log;
- 
+
 ModulesManager::file('/inc/utils.php');
 
  ModulesManager::file('/inc/model/orm/UnverifiedUsers_ORM.class.php');
@@ -597,7 +597,7 @@ and rug.idrole in (select idrole from RelRolesPermissions where IdPermission = 1
             $isDir = $selectedNode->nodeType->isFolder() ? '1' : '0';
         } else {
             $isDir = '0';
-            XMD_Log::warning(sprintf(_('A Node without NodeType was requested: idNode=%s, nodeType=%s'), $idNode, $selectedNode->nodeType));
+            Logger::warning(sprintf(_('A Node without NodeType was requested: idNode=%s, nodeType=%s'), $idNode, $selectedNode->nodeType));
         }
 
         //Filtering by debufilter

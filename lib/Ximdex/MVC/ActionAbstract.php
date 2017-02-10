@@ -27,12 +27,11 @@
 
 namespace Ximdex\MVC;
 
-
+use Ximdex\Logger;
 use Ximdex\Notifications\EmailNotificationStrategy;
 use Ximdex\MVC\FrontController;
 use ModulesManager;
 use Ximdex\Parsers\ParsingJsGetText;
-use Ximdex\Logger;
 use Ximdex\Utils\Serializer;
 use Ximdex\Models\User;
 use Ximdex\Models\Action;
@@ -43,7 +42,6 @@ use Ximdex\Utils\Factory;
 use Ximdex\Utils\QueryManager;
 use Ximdex\Utils\Session;
 use Ximdex\Notifications\XimdexNotificationStrategy;
-use Ximdex\Logger as XMD_Log;
 
 /**
  *
@@ -185,7 +183,7 @@ class ActionAbstract extends IController
 
         if ($nodeid && $actionid) {
             // $action = new Action($actionid);
-            //XMD_Log::debug("MVC::ActionAbstract calling action $actionid (" . $action->get('Command') . ") in node $nodeid ");
+            //Logger::debug("MVC::ActionAbstract calling action $actionid (" . $action->get('Command') . ") in node $nodeid ");
         }
 
         $method = ($var = $request->getParam("method")) ? $var : 'index';
@@ -213,7 +211,7 @@ class ActionAbstract extends IController
             $this->logInitAction();
             $this->$method();
         } else {
-            XMD_Log::debug("MVC::ActionAbstract Metodo {$method} not found");
+            Logger::debug("MVC::ActionAbstract Metodo {$method} not found");
         }
 
     }

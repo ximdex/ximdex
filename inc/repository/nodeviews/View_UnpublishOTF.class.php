@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Utils\FsUtils;
 use Ximdex\Utils\TarArchiver;
 
@@ -39,12 +40,12 @@ class View_UnpublishOTF extends Abstract_View implements Interface_View
     function transform($idVersion = NULL, $pointer = NULL, $args = NULL)
     {
         if (!array_key_exists('CHANNEL', $args)) {
-            XMD_Log::error('channel is mandatory');
+            Logger::error('channel is mandatory');
             return NULL;
         }
 
         if (!array_key_exists('NODEID', $args)) {
-            XMD_Log::error('nodeid is mandatory');
+            Logger::error('nodeid is mandatory');
             return NULL;
         }
 

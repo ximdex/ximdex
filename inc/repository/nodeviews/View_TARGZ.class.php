@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
 use Ximdex\Models\StructuredDocument;
@@ -50,7 +51,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
         //VALIDATING DATA
         $version = new Version($idVersion);
         if (!($version->get('IdVersion') > 0)) {
-            XMD_Log::error("Se ha cargado una versi�n incorrecta ($idVersion)");
+            Logger::error("Se ha cargado una versi�n incorrecta ($idVersion)");
             return NULL;
         }
         $node = new Node($version->get('IdNode'));
@@ -60,11 +61,11 @@ class View_TARGZ extends Abstract_View implements Interface_View
         $dataEncoding = \App::getValue('dataEncoding');
 
         if (!($nodeId > 0)) {
-            XMD_Log::error("El nodo que se est� intentando convertir no existe: " . $version->get('IdNode'));
+            Logger::error("El nodo que se est� intentando convertir no existe: " . $version->get('IdNode'));
             return NULL;
         }
         if (!array_key_exists('PATH', $args) && !array_key_exists('NODENAME', $args)) {
-            XMD_Log::error('Path and nodename arguments are mandatory');
+            Logger::error('Path and nodename arguments are mandatory');
             return NULL;
         }
 
@@ -165,7 +166,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
 
         $additionalFiles = array();
 
-        XMD_Log::info("Getting additional files for node $nodeId type $nodeTypeName");
+        Logger::info("Getting additional files for node $nodeId type $nodeTypeName");
 
         switch ($nodeTypeName) {
             case 'XimNewsNewLanguage':
@@ -206,7 +207,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
                         if (FsUtils::file_put_contents($headerFile, $defaultContent)) {
                             $additionalFiles[] = $headerFile;
                         } else {
-                            XMD_Log::error("View TARG:No se ha podido a�adir el archivo $headerFile");
+                            Logger::error("View TARG:No se ha podido a�adir el archivo $headerFile");
                         }
 
                         //Generate Docxap for the bulletin
@@ -220,10 +221,10 @@ class View_TARGZ extends Abstract_View implements Interface_View
                             if (FsUtils::file_put_contents($docxapFile, $docxapContent)) {
                                 $additionalFiles[] = $docxapFile;
                             } else {
-                                XMD_Log::error("View TARG:No se ha podido a�adir el archivo $docxapFile");
+                                Logger::error("View TARG:No se ha podido a�adir el archivo $docxapFile");
                             }
                         } else {
-                            XMD_Log::error("View TARG:No se ha generado la docxap para el colector $colectorId");
+                            Logger::error("View TARG:No se ha generado la docxap para el colector $colectorId");
                         }
                     }
                 }
@@ -253,7 +254,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
         $object = $factory->instantiate("_ORM");
 
         if (!is_object($object)) {
-            XMD_Log::info("Error, la clase $tableName de orm especificada no existe");
+            Logger::info("Error, la clase $tableName de orm especificada no existe");
             return NULL;
         }
 
@@ -265,7 +266,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
             return $fileName;
         }
 
-        XMD_Log::info("Additional file for $tableName not found");
+        Logger::info("Additional file for $tableName not found");
 
         return NULL;
     }
@@ -290,7 +291,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
         if (!is_null($idVersion)) {
             $version = new Version($idVersion);
             if (!($version->get('IdVersion') > 0)) {
-                XMD_Log::error('VIEW TARGZ: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
+                Logger::error('VIEW TARGZ: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
                 return "";
             }
             $structuredDocument = new StructuredDocument($version->get('IdNode'));
@@ -298,7 +299,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
             $language = $structuredDocument->GetLanguage();
 
             if (!($structuredDocument->get('IdDoc') > 0)) {
-                XMD_Log::error('VIEW TARGZ: El structured document especificado no existe: ' . $structuredDocument->get('IdDoc'));
+                Logger::error('VIEW TARGZ: El structured document especificado no existe: ' . $structuredDocument->get('IdDoc'));
                 return "";
             }
             //If it is all ok
@@ -311,17 +312,17 @@ class View_TARGZ extends Abstract_View implements Interface_View
 
                 // Check out:
                 if (!isset($docxapout) || $docxapout == "") {
-                    XMD_Log::error('VIEW TARGZ: No se ha especificado la cabecera docxap del nodo ' . $node->GetNodeName() . ' que quiere renderizar');
+                    Logger::error('VIEW TARGZ: No se ha especificado la cabecera docxap del nodo ' . $node->GetNodeName() . ' que quiere renderizar');
                     return "";
                 }
             } else {
-                XMD_Log::error("VIEW TARGZ:No se ha podido generar la etiqueta doxcap para el boletin, renderizado para OTF");
+                Logger::error("VIEW TARGZ:No se ha podido generar la etiqueta doxcap para el boletin, renderizado para OTF");
             }
 
             return $docxapout;
 
         } else {
-            XMD_Log::error("VIEW TARGZ:No se ha podido generar la etiqueta doxcap para el boletin, renderizado para OTF");
+            Logger::error("VIEW TARGZ:No se ha podido generar la etiqueta doxcap para el boletin, renderizado para OTF");
         }
     }
 
@@ -384,7 +385,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
                         $subversion = $relNewsColector->get('SubVersion');
                         $cacheId = $relNewsColector->get('IdCache');
                     } else {
-                        XMD_Log::info('Sin relaci�n en la base de datos');
+                        Logger::info('Sin relaci�n en la base de datos');
                     }
 
                     if (!($cacheId > 0)) {
@@ -399,7 +400,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
                             $cacheId = $cache->CreateCache($idNew, $versionId, $idPvd, $xslFile);
 
                             if (!$cacheId) {
-                                XMD_Log::info("ERROR Creando cache de noticia $idNew");
+                                Logger::info("ERROR Creando cache de noticia $idNew");
 
                                 //Elimino la asociacion para no dejar inconsistencia entre el boletin y la tabla
                                 $relNewColector = new RelNewsColector($idRel);
@@ -413,7 +414,7 @@ class View_TARGZ extends Abstract_View implements Interface_View
                         $numRows = $cache->update();
 
                         if ($numRows == 0) {
-                            XMD_Log::info("ERROR Actualizando contador en $cacheId");
+                            Logger::info("ERROR Actualizando contador en $cacheId");
                             return false;
                         }
 

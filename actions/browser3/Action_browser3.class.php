@@ -25,6 +25,7 @@
  * @version $Revision: 8735 $
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Action;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeSets;
@@ -38,7 +39,6 @@ use Ximdex\Runtime\Request;
 use Ximdex\Utils\Extensions;
 use Ximdex\Utils\Serializer;
 use Ximdex\Utils\Session;
-use Ximdex\Logger as XMD_Log;
 
 ModulesManager::file('/inc/search/QueryProcessor.class.php');
 ModulesManager::file('/inc/xvfs/XVFS.class.php');
@@ -362,7 +362,7 @@ class Action_browser3 extends ActionAbstract
 
             return $nodes;
         } else {
-            XMD_Log::info(_('Empty nodes in checkNodeAction [ browser3 ]'));
+            Logger::info(_('Empty nodes in checkNodeAction [ browser3 ]'));
             return null;
         }
     }

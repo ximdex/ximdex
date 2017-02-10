@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\Version;
 
@@ -47,7 +48,7 @@ class View_Transformer extends Abstract_View implements Interface_View {
 			$args['TRANSFORMER'] = end($node->getProperty('Transformer'));
 
 			if (empty($args['TRANSFORMER'])) {
-				XMD_Log::fatal('No se ha especificado el transformador en la tabla Config');
+				Logger::fatal('No se ha especificado el transformador en la tabla Config');
 			}
 		}
 

@@ -30,8 +30,8 @@ namespace Ximdex\Parsers\PVD2RNG;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
+use Ximdex\Logger;
 use Ximdex\Models\Node;
-use Ximdex\Logger as XMD_Log;
 
 
 class PVD2RNG
@@ -79,12 +79,12 @@ class PVD2RNG
 
         $pvd = new Node($idpvd);
         if (!($pvd->get('IdNode') > 0)) {
-            XMD_Log::error('Se esta intentando obtener un nodo que no existe: ' . $idpvd);
+            Logger::error('Se esta intentando obtener un nodo que no existe: ' . $idpvd);
             return false;
         }
 
         if ($pvd->getNodeType() != 5045 /*'VisualTemplate'*/) {
-            XMD_Log::error('El nodo indicado para la transformacion no es un esquema: ' . $idpvd);
+            Logger::error('El nodo indicado para la transformacion no es un esquema: ' . $idpvd);
             return false;
         }
 
@@ -124,7 +124,7 @@ class PVD2RNG
 
 
         if ($this->_dompvd === null) {
-            XMD_Log::error('Se debe indicar un esquema valido para transformarla.');
+            Logger::error('Se debe indicar un esquema valido para transformarla.');
             return false;
         }
 
@@ -134,7 +134,7 @@ class PVD2RNG
         if ($docxap) {
             $this->parse_template('docxap', $docxap, $start);
         } else {
-            XMD_Log::error("La pvd no tiene template docxap, pvd incompatible con rng");
+            Logger::error("La pvd no tiene template docxap, pvd incompatible con rng");
         }
 
 
@@ -314,7 +314,7 @@ class PVD2RNG
     {
 
         if (!$template || !($template instanceof DOMElement)) {
-            XMD_Log::error('No se puede parsear. Template no v�lido.');
+            Logger::error('No se puede parsear. Template no v�lido.');
             return null;
         }
 

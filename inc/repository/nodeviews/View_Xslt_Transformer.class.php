@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 
 ModulesManager::file('/inc/repository/nodeviews/Abstract_View.class.php');
 ModulesManager::file('/inc/repository/nodeviews/Interface_View.class.php');
@@ -40,7 +41,7 @@ class View_Xslt_Transformer extends Abstract_View implements Interface_View {
 		} 
 		
 		if (!is_file(XIMDEX_ROOT_PATH . $xsltFile)) {
-			XMD_Log::error('No se ha encontrado la xslt solicitada ' . $xsltFile);
+			Logger::error('No se ha encontrado la xslt solicitada ' . $xsltFile);
 			return $pointer;
 		}
 		

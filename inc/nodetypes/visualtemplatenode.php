@@ -25,6 +25,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\NodeTypes\FileNode;
 use Ximdex\Parsers\PVD2RNG\PVD2RNG;
@@ -59,12 +60,12 @@ class VisualTemplateNode extends FileNode {
 
 		$pvdt = new PVD2RNG();
 		if (!$pvdt->loadPVD($this->parent->get('IdNode'))) {
-			XMD_Log::error("(1) Pvd-schema " . $this->parent->get('IdNode') . " not compatible RNG");
+			Logger::error("(1) Pvd-schema " . $this->parent->get('IdNode') . " not compatible RNG");
 		} else {
 			if ($pvdt->transform()) {
 				$content = htmlspecialchars_decode($pvdt->getRNG()->saveXML());
 			} else {
-				XMD_Log::error("(2) Pvd " . $this->parent->get('IdNode') . " not compatible RNG");
+				Logger::error("(2) Pvd " . $this->parent->get('IdNode') . " not compatible RNG");
 			}
 		}
 
@@ -129,7 +130,7 @@ class VisualTemplateNode extends FileNode {
 		if ($pvdt->transform()) {
 			$content = htmlspecialchars_decode($pvdt->getRNG()->saveXML());
 		} else {
-			XMD_Log::error("Pvd not compatible RNG");
+			Logger::error("Pvd not compatible RNG");
 		}
 
 		$rngName = VisualTemplateNode::RNG_SUFFIX . $this->parent->get('Name');
@@ -169,11 +170,11 @@ class VisualTemplateNode extends FileNode {
 		$content = $this->GetContent();
 		$parts = explode('##########', $content);
 		if (count($parts) > 2) {
-			XMD_Log::error("El esquema PVD {$this->nodeID} tiene m�s de una vez la cadena ########## lo que hace que no se pueda obtener el contenido por defecto correctamente");
+			Logger::error("El esquema PVD {$this->nodeID} tiene m�s de una vez la cadena ########## lo que hace que no se pueda obtener el contenido por defecto correctamente");
 			return false;
 		}
 		if (!(count($parts) == 2)) {
-			XMD_Log::error("El esquema PVD {$this->nodeID} parece que no tiene contenido por defecto");
+			Logger::error("El esquema PVD {$this->nodeID} parece que no tiene contenido por defecto");
 			return false;
 		}
 		return $parts[1];

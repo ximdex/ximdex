@@ -26,6 +26,7 @@
 
 namespace Ximdex\Parsers;
 
+use Ximdex\Logger;
 use Ximdex\Runtime\DataFactory;
 use Ximdex\Models\Dependencies;
 use Ximdex\Deps\DepsManager;
@@ -38,7 +39,6 @@ use Ximdex\Utils\PipelineManager;
 use Ximdex\Models\StructuredDocument;
 use Ximdex;
 use Ximdex\Models\Node;
-use Ximdex\Logger as XMD_Log;
 
 
 
@@ -94,7 +94,7 @@ class ParsingDependencies
 
         $node = new Node($idNode);
         if (!($node->get('IdNode') > 0)) {
-            XMD_Log::error('Error while node loading.');
+            Logger::error('Error while node loading.');
             return false;
         }
 
@@ -102,7 +102,7 @@ class ParsingDependencies
         $idVersion = $dataFactory->GetLastVersionId();
 
         if (!($node->nodeType->get('IsStructuredDocument') == 1)) {
-            XMD_Log::info('This node is not a structured document');
+            Logger::info('This node is not a structured document');
             return false;
         }
 
@@ -165,7 +165,7 @@ class ParsingDependencies
 
 
         if (!($node->get('IdNode') > 0)) {
-            XMD_Log::error('Error while node loading.');
+            Logger::error('Error while node loading.');
             return false;
         }
         $version = $node->getVersion();
@@ -570,7 +570,7 @@ class ParsingDependencies
                     case 'css':
                         $id = $cssNode->GetChildByName(substr($matches[2][$n], 1));
                         if (!($id > 0)) {
-                            XMD_Log::error("Css file {$matches[2][$n]} not found");
+                            Logger::error("Css file {$matches[2][$n]} not found");
                         } else {
                             $css[] = $id;
                         }
@@ -578,7 +578,7 @@ class ParsingDependencies
                     case 'common':
                         $id = $commonNode->GetChildByName(substr($matches[2][$n], 1));
                         if (!($id > 0)) {
-                            XMD_Log::error("Common file {$matches[2][$n]} not found");
+                            Logger::error("Common file {$matches[2][$n]} not found");
                         } else {
                             $common[] = $id;
                         }

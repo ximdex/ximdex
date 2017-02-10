@@ -25,6 +25,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\NodeTypes\FolderNode;
 use Ximdex\Utils\FsUtils;
 
@@ -49,14 +50,14 @@ class XimNewsImagesFolder extends FolderNode {
 		$this->setThumbnailsPath();
 
 		if (!mkdir($this->thumbnailsPath, 0755, true)) {
-			XMD_Log::error("Creating thumbnail folder");
+			Logger::error("Creating thumbnail folder");
 			return NULL;
 		}
 
 		if (!FsUtils::file_put_contents($this->thumbnailsPath . 'thumbnails.xml', \App::getValue( 'EncodingTag') .
 			"\n<thumbnails>\n</thumbnails>")) {
 
-			XMD_Log::error("Creating thumbnail file");
+			Logger::error("Creating thumbnail file");
 			return NULL;
 		}
 

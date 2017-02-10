@@ -1,4 +1,5 @@
 <?php
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\MVC\ActionAbstract;
 
@@ -114,7 +115,7 @@ class Action_unlinknewscolector extends ActionAbstract {
 				if (!$relNewsColector->update()) {
 					$this->messages->add(_('The dissociation '.$node->get('Name').' - '. $elemNode->get('Name').' was NOT successfully performed. Updating error.'), MSG_TYPE_NOTICE);
 
-					XMD_Log::error("Updating relNewsColector $idRel");
+					Logger::error("Updating relNewsColector $idRel");
 				} else {
 					$this->messages->add(_('The dissociation '.$node->get('Name').' - '. $elemNode->get('Name').' was successfully performed.'), MSG_TYPE_NOTICE);
 

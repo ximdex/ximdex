@@ -100,12 +100,12 @@ function fileExistAndIsNotEmpty($path){
 }
 
 $count = 0;
-while(!fileExistAndIsNotEmpty('data/previos/css/default.css') && $count < 30){
+while(!fileExistAndIsNotEmpty('data/previos/css/default.css') && $count < 45){
     sleep(2);
     $count++;
 }
 
-while(!fileExistAndIsNotEmpty('data/previos/picasso-iden-idhtml.html') && $count < 30){
+while(!fileExistAndIsNotEmpty('data/previos/picasso-iden-idhtml.html') && $count < 45){
     sleep(2);
     $count++;
 }

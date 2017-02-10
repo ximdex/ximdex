@@ -32,6 +32,7 @@ use ModulesManager;
 use PoolerClient;
 use SolrConector;
 use Ximdex\Event\NodeEvent;
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\PipeCache;
 use Ximdex\Models\Version;
@@ -320,14 +321,14 @@ class DataFactory
         }
 
         if (!(!(is_null($versionID)) && !(is_null($subVersion)))) {
-            XMD_Log::warning('No se ha podido estimar la versi�n o la subversion');
+            Logger::warning('No se ha podido estimar la versi�n o la subversion');
             return false;
         }
 
         $uniqueName = $this->GetTmpFile($versionID, $subVersion);
 
         if (!$uniqueName) {
-            XMD_Log::warning('No se ha podido obtener el file');
+            Logger::warning('No se ha podido obtener el file');
             $this->SetError(3);
             return false;
         }
@@ -335,7 +336,7 @@ class DataFactory
         $targetPath = \App::getValue("AppRoot") . \App::getValue("FileRoot") . "/" . $uniqueName;
         $content = FsUtils::file_get_contents($targetPath);
 
-        XMD_Log::info("GetContent for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
+        Logger::info("GetContent for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
 
         $nodo = new Node($this->nodeID);
         $isPlainFile = $nodo->nodeType->get('IsPlainFile');
@@ -375,7 +376,7 @@ class DataFactory
             $channels = $node->GetChannels();
             $pipelineManager = new PipelineManager();
             foreach ($channels as $idChannel) {
-                XMD_Log::info("Generando cache para la versi�n $idVersion y el canal $idChannel");
+                Logger::info("Generando cache para la versi�n $idVersion y el canal $idChannel");
                 $data = array('CHANNEL' => $idChannel);
 
                 if (!$isOTF) {
@@ -436,12 +437,12 @@ class DataFactory
             $uniqueName = $this->GetTmpFile($versionID, $subVersion);
 
             if (!$uniqueName) {
-                XMD_Log::error("Error al hacer un setContent for Node (No se ha podido obtener el file):" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
+                Logger::error("Error al hacer un setContent for Node (No se ha podido obtener el file):" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
                 return false;
             }
 
             $targetPath = \App::getValue("AppRoot") . \App::getValue("FileRoot") . "/" . $uniqueName;
-            XMD_Log::info("SetContent for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
+            Logger::info("SetContent for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
             $result = FsUtils::file_put_contents($targetPath, $content);
 
             $idVersion = $this->getVersionId($versionID, $subVersion);
@@ -487,7 +488,7 @@ class DataFactory
             $curVersion = $this->GetLastVersion();
 
             if (is_null($curVersion)) {
-                XMD_Log::warning('No se ha podido obtener la �ltima versi�n del documento');
+                Logger::warning('No se ha podido obtener la �ltima versi�n del documento');
                 return false;
             }
             $curSubVersion = $this->GetLastSubVersion($curVersion);
@@ -557,7 +558,7 @@ class DataFactory
             $this->updateCaches($oldIdVersion, $IdVersion);
         }
 
-        XMD_Log::info("AddVersion for Node:" . $this->nodeID . ", Version: " . $newVersion . "." . $newSubVersion . ", File: ." . $uniqueName);
+        Logger::info("AddVersion for Node:" . $this->nodeID . ", Version: " . $newVersion . "." . $newSubVersion . ", File: ." . $uniqueName);
 
 
         if (ModulesManager::isEnabled('ximRAM')) {
@@ -621,7 +622,7 @@ class DataFactory
         $targetPath = \App::getValue("AppRoot") . \App::getValue("FileRoot") . "/" . $uniqueName;
 
         if (!FsUtils::file_put_contents($targetPath, $newContent)) {
-            XMD_Log::error('Error al establecer el contenido del documento');
+            Logger::error('Error al establecer el contenido del documento');
             $this->SetError(5);
         }
 
@@ -646,12 +647,12 @@ class DataFactory
 
         /// Lo guardamos en el sistema de archivos
         if ($nodetype->GetHasFSEntity() && !FsUtils::file_put_contents($fileName, $fileContent)) {
-            XMD_Log::error('Ha ocurrido un error al intentar guardar el documento');
+            Logger::error('Ha ocurrido un error al intentar guardar el documento');
             $this->SetError(6);
             return false;
         }
 
-        XMD_Log::debug("RecoverVersion for Node" . $this->nodeID . " with result:" .
+        Logger::debug("RecoverVersion for Node" . $this->nodeID . " with result:" .
             $IdVersion . ", Version: " . $newVersion . "." . $newSubVersion .
             ", OldVersion: " . $tmpVersion . "." . $subversion . ", File: ." . $uniqueName, 4, "DataFactory");
 
@@ -785,7 +786,7 @@ class DataFactory
         $dbObj->Execute($query);
 
 
-        XMD_Log::info("DeleteVersion  for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName);
+        Logger::info("DeleteVersion  for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName);
         return true;
     }
 
@@ -1195,7 +1196,7 @@ class DataFactory
     {
 
         if (!is_numeric($idVersion)) {
-            XMD_Log::warning('Se ha intentado indexar un nodo por un IdVersion no valido.');
+            Logger::warning('Se ha intentado indexar un nodo por un IdVersion no valido.');
             return;
         }
 
