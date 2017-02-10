@@ -59,7 +59,7 @@ function main($argc, $argv)
     $nodesToPublish = NodesToPublish::getNext();
 
     while ($nodesToPublish != null) {
-        Logger::write(_("Publication cycle triggered by") . " " . $nodesToPublish['idNodeGenerator'], 'publication_logger');
+        Logger::info(_("Publication cycle triggered by") . " " . $nodesToPublish['idNodeGenerator'], 'publication_logger');
         createBatchsForBlock($nodesToPublish);
 
         // Gext next block (if any) of nodes to publish
@@ -84,7 +84,7 @@ function createBatchsForBlock($nodesToPublish)
     $nodeServer = new Node($idServer);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           $otfMode = 0; //For the moment, otfMode is disabled
     if (\App::getValue('PublishOnDisabledServers') == 1) {
-        Logger::write("PublishOnDisabledServers is true", 'publication_logger');
+        Logger::info("PublishOnDisabledServers is true", 'publication_logger');
         $physicalServers = $nodeServer->class->GetPhysicalServerList(true, $otfMode);
     } else {
         $physicalServers = $nodeServer->class->GetEnabledPhysicalServerList(true, $otfMode);

@@ -33,7 +33,6 @@ use Ximdex\Models\Server;
 use Ximdex\NodeTypes\ServerNode;
 use Ximdex\Runtime\DataFactory;
 use Ximdex\Runtime\Db;
-use Ximdex\Utils\Logs\MN_Log;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Utils\PipelineManager;
@@ -107,7 +106,7 @@ class BatchManager
         $node = new Node($idNode);
         $idServer = $node->GetServer();
 
-        Logger::write(_("Publication starts for ") . $node->GetPath() . "($idNode)", 'publication_logger');
+        Logger::info(_("Publication starts for ") . $node->GetPath() . "($idNode)", 'publication_logger');
 
         $isOTF = $node->getSimpleBooleanProperty('otf');
         $ancestors = array();
@@ -201,7 +200,7 @@ class BatchManager
 
         $timer->stop();
 
-        Logger::write(_("Publication ended; time for publication") . " = " . $timer->display('m') . _(" minutes"), 'publication_logger');
+        Logger::info(_("Publication ended; time for publication") . " = " . $timer->display('m') . _(" minutes"), 'publication_logger');
 
         return array($docsBatch, $unchangedDocs);
     }
@@ -295,7 +294,7 @@ class BatchManager
 
             if ($timeDown != 0) {
                 $idBatchDown = $batch->create($timeDown, 'Down', $nodeGenerator, 1, null, $idPortalVersion, $userId);
-                MN_Log::info(_('Creating down batch: ') . $timeDown);
+                Logger::info(_('Creating down batch: ') . $timeDown, "mn_logger");
                 Logger::info(sprintf(_("[Generator %s]: Creating down batch with id %s"), $nodeGenerator, $idBatchDown), 'publication_logger');
             }
 
@@ -304,7 +303,7 @@ class BatchManager
                 $timeUp, 'Up', $nodeGenerator, $priority,
                 $idBatchDown, $idPortalVersion, $userId
             );
-            MN_Log::info(_('Creating up batch: ') . $timeUp);
+            Logger::info(_('Creating up batch: ') . $timeUp, "mn_logger");
             Logger::info(sprintf(_("[Generator %s]: Creating up batch with id %s"), $nodeGenerator, $relBatchsServers[$serverId]), 'publication_logger');
         }
 
@@ -656,7 +655,7 @@ class BatchManager
                 $batch->set('State', 'Ended');
                 $batch->BatchToLog($idBatch, null, null, null, null, __CLASS__, __FUNCTION__, __FILE__,
                     __LINE__, "INFO", 8, sprintf(_("Ending %s  batch %d UP"), $prevState, $idBatch));
-                MN_Log::info(_("Ending up batch with id ") . $idBatch);
+                Logger::info(_("Ending up batch with id ") . $idBatch, "mn_logger");
             }
 
             $batch->update();
@@ -713,7 +712,7 @@ class BatchManager
                     $batchDown->set('State', 'Ended');
                     $batchDown->BatchToLog($idBatch, null, null, null, null, __CLASS__, __FUNCTION__, __FILE__,
                         __LINE__, "INFO", 8, _("Ending " . $prevState . "for batch DOWN $idBatch"));
-                    MN_Log::info(_("Ending down batch with id ") . $idBatch);
+                    Logger::info(_("Ending down batch with id ") . $idBatch, "mn_logger");
                 }
 
                 $batchDown->update();
