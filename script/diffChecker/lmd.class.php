@@ -38,8 +38,9 @@ class lmd {
 	function lmd() {
 		if (!defined("LOGGED_SCRIPT_BEGIN")) {
 			Logger::info(sprintf("*** Ejecuci�n script %s", $_SERVER["PHP_SELF"]), "updatedb_logger");
-			UpdateDb_historic::info(sprintf("*** Ejecuci�n script %s", $_SERVER["PHP_SELF"]));
-			define("LOGGED_SCRIPT_BEGIN", true);
+			Logger::info(sprintf("*** Ejecuci�n script %s", $_SERVER["PHP_SELF"]), "updatedb_historic");
+
+            define("LOGGED_SCRIPT_BEGIN", true);
 		}
 	}
 
