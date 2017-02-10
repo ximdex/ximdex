@@ -32,6 +32,10 @@ Class Logger
         }
     }
 
+    /**
+     * @param string $loggerInstance
+     * @return \Monolog\Logger|void
+     */
     public static function get($loggerInstance = 'XMD') {
         if ( !isset( self::$instances[ $loggerInstance ] ) || !self::$instances[ $loggerInstance ] instanceof \Monolog\Logger ) {
             throw \Exception( 'Logger need to be initilized' );
@@ -69,6 +73,35 @@ Class Logger
             return self::$instances[$loggerInstance]->addWarning($string);
         }catch (\Exception $e){
             error_log($e->getMessage());
+        }
+    }
+
+    public static function write($msg, $level = LOGGER_LEVEL_DEBUG, $loggerInstance = 'XMD'){
+        $logger = self::get($loggerInstance);
+        if (!is_null($logger)) {
+            switch ( $level ) {
+                case LOGGER_LEVEL_ALL:
+                    $logger->addDebug( $msg );
+                    break;
+                case LOGGER_LEVEL_DEBUG:
+                    $logger->addDebug( $msg );
+                    break;
+                case LOGGER_LEVEL_INFO:
+                    $logger->addInfo( $msg );
+                    break;
+                case LOGGER_LEVEL_WARNING:
+                    $logger->addWarning( $msg );
+                    break;
+                case LOGGER_LEVEL_ERROR:
+                    $logger->addError( $msg );
+                    break;
+                case LOGGER_LEVEL_FATAL:
+                    $logger->addCritical( $msg );
+                    break;
+                case LOGGER_LEVEL_NONE:
+                    $logger->addEmergency( $msg );
+                    break;
+            }
         }
     }
 

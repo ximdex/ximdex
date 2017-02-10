@@ -24,6 +24,7 @@
  * @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
 use Ximdex\Models\PipeCacheTemplates;
@@ -225,7 +226,7 @@ class Action_edittext extends ActionAbstract
                 if (method_exists($node->class, 'updateNew')) {
                     $node->class->updateNew();
                 } else {
-                    XMD_Log::error(_('It was tried to call a non-existing method for this node: $node->class->updateNew for nodeid:') . $node->get('IdNode'));
+                    Logger::error(_('It was tried to call a non-existing method for this node: $node->class->updateNew for nodeid:') . $node->get('IdNode'));
                 }
             }
 

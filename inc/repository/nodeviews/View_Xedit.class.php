@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\Version;
 use Ximdex\Parsers\ParsingRng;
@@ -148,13 +149,13 @@ class View_Xedit extends Abstract_View implements Interface_View {
 		if(!is_null($idVersion)) {
 			$version = new Version($idVersion);
 			if (!($version->get('IdVersion') > 0)) {
-				XMD_Log::error('VIEW XEDIT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
+				Logger::error('VIEW XEDIT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
 				return false;
 			}
 			
 			$this->node = new Node($version->get('IdNode'));
 			if (!($this->node->get('IdNode') > 0)) {
-				XMD_Log::error('VIEW XEDIT: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
+				Logger::error('VIEW XEDIT: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
 				return false;
 			}
 		}
@@ -164,7 +165,7 @@ class View_Xedit extends Abstract_View implements Interface_View {
 	
 	private function setView($args) {
 		if (!array_key_exists('XEDIT_VIEW', $args)) {
-			XMD_Log::error('VIEW XEDIT: No se ha especificado la vista de XEDIT');
+			Logger::error('VIEW XEDIT: No se ha especificado la vista de XEDIT');
 			return false;
 		}
 		$this->view = $args['XEDIT_VIEW'];

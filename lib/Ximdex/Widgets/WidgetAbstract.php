@@ -26,12 +26,10 @@
 
 
 namespace Ximdex\Widgets;
+use Ximdex\Logger;
 use Ximdex\Parsers\ParsingJsGetText;
 use Ximdex\Runtime\App;
 use Ximdex\Utils\FsUtils;
-
-use XMD_Log;
-
 
 abstract class WidgetAbstract
 {
@@ -116,7 +114,7 @@ abstract class WidgetAbstract
 
 		$this->_tpl = sprintf('%s%s.tpl', $this->_template_dir, basename($_template));
 		if (!is_file($this->_tpl)) {
-			if ($this->_wname != 'common') XMD_Log::warning(sprintf("There is no template for widget %s", $this->_wname));
+			if ($this->_wname != 'common') Logger::warning(sprintf("There is no template for widget %s", $this->_wname));
 			$this->_tpl = null;
 		}
 	}

@@ -26,6 +26,7 @@
 
 
 use Ximdex\Auth;
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Language;
 use Ximdex\Models\Node;
@@ -380,7 +381,7 @@ class Action_fileupload_common_multiple extends ActionAbstract {
                     return  $this->_setRest(_('File has been successfully uploaded.'), "ok" );
                 }
             }else {
-                XMD_Log::error(_("BaseIO has returned the error code"). $result);
+                Logger::error(_("BaseIO has returned the error code"). $result);
                 return  $this->_setRest($baseIO->messages->messages[0]["message"]);
             }
         }

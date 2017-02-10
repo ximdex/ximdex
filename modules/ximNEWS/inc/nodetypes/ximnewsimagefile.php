@@ -25,6 +25,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\NodeTypes\FileNode;
 use Ximdex\Utils\FsUtils;
@@ -162,7 +163,7 @@ class XimNewsImageFile extends FileNode {
 		$nodeList = $xpath->query("//thumbnail[@nodeid = '$idImage']");
 
 		if (!($nodeList->length > 0)) {
-			XMD_Log::error("Thumbnail for $idImage not found");
+			Logger::error("Thumbnail for $idImage not found");
 			return false;
 		}
 
@@ -174,7 +175,7 @@ class XimNewsImageFile extends FileNode {
 
 			$fileThumb = $this->thumbnailsPath . $pathNode->nodeValue;
 
-			if(!FsUtils::delete($fileThumb)) XMD_Log::info("Error eliminando imagen $fileThumb");
+			if(!FsUtils::delete($fileThumb)) Logger::info("Error eliminando imagen $fileThumb");
 		}
 
 		// update XML
@@ -235,7 +236,7 @@ class XimNewsImageFile extends FileNode {
 				// rename the thumbnails files
 
 				if (!rename($this->thumbnailsPath . $oldValue, $this->thumbnailsPath . $newValue)) {
-					XMD_Log::error("Error renaming thumbnail $oldThumbnail");
+					Logger::error("Error renaming thumbnail $oldThumbnail");
 				}
 			}
 		}

@@ -1,4 +1,5 @@
 <?php
+use Ximdex\Logger;
 use Ximdex\Utils\FsUtils;
 
 /**
@@ -47,7 +48,7 @@ class QueryProcessor {
 		$xml = FsUtils::file_get_contents($definitionPath);
 
 		if (empty($xml)) {
-			XMD_Log::error("Query definition not found: $definitionPath");
+			Logger::error("Query definition not found: $definitionPath");
 			return NULL;
 		}
 

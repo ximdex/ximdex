@@ -26,6 +26,7 @@
 
 
 use Ximdex\Deps\LinksManager;
+use Ximdex\Logger;
 use Ximdex\Models\Version;
 
 require_once(XIMDEX_ROOT_PATH . '/inc/repository/nodeviews/Abstract_View.class.php');
@@ -43,7 +44,7 @@ class View_Common extends Abstract_View implements Interface_View
             return NULL;
 
         if (!is_file($this->_filePath)) {
-            XMD_Log::error('VIEW COMMON: Se ha solicitado cargar un archivo inexistente. FilePath: ' . $this->_filePath);
+            Logger::error('VIEW COMMON: Se ha solicitado cargar un archivo inexistente. FilePath: ' . $this->_filePath);
             return NULL;
         }
 
@@ -76,7 +77,7 @@ class View_Common extends Abstract_View implements Interface_View
             }
             // Check Params:
             if (!isset($this->_filePath) || $this->_filePath == "") {
-                XMD_Log::error('VIEW COMMON: No se ha especificado la version ni el path del fichero correspondiente al nodo ' . $args['NODENAME'] . ' que quiere renderizar');
+                Logger::error('VIEW COMMON: No se ha especificado la version ni el path del fichero correspondiente al nodo ' . $args['NODENAME'] . ' que quiere renderizar');
                 return NULL;
             }
         }

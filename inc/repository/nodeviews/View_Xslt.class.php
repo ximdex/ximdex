@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Models\Version;
@@ -78,17 +79,17 @@ class View_Xslt extends Abstract_View
                 $xmlHeader = \App::getValue('EncodingTag');
                 $content = str_replace($xmlHeader, $xmlHeader . $inclusionHeader, $content);
 
-                XMD_Log::info('Render in client, return XML content + path to template');
+                Logger::info('Render in client, return XML content + path to template');
                 return $content;
             }
 
             /*			if (is_object($this->_node)) {
 
-                            XMD_Log::info("obteniendo propiedad otf para id ".$this->_node->get('IdNode'));
+                            \Ximdex\Logger::info("obteniendo propiedad otf para id ".$this->_node->get('IdNode'));
                             $isOTF = $this->_node->getSimpleBooleanProperty('otf');
 
                             if ($isOTF) {
-                                XMD_Log::info('Render in server, return XML content');
+                                \Ximdex\Logger::info('Render in server, return XML content');
                                 return $content;
                             }
                         }
@@ -97,7 +98,7 @@ class View_Xslt extends Abstract_View
 
         // XSLT Transformation
 
-        XMD_Log::info('Starting xslt transformation');
+        Logger::info('Starting xslt transformation');
         if (!file_exists($docxap)) {
             $project = new Node($this->_idProject);
             $nodeProjectPath = $project->class->GetNodePath();
@@ -116,7 +117,7 @@ class View_Xslt extends Abstract_View
 
         $content = $xsltHandler->process();
         if (empty($content)) {
-            XMD_Log::error("Error in XSLT process for $docxap ");
+            Logger::error("Error in XSLT process for $docxap ");
             return NULL;
         }
 
@@ -165,17 +166,17 @@ class View_Xslt extends Abstract_View
         if (!is_null($idVersion)) {
             $version = new Version($idVersion);
             if (!($version->get('IdVersion') > 0)) {
-                XMD_Log::error('VIEW XSLT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
+                Logger::error('VIEW XSLT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
                 return NULL;
             }
 
             $this->_node = new Node($version->get('IdNode'));
             if (!($this->_node->get('IdNode') > 0)) {
-                XMD_Log::error('VIEW XSLT: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
+                Logger::error('VIEW XSLT: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
                 return NULL;
             }
         } else {
-            XMD_Log::info("VIEW XSLT: Se instancia vista xslt sin idVersion");
+            Logger::info("VIEW XSLT: Se instancia vista xslt sin idVersion");
         }
 
         return true;
@@ -190,7 +191,7 @@ class View_Xslt extends Abstract_View
 
         // Check Params:
         if (!isset($this->_idChannel) || !($this->_idChannel > 0)) {
-            XMD_Log::error('VIEW XSLT: Node ' . $args['NODENAME'] . ' has not an associated channel');
+            Logger::error('VIEW XSLT: Node ' . $args['NODENAME'] . ' has not an associated channel');
             return NULL;
         }
 
@@ -209,7 +210,7 @@ class View_Xslt extends Abstract_View
 
             // Check Params:
             if (!isset($this->_idSection) || !($this->_idSection > 0)) {
-                XMD_Log::error('VIEW XSLT: There is not associated section for the node ' . $args['NODENAME']);
+                Logger::error('VIEW XSLT: There is not associated section for the node ' . $args['NODENAME']);
                 return NULL;
             }
         }
@@ -229,7 +230,7 @@ class View_Xslt extends Abstract_View
 
             // Check Params:
             if (!isset($this->_idProject) || !($this->_idProject > 0)) {
-                XMD_Log::error('VIEW XSLT: There is not associated project for the node ' . $args['NODENAME']);
+                Logger::error('VIEW XSLT: There is not associated project for the node ' . $args['NODENAME']);
                 return NULL;
             }
         }

@@ -25,6 +25,7 @@
  */
 
 namespace Ximdex\XML ;
+use Ximdex\Logger;
 use Ximdex\Utils\FsUtils ;
 
 class XML {
@@ -123,7 +124,7 @@ class XML {
             return $domDocument;
         }
 
-        XMD_Log::error('The loaded document has some errors');
+        Logger::error('The loaded document has some errors');
         return false;
     }
 

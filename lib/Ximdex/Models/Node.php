@@ -30,7 +30,6 @@ namespace Ximdex\Models;
 use NodeProperty;
 use Ximdex\Event\NodeEvent;
 use Ximdex\Events;
-use Ximdex\Logger as XMD_Log;
 use Ximdex\Models\ORM\NodesOrm;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\DataFactory;
@@ -41,6 +40,7 @@ use Ximdex\Utils\Sync\Synchronizer;
 use Ximdex\Workflow\WorkFlow;
 use Ximdex\XML\Base;
 use Ximdex\XML\XML;
+use Ximdex\Logger;
 
 require_once(XIMDEX_ROOT_PATH . '/inc/utils.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/model/NodeProperty.class.php');
@@ -165,7 +165,7 @@ class Node extends NodesOrm
                 $this->class = \Ximdex\NodeTypes\Factory::getNodeTypeByName($nodeTypeClass, $this, $nodeTypeModule);
 
 
-                //XMD_Log::info(sprintf(_('Fatal error: the nodetype associated to %s does not exist'), $fileToInclude));
+                //Logger::info(sprintf(_('Fatal error: the nodetype associated to %s does not exist'), $fileToInclude));
                 //die(sprintf(_('Fatal error: the nodetype associated to %s does not exist'), $fileToInclude));
                 if (!$fullLoad) {
                     return;
@@ -651,7 +651,7 @@ class Node extends NodesOrm
         $path = $this->_GetPath();
         // $idNode = $this->get('IdNode');
         if (!$path) {
-            XMD_Log::debug("Model::Node::getPath(): Path cant be deduced from NULL idNode. ERROR");
+            Logger::debug("Model::Node::getPath(): Path cant be deduced from NULL idNode. ERROR");
         }
         return $path;
     }
@@ -1241,7 +1241,7 @@ class Node extends NodesOrm
         /// Updating the hierarchy index for this node.
         $this->RenderizeNode();
 
-        XMD_Log::debug("Model::Node::CreateNode: Creating node id(" . $this->nodeID . "), name(" . $name . "), parent(" . $parentID . ").");
+        Logger::debug("Model::Node::CreateNode: Creating node id(" . $this->nodeID . "), name(" . $name . "), parent(" . $parentID . ").");
 
         /// Once created, its content by default is added.
         $dbObj = new Db();
@@ -1257,7 +1257,7 @@ class Node extends NodesOrm
 
         while (!$dbObj->EOF) {
             $childNode = new Node();
-            XMD_Log::debug("Model::Node::CreateNode: Creating child name(" . $this->get('Name') . "), type(" . $this->get('IdNodeType') . ").");
+            Logger::debug("Model::Node::CreateNode: Creating child name(" . $this->get('Name') . "), type(" . $this->get('IdNodeType') . ").");
             $childNode->CreateNode($dbObj->GetValue('Name'), $this->get('IdNode'), $dbObj->GetValue('NodeType'), $dbObj->GetVAlue('State'));
             $dbObj->Next();
         }
@@ -1351,7 +1351,7 @@ class Node extends NodesOrm
         $rtn = new RelTagsNodes();
         $rtn->deleteTags($this->nodeID);
 
-        XMD_Log::info("Node " . $this->nodeID . " deleted.");
+        Logger::info("Node " . $this->nodeID . " deleted.");
         $this->nodeID = null;
         $this->class = null;
 
@@ -2009,14 +2009,14 @@ class Node extends NodesOrm
 
             if ($dbObj->numErr) {
                 $this->messages->add(_('Alias could not be updated, incorrect operation'), MSG_TYPE_ERROR);
-                XMD_Log::error(sprintf(_("Error in query %s or %s"), $query, $sql));
+                Logger::error(sprintf(_("Error in query %s or %s"), $query, $sql));
                 return false;
             }
             return true;
         }
 
         $this->messages->add(_('The node you want to operate with does not exist'), MSG_TYPE_WARNING);
-        XMD_Log::warning(_("Error: unexisting node") . "{$this->IdNode}");
+        Logger::warning(_("Error: unexisting node") . "{$this->IdNode}");
         return false;
     }
 
@@ -2038,13 +2038,13 @@ class Node extends NodesOrm
             $dbObj->Execute($sql);
             if ($dbObj->numErr) {
                 $this->messages->add(_('Alias could not be deleted, incorrect operation'), MSG_TYPE_ERROR);
-                XMD_Log::error(sprintf(_("Error in query %s"), $sql));
+                Logger::error(sprintf(_("Error in query %s"), $sql));
                 return false;
             }
             return true;
         }
         $this->messages->add(_('The node you want to operate with does not exist'), MSG_TYPE_WARNING);
-        XMD_Log::warning(_("Error: unexisting node") . "{$this->IdNode}");
+        Logger::warning(_("Error: unexisting node") . "{$this->IdNode}");
         return false;
     }
 
@@ -2161,7 +2161,7 @@ class Node extends NodesOrm
     function _getParentByType($type = NULL)
     {
         if (is_null($type)) {
-            XMD_Log::fatal(_('It is being tried to call a function without param'));
+            Logger::fatal(_('It is being tried to call a function without param'));
             return false;
         }
 
@@ -2178,7 +2178,7 @@ class Node extends NodesOrm
             return $db->getValue('IdNode');
         }
 
-        XMD_Log::error(sprintf(_("The nodetype %s could not be obtained for node "), $type) . $this->get('IdNode'));
+        Logger::error(sprintf(_("The nodetype %s could not be obtained for node "), $type) . $this->get('IdNode'));
         return NULL;
     }
 
@@ -2630,7 +2630,7 @@ class Node extends NodesOrm
         global $STOP_COUNT;
         //TODO check if current user has permits to read this node, and if he does not, returns an empty string.
         if (!($this->get('IdNode') > 0)) {
-            XMD_Log::warning(sprintf(_("It is being tried to load the unexistent node %s"), $this->get('IdNode')));
+            Logger::warning(sprintf(_("It is being tried to load the unexistent node %s"), $this->get('IdNode')));
             return false;
         }
 
@@ -2705,7 +2705,7 @@ class Node extends NodesOrm
                 while (list(, $idChildrenNode) = each($childrens)) {
                     $children = new Node($idChildrenNode);
                     if (!($children->get('IdNode') > 0)) {
-                        XMD_Log::warning(sprintf(_("It is being tried to load the node %s from the unexistent node %s"), $children->get('IdNode'), $this->get('IdNode')));
+                        Logger::warning(sprintf(_("It is being tried to load the node %s from the unexistent node %s"), $children->get('IdNode'), $this->get('IdNode')));
                         continue;
                     }
 
@@ -2714,7 +2714,7 @@ class Node extends NodesOrm
                         $idTemplate = $structuredDocument->GetDocumentType();
                         $node = new Node($idTemplate);
                         if (!($node->get('IdNode') > 0)) {
-                            XMD_Log::warning(sprintf(_("It is being tried to load the node %s from the unexistent node %s"), $node->get('IdNode'), $this->get('IdNode')));
+                            Logger::warning(sprintf(_("It is being tried to load the node %s from the unexistent node %s"), $node->get('IdNode'), $this->get('IdNode')));
                             continue;
                         }
                         if ($STOP_COUNT == COUNT) {
@@ -2787,7 +2787,7 @@ class Node extends NodesOrm
                 while (list(, $idChildren) = each($childrens)) {
                     $childrenNode = new Node($idChildren);
                     if (!($childrenNode->get('IdNode') > 0)) {
-                        XMD_Log::warning(sprintf(_("It is being tried to load the node %s from the unexistent node %s"), $childrenNode->get('IdNode'), $this->get('IdNode')));
+                        Logger::warning(sprintf(_("It is being tried to load the node %s from the unexistent node %s"), $childrenNode->get('IdNode'), $this->get('IdNode')));
                         continue;
                     }
                     $xmlBody .= $childrenNode->toXml($depth, $files, $recurrence);
@@ -2851,34 +2851,34 @@ class Node extends NodesOrm
     {
         if (is_null($parent)) {
             if (is_null($this->get('IdParent'))) {
-                XMD_Log::info(_('Error checking if the node is allowed - parent does not exist [1]'));
+                Logger::info(_('Error checking if the node is allowed - parent does not exist [1]'));
                 return false;
             }
             $parent = $this->get('IdParent');
         }
         $parentNode = new Node($parent);
         if (!($parentNode->GetID() > 0)) {
-            XMD_Log::info(_('Error checking if the node is allowed - parent does not exist [2]'));
+            Logger::info(_('Error checking if the node is allowed - parent does not exist [2]'));
             $this->messages->add(_('The specified parent node does not exist'), MSG_TYPE_ERROR);
             return false;
         }
 
         $nodeAllowedContents = $parentNode->GetCurrentAllowedChildren();
         if (!(count($nodeAllowedContents) > 0)) {
-            XMD_Log::info(sprintf(_("The parent %s does not allow any nested node from him"), $parent));
+            Logger::info(sprintf(_("The parent %s does not allow any nested node from him"), $parent));
             $this->messages->add(_('This node type is not allowed in this position'), MSG_TYPE_ERROR);
             return false;
         }
 
         $nodeType = new NodeType($idNodeType);
         if (!($nodeType->GetID() > 0)) {
-            XMD_Log::info(sprintf(_("The introduced nodetype %s does not exist"), $idNodeType));
+            Logger::info(sprintf(_("The introduced nodetype %s does not exist"), $idNodeType));
             $this->messages->add(_('The specified nodetype does not exist'), MSG_TYPE_ERROR);
             return false;
         }
 
         if (!in_array($idNodeType, $nodeAllowedContents)) {
-            XMD_Log::info("The nodetype $idNodeType is not allowed in the parent (idnode =" . $parent . ") - (idnodetype =" . $parentNode->get('IdNodeType') . ") which allowed nodetypes are" . print_r($nodeAllowedContents, true));
+            Logger::info("The nodetype $idNodeType is not allowed in the parent (idnode =" . $parent . ") - (idnodetype =" . $parentNode->get('IdNodeType') . ") which allowed nodetypes are" . print_r($nodeAllowedContents, true));
             $this->messages->add(_('This node type is not allowed in this position'), MSG_TYPE_ERROR);
             return false;
         }
@@ -2973,7 +2973,7 @@ class Node extends NodesOrm
             return $nodeProperty->getProperty($this->get('IdNode'), $property);
         }
 
-        XMD_Log::info(sprintf(_("Property %s not found for node %d"), $property, $this->get('IdNode')));
+        Logger::info(sprintf(_("Property %s not found for node %d"), $property, $this->get('IdNode')));
 
         return NULL;
     }
@@ -3264,19 +3264,19 @@ class Node extends NodesOrm
         $idProject = $this->GetProject();
 
         if (!($idProject > 0)) {
-            XMD_Log::debug(_('It was not possible to obtain the node project folder'));
+            Logger::debug(_('It was not possible to obtain the node project folder'));
             return NULL;
         }
 
         $project = new Node($idProject);
         if (!($project->get('IdNode') > 0)) {
-            XMD_Log::debug('An unexistent project has be obtained');
+            Logger::debug('An unexistent project has be obtained');
             return NULL;
         }
 
         $folder = new Node($project->GetChildByName(App::getValue("SchemasDirName")));
         if (!($folder->get('IdNode') > 0)) {
-            XMD_Log::debug('Pvd folder could not be obtained');
+            Logger::debug('Pvd folder could not be obtained');
             return NULL;
         }
 
@@ -3305,7 +3305,7 @@ class Node extends NodesOrm
         }
 
         if (!is_array($schemas)) {
-            XMD_Log::debug(sprintf('The specified folder (%s) is not containing schemas', $folder->get('IdNode')));
+            Logger::debug(sprintf('The specified folder (%s) is not containing schemas', $folder->get('IdNode')));
             return NULL;
         }
 

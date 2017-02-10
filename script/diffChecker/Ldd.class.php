@@ -25,10 +25,11 @@
  */
 
 
+use Ximdex\Logger;
+
 require_once(XIMDEX_ROOT_PATH . "/extensions/adodb/adodb.inc.php");
 require_once(XIMDEX_ROOT_PATH . "/extensions/adodb/adodb-active-record.inc.php");
 require_once(XIMDEX_ROOT_PATH . "/conf/log.php");
-require_once(XIMDEX_ROOT_PATH . "/script/diffChecker/UpdateDb_log.class.php");
 require_once(XIMDEX_ROOT_PATH . "/script/diffChecker/lddConstants.php");
 
 define("GET_FIELD_TYPE_INFO", "/([a-z]+)\s*\(\s*([0-9]*)\s*(\s*,*\s*([0-9]*))?\s*\)/");
@@ -48,13 +49,13 @@ class ldd
     {
         global $DB_TYPE_USAGE;
         if (!isset($DB_TYPE_USAGE) || ($DB_TYPE_USAGE != ADODB)) {
-            UpdateDb_log::fatal("Es necesario tener activado ADODB en el tipo de acceso a datos para poder ejecutar el actualizador");
+            Logger::fatal("Es necesario tener activado ADODB en el tipo de acceso a datos para poder ejecutar el actualizador", "updatedb_logger");
             die("Es necesario tener activado ADODB en el tipo de acceso a datos para poder ejecutar el actualizador");
         }
 
-        UpdateDb_log::debug("Chequeando archivo $fileName");
+        Logger::debug("Chequeando archivo $fileName", "updatedb_logger");
         if (!is_file($fileName)) {
-            UpdateDb_log::error("No se ha podido encontrar el orm correspondiente al archivo " . $fileName);
+            Logger::error("No se ha podido encontrar el orm correspondiente al archivo " . $fileName, "updatedb_logger", "updatedb_logger");
             return false;
         }
 
@@ -78,7 +79,7 @@ class ldd
     function updateFromMetaData()
     {
         if (!is_object($this->object)) {
-            UpdateDb_log::error("El objeto ldd no se ha cargado correctamente, compruebe los errores anteriores");
+            Logger::error("El objeto ldd no se ha cargado correctamente, compruebe los errores anteriores", "updatedb_logger");
             return false;
         }
 
@@ -113,8 +114,8 @@ class ldd
             }
 
             if (empty($matches)) {
-                UpdateDb_log::error(sprintf("Error al parsear el tipo del campo %s de la tabla %s, saltamos la creaci�n de este campo",
-                    $fieldName, $this->tableName));
+                Logger::error(sprintf("Error al parsear el tipo del campo %s de la tabla %s, saltamos la creaci�n de este campo",
+                    $fieldName, $this->tableName), "updatedb_logger");
                 return;
             }
 
@@ -199,7 +200,7 @@ class ldd
         $uniqueKey = implode(", ", $uniqueKeys);
 
         if (empty($primaryKey)) {
-            UpdateDb_log::error("La tabla {$this->tableName} no contiene primaryKey, regenere el orm y pruebe de nuevo");
+            Logger::error("La tabla {$this->tableName} no contiene primaryKey, regenere el orm y pruebe de nuevo", "updatedb_logger");
             return;
         }
 
@@ -282,8 +283,8 @@ class ldd
         }
 
         if (empty($matches)) {
-            UpdateDb_log::error(sprintf("Error al parsear el tipo del campo %s de la tabla %s, saltamos la actualizaci�n de este campo",
-                $fieldName, $this->tableName));
+            Logger::error(sprintf("Error al parsear el tipo del campo %s de la tabla %s, saltamos la actualizaci�n de este campo",
+                $fieldName, $this->tableName), "updatedb_logger");
             return;
         }
 
@@ -388,7 +389,7 @@ class ldd
 
     function _executeQuery($query)
     {
-        UpdateDb_log::debug($query);
+        Logger::debug($query, "updatedb_logger");
         if ($this->mode == SCREEN) {
             echo $query . ";\n";
             return true;
@@ -396,7 +397,7 @@ class ldd
             $db = new DB();
             $result = $db->execute($query);
             if (!$result) {
-                UpdateDb_log::error($db->desErr);
+                Logger::error($db->desErr, "updatedb_logger");
             } else {
                 $this->script .= $query;
             }

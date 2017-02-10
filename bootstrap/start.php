@@ -45,9 +45,8 @@ if ( file_exists( App::getValue('XIMDEX_ROOT_PATH') . '/conf/install-params.conf
 // set ximdex root path
 Ximdex\Modules\Manager::init( App::getValue('XIMDEX_ROOT_PATH')   );
 Ximdex\Modules\Manager::file( Ximdex\Modules\Manager::get_modules_install_params() );
-// setup log
-class_alias('Ximdex\Logger', 'XMD_Log');
 
+// setup log
 include_once XIMDEX_ROOT_PATH . '/conf/log.php';
 
 // read install-modules.php

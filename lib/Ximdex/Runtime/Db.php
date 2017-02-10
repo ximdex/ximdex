@@ -7,9 +7,9 @@
  */
 namespace Ximdex\Runtime;
 
+use Ximdex\Logger;
 use Ximdex\Runtime\App;
 use PDO;
-use  XMD_Log;
 
 class Db
 {
@@ -294,7 +294,7 @@ class Db
         }
 
         if (!(strlen($value) > 0)) {
-            XMD_Log::info("WARNING: A SQL statement is converting an empty string to NULL");
+            Logger::info("WARNING: A SQL statement is converting an empty string to NULL");
             return 'NULL';
         }
         return self::getInstance()->db->quote($value);

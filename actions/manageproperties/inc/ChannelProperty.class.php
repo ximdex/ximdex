@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Models\StructuredDocument;
@@ -146,7 +147,7 @@ class ChannelProperty extends InheritableProperty {
 		$db = new DB();
 		$db->execute($sql);
 		if ($db->numErr != 0) {
-	 		XMD_Log::error($this->desErr);
+	 		Logger::error($this->desErr);
 		}
 
 		return array('affectedNodes' => $affectedNodes, 'messages' => array());
@@ -175,7 +176,7 @@ class ChannelProperty extends InheritableProperty {
 			$nodeId = $db->getValue('IdNode');
 			$node = new StructuredDocument($nodeId);
 			if (!($node->get('IdDoc') > 0)) {
-				XMD_Log::error(_('StructuredDocument cannot be instantiate with ID ') . $nodeID);
+				Logger::error(_('StructuredDocument cannot be instantiate with ID ') . $nodeID);
 				continue;
 			}
 

@@ -27,6 +27,7 @@
 
 namespace Ximdex\Models;
 
+use Ximdex\Logger;
 use Ximdex\Models\Group;
 use ModulesManager;
 use NoActionsInNode;
@@ -36,7 +37,6 @@ use Ximdex\Models\Version;
 use Ximdex\Models\ORM\UsersOrm;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\Db as DB;
-use Ximdex\Logger as XMD_Log;
 
 
 ModulesManager::file('/inc/model/NoActionsInNode.class.php');
@@ -512,7 +512,7 @@ class User extends UsersOrm
     {
 
         if (is_null($idUser)) {
-            XMD_Log::error(_("The node must be previously created"));
+            Logger::error(_("The node must be previously created"));
             return NULL;
         }
 
@@ -524,7 +524,7 @@ class User extends UsersOrm
         $this->set('Locale', $locale);
 
         if (!parent::add()) {
-            XMD_Log::error(_("Error in User persistence for $idUser"));
+            Logger::error(_("Error in User persistence for $idUser"));
             return NULL;
         }
 

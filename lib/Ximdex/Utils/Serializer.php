@@ -26,7 +26,8 @@
 
 
 namespace Ximdex\Utils;
-use Ximdex\Logger as XMD_Log ;
+
+use Ximdex\Logger;
 
 if (!defined('SZR_JSON')) define('SZR_JSON', 'json');
 if (!defined('SZR_XMLRPC')) define('SZR_XMLRPC', 'xmlrpc');
@@ -67,7 +68,7 @@ class Serializer
 		if ( class_exists( $class )) {
 			$instance = new $class();
 		} else  {
-			XMD_Log::error(sprintf(_("Serializer :: The class {%s} could not be instanced."), $class));
+			Logger::error(sprintf(_("Serializer :: The class {%s} could not be instanced."), $class));
 			die;
 		}
 		return $instance;

@@ -24,6 +24,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Parsers\PVD2RNG\PVD2RNG;
@@ -65,7 +66,7 @@ abstract class XmlEditor_Abstract
     {
         $node = new Node($idnode);
         if (!($node->get('IdNode') > 0)) {
-            XMD_Log::error(_("A non-existing node cannot be obtained: ") . $node->get('IdNode'));
+            Logger::error(_("A non-existing node cannot be obtained: ") . $node->get('IdNode'));
 
             return null;
         }
@@ -115,7 +116,7 @@ abstract class XmlEditor_Abstract
 
         } else {
             $msg = "docxap.xsl was not found for node $idnode";
-            XMD_Log::error(_($msg));
+            Logger::error(_($msg));
 //			$content = array('error' => array($msg));
         }
 
@@ -126,7 +127,7 @@ abstract class XmlEditor_Abstract
     {
         $node = new Node($idnode);
         if (!($node->get('IdNode') > 0)) {
-            XMD_Log::error(_("A non-existing node cannot be obtained: " ) . "$idnode");
+            Logger::error(_("A non-existing node cannot be obtained: " ) . "$idnode");
 
             return null;
         }

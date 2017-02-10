@@ -23,9 +23,9 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
+use Ximdex\Logger;
 use Ximdex\Runtime\Cli\CliParser;
 use Ximdex\Utils\FsUtils;
-use Ximdex\Logger as XMD_Log ;
 
 /**
  *    scafold.php
@@ -56,7 +56,7 @@ $ormFile = $parameterCollector->getParameter('--entityFile');
 $className = $parameterCollector->getParameter('--className');
 
 if (!is_file($ormFile)) {
-    XMD_Log::display('Se ha solicitado generar las vistas de un archivo inexistente ' . $ormFile);
+    Logger::display('Se ha solicitado generar las vistas de un archivo inexistente ' . $ormFile);
     die();
 }
 
@@ -68,8 +68,8 @@ if (is_null($obj->_metaData)) {
 
 $parcial = '';
 
-XMD_Log::display("File: " . realpath($ormFile));
-XMD_Log::display('Class: ' . $className);
+Logger::display("File: " . realpath($ormFile));
+Logger::display('Class: ' . $className);
 
 $longFieldTypes = array('K', 'V', 'I', 'C', 'M', 'R');
 $classNameForForm = str_replace('_ENTITY', '', $className);

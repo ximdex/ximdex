@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Utils\FsUtils;
 
@@ -411,7 +412,7 @@ function call_template_dynamic($templateToCall, $matchNode, $pathToInclude, $xml
 	$xsltHandler->setXsltSrc($xslCode);
 
 	if (!$xsltHandler->process()) {
-		XMD_Log::error("Error in XSLT process: ".$xsltHandler->getError());
+		Logger::error("Error in XSLT process: ".$xsltHandler->getError());
 		return '<empty/>';
 	}
 

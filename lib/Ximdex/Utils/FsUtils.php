@@ -26,8 +26,8 @@
 
 namespace Ximdex\Utils;
 
-use Ximdex\Utils\Logs\MN_Log;
 use Ximdex\Logger as XMD_log;
+use Ximdex\Logger;
 
 class FsUtils
 {
@@ -115,14 +115,14 @@ class FsUtils
 
         if ($result === false) {
             $backtrace = debug_backtrace();
-            XMD_Log::debug(sprintf(_("Error writing in file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s file: %s"),
+            Logger::debug(sprintf(_("Error writing in file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s file: %s"),
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
                 $backtrace[0]['line'],
                 $filename));
             return false;
         }
-        XMD_Log::debug("file_put_contents: input: $filename");
+        Logger::debug("file_put_contents: input: $filename");
 
         return true;
     }
@@ -165,7 +165,7 @@ class FsUtils
     {
         if (!is_file($filename)) {
             $backtrace = debug_backtrace();
-            XMD_Log::debug(sprintf(_('Trying to obating the content of a nonexistent file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s nonexistent_file: %s'),
+            Logger::debug(sprintf(_('Trying to obating the content of a nonexistent file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s nonexistent_file: %s'),
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
                 $backtrace[0]['line'],
@@ -286,14 +286,14 @@ class FsUtils
     static public function deltree($folder)
     {
         $backtrace = debug_backtrace();
-        XMD_Log::debug(sprintf(_('It has been applied to delete recursively a folder [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s folder: %s'),
+        Logger::debug(sprintf(_('It has been applied to delete recursively a folder [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s folder: %s'),
             $_SERVER['SCRIPT_FILENAME'],
             $backtrace[0]['file'],
             $backtrace[0]['line'],
             $folder));
 
         if (!is_dir($folder)) {
-            XMD_Log::error(sprintf(_("Error estimating folder %s"), $folder));
+            Logger::error(sprintf(_("Error estimating folder %s"), $folder));
             return false;
         }
 
@@ -332,7 +332,7 @@ class FsUtils
     {
         if (!is_file($file)) {
             $backtrace = debug_backtrace();
-            XMD_Log::debug(sprintf(_('It has been applied to delete a nonexistent file %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s'),
+            Logger::debug(sprintf(_('It has been applied to delete a nonexistent file %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s'),
                 $file,
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
@@ -341,7 +341,7 @@ class FsUtils
         }
         if (!unlink($file)) {
             $backtrace = debug_backtrace();
-            XMD_Log::debug(sprintf(_('It has been applied to delete a file which could not been deleted %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s'),
+            Logger::debug(sprintf(_('It has been applied to delete a file which could not been deleted %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s'),
                 $file,
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
@@ -370,7 +370,7 @@ class FsUtils
             $fileName = Strings::generateUniqueID();
             $tmpFile = sprintf("%s/%s%s%s", $containerFolder, $prefix, $fileName, $sufix);
         } while (is_file($tmpFile));
-        XMD_Log::debug("getUniqueFile: return: $fileName | container: $containerFolder");
+        Logger::debug("getUniqueFile: return: $fileName | container: $containerFolder");
         return $fileName;
     }
 
@@ -397,7 +397,7 @@ class FsUtils
         }
 
         if (!$result) {
-            XMD_Log::error(sprintf('An error occurred while trying to copy from %s to %s', $sourceFile, $destFile));
+            Logger::error(sprintf('An error occurred while trying to copy from %s to %s', $sourceFile, $destFile));
         }
         return $result;
     }

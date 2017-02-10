@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Language;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
@@ -83,7 +84,7 @@ class  ximNEWS_Adapter {
 		$idNewsContainer = $results['errno'];
 
 		if (!($idNewsContainer > 0)) {
-			XMD_Log::error("In newscontainer creation");
+			Logger::error("In newscontainer creation");
 			$this->messages->add(sprintf(_('Error creando el contenedor %s'), $name), MSG_TYPE_ERROR);
 			foreach ($results['errors'] as $error) {
 				$this->messages->add(_($error['message']), $error['type']);
@@ -164,7 +165,7 @@ class  ximNEWS_Adapter {
 
 			if (!($idNewsLanguage > 0)) {
 
-				XMD_Log::error("In newslanguage $name creation");
+				Logger::error("In newslanguage $name creation");
 				$this->messages->add(sprintf(_('Error creando la noticia %s'), $name), MSG_TYPE_ERROR);
 			} else {
 
@@ -172,7 +173,7 @@ class  ximNEWS_Adapter {
 
 				if ($langId == $master) $targetLink = $idNewsLanguage;
 
-				XMD_Log::info("Newslanguage $name creation O.K.");
+				Logger::info("Newslanguage $name creation O.K.");
 				$this->messages->add(sprintf(_('La noticia %s se ha creado correctamente'), $name), MSG_TYPE_NOTICE);
 
 
@@ -527,7 +528,7 @@ class  ximNEWS_Adapter {
 	function getContentElements($idTemplate) {
 
 		if (empty($idTemplate)) {
-			XMD_Log::error("Void templateID");
+			Logger::error("Void templateID");
 			return NULL;
 		}
 
@@ -568,7 +569,7 @@ class  ximNEWS_Adapter {
 	function setNewsXmlContent($newsData, $idTemplate) {
 
 		if (is_null($idTemplate)) {
-			XMD_Log::error('Template is mandatory');
+			Logger::error('Template is mandatory');
 			return NULL;
 		}
 
@@ -731,7 +732,7 @@ class  ximNEWS_Adapter {
 		foreach($colectors as $idColector) {
 	
 			if (!$node->class->addToColector($idColector, $fecha_ini, $fecha_fin, "$version-$subversion"))
-				XMD_Log::error('Error al insertar en RelNewsColector');
+				Logger::error('Error al insertar en RelNewsColector');
 		}
 	}
 
@@ -776,7 +777,7 @@ class  ximNEWS_Adapter {
 		foreach ($areas as $idArea) {
 			if ($node->get('IdNode') > 0) {
 				if (!$node->class->addToArea($idArea)) {
-					XMD_Log::error("In relation news $idNews with area $idArea");
+					Logger::error("In relation news $idNews with area $idArea");
 				}
 			}
 		}
@@ -793,7 +794,7 @@ class  ximNEWS_Adapter {
 	function createLote($name, $idParent, $type, $stringDate) {
 
 		if ((int) preg_match("/([0-9]{1,2})[-\/]([0-9]{1,2})[-\/]([0-9]{2,4})/", $stringDate, $date) == 0) {
-			XMD_Log::error("Invalid date format $stringDate");
+			Logger::error("Invalid date format $stringDate");
 			return NULL;
 		}
 
@@ -918,7 +919,7 @@ class  ximNEWS_Adapter {
 		$idBulletinContainer = self::createBulletinContainer($idColector, $idSection, $idTemplate, $name);
 
 		if (!($idBulletinContainer > 0)) {
-			XMD_Log::error("In bulletincontainer creation");
+			Logger::error("In bulletincontainer creation");
 			return false;
 		}
 
@@ -947,14 +948,14 @@ class  ximNEWS_Adapter {
 
 			if (!($idBulletinLanguage > 0)) {
 
-				XMD_Log::error("In bulletinlanguage $bulletinName creation");
+				Logger::error("In bulletinlanguage $bulletinName creation");
 			} else {
 
 				// set workflow master for next news
 
 				if ($langId == $master) $targetLink = $idBulletinLanguage;
 
-				XMD_Log::info("Bulletinlanguage $bulletinName creation O.K.");
+				Logger::info("Bulletinlanguage $bulletinName creation O.K.");
 			}
 
 		}
@@ -1052,7 +1053,7 @@ class  ximNEWS_Adapter {
 	function getBulletinHeader($headerData, $idTemplate) {
 
 		if (is_null($idTemplate)) {
-			XMD_Log::error('Schema not found');
+			Logger::error('Schema not found');
 			return NULL;
 		}
 
@@ -1072,7 +1073,7 @@ class  ximNEWS_Adapter {
 		$nodeList = $xpath->query('//*[@id = "header"]');
 
 		if (!($nodeList->length > 0)) {
-			XMD_Log::info('Header not found');
+			Logger::info('Header not found');
 			return NULL;
 		}
 
@@ -1350,7 +1351,7 @@ class  ximNEWS_Adapter {
 		
 
 		if (!($id > 0)) {
-			XMD_Log::error("Creating for colector $colectorName ximlet language $idLanguage");
+			Logger::error("Creating for colector $colectorName ximlet language $idLanguage");
 			return NULL;
 		}
 
@@ -1432,7 +1433,7 @@ class  ximNEWS_Adapter {
 		
 		if ((int) preg_match("/([0-9]{1,2})[-\/]([0-9]{1,2})[-\/]([0-9]{2,4}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", 
 			$date, $regs) == 0) {
-			XMD_Log::info("Invalid date format $date");
+			Logger::info("Invalid date format $date");
 			return NULL;
 		}
 

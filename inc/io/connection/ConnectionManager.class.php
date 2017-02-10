@@ -25,10 +25,7 @@
  */
 
 
-
-
- 
-
+use Ximdex\Logger;
 
 if (!defined('XIMDEX_ROOT_PATH')) {
 	define ('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) . '/../../../'));
@@ -56,10 +53,10 @@ class ConnectionManager {
 				$tmpType = $type;
 				$type = $fileRoutes[$type];
 				if (!is_file($connectionclass)) {
-					XMD_Log::fatal("Connection $type neither $tmpType not implemented yet");
+					Logger::fatal("Connection $type neither $tmpType not implemented yet");
 				}
 			} else {
-					XMD_Log::fatal("Connection $type not implemented yet");
+					Logger::fatal("Connection $type not implemented yet");
 				
 			}
 		}

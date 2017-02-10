@@ -23,6 +23,7 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
+use Ximdex\Logger;
 
 
 /**
@@ -101,8 +102,7 @@ class Parser
         $exito = $mydoc->loadXML($this->input_file);
 
         if (!$exito) {
-            //echo "Error while loading XML";
-            XMD_Log::write("Error while loading XML", 8);
+            Logger::write("Error while loading XML", 8);
         } else {
             $doc_element = $mydoc->documentElement;
             if ($mydoc->documentElement->hasChildNodes()) {

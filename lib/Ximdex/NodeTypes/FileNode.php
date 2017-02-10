@@ -26,6 +26,7 @@
 
 namespace Ximdex\NodeTypes;
 use content;
+use Ximdex\Logger;
 use Ximdex\Runtime\DataFactory;
 use DB;
 use Ximdex\Deps\DepsManager;
@@ -49,8 +50,6 @@ use Ximdex\NodeTypes\Root;
 use Ximdex\Parsers\ParsingDependencies;
 use Ximdex\Services\NodeType;
 use Ximdex\Utils\FsUtils;
-use XMD_Log;
-
 
 include_once(XIMDEX_ROOT_PATH . "/inc/utils.php");
 include_once(XIMDEX_ROOT_PATH . "/actions/fileupload/baseIO.php");
@@ -218,7 +217,7 @@ class FileNode extends Root
         $this->dbObj->Query($query);
 
         if (!$this->dbObj->numRows > 0) {
-            XMD_Log::error("***************** Version de archivo no encontrada -->" . $this->parent->get('IdNode'));
+            Logger::error("***************** Version de archivo no encontrada -->" . $this->parent->get('IdNode'));
         } else {
             $nodeFile = $this->dbObj->GetValue('File');
 
@@ -244,7 +243,7 @@ class FileNode extends Root
         $result = $depsMngr->deleteBySource(DepsManager::NODE2ASSET, $this->parent->get('IdNode')) && $result;
 
         if ($result) {
-            XMD_Log::info('Filenode dependencies deleted');
+            Logger::info('Filenode dependencies deleted');
         }
 
         return $result;
@@ -303,7 +302,7 @@ class FileNode extends Root
         $idState = $state->loadByName($newState);
         $idActualState = $this->parent->GetState();
         if ($idState == $idActualState) {
-            XMD_Log::warning('Se ha solicitado pasar a un estado y ya nos encontramos en ese estado');
+            Logger::warning('Se ha solicitado pasar a un estado y ya nos encontramos en ese estado');
             return true;
         }
         $actualState = new State($idActualState);

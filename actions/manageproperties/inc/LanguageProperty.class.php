@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Language;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
@@ -155,7 +156,7 @@ class LanguageProperty extends InheritableProperty {
 			if (!($result > 0)) {
 				$messages = $baseIO->messages->messages;
 				foreach ($messages as $message) {
-					XMD_Log::error($message['message']);
+					Logger::error($message['message']);
 				}
 			}
 		}
