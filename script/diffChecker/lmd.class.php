@@ -25,20 +25,19 @@
  */
 
 
-
+use Ximdex\Logger;
 
 if (!isset($DB_TYPE_USAGE) && defined("ADODB") ) {
 	$DB_TYPE_USAGE = ADODB;
 }
 
- require_once(XIMDEX_ROOT_PATH."/script/diffChecker/UpdateDb_log.class.php");
 require_once(XIMDEX_ROOT_PATH."/script/diffChecker/UpdateDb_historic.class.php");
 require_once(XIMDEX_ROOT_PATH."/script/diffChecker/Ldd.class.php");
 
 class lmd {
 	function lmd() {
 		if (!defined("LOGGED_SCRIPT_BEGIN")) {
-			UpdateDb_log::info(sprintf("*** Ejecuci�n script %s", $_SERVER["PHP_SELF"]));
+			Logger::info(sprintf("*** Ejecuci�n script %s", $_SERVER["PHP_SELF"]), "updatedb_logger");
 			UpdateDb_historic::info(sprintf("*** Ejecuci�n script %s", $_SERVER["PHP_SELF"]));
 			define("LOGGED_SCRIPT_BEGIN", true);
 		}
@@ -46,7 +45,7 @@ class lmd {
 
 	function add($data) {
 		if (!(isset($data["table"]) && !empty($data["table"]))) {
-			UpdateDb_log::error("No se ha especificado el nombre de la tabla");
+			Logger::error("No se ha especificado el nombre de la tabla", "updatedb_logger");
 		}
 		$tableName = $data["table"];
 
@@ -58,8 +57,8 @@ class lmd {
 
 		$result = $obj->find($obj->_idField, sprintf("%s = %%s", $obj->_idField), array($obj->get($obj->_idField)));
 		if (count($result) > 0) {
-			UpdateDb_log::info(sprintf("Ya existe una tupla en la tabla %s con el valor %s para el identificador %s, procediendo a actualizar los datos",
-				$tableName, $obj->get($obj->_idField), $obj->_idField));
+			Logger::info(sprintf("Ya existe una tupla en la tabla %s con el valor %s para el identificador %s, procediendo a actualizar los datos",
+				$tableName, $obj->get($obj->_idField), $obj->_idField), "updatedb_logger");
 			return $this->update($data);
 		}
 
@@ -73,8 +72,8 @@ class lmd {
 				}
 				$result = $obj->find($obj->_idField, implode(" AND ", $where), $value, MONO);
 				if (count($result) > 0) {
-					UpdateDb_log::error(sprintf("Se ha violado la unicidad de la clave %s, la tupla (" . print_r($data, true) . ")ya existe con el id %s",
-						$uniqueName, $result[0]));
+					Logger::error(sprintf("Se ha violado la unicidad de la clave %s, la tupla (" . print_r($data, true) . ")ya existe con el id %s",
+						$uniqueName, $result[0]), "updatedb_logger");
 					return false;
 				}
 			}
@@ -85,7 +84,7 @@ class lmd {
 		$result = $obj->add();
 		reset($obj->messages->messages);
 		while (list(, $message) = each($obj->messages->messages)) {
-			UpdateDb_log::warning($message["message"]);
+			Logger::warning($message["message"], "updatedb_logger");
 		}
 		$obj->messages = new \Ximdex\Utils\Messages();
 		if (!$result) {
@@ -94,14 +93,14 @@ class lmd {
 		}
 		reset($obj->messages->messages);
 		while (list(, $message) = each($obj->messages->messages)) {
-			UpdateDb_log::warning($message["message"]);
+			Logger::warning($message["message"], "updatedb_logger");
 		}
 		return $result;
 	}
 
 	function update($data) {
 		if (!(isset($data["table"]) && !empty($data["table"]))) {
-			UpdateDb_log::error("No se ha especificado el nombre de la tabla");
+			Logger::error("No se ha especificado el nombre de la tabla", "updatedb_logger");
 		}
 		$tableName = $data["table"];
 
@@ -110,14 +109,14 @@ class lmd {
 		$obj = $factory->instantiate("_ORM");
 
 		if (!isset($data[$obj->_idField])) {
-			UpdateDb_log::error("No se ha especificado el identificador del nodo"
-				 . " que se quiere actualizar");
+			Logger::error("No se ha especificado el identificador del nodo"
+				 . " que se quiere actualizar", "updatedb_logger");
 			return false;
 		}
 		$obj = $factory->instantiate("_ORM", $data[$obj->_idField]);
 		if (!($obj->get($obj->_idField) > 0)) {
-			UpdateDb_log::error(sprintf("No se ha podido encontrar la tupla con"
-				. " el identificador %s", $data[$obj->_idField]));
+			Logger::error(sprintf("No se ha podido encontrar la tupla con"
+				. " el identificador %s", $data[$obj->_idField]), "updatedb_logger");
 			return false;
 		}
 
@@ -141,9 +140,9 @@ class lmd {
 					$result = $obj->find($obj->_idField, implode(" AND ",
 						$where), $value, MONO);
 					if (count($result) > 0) {
-						UpdateDb_log::error(sprintf("Se ha violado la unicidad"
+						Logger::error(sprintf("Se ha violado la unicidad"
 							. " de la clave %s, la tupla ya existe con el id %s",
-							$uniqueName, $result[0]));
+							$uniqueName, $result[0]), "updatedb_logger");
 						return false;
 					}
 				}
@@ -156,7 +155,7 @@ class lmd {
                 $result = $obj->update();
                 reset($obj->messages->messages);
                 while (list(, $message) = each($obj->messages->messages)) {
-                        UpdateDb_log::warning($message["message"]);
+                        Logger::warning($message["message"], "updatedb_logger");
                 }
                 $obj->messages = new \Ximdex\Utils\Messages();
                 if (!$result) {
@@ -165,7 +164,7 @@ class lmd {
                 }
                 reset($obj->messages->messages);
                 while (list(, $message) = each($obj->messages->messages)) {
-                        UpdateDb_log::warning($message["message"]);
+                        Logger::warning($message["message"], "updatedb_logger");
                 }
 		
 		return $result;
@@ -179,7 +178,7 @@ class lmd {
 	 */
 	function delete($data) {
 		if (!(isset($data["table"]) && !empty($data["table"]))) {
-			UpdateDb_log::error("No se ha especificado el nombre de la tabla");
+			Logger::error("No se ha especificado el nombre de la tabla", "updatedb_logger");
 		}
 		$tableName = $data["table"];
 
@@ -187,23 +186,18 @@ class lmd {
 		$factory = new \Ximdex\Utils\Factory(XIMDEX_ROOT_PATH . "/inc/model/orm/", $tableName);
 		$obj = $factory->instantiate("_ORM");
 
-/*		if (!isset($data[$obj->_idField])) {
-			UpdateDb_log::error("No se ha especificado el identificador del nodo"
-				. " que se quiere eliminar");
-			return false;
-		}*/
 		if (isset($data[$obj->_idField]) && $data[$obj->_idField] > 0) {
 			$obj = $factory->instantiate("_ORM", $data[$obj->_idField]);
 			if (!($obj->get($obj->_idField) > 0)) {
-				UpdateDb_log::error(sprintf("No se ha podido encontrar la tupla con"
-					. " el identificador %s para la tabla %s", $data[$obj->_idField], $obj->_table));
+				Logger::error(sprintf("No se ha podido encontrar la tupla con"
+					. " el identificador %s para la tabla %s", $data[$obj->_idField], $obj->_table), "updatedb_logger");
 				return false;
 			}
 
 			$result = $obj->delete();
 			reset($obj->messages->messages);
 			while (list(, $message) = each($obj->messages->messages)) {
-				UpdateDb_log::warning($message["message"]);
+				Logger::warning($message["message"], "updatedb_logger");
 			}
 			return $result;
 		} else {
@@ -236,11 +230,11 @@ class lmd {
 			$result = $db->execute($query);
 		}
 		if (!$result) {
-			UpdateDb_log::error("Error al lanzar la consulta $query");
+			Logger::error("Error al lanzar la consulta $query", "updatedb_logger");
 		}
 	}
 	function updateModel($model) {
-		UpdateDb_log::error('Modelo ' . $model . ' con errores, intentando reparar con Ldd');
+		Logger::error('Modelo ' . $model . ' con errores, intentando reparar con Ldd', "updatedb_logger");
 		$fileName = XIMDEX_ROOT_PATH . "/inc/model/orm/" . $model . '_ORM.class.php';
 		$ldd = new Ldd($fileName, DB);
 		$ldd->updateFromMetaData();
@@ -255,7 +249,7 @@ class lmd {
                 if (empty($tableInfo)) {
 			$ormFile = XIMDEX_ROOT_PATH . "/inc/model/orm/" . $model . '_ORM.class.php';
 			if (is_file($ormFile)) {
-				UpdateDb_log::error('Modelo ' . $model . ' no existe, se intenta crear la tabla');
+				Logger::error('Modelo ' . $model . ' no existe, se intenta crear la tabla', "updatedb_logger");
 				$this->updateMOdel($model);
 			}
 		}
