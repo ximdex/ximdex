@@ -32,6 +32,7 @@ use Ximdex\Notifications\EmailNotificationStrategy;
 use Ximdex\MVC\FrontController;
 use ModulesManager;
 use Ximdex\Parsers\ParsingJsGetText;
+use Ximdex\Logger;
 use Ximdex\Utils\Serializer;
 use Ximdex\Models\User;
 use Ximdex\Models\Action;
@@ -43,9 +44,6 @@ use Ximdex\Utils\QueryManager;
 use Ximdex\Utils\Session;
 use Ximdex\Notifications\XimdexNotificationStrategy;
 use Ximdex\Logger as XMD_Log;
-
-Use Ximdex\Utils\Logs\Action_log;
-
 
 /**
  *
@@ -239,8 +237,8 @@ class ActionAbstract extends IController
     {
 
         $this->endActionLogged = false;
-        Action_log::info("Init " . $this->getDefaultLogMessage());
-        Action_log::debug("Request: " . print_r($this->request, true));
+        Logger::info("Init " . $this->getDefaultLogMessage(), "action_logger");
+        Logger::debug("Request: " . print_r($this->request, true), "action_logger");
 
     }
 
@@ -249,9 +247,9 @@ class ActionAbstract extends IController
 
         $message = $message ? ". $message" : "";
         if ($success)
-            Action_log::info("FINISH OK " . $this->getDefaultLogMessage() . " $message");
+            Logger::info("FINISH OK " . $this->getDefaultLogMessage() . " $message", "action_logger");
         else
-            Action_log::error("FINISH FAIL " . $this->getDefaultLogMessage() . " $message");
+            Logger::error("FINISH FAIL " . $this->getDefaultLogMessage() . " $message", "action_logger");
 
         $this->endActionLogged = true;
     }
