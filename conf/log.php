@@ -26,7 +26,6 @@
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Ximdex\Runtime\App;
-use Ximdex\Utils\Logs\Action_log;
 
 
 $log = new Logger('XMD');
@@ -49,7 +48,7 @@ $log->pushHandler(new StreamHandler(App::getValue('XIMDEX_ROOT_PATH') .'/logs/pu
 \Ximdex\Logger::addLog( $log ) ;
 
 
-$log = new Logger(Action_log::LOGGER_NAME);
+$log = new Logger("action_logger");
 $log->pushHandler(new StreamHandler(App::getValue('XIMDEX_ROOT_PATH') .'/logs/actions.log', Logger::DEBUG));
 \Ximdex\Logger::addLog( $log ) ;
 

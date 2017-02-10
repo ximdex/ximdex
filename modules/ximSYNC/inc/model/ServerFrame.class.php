@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Models\Server;
@@ -311,7 +312,7 @@ class ServerFrame extends ServerFrames_ORM {
 		$isHybrid = $node->getSimpleBooleanProperty('hybridColector');
 
 		if (!($idNode > 0)) {
-			XMD_Log::error("Unexisting node for serverframe $frameID");
+			Logger::error("Unexisting node for serverframe $frameID");
 			return NULL;
 		}
 
@@ -349,7 +350,7 @@ class ServerFrame extends ServerFrames_ORM {
 					$db->Query($sql);
 					$encodingServer = $db->GetValue("idEncode");
 
-					XMD_Log::info("Codificando contenido a " . $encodingServer . 'con server=' . $server);
+					Logger::info("Codificando contenido a " . $encodingServer . 'con server=' . $server);
 					$content = \Ximdex\XML\Base::recodeSrc($content, $encodingServer);
 				}
 

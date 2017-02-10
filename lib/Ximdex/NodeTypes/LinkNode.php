@@ -31,6 +31,7 @@ use commit;
 use depth;
 use description;
 use files;
+use Ximdex\Logger;
 use Ximdex\Models\Iterators\IteratorLinkDescriptions;
 use Ximdex\Models\Link;
 use name;
@@ -43,7 +44,6 @@ use stateID;
 use unknown;
 use url;
 use Ximdex\NodeTypes\Root;
-use XMD_Log;
 
 
 
@@ -98,7 +98,7 @@ class LinkNode extends Root
 		$relDescription = !empty($description) ? $description : $this->link->get('Name');
 		$rel = RelLinkDescriptions::create($this->nodeID, $relDescription);
 		if ($rel->getIdRel() < 0) {
-			XMD_Log::warning(sprintf('No se ha podido crear la descripcion para el enlace %s en su tabla relacionada.', $link->get('IdLink')));
+			Logger::warning(sprintf('No se ha podido crear la descripcion para el enlace %s en su tabla relacionada.', $link->get('IdLink')));
 		}
 
 		$ret = $this->link->get('IdLink');
@@ -116,7 +116,7 @@ class LinkNode extends Root
 	{
 
 		if (!($this->link->get('IdLink') > 0)) {
-			XMD_Log::error("Se ha solicitado eliminar el nodo {$this->nodeID} que actualmente no existe");
+			Logger::error("Se ha solicitado eliminar el nodo {$this->nodeID} que actualmente no existe");
 		}
 
 		$result = $this->link->delete();
@@ -133,7 +133,7 @@ class LinkNode extends Root
 			$it = new IteratorLinkDescriptions('IdLink = %s', array($this->link->get('IdLink')));
 			while ($rel = $it->next()) {
 				if (!$rel->delete()) {
-					XMD_Log::warning(sprintf('No se ha podido eliminar la descripcion con id %s para el enlace %s.', $rel->getIdRel(), $this->link->get('IdLink')));
+					Logger::warning(sprintf('No se ha podido eliminar la descripcion con id %s para el enlace %s.', $rel->getIdRel(), $this->link->get('IdLink')));
 				}
 			}
 

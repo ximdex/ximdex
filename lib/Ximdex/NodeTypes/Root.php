@@ -33,10 +33,10 @@ use files;
 use idNode;
 use name;
 use recurrence;
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Runtime\Constants;
-use Ximdex\Logger as XMD_Log;
 use Ximdex\Runtime\Db as DB;
 
 
@@ -131,14 +131,14 @@ class Root
         $parentNode = new Node($idParentNode);
 
         if (!($parentNode->get('IdNode') > 0)) {
-//			XMD_Log::error('No se ha podido obtener el nodo padre de ' . $parentNode->get('IdNode'));
+//			Logger::error('No se ha podido obtener el nodo padre de ' . $parentNode->get('IdNode'));
             return "";
         }
 
         $parentPath = $parentNode->class->getPathList();
 
         if (!$this->nodeType->GetIsRenderizable()) {
-            XMD_Log::warning('Se ha solicitado el path de un nodo no renderizable con id ' . $this->parent->get('IdNode'));
+            Logger::warning('Se ha solicitado el path de un nodo no renderizable con id ' . $this->parent->get('IdNode'));
             return $parentPath;
         }
 

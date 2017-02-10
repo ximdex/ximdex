@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\Version;
 use Ximdex\Utils\Curl;
@@ -54,7 +55,7 @@ class View_PreviewInServer extends Abstract_View implements Interface_View
             return NULL;
 
         if (\App::getValue('PreviewInServer') == 0) {
-            XMD_Log::error('PreviewInServer mode is disabled');
+            Logger::error('PreviewInServer mode is disabled');
             return NULL;
         }
 
@@ -62,7 +63,7 @@ class View_PreviewInServer extends Abstract_View implements Interface_View
         $previewServer = $this->_serverNode->class->GetPreviewServersForChannel($this->_idChannel);
 
         if (!$previewServer) {
-            XMD_Log::error('No Preview Servers for this channel');
+            Logger::error('No Preview Servers for this channel');
             return NULL;
         }
 
@@ -93,21 +94,21 @@ class View_PreviewInServer extends Abstract_View implements Interface_View
             case 0:
                 $curl = new Curl();
                 $response = $curl->get($commandParams['publishedURL']);
-                XMD_Log::info('Success');
+                Logger::info('Success');
                 $content = $response['data'];
                 break;
             case 10:
-                XMD_Log::error('Error accessing remote server');
+                Logger::error('Error accessing remote server');
                 $content = '';
                 //return '3';
                 break;
             case 200:
-                XMD_Log::error('Error accessing to the remote server (please, check IPs and login credentials)');
+                Logger::error('Error accessing to the remote server (please, check IPs and login credentials)');
                 $content = '';
                 //return '4';
                 break;
             default:
-                XMD_Log::error('Error de invocaci�n, comando mal formado, etc. (error desconocido)');
+                Logger::error('Error de invocaci�n, comando mal formado, etc. (error desconocido)');
                 $content = '';
                 break;
             //return '5';
@@ -122,13 +123,13 @@ class View_PreviewInServer extends Abstract_View implements Interface_View
         if (!is_null($idVersion)) {
             $version = new Version($idVersion);
             if (!($version->get('IdVersion') > 0)) {
-                XMD_Log::error('VIEW FILTERMACROSPREVIEW: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
+                Logger::error('VIEW FILTERMACROSPREVIEW: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
                 return NULL;
             }
 
             $this->_node = new Node($version->get('IdNode'));
             if (!($this->_node->get('IdNode') > 0)) {
-                XMD_Log::error('VIEW FILTERMACROSPREVIEW: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
+                Logger::error('VIEW FILTERMACROSPREVIEW: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
                 return NULL;
             }
         }
@@ -145,7 +146,7 @@ class View_PreviewInServer extends Abstract_View implements Interface_View
 
         // Check Params:
         if (!isset($this->_idChannel) || !($this->_idChannel > 0)) {
-            XMD_Log::error('VIEW FILTERMACROSPREVIEW: Channel not specified for node ' . $args['SERVERNODE']);
+            Logger::error('VIEW FILTERMACROSPREVIEW: Channel not specified for node ' . $args['SERVERNODE']);
             return NULL;
         }
 
@@ -163,7 +164,7 @@ class View_PreviewInServer extends Abstract_View implements Interface_View
 
         // Check Params:
         if (!($this->_serverNode) || !is_object($this->_serverNode)) {
-            XMD_Log::error('VIEW FILTERMACROSPREVIEW: There is no server linked to the node ' . $args['NODENAME']);
+            Logger::error('VIEW FILTERMACROSPREVIEW: There is no server linked to the node ' . $args['NODENAME']);
             return NULL;
         }
 

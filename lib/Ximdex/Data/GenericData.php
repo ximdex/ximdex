@@ -28,7 +28,7 @@ namespace Ximdex\Data;
 
 use Ximdex\Behaviours\Collection;
 use Ximdex\Helpers\Cache;
-use Ximdex\Logger as XMD_Log;
+use Ximdex\Logger;
 use Ximdex\Runtime\Db as DB;
 use Ximdex\Utils\Messages;
 use Ximdex\Utils\Overloadable;
@@ -167,7 +167,7 @@ class GenericData extends Overloadable
                         $this->{$key} = $dbObj->GetValue($key);
                     } else {
                         $backtrace = debug_backtrace();
-                        XMD_Log::warning(sprintf('[CONSTRUCTOR] Inconsistency between the model and the database [inc/helper/GenericData.class.php] script: %s file: %s line: %s table: %s field: %s', $_SERVER['SCRIPT_FILENAME'], $backtrace[0]['file'], $backtrace[0]['line'], $this->_table, $key));
+                        Logger::warning(sprintf('[CONSTRUCTOR] Inconsistency between the model and the database [inc/helper/GenericData.class.php] script: %s file: %s line: %s table: %s field: %s', $_SERVER['SCRIPT_FILENAME'], $backtrace[0]['file'], $backtrace[0]['line'], $this->_table, $key));
                         $this->modelInError = true;
                     }
                 }
@@ -202,7 +202,7 @@ class GenericData extends Overloadable
      */
     public function _logQuery($query)
     {
-        XMD_Log::info($query);
+        Logger::info($query);
     }
 
     /**
@@ -258,7 +258,7 @@ class GenericData extends Overloadable
             if ($dbObj->numErr > 0) {
                 $this->messages->add($dbObj->desErr[2], MSG_TYPE_ERROR);
                 foreach ($this->messages->messages as $message) {
-                    XMD_Log::error(sprintf("%s: [%s]", $message['message'], $query));
+                    Logger::error(sprintf("%s: [%s]", $message['message'], $query));
                 }
                 return false;
             } else {
@@ -278,7 +278,7 @@ class GenericData extends Overloadable
                         array($this->{$this->_idField}),
                         MONO);
                     if (count($result) == 1) {
-                        XMD_Log::warning('The table has an auto-increment field, returning id field');
+                        Logger::warning('The table has an auto-increment field, returning id field');
                         $insertedId = $result[0];
                     }
                 }
@@ -294,9 +294,9 @@ class GenericData extends Overloadable
 
             }
         } else {
-            XMD_Log::error('Integrity errors found while executing a SQL query');
+            Logger::error('Integrity errors found while executing a SQL query');
             foreach ($this->messages->messages as $message) {
-                XMD_Log::error($message['message']);
+                Logger::error($message['message']);
             }
         }
         $this->_applyFilter('afterAdd');
@@ -613,7 +613,7 @@ class GenericData extends Overloadable
 
         if (!array_key_exists($attribute, $this->_metaData)) {
             $backtrace = debug_backtrace();
-            XMD_Log::error(sprintf('[GET] Trying to get a property that does not exist'
+            Logger::error(sprintf('[GET] Trying to get a property that does not exist'
                 . ' [inc/helper/GenericData.class.php] script: %s file: %s line: %s table: %s key: %s',
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
@@ -777,7 +777,7 @@ class GenericData extends Overloadable
         } else if (preg_match('/delete/i', $query) > 0) {
             $this->_applyFilter('beforeDelete');
         } else {
-            XMD_Log::warning('No pre-filter applied for query: ' . $query);
+            Logger::warning('No pre-filter applied for query: ' . $query);
         }
 
         $dbObj = new Db();
@@ -793,7 +793,7 @@ class GenericData extends Overloadable
         } else if (preg_match('/delete/i', $query) > 0) {
             $this->_applyFilter('afterDelete');
         } else {
-            XMD_Log::warning('No post-filter applied for query: ' . $query);
+            Logger::warning('No post-filter applied for query: ' . $query);
         }
         return $result;
     }
@@ -810,7 +810,7 @@ class GenericData extends Overloadable
         }
         if (!array_key_exists($attribute, $this->_metaData)) {
             $backtrace = debug_backtrace();
-            XMD_Log::error(sprintf('[SET] Trying to set a property that does not exist'
+            Logger::error(sprintf('[SET] Trying to set a property that does not exist'
                 . ' [inc/helper/GenericData.class.php] script: %s file: %s line: %s table: %s key: %s value: %s',
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],

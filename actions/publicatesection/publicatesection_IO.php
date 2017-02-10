@@ -26,6 +26,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Utils\Sync\SyncManager;
 
@@ -50,11 +51,11 @@ function Main($argv, $argc)
 	{
 	global $config;
 	
-	XMD_Log::info(_("Launching publicate section"));
+	Logger::info(_("Launching publicate section"));
 
-	XMD_Log::display("---------------------------------------------------------------------");
-	XMD_Log::display(_("Executing: Publicate Section"));
-	XMD_Log::display("---------------------------------------------------------------------");
+	Logger::display("---------------------------------------------------------------------");
+	Logger::display(_("Executing: Publicate Section"));
+	Logger::display("---------------------------------------------------------------------");
 	
 	
 	$node		= new Node();
@@ -73,7 +74,7 @@ function Main($argv, $argc)
 				$config['sectionid'] = $argv[++$i];
 			else
 				{
-				XMD_Log::display(_("Section does not exist: '").$argv[++$i]."'");
+				Logger::display(_("Section does not exist: '").$argv[++$i]."'");
 				exit(1);
 				}
 			}
@@ -82,24 +83,24 @@ function Main($argv, $argc)
 	$rec=$argv[3];
 
 
-	XMD_Log::display("");
+	Logger::display("");
 	
 	if(!$config['sectionid'])
 		{
-		XMD_Log::display(_("Uso del comando:"));
-		XMD_Log::display("./publicatesection_IO.php --sectionid {id de la seccion} [-r]");
+		Logger::display(_("Uso del comando:"));
+		Logger::display("./publicatesection_IO.php --sectionid {id de la seccion} [-r]");
 		exit(1);
 		}
-	XMD_Log::display("---------------------------------------------------------------------");
-	XMD_Log::display(_("Read parameters: "));
-	XMD_Log::display(_("\tXimdex section: ").$config['sectionid'].", ".$node->GetNodeName());
-	XMD_Log::display("---------------------------------------------------------------------");
+	Logger::display("---------------------------------------------------------------------");
+	Logger::display(_("Read parameters: "));
+	Logger::display(_("\tXimdex section: ").$config['sectionid'].", ".$node->GetNodeName());
+	Logger::display("---------------------------------------------------------------------");
 	//var_dump($config);
 
-	XMD_Log::display("");
-	XMD_Log::display(_(" Are read parameters corrects?"));
-	XMD_Log::display(_("To confirm press uppercase 'A' and then press 'Intro'."));
-	XMD_Log::display(_(" Press Ctrl+C to exit."));
+	Logger::display("");
+	Logger::display(_(" Are read parameters corrects?"));
+	Logger::display(_("To confirm press uppercase 'A' and then press 'Intro'."));
+	Logger::display(_(" Press Ctrl+C to exit."));
 
 	session_write_close();
 	ob_flush();
@@ -119,7 +120,7 @@ function Main($argv, $argc)
 		PublicateSection($config['sectionid'], time(), false);
 	}
 	
-	XMD_Log::info("Saliendo de publicate section");
+	Logger::info("Saliendo de publicate section");
 }
 
 
@@ -127,7 +128,7 @@ function PublicateSection($sectionID,$dateUp,$recurrence) {
 
         $node = new Node($sectionID);
 	if (!($node->nodeType->GetName() == 'Section' || $node->nodeType->GetName() == 'Server')) {
-	    XMD_Log::display(_("Aborting publication, it is just allowed to publish over sections and servers"));
+	    Logger::display(_("Aborting publication, it is just allowed to publish over sections and servers"));
 	    die();
 	}
 
@@ -145,7 +146,7 @@ function PublicateSection($sectionID,$dateUp,$recurrence) {
         }
 
         foreach ($nodeList as $nodeID) {
-		XMD_Log::info("Publicando IdNode: $nodeID");
+		Logger::info("Publicando IdNode: $nodeID");
 		$syncMngr = new SyncManager();
 
 		$syncMngr->setFlag('markEnd', false);

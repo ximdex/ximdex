@@ -24,6 +24,7 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
+use Ximdex\Logger;
 
 /**
  * <p>AES encryption class</p>
@@ -100,7 +101,7 @@ class AES {
                 $this->cipher = MCRYPT_RIJNDAEL_256;
                 break;
             default:
-                XMD_Log::info("default entering cipher");
+                Logger::info("default entering cipher");
                 $this->cipher = MCRYPT_RIJNDAEL_128;
         }
     }

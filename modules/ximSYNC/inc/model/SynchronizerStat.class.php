@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\Db;
 
@@ -84,8 +85,7 @@ class SynchronizerStat extends SynchronizerStats_ORM
                 parent::add();
             }
 
-            //XMD_Log::info($comment);
-            Sync_Log::write($comment, $level);
+            Logger::write($comment, $levelm, 'sync_logger');
         }
         return null;
     }

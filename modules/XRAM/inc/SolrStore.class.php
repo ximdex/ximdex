@@ -24,6 +24,7 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
+use Ximdex\Logger;
 use Ximdex\Runtime\DataFactory;
 
 if (!defined('XIMDEX_ROOT_PATH')) {
@@ -111,7 +112,7 @@ class SolrStore implements Store {
         $version = $df->getVersionId($versionId, $subversion);
         $resultNode = $this->retrieveNode($version);
         if (is_null($resultNode)) {
-            XMD_Log::warning('No se ha podido obtener el contenido de Solr. Intentando obtener contenido del sistema de ficheros');
+            Logger::warning('No se ha podido obtener el contenido de Solr. Intentando obtener contenido del sistema de ficheros');
             return false;
         }
 
@@ -160,7 +161,7 @@ class SolrStore implements Store {
      */
     private function retrieveNode($idVersion) {
         if (!is_numeric($idVersion)) {
-            XMD_Log::warning('Se ha intentado recuperar un nodo con un IdVersion no valido.');
+            Logger::warning('Se ha intentado recuperar un nodo con un IdVersion no valido.');
             return null;
         }
 
@@ -198,7 +199,7 @@ class SolrStore implements Store {
      */
     private function deleteNode($idVersion, $commit = true) {
         if (!is_numeric($idVersion)) {
-            XMD_Log::warning('Se ha intentado eliminar un nodo con un IdVersion no valido.');
+            Logger::warning('Se ha intentado eliminar un nodo con un IdVersion no valido.');
             return false;
         }
 
@@ -218,7 +219,7 @@ class SolrStore implements Store {
      */
     private function indexNode($idVersion, $content, $commitNode = true) {
         if (!is_numeric($idVersion)) {
-            XMD_Log::warning('Se ha intentado indexar un nodo por un IdVersion no valido.');
+            Logger::warning('Se ha intentado indexar un nodo por un IdVersion no valido.');
             return false;
         }
 

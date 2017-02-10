@@ -31,9 +31,9 @@ use DOMDocument;
 use domNode;
 use DOMXPath;
 use RNG;
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Parsers\PVD2RNG\PVD2RNG;
-use XMD_Log;
 
 
 class ParsingRng
@@ -72,7 +72,7 @@ class ParsingRng
         $elements = $this->elementsForRender;
 
         if (is_null($elements)) {
-            XMD_Log::error("Incorrect visual template $templateID for render a web form");
+            Logger::error("Incorrect visual template $templateID for render a web form");
             return NULL;
         }
 
@@ -163,7 +163,7 @@ class ParsingRng
             if ($pvdt->transform()) {
                 $content = htmlspecialchars_decode($pvdt->getRNG()->saveXML());
             } else {
-                XMD_Log::error("Pvd $templateID not RNG compatible");
+                Logger::error("Pvd $templateID not RNG compatible");
                 return NULL;
             }
         }

@@ -30,7 +30,8 @@ namespace Ximdex\MVC\Render;
 use Ximdex\Utils\Extensions as Extensions;
 use ModulesManager;
 use Smarty;
- use Ximdex\Widgets\Widget;
+use Ximdex\Widgets\Widget;
+use Ximdex\Logger;
 
 require_once(XIMDEX_ROOT_PATH . Extensions::SMARTY);
 
@@ -81,7 +82,7 @@ class SmartyRenderer extends AbstractRenderer
 //		$smarty->register_prefilter(array(&$this, 'prefilter_widgets'));
 		$this->_set_params($smarty);
 
-//		XMD_Log::debug("MVC::SmartyRenderer display '".$_ACTION_CONTROLLER."' template " );
+//		Logger::debug("MVC::SmartyRenderer display '".$_ACTION_CONTROLLER."' template " );
 		return $smarty->fetch($this->_template);
 	}
 

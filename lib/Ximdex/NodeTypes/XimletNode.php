@@ -28,10 +28,9 @@
 namespace Ximdex\NodeTypes;
 
  use Ximdex\Deps\DepsManager;
+ use Ximdex\Logger;
  use Ximdex\Models\Node;
 use Ximdex\Models\StructuredDocument;
-use XMD_Log;
-
 
 class XimletNode extends AbstractStructuredDocument
 {
@@ -93,7 +92,7 @@ class XimletNode extends AbstractStructuredDocument
         $depsMngr->deleteBySource(DepsManager::STRDOC_TEMPLATE, $this->parent->get('IdNode'));
         $depsMngr->deleteByTarget(DepsManager::BULLETIN_XIMLET, $this->parent->get('IdNode'));
 
-        XMD_Log::info('Ximlet dependencies deleted');
+        Logger::info('Ximlet dependencies deleted');
 
 
     }
@@ -120,7 +119,7 @@ class XimletNode extends AbstractStructuredDocument
         // check the obtained node
         $colector = new Node($idColector);
         if ($colector->nodeType->get('Name') != 'XimNewsColector') {
-            XMD_Log::fatal('Se ha estimado un tipo de nodo incorrecto');
+            Logger::fatal('Se ha estimado un tipo de nodo incorrecto');
             return false; // xmd::fatal must kill the process anyway, so dont wait any further trace
         }
 

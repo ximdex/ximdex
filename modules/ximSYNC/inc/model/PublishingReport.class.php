@@ -25,6 +25,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\State;
 use Ximdex\Runtime\Db;
@@ -152,9 +153,9 @@ class PublishingReport extends PublishingReport_ORM {
         }
 
         $query = "UPDATE PublishingReport" . $setClause . $whereClause;
-        XMD_Log::info($query);
-        XMD_Log::info(print_r($updateFields,1));
-        XMD_Log::info(print_r($searchFields, 1));
+        Logger::info($query);
+        Logger::info(print_r($updateFields,1));
+        Logger::info(print_r($searchFields, 1));
         $dbObj = new Db();
         $dbObj->execute($query);
 

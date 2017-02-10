@@ -25,6 +25,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Runtime\DataFactory;
 use Ximdex\Utils\FsUtils;
 
@@ -55,7 +56,7 @@ class FileSystemStore implements Store
         $df = new DataFactory($nodeId);
         $uniqueName = $df->GetTmpFile($versionId, $subversion);
 	if(!$uniqueName) {
-            XMD_Log::warning('No se ha podido obtener el file');
+            Logger::warning('No se ha podido obtener el file');
             $this->SetError(3);
             return false;
 	}
@@ -63,7 +64,7 @@ class FileSystemStore implements Store
 	$targetPath = \App::getValue( "AppRoot") . \App::getValue( "FileRoot"). "/". $uniqueName;
         $content = FsUtils::file_get_contents($targetPath);
 			
-	XMD_Log::info("GetContent for Node:".$nodeId.", Version: ".$versionId.".".$subversion.", File: .".$uniqueName. ", Chars: ".strlen($content));
+	Logger::info("GetContent for Node:".$nodeId.", Version: ".$versionId.".".$subversion.", File: .".$uniqueName. ", Chars: ".strlen($content));
         return $content;
     }
 
@@ -81,7 +82,7 @@ class FileSystemStore implements Store
         $df->GetTmpFile($versionId, $subversion);
         $uniqueName = $df->GetTmpFile($versionId, $subversion);
 	if(!$uniqueName) {
-            XMD_Log::warning('No se ha podido obtener el file');
+            Logger::warning('No se ha podido obtener el file');
             $this->SetError(3);
             return false;
 	}

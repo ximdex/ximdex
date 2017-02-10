@@ -36,9 +36,9 @@ use params;
 use parentID;
 use recurrence;
 use target;
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Utils\FsUtils;
-use XMD_Log;
 
 
 /**
@@ -106,7 +106,7 @@ class FolderNode extends Root
         $xmlFolderId = $this->parent->GetChildByName($folderType);
 
         if (!($xmlFolderId > 0)) {
-            XMD_Log::error('xml folder not found');
+            Logger::error('xml folder not found');
             return NULL;
         }
 

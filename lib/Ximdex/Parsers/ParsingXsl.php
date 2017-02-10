@@ -29,9 +29,9 @@ namespace Ximdex\Parsers;
 
 use DOMDocument;
 use DOMXPath;
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Utils\FsUtils;
-use Ximdex\Logger as XMD_Log;
 
 
 class ParsingXsl
@@ -96,7 +96,7 @@ class ParsingXsl
 	private function setNode($idNode, $path)
 	{
 		if (is_null($idNode) && is_null($path)) {
-			XMD_Log::error('Cannot parse template: idNode and path are NULL');
+			Logger::error('Cannot parse template: idNode and path are NULL');
 			return false;
 		}
 
@@ -107,12 +107,12 @@ class ParsingXsl
 
 		$this->node = new Node($idNode);
 		if (!($this->node->get('IdNode')) > 0) {
-			XMD_Log::error('Cannot parse template: Non existant node ' . $idNode);
+			Logger::error('Cannot parse template: Non existant node ' . $idNode);
 			return false;
 		}
 
 		if ($this->node->nodeType->get('Name') != 'XslTemplate') {
-			XMD_Log::error('Cannot parse template: Node ' . $idNode . ' is not a Xsl Template');
+			Logger::error('Cannot parse template: Node ' . $idNode . ' is not a Xsl Template');
 			return false;
 		}
 

@@ -24,6 +24,7 @@
  * @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Node;
 use Ximdex\Models\StructuredDocument;
@@ -92,13 +93,13 @@ class View_NodeToRenderizedContent extends Abstract_View implements Interface_Vi
         if (!is_null($idVersion)) {
             $version = new Version($idVersion);
             if (!($version->get('IdVersion') > 0)) {
-                XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
+                Logger::error('VIEW NODETORENDERIZEDCONTENT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
                 return false;
             }
 
             $this->_node = new Node($version->get('IdNode'));
             if (!($this->_node->get('IdNode') > 0)) {
-                XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
+                Logger::error('VIEW NODETORENDERIZEDCONTENT: El nodo que se est� intentando convertir no existe: ' . $version->get('IdNode'));
                 return false;
             }
         }
@@ -144,13 +145,13 @@ class View_NodeToRenderizedContent extends Abstract_View implements Interface_Vi
         if (!is_null($idVersion)) {
             $version = new Version($idVersion);
             if (!($version->get('IdVersion') > 0)) {
-                XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
+                Logger::error('VIEW NODETORENDERIZEDCONTENT: Se ha cargado una versi�n incorrecta (' . $idVersion . ')');
                 return false;
             }
 
             $this->_structuredDocument = new StructuredDocument($version->get('IdNode'));
             if (!($this->_structuredDocument->get('IdDoc') > 0)) {
-                XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: El structured document especificado no existe: ' . $this->_structuredDocument->get('IdDoc'));
+                Logger::error('VIEW NODETORENDERIZEDCONTENT: El structured document especificado no existe: ' . $this->_structuredDocument->get('IdDoc'));
                 return false;
             }
         }
@@ -167,7 +168,7 @@ class View_NodeToRenderizedContent extends Abstract_View implements Interface_Vi
 
         // Check Params:
         if (!isset($idChannel) || !($idChannel > 0)) {
-            XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: Channel not specified for node ' . $args['NODENAME']);
+            Logger::error('VIEW NODETORENDERIZEDCONTENT: Channel not specified for node ' . $args['NODENAME']);
             return false;
         }
 
@@ -187,7 +188,7 @@ class View_NodeToRenderizedContent extends Abstract_View implements Interface_Vi
 
             // Check Params:
             if (!isset($this->_idSection) || !($this->_idSection > 0)) {
-                XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: No se ha especificado la secci�n del nodo ' . $args['NODENAME'] . ' que quiere renderizar');
+                Logger::error('VIEW NODETORENDERIZEDCONTENT: No se ha especificado la secci�n del nodo ' . $args['NODENAME'] . ' que quiere renderizar');
                 return false;
             }
         }
@@ -208,7 +209,7 @@ class View_NodeToRenderizedContent extends Abstract_View implements Interface_Vi
 
         // Check Params:
         if (!isset($this->_idLanguage) || !($this->_idLanguage > 0)) {
-            XMD_Log::error("VIEW NODETORENDERIZEDCONTENT: Node's language not specified " . $args['NODENAME'] . " que quiere renderizar");
+            Logger::error("VIEW NODETORENDERIZEDCONTENT: Node's language not specified " . $args['NODENAME'] . " que quiere renderizar");
             return false;
         }
 
@@ -229,7 +230,7 @@ class View_NodeToRenderizedContent extends Abstract_View implements Interface_Vi
 
         // Check Params:
         if (!isset($this->_docXapHeader) || $this->_docXapHeader == "") {
-            XMD_Log::error('VIEW NODETORENDERIZEDCONTENT: No se ha especificado la cabecera docxap del nodo ' . $args['NODENAME'] . ' que quiere renderizar');
+            Logger::error('VIEW NODETORENDERIZEDCONTENT: No se ha especificado la cabecera docxap del nodo ' . $args['NODENAME'] . ' que quiere renderizar');
             return false;
         }
 

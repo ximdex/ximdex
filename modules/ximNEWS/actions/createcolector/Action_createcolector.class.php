@@ -25,6 +25,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Channel;
 use Ximdex\Models\Language;
 use Ximdex\Models\Node;
@@ -232,7 +233,7 @@ class Action_createcolector extends ActionAbstract {
 
 		if (!$ximNewsColector->update()) {
 			$this->messages->add(_("The colector has NOT been edited successfully."), MSG_TYPE_ERROR);
-			XMD_Log::error("Updating ximnewsColector table");
+			Logger::error("Updating ximnewsColector table");
 			return false;
 		}
 
@@ -245,14 +246,14 @@ class Action_createcolector extends ActionAbstract {
 
 		if (!$this->setChannels($idNode, $data["channels"])) {
 			$this->messages->add(_("Error updating channels."), MSG_TYPE_ERROR);
-			XMD_Log::error(_("Updating channels list for colector")." $idNode");
+			Logger::error(_("Updating channels list for colector")." $idNode");
 		}
 
 		if(isset($data["listName"])){
 			$ximNewsList = new XimNewsList();
 			if(!$ximNewsList->updateList($idNode,$data["listName"])){
 				$this->messages->add(_("Error updating mail list."), MSG_TYPE_ERROR);
-				XMD_Log::error(_("Updating channels list for colector")." $idNode");
+				Logger::error(_("Updating channels list for colector")." $idNode");
 			}
 		}
 
@@ -313,7 +314,7 @@ class Action_createcolector extends ActionAbstract {
 			$canalCorreo, $newstogenerate, $timetogenerate, $inactive,
 			$newsPerBulletin, $filter, $mailList, $idArea, $master)) {
 
-			XMD_Log::info(_("Error creating the colector index").":".$idColector."");
+			Logger::info(_("Error creating the colector index").":".$idColector."");
 			$this->messages->add(_("The colector has NOT been created successfully."), MSG_TYPE_ERROR);
 			$this->messages->add(_("Error creating the colector index"), MSG_TYPE_ERROR);
 			$this->messages->mergeMessages($adapter->messages);

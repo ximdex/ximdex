@@ -26,6 +26,7 @@
 
 
 use Ximdex\Models\State;
+use Ximdex\Logger;
 
 ModulesManager::file('/inc/model/orm/XimNewsColectorUsers_ORM.class.php', 'ximNEWS');
 
@@ -43,12 +44,12 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 	function add($idColector = null, $idUser = 0, $state = 'Generating') {
 		
 		if (!ModulesManager::isEnabled('ximPUBLISHtools')) {
-			XMD_Log::error(_("Colector-user relation not added. XimPUBLISHtools module is disabled."));
+			Logger::error(_("Colector-user relation not added. XimPUBLISHtools module is disabled."));
 			return null;
 		}
 		
 		if(is_null($idColector)) {
-			XMD_Log::error(_("Cannot add colector-user relation. IdColector param is null."));
+			Logger::error(_("Cannot add colector-user relation. IdColector param is null."));
 			return null;
 		}
 		
@@ -60,7 +61,7 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 
 		$id = parent::add();
 		
-		XMD_Log::info(_("New relation colector-user added (Id: " . $id . " - IdColector: " . 
+		Logger::info(_("New relation colector-user added (Id: " . $id . " - IdColector: " .
 						$idColector . " - IdUser: " . $idUser . ")"));
 		
 		return $id ? $id : null;
@@ -75,14 +76,14 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 	function getRelsByUser($idUser = null) {
 		
 		if(is_null($idUser)) {
-			XMD_Log::error(_("Cannot get colector-user relations. IdUser param is null."));
+			Logger::error(_("Cannot get colector-user relations. IdUser param is null."));
 			return null;
 		}
 		
 		$rels = $this->find('Id', 'IdUser = %s', array($idUser), MULTI);
 
 		if (!(count($rels) > 0)) {
-			XMD_Log::info("User " . $idUser . " has not colector-user relations.");
+			Logger::info("User " . $idUser . " has not colector-user relations.");
 		}
 
 		return $rels;
@@ -97,14 +98,14 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 	function getRelsByColector($idColector = null) {
 		
 		if(is_null($idColector)) {
-			XMD_Log::error(_("Cannot get colector-user relations. IdColector param is null."));
+			Logger::error(_("Cannot get colector-user relations. IdColector param is null."));
 			return NULL;
 		}
 		
 		$rels = $this->find('Id', 'IdColector = %s ORDER BY Time DESC limit 1', array($idColector), MULTI);
 
 		if (!(count($rels) > 0)) {
-			XMD_Log::info(_("Colector " . $idColector . " has not colector-user relations."));
+			Logger::info(_("Colector " . $idColector . " has not colector-user relations."));
 			return NULL;
 		}
 
@@ -120,14 +121,14 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 	function getColectorGenerationsData($idColector = null) {
 		
 		if(is_null($idColector)) {
-			XMD_Log::error(_("Cannot get colector generation data. IdColector param is null."));
+			Logger::error(_("Cannot get colector generation data. IdColector param is null."));
 			return NULL;
 		}
 		
 		$rels = $this->find('Id, Idcolector, IdUser, StartGenerationTime, EndGenerationTime, EndPublicationTime, Progress, State', 'IdColector = %s ORDER BY StartGenerationTime DESC', array($idColector), MULTI);
 
 		if (!(count($rels) > 0)) {
-			XMD_Log::info(_("Colector " . $idColector . " has not generation data."));
+			Logger::info(_("Colector " . $idColector . " has not generation data."));
 			return NULL;
 		}
 
@@ -140,7 +141,7 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 		//		They're post-automatic states but... It's necessary to notify user about them?
 		
 		if(is_null($idNew) || !($idNew > 0)) {
-			XMD_Log::error('Cannot get Pending relations. IdNew is null or not positive integer.');
+			Logger::error('Cannot get Pending relations. IdNew is null or not positive integer.');
 			return NULL;
 		}
 		
@@ -154,7 +155,7 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 		$dbObj->Query($query);
 		$result = array();
 		if (!($dbObj->numRows > 0)) {			
-			XMD_Log::info('No pending relations found for new ' . $idNew);
+			Logger::info('No pending relations found for new ' . $idNew);
 			return NULL;
 		}
 
@@ -193,7 +194,7 @@ class XimNewsColectorUsers extends XimNewsColectorUsers_ORM
 		$dbObj->Query($query);
 		$result = array();
 		if (!($dbObj->numRows > 0)) {			
-			XMD_Log::info('No pending relations found');
+			Logger::info('No pending relations found');
 			return NULL;
 		}
 

@@ -25,6 +25,7 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
 use Ximdex\Models\Pumper;
 use Ximdex\Models\Server;
 use Ximdex\Runtime\Cli\CliParser;
@@ -501,9 +502,9 @@ class DexPumper {
 			$this->info($sqlReport);
 	}
 
-	public function info($_msg = NULL) { $this->msg_log("INFO PUMPER: $_msg"); XMD_Log::info($_msg); }
-	public function error($_msg = NULL) { $this->msg_log("ERROR PUMPER: $_msg"); XMD_Log::error($_msg); }
-	public function fatal($_msg = NULL) { $this->msg_log("FATAL PUMPER: $_msg"); XMD_Log::fatal($_msg); }
+	public function info($_msg = NULL) { $this->msg_log("INFO PUMPER: $_msg"); Logger::info($_msg); }
+	public function error($_msg = NULL) { $this->msg_log("ERROR PUMPER: $_msg"); Logger::error($_msg); }
+	public function fatal($_msg = NULL) { $this->msg_log("FATAL PUMPER: $_msg"); Logger::fatal($_msg); }
 
 	public function msg_log($_msg) {
 		$pumperID = (int) $this->pumper->get('PumperId');

@@ -25,6 +25,8 @@
  *  @version $Revision$
  */
 
+use Ximdex\Logger;
+
 ModulesManager::file('/actions/addtocolector/baseIO.php', 'ximNEWS');
 ModulesManager::file('/inc/menu_colector.inc', 'ximNEWS');
 ModulesManager::file('/inc/model/RelNewsColector.php', 'ximNEWS');
@@ -185,7 +187,7 @@ function getVersionColector($arr_colectors,$arr_news)
 				$version = $relNewsColector->get('Version');
 				$subversion = $relNewsColector->get('SubVersion');
 			} else {
-				XMD_Log::info(_('No relationship was found in the database'));
+				Logger::info(_('No relationship was found in the database'));
 			}
 
 			// This first case CANNOT BE GET unless the query fails or the relations didn't exist

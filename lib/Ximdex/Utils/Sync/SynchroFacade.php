@@ -29,8 +29,9 @@ namespace Ximdex\Utils\Sync;
 
 use ChannelFrame;
 
+use Ximdex\Logger;
 use Ximdex\Runtime\Db as DB;
- use ModulesManager;
+use ModulesManager;
 use NodeFrame;
 use NodeFrameManager;
 use Ximdex\Models\NodeType;
@@ -60,13 +61,13 @@ class SynchroFacade
 
 		$targetNode = new Node(($idTargetNode));
 		if (!($targetNode->get('IdNode') > 0)) {
-			XMD_Log::error(_('No correct node received'));
+			Logger::error(_('No correct node received'));
 			return NULL;
 		}
 
 		$server = new Server($idServer);
 		if (!($server->get('IdServer') > 0)) {
-			XMD_Log::error(_('No correct server received'));
+			Logger::error(_('No correct server received'));
 			return NULL;
 		}
 
@@ -78,7 +79,7 @@ class SynchroFacade
 			$frameID = $targetFrame->getCurrent($idTargetNode, $idTargetChannel); // esto es un idSync
 
 			if (!($frameID > 0)) {
-				XMD_Log::error(_("No target frame available") . " FACADE - $idTargetNode - $idTargetChannel - $idServer");
+				Logger::error(_("No target frame available") . " FACADE - $idTargetNode - $idTargetChannel - $idServer");
 				return NULL;
 			}
 
@@ -86,7 +87,7 @@ class SynchroFacade
 			$physicalTargetServers = $targetFrame->getCompleteServerList($idTargetNode, $idTargetChannel);
 
 			if (count($physicalTargetServers) == 0) {
-				XMD_Log::error(_("No physical target server available"));
+				Logger::error(_("No physical target server available"));
 				return NULL;
 			}
 
@@ -103,14 +104,14 @@ class SynchroFacade
 		$idFrame = $syncro->GetCurrentFrame($idTargetChannel);
 
 		if (!($idFrame > 0)) {
-			XMD_Log::error(_("Not target frame available") . " FACADE (2)");
+			Logger::error(_("Not target frame available") . " FACADE (2)");
 			return NULL;
 		}
 
 		$physicalTargetServers = $syncro->GetServerListOnFrame($idFrame, $idTargetChannel);
 
 		if (count($physicalTargetServers) == 0) {
-			XMD_Log::info(_("No physical target server available"));
+			Logger::info(_("No physical target server available"));
 			return NULL;
 		}
 
@@ -139,9 +140,9 @@ class SynchroFacade
 		$dbObj->Execute($sql);
 
 		if ($dbObj->numRows > 0) {
-			XMD_Log::info(sprinf(_("Deleting frames in table %s - server %s"), $table, $physicalServerID));
+			Logger::info(sprinf(_("Deleting frames in table %s - server %s"), $table, $physicalServerID));
 		} else {
-			XMD_Log::info(sprinft(_("No deletion in table %s - server %s"), $table, $physicalServerID));
+			Logger::info(sprinft(_("No deletion in table %s - server %s"), $table, $physicalServerID));
 		}
 
 	}
@@ -338,7 +339,7 @@ class SynchroFacade
 	{
 
 		if (is_null($idFrame)) {
-			XMD_Log::error(_('Void param idFrame'));
+			Logger::error(_('Void param idFrame'));
 			return NULL;
 		}
 
@@ -367,7 +368,7 @@ class SynchroFacade
 	{
 
 		if (is_null($idFrame)) {
-			XMD_Log::error(_('Void param idFrame'));
+			Logger::error(_('Void param idFrame'));
 			return NULL;
 		}
 
@@ -396,7 +397,7 @@ class SynchroFacade
 	{
 
 		if (is_null($idFrame)) {
-			XMD_Log::error(_('Void param idFrame'));
+			Logger::error(_('Void param idFrame'));
 			return NULL;
 		}
 
@@ -425,7 +426,7 @@ class SynchroFacade
 	{
 
 		if (is_null($idFrame)) {
-			XMD_Log::error(_('Void param idFrame'));
+			Logger::error(_('Void param idFrame'));
 			return NULL;
 		}
 
@@ -454,7 +455,7 @@ class SynchroFacade
 	{
 
 		if (is_null($idFrame)) {
-			XMD_Log::error(_('Void param idFrame'));
+			Logger::error(_('Void param idFrame'));
 			return NULL;
 		}
 
@@ -599,7 +600,7 @@ class SynchroFacade
 			}
 
 			// TODO ximnews bulletins are passing by here now
-			XMD_Log::info("Stablishing PUSH");
+			Logger::info("Stablishing PUSH");
 			$syncMngr->setFlag('deleteOld', true);
 			$result = $syncMngr->pushDocInPublishingPool($idNode, $upDate, $downDate);
 
@@ -676,7 +677,7 @@ class SynchroFacade
 
 		if ($ximNewsBulletin->isBulletinForXimlet()) {
 			$ximletID = $ximNewsBulletin->GetBulletinXimlet();
-			XMD_Log::info(_("Bulletin is of the ximlet ") . $ximletID);
+			Logger::info(_("Bulletin is of the ximlet ") . $ximletID);
 			$ximlet = new StructuredDocument($ximletID);
 			$bulletinDoc = new StructuredDocument($idNode);
 			$content = $bulletinDoc->GetContent();
@@ -712,11 +713,11 @@ class SynchroFacade
 		$nodeTypeName = $nodeType->GetName();
 
 		if ($nodeTypeName == 'Ximlet') {
-			XMD_Log::info(_("Starting ximlet publication"));
+			Logger::info(_("Starting ximlet publication"));
 			self::publishXimNewsDocument($idNode, $dateUp, $dateDown);
 
 			$docsToPublish = array();
-			XMD_Log::info(sprintf(_("Looking for documents associated to the ximlet %s"), $nodeID));
+			Logger::info(sprintf(_("Looking for documents associated to the ximlet %s"), $nodeID));
 			$docsToPublish = $node->class->getRefererDocs();
 
 			//Publishing all the documents associated to the ximlet
@@ -858,7 +859,7 @@ class SynchroFacade
 				$relNewsColector->set('SubVersion', $subversion);
 
 				if (!$relNewsColector->update()) {
-					XMD_Log::error(_('Updating version'));
+					Logger::error(_('Updating version'));
 				}
 
 				if ($idCache > 0) {
@@ -866,12 +867,12 @@ class SynchroFacade
 					$ximNewsCache->set('IdVersion', $idVersion);
 
 					if (!$ximNewsCache->update()) {
-						XMD_Log::error(_('Updating cache version'));
+						Logger::error(_('Updating cache version'));
 					}
 				}
 			}
 
-			XMD_Log::info(sprintf(_("node %s version %s"), $idNode, $version));
+			Logger::info(sprintf(_("node %s version %s"), $idNode, $version));
 		}
 
 		return $result;
