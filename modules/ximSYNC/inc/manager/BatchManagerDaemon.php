@@ -26,6 +26,7 @@
  */
 
 
+use Ximdex\Logger;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
 use Ximdex\Runtime\DataFactory;
@@ -47,7 +48,7 @@ function main($argc, $argv)
 
     // Command line mode call
     if ($argv != null && isset($argv[1]) && is_numeric($argv[1])) {
-        \Ximdex\Logger::logTrace(_("IdNode passed:") . " " . $argv[1]);
+        Logger::logTrace(_("IdNode passed:") . " " . $argv[1]);
         // Add node to publishing pool and exit (SyncManager will call this daemon again when inserting node job is done)
         SynchroFacade::pushDocInPublishingPool($argv[1], time(), null);
         exit(1);
@@ -58,7 +59,7 @@ function main($argc, $argv)
     $nodesToPublish = NodesToPublish::getNext();
 
     while ($nodesToPublish != null) {
-        Publication_Log::write(_("Publication cycle triggered by") . " " . $nodesToPublish['idNodeGenerator']);
+        Logger::write(_("Publication cycle triggered by") . " " . $nodesToPublish['idNodeGenerator'], 'publication_logger');
         createBatchsForBlock($nodesToPublish);
 
         // Gext next block (if any) of nodes to publish
@@ -83,13 +84,13 @@ function createBatchsForBlock($nodesToPublish)
     $nodeServer = new Node($idServer);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           $otfMode = 0; //For the moment, otfMode is disabled
     if (\App::getValue('PublishOnDisabledServers') == 1) {
-        Publication_Log::write("PublishOnDisabledServers is true");
+        Logger::write("PublishOnDisabledServers is true", 'publication_logger');
         $physicalServers = $nodeServer->class->GetPhysicalServerList(true, $otfMode);
     } else {
         $physicalServers = $nodeServer->class->GetEnabledPhysicalServerList(true, $otfMode);
     }
     if (count($physicalServers) == 0) {
-        Publication_Log::error(_('Fisical server does not exist for nodeId:') . " " . $idNodeGenerator . " " . _('returning empty arrays.'));
+        Logger::error(_('Fisical server does not exist for nodeId:') . " " . $idNodeGenerator . " " . _('returning empty arrays.'), 'publication_logger');
         return null;
     }
 

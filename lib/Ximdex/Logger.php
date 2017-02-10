@@ -72,6 +72,10 @@ Class Logger
         }
     }
 
+    public static function write($string, $loggerInstance = 'XMD'){
+        return self::info($string, $loggerInstance = 'XMD');
+    }
+
     public static function info($string, $loggerInstance = 'XMD')
     {
         try{

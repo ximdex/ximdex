@@ -5,6 +5,15 @@ if(file_exists('conf/_STATUSFILE')){
     $I->deleteFile('conf/_STATUSFILE');
 }
 
+if( file_exists('data/previos/css/default.css') ){
+    $I->deleteFile('data/previos/css/default.css');
+    $I->deleteDir('data/previos/css');
+}
+
+if( file_exists('data/previos/picasso-iden-idhtml.html') ){
+    $I->deleteFile('data/previos/picasso-iden-idhtml.html');
+}
+
 $I->wantTo('ensure that installation works');
 
 $I->amOnPage('/setup/index.php');
