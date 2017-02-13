@@ -2,7 +2,7 @@ version: "2"
 services:
   # PHP with required extensions to execute Ximdex
   phpfpm:
-    image: ximdex/php:${PHP_VERSION:-7}
+    image: ximdex/php:7
     volumes:
       - ./tests/php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf:ro
       - ./tests/php-fpm/php.ini:/usr/local/etc/php/php.ini:ro
@@ -25,7 +25,7 @@ services:
 
   # MySQL
   db:
-    image: "mysql:${MYSQL_VERSION:-5.6}"
+    image: "mysql:5.6"
     # Path where MySQL data will be
     volumes:
       - .data/db:/var/lib/mysql
