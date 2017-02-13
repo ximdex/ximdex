@@ -11,10 +11,11 @@ modules:
         - \Codeception\Module\Filesystem
 
         - WebDriver:
-             url: 'http://ximdex/'
-             browser: phantomjs
-             port: 9000
-             host: phantomjs
-             window_size: 1124x850
+            url: 'http://ximdex/'
+            browser: chrome
+            port: 4444
+            host: selenium
+            window_size: 1124x850
+
         - Db:
              cleanup: true

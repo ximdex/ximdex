@@ -22,9 +22,11 @@ $I->see("Welcome to Ximdex CMS");
 
 $I->click("Start Installation");
 
-$I->see("System Requirements");
+$I->waitForText("System Requirements", 5);
 
 $I->click("Start Installation");
+
+$I->waitForText("Database host:", 5);
 
 $I->fillField("dbhost", "db");
 $I->fillField("dbuser", "ximdex");
@@ -37,11 +39,11 @@ $I->wait(3);
 
 $I->click("Continue: Create tables");
 
-$I->waitForText("Tables and default data created", 15);
+$I->waitForText("Tables and default data created", 20);
 
 $I->click("Continue: Modules");
 
-$I->waitForText("Install Modules", 5);
+$I->waitForText("Install Modules", 10);
 
 $I->click("Next: Settings");
 
@@ -69,17 +71,25 @@ $I->wantTo('ensure that publish works');
 $I->waitForText("Hello ximdex, first time here?", 5, "#tourcontrols");
 $I->click("#canceltour");
 
-$I->doubleClick("//span[contains(text(),'Picasso')]", "#angular-tree");
+function reload($I){
+    $I->click("#angular-tree > div.ui-tabs.ui-widget.ui-widget-content.ui-corner-all.tabs-container.hbox-panel.ng-isolate-scope > div.ui-tabs.ui-widget.ui-widget-content.ui-corner-all.tabs-container > div > div.browser-view.ui-tabs-panel.ui-widget-content.ui-corner-bottom.tab-pane.ng-scope.active > div.ng-scope > xim-tree > div > div.xim-treeview-btnreload.ui-corner-all.ui-state-default.ng-binding");
+}
+
+$I->click("//span[contains(text(),'Picasso')]", "#angular-tree");
+reload($I);
 
 $I->waitForText("Picasso_Server", 5, "#angular-tree");
 
-$I->doubleClick("//span[contains(text(),'Picasso_Server')]", "#angular-tree");
+$I->click("//span[contains(text(),'Picasso_Server')]", "#angular-tree");
+reload($I);
 $I->waitForText("documents", 5, "#angular-tree");
 
-$I->doubleClick("//span[contains(text(),'documents')]", "#angular-tree");
+$I->click("//span[contains(text(),'documents')]", "#angular-tree");
+reload($I);
 $I->waitForText("picasso", 5, "#angular-tree");
 
-$I->doubleClick("//span[contains(text(),'picasso')]", "#angular-tree");
+$I->click("//span[contains(text(),'picasso')]", "#angular-tree");
+reload($I);
 $I->waitForText("picasso-iden", 5, "#angular-tree");
 
 // Open picasso-iden menu

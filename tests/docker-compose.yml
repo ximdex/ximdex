@@ -28,17 +28,14 @@ services:
       MYSQL_PASSWORD: ximdex
       MYSQL_DATABASE: ximdex
 
-  phantomjs:
-    image: wernight/phantomjs:2
-    command: phantomjs --webdriver=9000
-    links:
-      - ximdex:ximdex
+  selenium:
+      image: selenium/standalone-chrome:3.0.1
 
   test:
     image: ximdex/php:${PHP_VERSION}
     links:
       - ximdex:ximdex
-      - phantomjs:phantomjs
+      - selenium:selenium
       - db:db
     volumes:
       - ../:/var/www/html
