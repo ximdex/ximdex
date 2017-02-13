@@ -56,10 +56,13 @@ Ximdex CMS is a Visual Headless Content & Data Management System (CMS / DMS) wit
 * Ximdex developer's guide
   ------------------------
 
-  This repo contains all the required dependencies to use Ximdex. If you want to execute tests, you have to download the developer dependecies using:
-    
-```{r, engine='bash'}
-  composer install --dev
+  This repo contains all the required dependencies to use Ximdex. If you want to execute tests, you have to run the next commands:
+  
+```{r, engine='bash'} 
+  cd tests 
+  docker-compose up -d ximdex 
+  docker-compose run test 
+
 ```
 
 * Important
