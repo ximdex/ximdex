@@ -69,8 +69,8 @@ class FrontControllerHTTP extends FrontController
             /* Getting params to check permissions.
              * Some actions can be loaded for everyone
              */
-            $idNode = $this->request->getParam('nodeid');
-            $actionName = $this->request->getParam('action');
+            $idNode = $this->request->input('nodeid');
+            $actionName = $this->request->input('action');
             $idAction = $this->getActionId();
             $listAllowedActions = Action::getAlwaysAllowedActions();
             if (in_array($actionName, $listAllowedActions) ||
@@ -157,7 +157,7 @@ class FrontControllerHTTP extends FrontController
 
     function ModuleShortUrl()
     {
-        $actionName = $this->request->getParam('action');
+        $actionName = $this->request->input('action');
         $ximDEMOS = ModulesManager::isEnabled('ximDEMOS');
 
         if ("createaccount" == $actionName) {
@@ -178,8 +178,8 @@ class FrontControllerHTTP extends FrontController
         $session_exists = \Ximdex\Utils\Session::get("userID");
 
         $action_without_session = array("createaccount", "logout", "installer");
-        $actionName = $this->request->getParam('action');
-        $method = $this->request->getParam('method');
+        $actionName = $this->request->input('action');
+        $method = $this->request->input('method');
 
         $session_exists = \Ximdex\Utils\Session::get("userID");
         $need_session = !in_array($actionName, $action_without_session);
@@ -215,11 +215,11 @@ class FrontControllerHTTP extends FrontController
         $this->checkSession();
 
         $params = null;
-        $nodeid = $this->request->getParam('nodeid');
-        $actionName = $this->request->getParam('action');
-        $module = $this->request->getParam('mod');
-        $method = $this->request->getParam('method');
-        $renderer = $this->request->getParam('renderer');
+        $nodeid = $this->request->input('nodeid');
+        $actionName = $this->request->input('action');
+        $module = $this->request->input('mod');
+        $method = $this->request->input('method');
+        $renderer = $this->request->input('renderer');
         $actionId = $this->getActionId();
 
         //get action by $actionId
@@ -266,9 +266,9 @@ class FrontControllerHTTP extends FrontController
 
     function getActionId()
     {
-        $actionId = $this->request->getParam("actionid");
-        $actionName = $this->request->getParam('action');
-        $nodeid = $this->request->getParam('nodeid');
+        $actionId = $this->request->input("actionid");
+        $actionName = $this->request->input('action');
+        $nodeid = $this->request->input('nodeid');
 
 
         if (empty($actionId)) {
@@ -279,8 +279,8 @@ class FrontControllerHTTP extends FrontController
             return (int)$actionId;
         } else if (!empty($actionName) && "browser3" != $actionName && "browser3" != $actionName && !empty($nodeid)) {
 
-            $actionName = $this->request->getParam('action');
-            $module = $this->request->getParam('mod');
+            $actionName = $this->request->input('action');
+            $module = $this->request->input('mod');
             $action = new Action($nodeid);
             $actionId = (int)$action->setByCommandAndModule($actionName, $nodeid, $module);
 
@@ -302,7 +302,7 @@ class FrontControllerHTTP extends FrontController
 
     function getMethod()
     {
-        $method = $this->request->getParam("method");
+        $method = $this->request->input("method");
 
         if (empty($method)) {
             return "index";

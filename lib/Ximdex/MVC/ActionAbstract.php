@@ -27,11 +27,15 @@
 
 namespace Ximdex\MVC;
 
+use Laravel\Lumen\Routing\Controller;
 use Ximdex\Logger;
+use Ximdex\MVC\Render\AbstractRenderer;
+use Ximdex\MVC\Render\SmartyRenderer;
 use Ximdex\Notifications\EmailNotificationStrategy;
 use Ximdex\MVC\FrontController;
 use ModulesManager;
 use Ximdex\Parsers\ParsingJsGetText;
+use Ximdex\Runtime\WebRequest;
 use Ximdex\Utils\Serializer;
 use Ximdex\Models\User;
 use Ximdex\Models\Action;
@@ -51,7 +55,7 @@ use Ximdex\Notifications\XimdexNotificationStrategy;
  *  css/js inclusion and redirection
  *
  */
-class ActionAbstract extends IController
+class ActionAbstract extends Controller
 {
 
     /**
@@ -85,7 +89,7 @@ class ActionAbstract extends IController
      * Action renderer
      */
     /**
-     * @var mixed
+     * @var AbstractRenderer
      */
     public $renderer;
 
@@ -100,17 +104,37 @@ class ActionAbstract extends IController
     protected $endActionLogged = false;
 
     /**
+     * @var WebRequest
+     */
+    var $request;
+
+    /**
+     * @var Response
+     */
+    var $response;
+    /**
+     * @var bool
+     */
+    var $hasError;
+    /**
+     * @var
+     */
+    var $msgError;
+    /**
+     * @var Messages
+     */
+    var $messages;
+
+    /**
      * ActionAbstract constructor.
      * @param null $_render
      */
-    public function __construct($_render = null)
+    public function __construct($_render = null, WebRequest $request = null)
     {
 
-        parent::__construct();
+        $this->request = $request;
 
         $this->displayEncoding = App::getValue('displayEncoding');
-
-        /** Obtaining the render to use */
 
 
         $rendererClass = $this->_get_render($_render);
@@ -123,8 +147,6 @@ class ActionAbstract extends IController
 
 
         $this->renderer = $factory->instantiate($rendererClass . 'Renderer');
-
-
 
 
         $this->renderer->set("_BASE_TEMPLATE_PATH", sprintf('%s/xmd/template/%s/', XIMDEX_ROOT_PATH, $rendererClass));
@@ -160,8 +182,6 @@ class ActionAbstract extends IController
 
         if (!empty($data)) {
             $data = $data[0];
-
-
         }
 
         //debug::log($data,$actionName, $module, $actionId, $nodeId);
@@ -177,35 +197,31 @@ class ActionAbstract extends IController
     function execute($request)
     {
         // Setting path or subset which current action belongs to
-        $nodeid = $request->getParam("nodeid");
-        //$action = $request->getParam("action");
-        $actionid = $request->getParam("actionid");
+        $nodeid = $this->request->input("nodeid");
+        //$action = $this->request->getParam("action");
+        $actionid = $this->request->input("actionid");
 
         if ($nodeid && $actionid) {
             // $action = new Action($actionid);
             //Logger::debug("MVC::ActionAbstract calling action $actionid (" . $action->get('Command') . ") in node $nodeid ");
         }
 
-        $method = ($var = $request->getParam("method")) ? $var : 'index';
-        $this->request = $request;
-
+        $method = ($var = $this->request->input("method")) ? $var : 'index';
         $actionInfo = $this->getActionInfo(
-            $request->getParam('action'),
-            $request->getParam('module'),
-            $request->getParam('actionid'),
-            $request->getParam('nodeid')
+            $this->request->input('action'),
+            $this->request->input('module'),
+            $this->request->input('actionid'),
+            $this->request->input('nodeid')
         );
 
-
         if (!empty($actionInfo)) {
-
-
             $this->actionCommand = $actionInfo['Command'];
             $this->actionName = $actionInfo['Name'];
             $this->actionDescription = $actionInfo['Description'];
             $this->actionModule = isset($actionInfo['Module']) ? $actionInfo['Module'] : null;
-            $this->actionCommand = $actionInfo['Command'];
         }
+
+
         if (method_exists($this, $method)) {
             $this->actionMethod = $method;
             $this->logInitAction();
@@ -287,7 +303,7 @@ class ActionAbstract extends IController
         }
 
         //Send the encoding to the browser
-        $this->response->set('Content-type', "text/html; charset=$this->displayEncoding");
+        //$this->response->set('Content-type', "text/html; charset=$this->displayEncoding");
 
         // Render default values
         if ($view != NULL) $this->request->setParam("method", $view);
@@ -303,9 +319,13 @@ class ActionAbstract extends IController
         $this->request->setParam("js_files", $getTextJs->getTextArrayOfJs($this->_js));
         $this->request->setParam("css_files", $this->_css);
 
+        $reflector = new \ReflectionClass(get_class($this));
+        $fileName = $reflector->getFileName();
+        $dirName = dirname($fileName);
+
         // Usefull values
         $arrValores['_XIMDEX_ROOT_PATH'] = XIMDEX_ROOT_PATH;
-        $arrValores['_ACTION_COMMAND'] = $this->actionCommand;
+        $arrValores['_ACTION_COMMAND'] = $dirName;
         $arrValores['_ACTION_NAME'] = $this->actionName;
         $arrValores['_ACTION_DESCRIPTION'] = $this->actionDescription;
 
@@ -315,8 +335,7 @@ class ActionAbstract extends IController
 
         // Passing specified values
         $this->request->setParameters($arrValores);
-        $this->renderer->setParameters($this->request->getRequests());
-
+        $this->renderer->setParameters($this->request->all());
 
         // If layout was not specified
         if (empty($layout) || $layout == "messages.tpl") {
@@ -346,7 +365,6 @@ class ActionAbstract extends IController
                 $layout = 'default.tpl';
             }
         }
-
         $this->renderer->setTemplate(XIMDEX_ROOT_PATH . '/xmd/template/Smarty/layouts/' . $layout);
 //		$this->request->setParam("outHTML", $this->renderer->render($view));
         $output = $this->renderer->render($view);
@@ -360,7 +378,7 @@ class ActionAbstract extends IController
 
         $this->request->setParam('outHTML', $output);
         $this->request->setParameters($this->renderer->getParameters());
-        $this->response->sendHeaders();
+        //$this->response->sendHeaders();
 
         if ($this->request->getParam("out") == "WEB") {
             echo $this->request->getParam("outHTML");
@@ -553,10 +571,10 @@ class ActionAbstract extends IController
                         $rendererClass = "Debug";
                         break;
                     default:
-                        $rendererClass = $this->request->getParam("renderer");
+                        $rendererClass = $this->request->input("renderer");
                 }
             } else {
-                $rendererClass = $this->request->getParam("renderer");
+                $rendererClass = $this->request->input("renderer");
             }
         }
 
@@ -566,7 +584,7 @@ class ActionAbstract extends IController
         }
 
         //Guardamos el render
-        $this->request->setParam("renderer", $rendererClass);
+        $this->request['renderer'] = $rendererClass;
         return $rendererClass;
     }
 
@@ -721,6 +739,46 @@ class ActionAbstract extends IController
         }
 
         return $result;
+    }
+
+    /**
+     * @param $request
+     */
+    function setRequest($request)
+    {
+        $this->request = $request;
+    }
+    /**
+     * TODO: Cambiar toda la gesti�n de errores en base a variable booleana + array simple por el objeto messages
+     * Getter
+     */
+    /**
+     *
+     */
+    function hasError()
+    {
+        if (isset ($this->hasError)) return $this->hasError;
+    }
+    /**
+     *
+     */
+    function getMsgError()
+    {
+        if (isset ($this->msgError)) {
+            return $this->msgError;
+        }
+    }
+    /**
+     * @param $msg
+     * @param $module
+     */
+    function _setError($msg, $module)
+    {
+        unset( $module ) ;
+        $this->hasError = true;
+        $this->msgError = $msg;
+        // Registra un apunte en el log
+        Logger::error($msg);
     }
 
 }

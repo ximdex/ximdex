@@ -11,6 +11,9 @@ namespace Ximdex\API;
 
 class Response
 {
+    const ERROR = -1;
+    const OK = 0;
+
     private $status = 0;
     private $response = null;
     private $message = '';

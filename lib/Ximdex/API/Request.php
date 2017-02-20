@@ -13,10 +13,14 @@ class Request
 {
     private $path;
 
+    private $method;
+
     public function __construct()
     {
         $this->path = isset( $_GET['_action']) ? $_GET['_action'] : "" ;
         $this->path = trim( $this->path ,  "/" ) ;
+
+        $this->method = $_SERVER['REQUEST_METHOD'];
     }
     /**
      * Get a query value from a key

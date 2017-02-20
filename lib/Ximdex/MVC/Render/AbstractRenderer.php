@@ -109,7 +109,7 @@ class AbstractRenderer
     /**
      * @param $array
      */
-    function setParameters(&$array)
+    function setParameters($array)
     {
 
         if (is_array($array)) {
@@ -134,7 +134,6 @@ class AbstractRenderer
      */
     function render($view = NULL)
     {
-
         $actionID = $this->get('actionid');
         $nodeID = $this->get('nodeid');
         $actionName = $this->get('actionName');
@@ -145,6 +144,10 @@ class AbstractRenderer
 
         $action = new Action($actionID);
         $_ACTION_COMMAND = ($actionName) ? $actionName : $action->get('Command');
+
+        if ( empty($_ACTION_COMMAND) ){
+            $_ACTION_COMMAND = $this->get('action');
+        }
 
         $base_action = null;
 

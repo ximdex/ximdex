@@ -12,8 +12,6 @@ if (!defined('XIMDEX_ROOT_PATH')) {
 }
 
 
-
-
 if (!defined('CLI_MODE'))
     define('CLI_MODE', 0);
 
@@ -23,6 +21,9 @@ include_once dirname(dirname(__FILE__)) . '/extensions/vendors/autoload.php';
 
 
 class_alias('Ximdex\Modules\Manager', 'ModulesManager');
+
+
+require_once dirname(dirname(__FILE__)) . '/extensions/vendors/illuminate/support/helpers.php';
 
 
 // Initialize App

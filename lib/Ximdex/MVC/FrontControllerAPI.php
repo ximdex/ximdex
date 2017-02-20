@@ -96,7 +96,7 @@ class FrontControllerAPI extends FrontController
 
         //Retrieve and check the ximtoken if the action requires security
         if (  $actionObject->isSecure() ) {
-            $encryptedXimtoken = $this->request->getParam(self::XIM_API_TOKEN_PARAM);
+            $encryptedXimtoken = $this->request->input(self::XIM_API_TOKEN_PARAM);
             if ($encryptedXimtoken == null)
                 $this->sendErrorResponse('400', 'Token missing for this action');
 

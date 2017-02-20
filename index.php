@@ -50,13 +50,115 @@ function goLoadAction()
 
 //Main thread
 if (!InstallController::isInstalled()) {
-    header( 'Location: ./setup/');
+    header( 'Location: ./setup/index.php');
     die();
 
 
 } else {
     $locale = \Ximdex\Utils\Session::get('locale');
-    I18N::setup($locale); // Check coherence with HTTP_ACCEPT_LANGUAGE
-    $frontController = new FrontController();
-    $frontController->dispatch();
+    I18N::setup($locale); // Check coherence with HTTP_ACCEPT_LANGUAGE*/
+
+    // TODO: Move this logic outta here
+
+    $app = new Laravel\Lumen\Application();
+
+    $app->configureMonologUsing(function($monolog) {
+        $monolog->pushHandler(\Ximdex\Logger::get()->getHandlers()[0]);
+
+        return $monolog;
+    });
+
+    $app->routeMiddleware([
+        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        //'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'checkuserlogged' => \Ximdex\MVC\Middleware\CheckUserLoggedMiddleware::class,
+    ]);
+
+    $app->alias('request', '\Ximdex\Runtime\WebRequest');
+
+    \Ximdex\Runtime\WebRequest::capture();
+
+    \Ximdex\API\Manager::addApiRoutes();
+
+    $app['auth']->viaRequest('/', function (\Ximdex\Runtime\WebRequest $request) {
+        $valid = \Ximdex\Utils\Session::check(false);
+        if( $valid ){
+            $userId = \Ximdex\Utils\Session::get('userID');
+            $user = new \Ximdex\Models\User($userId);
+            if( !empty($user) ){
+                \Ximdex\Utils\Session::refresh();
+                return $user;
+            }
+        }
+
+
+        return null;
+    });
+
+    $app->get('/xmd/loadaction.php', function (\Ximdex\Runtime\WebRequest $request){
+        dump('hello');
+    });
+
+    $webRequestHandler =  function(\Ximdex\Runtime\WebRequest $request){
+        $valid = \Ximdex\Utils\Session::check(false);
+
+        $actionRootName = "Action_";
+
+        $action = "login";
+        $method = "index";
+
+        $module = $request->input('module', '');
+        $action = $request->input('action', $action);
+        $method = $request->input('method', $method);
+
+
+
+        if (empty($module)) {
+            $actionPath = XIMDEX_ROOT_PATH .
+                DIRECTORY_SEPARATOR . 'actions' .
+                DIRECTORY_SEPARATOR . $action;
+        } else {
+            $path_module = ModulesManager::path($module);
+            $actionPath = sprintf('%s%s%s%s%s%s',
+                XIMDEX_ROOT_PATH,
+                $path_module,
+                DIRECTORY_SEPARATOR,
+                'actions',
+                DIRECTORY_SEPARATOR,
+                $action);
+        }
+
+        $request['action'] = $action;
+        $request['method'] = $method;
+        $request['module'] = $module;
+        $request['out'] = "WEB";
+
+        /*$factory = new \Ximdex\Utils\Factory($actionPath, $actionRootName);*/
+
+        /* @var $actionController \Ximdex\MVC\ActionAbstract */
+        /*$actionController = $factory->instantiate($action, null, $request);*/
+        $actionController = \Ximdex\MVC\ActionFactory::getAction($request);
+
+        if ($actionController == NULL) {
+            return response('PAGE NOT FOUND', 404);
+        } else {
+            //$this->setUserState();
+            //$stats = $this->actionStatsStart();
+            $actionController->execute($request);
+        }
+    };
+
+    $app->get('/', $webRequestHandler);
+    $app->post('/', $webRequestHandler);
+
+    try {
+        $app->run();
+    } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e){
+        // Not found
+        dump($e->getMessage());
+        dump($e->getTraceAsString());
+    } catch (\Illuminate\Auth\AuthenticationException $e){
+        dump($e->getMessage());
+        dump($e->getTraceAsString());
+    }
 }

@@ -4,6 +4,7 @@
  * Main setup functions and values
  */
 
+require_once __DIR__ . '/../../extensions/vendors/autoload.php';
 
  // Base autoloader
 spl_autoload_register(function ($class) {

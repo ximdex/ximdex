@@ -31,6 +31,7 @@ namespace Ximdex\MVC;
 
 use ModulesManager;
 use Ximdex\Logger;
+use Ximdex\Runtime\WebRequest;
 
 
 /**
@@ -49,10 +50,8 @@ class ActionFactory
      * @param $request
      * @return mixed|null
      */
-    public static function getAction($request)
+    public static function getAction(WebRequest $request)
     {
-
-
         $actionRootName = "Action_";
 
         // Cogemos los datos de la accion
@@ -81,7 +80,7 @@ class ActionFactory
             }
 
             $factory = new \Ximdex\Utils\Factory($actionPath, $actionRootName);
-            $actionController = $factory->instantiate($action);
+            $actionController = $factory->instantiate($action, null, $request);
         }
 
         return $actionController;

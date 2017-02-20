@@ -83,8 +83,8 @@ class ApplicationController extends IController
      */
     function _error_no_action()
     {
-        $action = $this->request->getParam("action");
-        $nodeid = $this->request->getParam("nodeid");
+        $action = $this->request->input("action");
+        $nodeid = $this->request->input("nodeid");
 
 
         $actionController = new ActionAbstract();
@@ -107,8 +107,8 @@ class ApplicationController extends IController
     {
         if (ModulesManager::isEnabled('ximADM')) {
             $userID = (int)Session::get('userID');
-            $action = $this->request->getParam("action");
-            $method = $this->request->getParam("method");
+            $action = $this->request->input("action");
+            $method = $this->request->input("method");
 
             if ($userID && !is_null($action) && "index" == $method) {
                 $user_status = new Status();
@@ -129,9 +129,9 @@ class ApplicationController extends IController
     function actionStatsStart()
     {
         $actionStats = App::getValue('ActionsStats');
-        $action = $this->request->getParam("action");
-        $method = $this->request->getParam("method");
-        $nodeId = (int)$this->request->getParam("nodeid");
+        $action = $this->request->input("action");
+        $method = $this->request->input("method");
+        $nodeId = (int)$this->request->input("nodeid");
         $userId = Session::get("userID");
         // Starts timer for use in action stats
         $stats = array();
@@ -157,9 +157,9 @@ class ApplicationController extends IController
     function actionStatsEnd($stats)
     {
         $actionStats = App::getValue('ActionsStats');
-        $action = $this->request->getParam("action");
-        $method = $this->request->getParam("method");
-        $nodeId = (int)$this->request->getParam("nodeid");
+        $action = $this->request->input("action");
+        $method = $this->request->input("method");
+        $nodeId = (int)$this->request->input("nodeid");
         $userId = Session::get("userID");
 
         if ($actionStats == 1 && !is_null($action) && "index" == $method && $this->timer) {
