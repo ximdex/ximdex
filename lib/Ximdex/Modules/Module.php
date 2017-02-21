@@ -374,7 +374,7 @@ class Module  {
     /**
      * @param Router $router
      */
-    public function addApiRoutes(Router &$router) {
+    public function addApiRoutes() {
 
     }
 

@@ -26,7 +26,6 @@
  */
 
 
-use Ximdex\MVC\FrontController;
 use Ximdex\Runtime\App;
 use Ximdex\Utils\FsUtils;
 
@@ -73,9 +72,17 @@ if (!InstallController::isInstalled()) {
         'checkuserlogged' => \Ximdex\MVC\Middleware\CheckUserLoggedMiddleware::class,
     ]);
 
-    //$app->alias('request', '\Ximdex\Runtime\WebRequest');
 
+    // Routes for API
     \Ximdex\API\Manager::addApiRoutes();
+
+    // Routes for modules
+    $mManager = new ModulesManager;
+    foreach(\Ximdex\Modules\Manager::getEnabledModules() as $module){
+        $name = $module["name"];
+        $mManager->instanceModule($name)->addApiRoutes();
+    }
+
 
     $app['auth']->viaRequest('/', function (\Ximdex\Runtime\WebRequest $request) {
         $valid = \Ximdex\Utils\Session::check(false);

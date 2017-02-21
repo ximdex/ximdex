@@ -34,7 +34,6 @@ use Ximdex\Logger;
 use Ximdex\MVC\Render\AbstractRenderer;
 use Ximdex\MVC\Render\SmartyRenderer;
 use Ximdex\Notifications\EmailNotificationStrategy;
-use Ximdex\MVC\FrontController;
 use ModulesManager;
 use Ximdex\Parsers\ParsingJsGetText;
 use Ximdex\Runtime\WebRequest;
