@@ -27,7 +27,6 @@ use Ximdex\MVC\IController;
 use Ximdex\Runtime\Request;
 use Ximdex\Runtime\Response;
 
-require_once(XIMDEX_ROOT_PATH . '/inc/install/InstallStepFactory.class.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/install/managers/InstallManager.class.php');
 
 /**
@@ -50,9 +49,7 @@ class InstallController extends IController
      */
     public function __construct()
     {
-        $this->installManager = new InstallManager(InstallManager::WEB_MODE);
-        $this->request = new Request();
-        $this->response = new Response();
+        $this->installManager = new InstallManager();
         $this->steps = $this->installManager->getSteps();
         $currentState = $this->installManager->getCurrentState();
         if (!$currentState) {
@@ -68,7 +65,7 @@ class InstallController extends IController
     public static function isInstalled()
     {
 
-        $installManager = new InstallManager(InstallManager::WEB_MODE);
+        $installManager = new InstallManager();
         return $installManager->isInstalled();
     }
 
@@ -113,13 +110,5 @@ class InstallController extends IController
         $this->request->setParameters($_POST);
     }
 
-    /**
-     * Instance an object for the current step
-     * @return object Step Object
-     */
-    public function compose()
-    {
 
-        return InstallStepFactory::getStep($this->steps, $this->currentState);
-    }
 }
