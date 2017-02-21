@@ -104,7 +104,7 @@ return'"'+string+'"';};var _escapeable=/["\\\x00-\x1f\x7f-\x9f]/g;var _meta={'\b
 		X = Object.extend(X, {
 			XMLNS_XIM: 'http://ximdex.com/schema/1.0',
 			baseUrl: baseUrl,
-			restUrl: baseUrl + '/xmd/loadaction.php',
+			restUrl: baseUrl + '/',
 			iconsUrl: baseUrl + '/xmd/images/icons',
 			tourInstance: null,
 			getUID: function() {
@@ -996,10 +996,10 @@ return'"'+string+'"';};var _escapeable=/["\\\x00-\x1f\x7f-\x9f]/g;var _meta={'\b
 								id: 'messageDialog',
 								title: _('Inactivity period reached'),
 								onclose: function(event,params) {
-									window.location.href='##BASE_URL##/xmd/loadaction.php?action=logout';
+									window.location.href='##BASE_URL##/?action=logout';
 								}.bind(this),
 								message: [{type: 'STRING', message: _('You have reached the limit of inactivity period. Please, re-authenticate again in order to continue working. ')}],
-								buttons: [{text: 'Login', value: 6, onPress: function() {window.location.href='##BASE_URL##/xmd/loadaction.php?action=logout'; this.close();} }]
+								buttons: [{text: 'Login', value: 6, onPress: function() {window.location.href='##BASE_URL##/?action=logout'; this.close();} }]
 							});
 							
 		/* Function to execute in the timeout timer */	
@@ -1012,7 +1012,7 @@ return'"'+string+'"';};var _escapeable=/["\\\x00-\x1f\x7f-\x9f]/g;var _meta={'\b
 		// Refreshing the session 2 seconds before the session expires
 		setInterval(function() {
 					console.log("Refreshing session");
-					jQuery.ajax({ url: '##BASE_URL##/xmd/loadaction.php?action=browser3&method=refreshSession',
+					jQuery.ajax({ url: '##BASE_URL##/?action=browser3&method=refreshSession',
   								  success: function(data) {
     							  	console.log("Session refreshed");
       							  },
@@ -13610,10 +13610,9 @@ function XimdocEditor(options) {
 		var xslIncludesOnServer = $('.kupu-fulleditor .kupu-ximparams #kupu-xslIncludesOnServer').html().trim();
 
 		// ximdex initialize stuff
-		//this._baseURL = url_root + '/xmd/loadaction.php?actionid=' + this.actionId + '&nodeid=' + this.nodeId;
-		this._baseURL = url_root + '/xmd/loadaction.php?action=xmleditor2&nodeid=' + this.nodeId;
+		this._baseURL = url_root + '/?action=xmleditor2&nodeid=' + this.nodeId;
 		this._baseActionURL = url_root + '/actions/xmleditor2/';
-		this._loadActionURL = url_root + '/xmd/loadaction.php?nodeid=' + this.nodeId;
+		this._loadActionURL = url_root + '/?nodeid=' + this.nodeId;
                 var xmlI18N = url_root + '/extensions/kupu/i18n/kupu-'+locale+'.pox';
                 var verifyTmpUrl = this._baseURL + '&ajax=json&method=verifyTmpFile';
 		var includesInServer="";
@@ -17409,7 +17408,7 @@ function ximletTool() {
 				} else {
 					if(this.editor) {
 						$.getJSON(
-				    		window.url_root + '/xmd/loadaction.php',
+				    		window.url_root + '/',
 				    		{actionid: this.editor.actionId, nodeid: this.getMacroId(), ajax: 'json', method: 'canEditNode'},
 				    		function(data, textStatus) {
 				    			if (textStatus == 'success') {
@@ -17437,7 +17436,7 @@ function ximletTool() {
 		//confirm dialog functions: Yes pressed, go on.
 		var cbYes = function() {
 			var macroId = target.ximElement.getMacroId();
-			var url = window.url_root + '/xmd/loadaction.php?actionid='+this.editor.actionId+'&nodes[]='+macroId;
+			var url = window.url_root + '/?actionid='+this.editor.actionId+'&nodes[]='+macroId;
 			var win = window.open(url);
 
 			// Register unload event so we can refresh the ximlet content

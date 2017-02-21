@@ -27,7 +27,9 @@
 
 namespace Ximdex\MVC;
 
+use Laravel\Lumen\Application;
 use Laravel\Lumen\Routing\Controller;
+use Ximdex\API\Response;
 use Ximdex\Logger;
 use Ximdex\MVC\Render\AbstractRenderer;
 use Ximdex\MVC\Render\SmartyRenderer;
@@ -36,6 +38,7 @@ use Ximdex\MVC\FrontController;
 use ModulesManager;
 use Ximdex\Parsers\ParsingJsGetText;
 use Ximdex\Runtime\WebRequest;
+use Ximdex\Utils\Messages;
 use Ximdex\Utils\Serializer;
 use Ximdex\Models\User;
 use Ximdex\Models\Action;
@@ -131,6 +134,14 @@ class ActionAbstract extends Controller
      */
     public function __construct($_render = null, WebRequest $request = null)
     {
+
+        $this->messages = new Messages();
+
+        $this->response = new Response();
+
+        if (empty($request)){
+            $request = WebRequest::capture();
+        }
 
         $this->request = $request;
 
@@ -425,7 +436,7 @@ class ActionAbstract extends Controller
             $method = 'index';
         }
 
-        $_GET["redirect_other_action"] = 1;
+        $this->request["redirect_other_action"] = 1;
         if (!empty($actionName)) {
             $action = new Action();
             $idNode = $this->request->getParam("nodeid");
@@ -443,19 +454,16 @@ class ActionAbstract extends Controller
             }
 
 
-            $_GET["actionid"] = $idAction;
-            $_REQUEST["actionid"] = $idAction;
+            $this->request["actionid"] = $idAction;
+            $this->request["action"] = $action->GetCommand();
         }
 
 
-        $_GET["method"] = $method;
-        $frontController = new FrontController();
-        if (!empty($parameters)) {
-            $frontController->request->setParameters($parameters);
-        }
-        $frontController->dispatch();
+        $this->request["method"] = $method;
 
-        die();
+        $app = Application::getInstance();
+        dump($this->request->all());
+        $app->run($this->request);
     }
 
     /**
@@ -470,7 +478,7 @@ class ActionAbstract extends Controller
         // TODO search and destroy the %20 generated in the last char of the query string
         $queryManager = new QueryManager(false);
         $file = sprintf('%s%s',
-            '/xmd/loadaction.php',
+            '/',
             $queryManager->buildWith(array(
                 'xparams[reload_node_id]' => $idnode,
                 'js_file' => 'reloadNode',
@@ -493,7 +501,7 @@ class ActionAbstract extends Controller
     /*function nextAction($idnode) {
         $queryManager = new QueryManager(false);
         $fileNextAction = sprintf('%s%s',
-            '/xmd/loadaction.php',
+            '/',
             $queryManager->buildWith(array(
                     'xparams[id_node]' => $idnode,
                     'xparams[action_name]' => str_replace("Action_", "", get_class($this)),

@@ -28,9 +28,9 @@
 use Ximdex\Authenticator;
 use Ximdex\Models\User;
 use Ximdex\MVC\ActionAbstract;
-use Ximdex\Runtime\Request;
+use Ximdex\Runtime\App;
+use Ximdex\Runtime\WebRequest;
 
-require_once(XIMDEX_ROOT_PATH . '/conf/stats.php');
 ModulesManager::file('/inc/i18n/I18N.class.php');
 
 class Action_login extends ActionAbstract
@@ -79,7 +79,7 @@ class Action_login extends ActionAbstract
 
     function get_news()
     {
-        $REMOTE_NEWS = STATS_SERVER . "/stats/getnews.php";
+        $REMOTE_NEWS = App::getValue('StatsServer') . "/stats/getnews.php";
 
         $ctx = stream_context_create(array(
                 'http' => array(
@@ -111,10 +111,10 @@ class Action_login extends ActionAbstract
     function check()
     {
         $stopper = file_exists(\App::getValue("AppRoot") . \App::getValue("TempRoot") . "/login.stop");
-        $user_lower = strtolower(Request::post('user'));
-        $user = Request::post('user');
-        $password = Request::post('password');
-        $formsent = Request::post('login');
+        $user_lower = strtolower($this->request->input('user'));
+        $user = $this->request->input('user');
+        $password = $this->request->input('password');
+        $formsent = $this->request->input('login');
 
         $this->check_disk_space();
         setcookie("expired", "", time() - 3600);
@@ -142,8 +142,8 @@ class Action_login extends ActionAbstract
             \Ximdex\Utils\Session::set('context', 'ximdex');
             $this->logSuccessAction();
 
-            if (Request::get('backto')) {
-                header(sprintf('Location: %s', base64_decode(Request::get('backto'))));
+            if ($this->request->input('backto')) {
+                header(sprintf('Location: %s', base64_decode($this->request->input('backto'))));
             } else {
                 header(sprintf("Location: %s", \App::getValue('UrlRoot')));
             }

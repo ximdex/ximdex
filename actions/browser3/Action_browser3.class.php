@@ -35,7 +35,7 @@ use Ximdex\Models\XimLocale;
 use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\Db;
-use Ximdex\Runtime\Request;
+use Ximdex\Runtime\WebRequest;
 use Ximdex\Utils\Extensions;
 use Ximdex\Utils\Serializer;
 use Ximdex\Utils\Session;
@@ -43,6 +43,7 @@ use Ximdex\Utils\Session;
 ModulesManager::file('/inc/search/QueryProcessor.class.php');
 ModulesManager::file('/inc/xvfs/XVFS.class.php');
 ModulesManager::file('/actions/browser3/inc/GenericDatasource.class.php');
+ModulesManager::file('/actions/composer/Action_composer.class.php');
 ModulesManager::file('/inc/validation/FormValidation.class.php');
 
 class Action_browser3 extends ActionAbstract
@@ -230,7 +231,7 @@ class Action_browser3 extends ActionAbstract
         $this->addActionJs('controller.js');
 
         /*         * ********************************** SPLASH ************************************** */
-        define("REMOTE_WELCOME", STATS_SERVER . "/stats/getsplash.php");
+        define("REMOTE_WELCOME", App::getValue('StatsServer') . "/stats/getsplash.php");
         $ctx = stream_context_create(array(
                 'http' => array(
                     'timeout' => 2
@@ -301,7 +302,8 @@ class Action_browser3 extends ActionAbstract
      */
     public function nodetypes()
     {
-        $ret = GenericDatasource::nodetypes($this->request);
+        $c = new Action_composer(null, $this->request);
+        $ret = $c->nodetypes();
         $this->sendJSON($ret);
     }
 
@@ -319,14 +321,23 @@ class Action_browser3 extends ActionAbstract
      */
     public function read()
     {
-        $ret = GenericDatasource::quickRead($this->request);
+        $idNode = $this->request->getParam('nodeid');
+        $items = $this->request->getParam('items');
+        $from = $this->request->getParam('from');
+        $to = $this->request->getParam('to');
+
+        // Should we consider the IdNode 10000 directly?
+        $idNode = $idNode == '/' ? 10000 : $idNode;
+
+        $c = new Action_composer(null, $this->request);
+        $ret = $c->quickRead($idNode, $from, $to, $items);
+
         $ret['collection'] = $this->checkNodeAction($ret['collection']);
         if ($this->request->getParam('nodeid') == "10000") {
             $ret["name"] = _($ret["name"]);
         }
-        header('Content-type: application/json');
-        $data = Serializer::encode(SZR_JSON, $ret);
-        echo $data;
+
+        $this->sendJSON($ret);
     }
 
     /**
@@ -377,14 +388,21 @@ class Action_browser3 extends ActionAbstract
     public function readFiltered()
     {
         $query = $this->request->getParam('query');
+        $idNode = $this->request->getParam('nodeid');
+        $children = $this->request->getParam('children');
+        $from = $this->request->getParam('from');
+        $to = $this->request->getParam('to');
+        $items = $this->request->getParam('items');
 
-        $this->request->setParam('find', $query);
-        $ret = GenericDatasource::readFiltered($this->request);
+        // Should we consider the IdNode 10000 directly?
+        $idNode = $idNode == '/' ? 10000 : $idNode;
+
+        $c = new Action_composer(null, $this->request);
+        $ret = $c->readTreedataFiltered($idNode, $query, $from, $to, $items);
+
         $ret['collection'] = $this->checkNodeAction($ret['collection']);
 
-        header('Content-type: application/json');
-        $data = Serializer::encode(SZR_JSON, $ret);
-        echo $data;
+        $this->sendJSON($ret);
     }
 
     /**
@@ -1122,21 +1140,17 @@ class Action_browser3 extends ActionAbstract
         $nodes = GenericDatasource::normalizeEntities($nodes);
         $sets = $this->getSetsIntersection($nodes);
         $actions = $this->getActions($nodes);
-
         $arrayActionsParams = array();
         //For every action, build the params for json response
-
         foreach ($actions as $idAction) {
             $actionsParamsAux = array();
             $action = new Action($idAction);
             $name = $action->get("Name");
-
             //Changing name when node sets.
             if (count($nodes) > 1) {
                 $auxName = explode(" ", $name);
                 $name = $auxName[0] . " " . _("selection");
             }
-
             $actionsParamsAux["id"] = $action->get("IdAction") ? $action->get("IdAction") : "";
             $actionsParamsAux["name"] = $name;
             $actionsParamsAux["module"] = $action->get("Module") ? $action->get("Module") : "";
@@ -1147,11 +1161,10 @@ class Action_browser3 extends ActionAbstract
             $actionsParamsAux["bulk"] = $action->get("IsBulk");
             $arrayActionsParams[] = $actionsParamsAux;
         }
-
         $options = array_merge($sets, $arrayActionsParams);
-
         $this->sendJSON($options);
     }
+
 
     /**
      * Launch a validation from the params values.

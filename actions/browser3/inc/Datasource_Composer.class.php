@@ -36,18 +36,15 @@ ModulesManager::file('/actions/composer/Action_composer.class.php');
 
 class Datasource_Composer extends AbstractDatasource {
 
-	private $fc = null;
-
 	public function __construct($conf=array()) {
 		parent::__construct($conf);
-		$this->fc = new FrontController();
 	}
 
 	/**
 	 * @param $request \Ximdex\Runtime\Request
 	 * @param $method
 	 */
-	protected function redirect($request, $method) {
+	/*protected function redirect($request, $method) {
 
 		/*$request->setParam('actionid', null);
 		$request->setParam('module', null);
@@ -55,7 +52,7 @@ class Datasource_Composer extends AbstractDatasource {
 		$request->setParam('actionName', 'composer');
 		$request->setParam('method', 'treedata');*/
 
-		$request->setParam('action', null);
+		/*$request->setParam('action', null);
 		$request->setParam('actionid', null);
 
 		unset($_GET['action']);
@@ -73,7 +70,7 @@ class Datasource_Composer extends AbstractDatasource {
 		$this->fc->dispatch();
 
 		die();
-	}
+	}*/
 
 	/**
 	 * @param $request \Ximdex\Runtime\Request

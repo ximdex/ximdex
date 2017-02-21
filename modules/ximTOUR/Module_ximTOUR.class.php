@@ -51,7 +51,7 @@ class Module_ximTOUR extends Module
         $projects = new Node(10000);
         $projectid = $projects->GetChildByName("Picasso");
         if (!($projectid > 0)) {
-            $addFolderNode = new Action_addfoldernode();
+            $addFolderNode = new Action_addfoldernode(null, \Ximdex\Runtime\WebRequest::capture());
             $nodeID = 10000;
             $name = "Picasso";
             $addFolderNode->name = $name;

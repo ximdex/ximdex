@@ -61,6 +61,10 @@ class Factory
     public function instantiate($type = NULL, $args = null, WebRequest $request = null )
     {
 
+        if (empty($request)){
+            $request = WebRequest::capture();
+        }
+
         $class = $this->_root_name;
         if (!is_null($type)) {
             $class .= $type;

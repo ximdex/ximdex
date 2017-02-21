@@ -23,7 +23,6 @@ use Ximdex\Utils\Session;
 use Ximdex\Workflow\WorkFlow;
 
 require_once(XIMDEX_ROOT_PATH . '/inc/model/RelNodeTypeMimeType.class.php');
-require_once(XIMDEX_ROOT_PATH . '/conf/stats.php');
 ModulesManager::file('/inc/io/BaseIOInferer.class.php');
 
 ModulesManager::file('/inc/i18n/I18N.class.php');

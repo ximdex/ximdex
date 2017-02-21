@@ -38,7 +38,7 @@
 		X = Object.extend(X, {
 			XMLNS_XIM: 'http://ximdex.com/schema/1.0',
 			baseUrl: baseUrl,
-			restUrl: baseUrl + '/xmd/loadaction.php',
+			restUrl: baseUrl + '/',
 			iconsUrl: baseUrl + '/xmd/images/icons',
 			tourInstance: null,
 			getUID: function() {
@@ -572,7 +572,7 @@
 				method: 'wconf',
 				wn: params.wn || '',
 				wi: params.wi || '',
-				a: params.a || '',
+				action: params.a || '',
 				m: params.m || ''
 			},
 			function(data, status) {

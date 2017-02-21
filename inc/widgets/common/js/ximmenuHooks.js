@@ -54,17 +54,17 @@ var XimMenuHooks = {
 	},
 
 	hook_mnuTotalActions: function(params) {
-		var url = window.url_root + '/xmd/loadaction.php?nodeid=NULL&action=actionsstats&method=index';
+		var url = window.url_root + '/?nodeid=NULL&action=actionsstats&method=index';
 		$('#tabs').tabs('add', url, params.data.text);
 	},
 
 	hook_mnuTempAvarage: function(params) {
-		var url = window.url_root + '/xmd/loadaction.php?nodeid=NULL&action=actionsstats&method=avarage';
+		var url = window.url_root + '/?nodeid=NULL&action=actionsstats&method=avarage';
 		$('#tabs').tabs('add', url, params.data.text);
 	},
 
 	hook_mnuView1: function(params) {
-		var url = window.url_root + '/xmd/loadaction.php?actionid=7300&nodeid=NULL&method=batchlist';
+		var url = window.url_root + '/?actionid=7300&nodeid=NULL&method=batchlist';
 		$('#tabs').tabs('add', url, params.data.text);
 	},
 
@@ -118,19 +118,19 @@ var XimMenuHooks = {
 	},
 
 	hook_mnuSpanishLang: function(params) {
-        if(confirm("Es necesario reiniciar su ximdex. ¿Está seguro que quiere proceder?")) {
+        if(confirm("Es necesario reiniciar su ximdex. ï¿½Estï¿½ seguro que quiere proceder?")) {
         	window.location = 'menu/change_lang.php?lang=es';
         }
 	},
 
 	hook_mnuEnglishLang: function(params) {
-        if(confirm("Es necesario reiniciar su ximdex. ¿Está seguro que quiere proceder?")) {
+        if(confirm("Es necesario reiniciar su ximdex. ï¿½Estï¿½ seguro que quiere proceder?")) {
         	window.location = 'menu/change_lang.php?lang=en';
         }
 	},
 
 	hook_mnuDeutchLang: function(params) {
-        if(confirm("Es necesario reiniciar su ximdex. ¿Está seguro que quiere proceder?")) {
+        if(confirm("Es necesario reiniciar su ximdex. ï¿½Estï¿½ seguro que quiere proceder?")) {
         	window.location = 'menu/change_lang.php?lang=de';
         }
 	},
@@ -145,11 +145,11 @@ var XimMenuHooks = {
 	},
 
 	hook_mnuXimdexClose: function(params) {
-		var url = window.url_root + '/xmd/loadaction.php?action=ximdexclose&method=index';
+		var url = window.url_root + '/?action=ximdexclose&method=index';
 		$('#tabs').tabs('add', url, params.data.text.value);
 	},
         hook_mnuManageThemes: function(params) {
-                var url = window.url_root + '/xmd/loadaction.php?action=templatecreator&mod=ximTHEMES';
+                var url = window.url_root + '/?action=templatecreator&mod=ximTHEMES';
                 $('#tabs').tabs('add', url, 'Definir nuevo layout');
         }
 

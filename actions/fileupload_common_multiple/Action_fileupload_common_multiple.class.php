@@ -132,7 +132,7 @@ class Action_fileupload_common_multiple extends ActionAbstract {
         $this->addCss('/actions/fileupload_common_multiple/resources/css/uploader_html5.css');
 
         $uploaderOptions = array (
-            "nodeURL" => \App::getValue( 'UrlRoot')."/xmd/loadaction.php?actionid=$actionID&nodeid={$idNode}",
+            "nodeURL" => \App::getValue( 'UrlRoot')."/?actionid=$actionID&nodeid={$idNode}",
             "lbl_anadir" => $lbl_anadir,
             'messages' => $this->messages->messages,
             'nodeid' => $idNode,
@@ -192,6 +192,7 @@ class Action_fileupload_common_multiple extends ActionAbstract {
                 )
             );
         }
+
         $values = array (
             'nodeid' => $idNode,
             'uploaderOptions' => json_encode($uploaderOptions)

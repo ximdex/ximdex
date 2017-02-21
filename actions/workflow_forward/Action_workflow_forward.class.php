@@ -164,15 +164,14 @@ class Action_workflow_forward extends ActionAbstract {
             'required' => $conf['required'] === true ? 1 : 0,
             'defaultMessage' => $defaultMessage,
             'idNode' => $idNode,
-            'name' => $node->GetNodeName()
+            'name' => $node->GetNodeName(),
+            'globalForcedEnabled' => FORCE_PUBLICATION,
         );
-
         //Only for Strdocs, goes to next state
         if ($node->nodeType->GetID() == 5032) {
             if ($workflowNext->IsFinalState()) {
                 $values['go_method'] = 'publicateNode';
                 $values['hasDisabledFunctions'] = $this->hasDisabledFunctions();
-				$values['globalForcedEnabled'] = FORCE_PUBLICATION;
                 $values = array_merge($values, $this->buildExtraValues($idNode));
                 $this->render($values, NULL, 'default-3.0.tpl');
             } else {
@@ -406,7 +405,7 @@ class Action_workflow_forward extends ActionAbstract {
         return array(
             'gap_info' => $gapInfo,
             'has_unlimited_life_time' => SynchroFacade::HasUnlimitedLifeTime($idNode),
-            'timestamp_from' => mktime(),
+            'timestamp_from' => time(),
             'structural_publication' => $user->HasPermission('structural_publication') ? '1' : '0',
             'advanced_publication' => $user->HasPermission('advanced_publication') ? '1' : '0',
             'nodetypename' => $nodeTypeName,

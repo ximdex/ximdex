@@ -70,13 +70,10 @@ if (!InstallController::isInstalled()) {
 
     $app->routeMiddleware([
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        //'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'checkuserlogged' => \Ximdex\MVC\Middleware\CheckUserLoggedMiddleware::class,
     ]);
 
-    $app->alias('request', '\Ximdex\Runtime\WebRequest');
-
-    \Ximdex\Runtime\WebRequest::capture();
+    //$app->alias('request', '\Ximdex\Runtime\WebRequest');
 
     \Ximdex\API\Manager::addApiRoutes();
 
@@ -95,8 +92,8 @@ if (!InstallController::isInstalled()) {
         return null;
     });
 
-    $app->get('/xmd/loadaction.php', function (\Ximdex\Runtime\WebRequest $request){
-        dump('hello');
+    $app->singleton(\Ximdex\Runtime\WebRequest::class, function () {
+        return \Ximdex\Runtime\WebRequest::capture();
     });
 
     $webRequestHandler =  function(\Ximdex\Runtime\WebRequest $request){
@@ -104,39 +101,24 @@ if (!InstallController::isInstalled()) {
 
         $actionRootName = "Action_";
 
-        $action = "login";
-        $method = "index";
+        $request->setUsualParams();
 
-        $module = $request->input('module', '');
-        $action = $request->input('action', $action);
-        $method = $request->input('method', $method);
-
-
-
-        if (empty($module)) {
+        if (!$request->has('module')) {
             $actionPath = XIMDEX_ROOT_PATH .
                 DIRECTORY_SEPARATOR . 'actions' .
-                DIRECTORY_SEPARATOR . $action;
+                DIRECTORY_SEPARATOR . $request->input('action');
         } else {
-            $path_module = ModulesManager::path($module);
+            $path_module = ModulesManager::path($request->input('module'));
             $actionPath = sprintf('%s%s%s%s%s%s',
                 XIMDEX_ROOT_PATH,
                 $path_module,
                 DIRECTORY_SEPARATOR,
                 'actions',
                 DIRECTORY_SEPARATOR,
-                $action);
+                $request->input('action'));
         }
 
-        $request['action'] = $action;
-        $request['method'] = $method;
-        $request['module'] = $module;
-        $request['out'] = "WEB";
-
-        /*$factory = new \Ximdex\Utils\Factory($actionPath, $actionRootName);*/
-
         /* @var $actionController \Ximdex\MVC\ActionAbstract */
-        /*$actionController = $factory->instantiate($action, null, $request);*/
         $actionController = \Ximdex\MVC\ActionFactory::getAction($request);
 
         if ($actionController == NULL) {

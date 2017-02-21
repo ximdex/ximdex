@@ -12,7 +12,6 @@ use Laravel\Lumen\Routing\Controller;
 use Illuminate\Http\Request;
 use Ximdex\API\APIResponse;
 
-require_once(XIMDEX_ROOT_PATH . '/conf/stats.php');
 ModulesManager::file('/inc/i18n/I18N.class.php');
 
 class NodetypeController extends Controller {

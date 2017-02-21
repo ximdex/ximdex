@@ -427,7 +427,7 @@
              */
             var that = this;
             $.getJSON(
-                X.restUrl + '?method=getUserName&ajax=json',
+                X.restUrl + '?action=composer&method=getUserName&ajax=json',
                 function (data) {
                     that.uname = data.username;
 

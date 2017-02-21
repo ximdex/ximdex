@@ -36,7 +36,6 @@ use Ximdex\Runtime\App;
 use \Ximdex\Utils\Session;
 
 
-require_once(XIMDEX_ROOT_PATH . '/conf/stats.php');
 ModulesManager::file('/inc/Status.class.php', 'ximADM');
 // Implement \Ximdex\Utils\Session::check() as Filter.
 
@@ -201,7 +200,7 @@ class ApplicationController extends IController
         else
             $event = "action";
 
-        $remote = ACTIONS_STATS;
+        $remote = App::getValue('StatsServer') . "/stats/stats_ximdex.php";
         $ximid = App::getValue('ximid');
         $userId = Session::get("userID");
         if (strcmp($stats["nodeid"], '') != 0) {

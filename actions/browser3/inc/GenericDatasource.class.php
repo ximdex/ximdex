@@ -27,6 +27,7 @@
 
 use Ximdex\Logger;
 use Ximdex\Runtime\Request;
+use Ximdex\Runtime\WebRequest;
 
 ModulesManager::file('/actions/browser3/inc/IDatasource.iface.php');
 ModulesManager::file('/actions/browser3/inc/AbstractDatasource.class.php');
@@ -156,7 +157,7 @@ class GenericDatasource extends AbstractDatasource {
 		$entities = !is_array($entities) ? array($entities) : $entities;
 
 		$ret = array();
-		$request = new Request();
+		$request = new WebRequest();
 		foreach ($entities as $entity) {
 
 			if (empty($entity)) {

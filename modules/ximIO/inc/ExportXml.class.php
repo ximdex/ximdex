@@ -52,7 +52,7 @@ class ExportXml {
 	 * 		to see if is an allowed node or not; if not, the xml generation process will return an empty string
 	 * @return ExportXml
 	 */
-	function ExportXml($nodeID) {
+	function __construct($nodeID) {
 		$this->dbObj = new DB();
 		
 		$this->messages = new \Ximdex\Utils\Messages();

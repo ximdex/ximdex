@@ -17,7 +17,6 @@ use Ximdex\Authenticator;
 use Ximdex\Runtime\App;
 use Ximdex\Services\Token;
 
-require_once(XIMDEX_ROOT_PATH . '/conf/stats.php');
 \ModulesManager::file('/inc/i18n/I18N.class.php');
 
 class LoginController extends Controller  {
