@@ -61,7 +61,7 @@ class SyncManager
     private $computedDocsToPublish = array();
     private $pendingDocsToPublish = array();
 
-    function SyncManager()
+    function __construct()
     {
 
         // Default values for state flags.
@@ -156,6 +156,10 @@ class SyncManager
         if (is_null($idNode)) {
             Logger::error(_("Pushdocinpool - Empty IdNode"));
             return NULL;
+        }
+
+        if ( empty($down) ){
+            $down = null;
         }
 
         $force = $this->getFlag('globalForcePublication') ? true : $this->getFlag("force");

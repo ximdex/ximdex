@@ -57,21 +57,8 @@ if (!InstallController::isInstalled()) {
     $locale = \Ximdex\Utils\Session::get('locale');
     I18N::setup($locale); // Check coherence with HTTP_ACCEPT_LANGUAGE*/
 
-    // TODO: Move this logic outta here
-
-    $app = new Laravel\Lumen\Application();
-
-    $app->configureMonologUsing(function($monolog) {
-        $monolog->pushHandler(\Ximdex\Logger::get()->getHandlers()[0]);
-
-        return $monolog;
-    });
-
-    $app->routeMiddleware([
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'checkuserlogged' => \Ximdex\MVC\Middleware\CheckUserLoggedMiddleware::class,
-    ]);
-
+    // Setup the app
+    \Ximdex\MVC\Manager::setupApp();
 
     // Routes for API
     \Ximdex\API\Manager::addApiRoutes();
@@ -79,29 +66,9 @@ if (!InstallController::isInstalled()) {
     // Routes for modules
     $mManager = new ModulesManager;
     foreach(\Ximdex\Modules\Manager::getEnabledModules() as $module){
-        $name = $module["name"];
+        $name = $module[ 'name' ];
         $mManager->instanceModule($name)->addApiRoutes();
     }
-
-
-    $app['auth']->viaRequest('/', function (\Ximdex\Runtime\WebRequest $request) {
-        $valid = \Ximdex\Utils\Session::check(false);
-        if( $valid ){
-            $userId = \Ximdex\Utils\Session::get('userID');
-            $user = new \Ximdex\Models\User($userId);
-            if( !empty($user) ){
-                \Ximdex\Utils\Session::refresh();
-                return $user;
-            }
-        }
-
-
-        return null;
-    });
-
-    $app->singleton(\Ximdex\Runtime\WebRequest::class, function () {
-        return \Ximdex\Runtime\WebRequest::capture();
-    });
 
     $webRequestHandler =  function(\Ximdex\Runtime\WebRequest $request){
         $request->setUsualParams();
@@ -109,17 +76,19 @@ if (!InstallController::isInstalled()) {
         /* @var $actionController \Ximdex\MVC\ActionAbstract */
         $actionController = \Ximdex\MVC\ActionFactory::getAction($request);
 
-        if ($actionController == NULL) {
-            return response('PAGE NOT FOUND', 404);
+        if ( empty( $actionController ) ) {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Action/method not found');
         } else {
+            // TODO: reformat this
             //$this->setUserState();
             //$stats = $this->actionStatsStart();
             $actionController->execute($request);
         }
     };
 
-    $app->get('/', $webRequestHandler);
-    $app->post('/', $webRequestHandler);
+    $app = \Laravel\Lumen\Application::getInstance();
+    $app->get('/', $webRequestHandler );
+    $app->post('/', $webRequestHandler );
 
     try {
         $app->run();

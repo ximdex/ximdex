@@ -305,7 +305,7 @@ class Action_xmleditor2 extends ActionAbstract
     public function getSpellCheckingFile()
     {
         $idnode = $this->request->getParam('nodeid');
-        $content = Request::post('content');
+        $content = $this->request->input('content');
         $this->getEditor($idnode);
         $content = $this->_editor->getSpellCheckingFile($idnode, $content);
         $this->printContent($content);

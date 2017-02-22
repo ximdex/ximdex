@@ -148,22 +148,42 @@ class WebRequest extends \Illuminate\Http\Request
     }
 
     public function setUsualParams() {
-        $valid = \Ximdex\Utils\Session::check(false);
 
-        $action = !$valid ? 'login' : 'browser3';
+        $valid = \Ximdex\Utils\Session::check(false);
+        if( $valid ){
+            $userId = \Ximdex\Utils\Session::get('userID');
+            $user = new \Ximdex\Models\User($userId);
+            if( !empty($user) ){
+                \Ximdex\Utils\Session::refresh();
+                $this['userLogged'] = $user->getLogin();
+            }
+        }
+
+        $logged = !empty($this->input('userLogged'));
+
+
+        $action = 'browser3';
 
         if (!$this->has('module') && $this->has('mod')){
             $this['module'] = $this->input('mod');
+        }
+
+        if (!$this->has('module') && $this->has('modsel')){
+            $this['module'] = $this->input('modsel');
         }
 
         if (!$this->has('nodeid') && $this->has('nodes') && !empty($this->input('nodes', ''))){
             $this['nodeid'] = $this->input('nodes')[0];
         }
 
-
         $this['action'] = $this->input('action', $action);
         $this['method'] = $this->input('method', 'index');
         $this['module'] = $this->input('module', '');
+
+        if( !$logged ){
+            $this['action'] = 'login';
+            $this['module'] = '';
+        }
 
         $this['out'] = 'WEB';
 

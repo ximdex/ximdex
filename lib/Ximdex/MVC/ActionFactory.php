@@ -52,12 +52,12 @@ class ActionFactory
      */
     public static function getAction(WebRequest $request)
     {
-        $actionRootName = "Action_";
+        $actionRootName = 'Action_';
 
         // Cogemos los datos de la accion
-        $actionPath = $request->getParam("action_path");
-        $action = $request->getParam("action");
-        $module = $request->getParam("module");
+        $actionPath = $request->getParam( 'action_path' );
+        $action = $request->getParam( 'action' );
+        $module = $request->getParam( 'module' );
 
         $absolut_actionPath = XIMDEX_ROOT_PATH . $actionPath;
 

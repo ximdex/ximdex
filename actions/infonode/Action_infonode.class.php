@@ -54,12 +54,14 @@ class Action_infonode extends ActionAbstract
         $node = new Node($idNode);
         $info = $node->loadData();
 
+        $pipeStatusInfo = null;
+
         // Obtain name of current status
         if(isset($info['state'])){
             $pipeStatus = new PipeStatus();
             $params = array( 'id' => $info['state'] );
             $condition = "id = %s";
-            $pipeStatusInfo=$pipeStatus->find('Name',$condition, $params, MONO);
+            $pipeStatusInfo = $pipeStatus->find('Name',$condition, $params, MONO)[0];
         }
 
         //channels
@@ -82,7 +84,7 @@ class Action_infonode extends ActionAbstract
         $urlRoot = App::getValue('UrlRoot');
         $jsonUrl = $urlRoot . "/?action=infonode&method=getDependencies&nodeid=" . $idNode;
 
-        $manageVersions= new Action_manageversions();
+        $manageVersions= new Action_manageversions(null, $this->request);
         $valuesManageVersion=$manageVersions->values($idNode);
         $this->addJs('/actions/manageversions/resources/js/index.js');
         $this->addCss('/actions/manageversions/resources/css/index.css');
@@ -91,7 +93,7 @@ class Action_infonode extends ActionAbstract
         $values = array(
             'id_node' => $idNode,
             'info' => $info,
-            'statusInfo' => $pipeStatusInfo[0],
+            'statusInfo' => $pipeStatusInfo,
             'channels' => $channels,
             'languages' => $languages,
             'jsonUrl' => $jsonUrl,
