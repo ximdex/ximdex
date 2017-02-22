@@ -104,26 +104,7 @@ if (!InstallController::isInstalled()) {
     });
 
     $webRequestHandler =  function(\Ximdex\Runtime\WebRequest $request){
-        $valid = \Ximdex\Utils\Session::check(false);
-
-        $actionRootName = "Action_";
-
         $request->setUsualParams();
-
-        if (!$request->has('module')) {
-            $actionPath = XIMDEX_ROOT_PATH .
-                DIRECTORY_SEPARATOR . 'actions' .
-                DIRECTORY_SEPARATOR . $request->input('action');
-        } else {
-            $path_module = ModulesManager::path($request->input('module'));
-            $actionPath = sprintf('%s%s%s%s%s%s',
-                XIMDEX_ROOT_PATH,
-                $path_module,
-                DIRECTORY_SEPARATOR,
-                'actions',
-                DIRECTORY_SEPARATOR,
-                $request->input('action'));
-        }
 
         /* @var $actionController \Ximdex\MVC\ActionAbstract */
         $actionController = \Ximdex\MVC\ActionFactory::getAction($request);

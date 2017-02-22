@@ -22,25 +22,6 @@ class Response extends \Illuminate\Http\Response
     }
 
     /**
-     *
-     */
-    public function sendHeaders()
-    {
-        /*echo ob_get_clean(); // asegura que no ha habido escritura antes de enviar las cabeceras
-        $keys = $this->_headers->getKeys();
-        foreach ($keys as $key) {
-            $values = $this->get($key);
-            if (is_array($values)) {
-                foreach ($values as $value) {
-                    header($key . ":" . $value);
-                }
-            } else {
-                header($key . ": " . $values);
-            }
-        }*/
-    }
-
-    /**
      * @param $key
      * @return mixed
      */
@@ -135,6 +116,7 @@ class Response extends \Illuminate\Http\Response
 
         if ($status_codes[$statusCode] !== null) {
             $status_string = $statusCode . ' ' . $status_codes[$statusCode];
+            header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
             $this->header($_SERVER['SERVER_PROTOCOL'], $status_string);
             $this->setStatusCode($statusCode);
         }

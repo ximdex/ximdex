@@ -29,13 +29,13 @@ namespace Ximdex\MVC;
 
 use Laravel\Lumen\Application;
 use Laravel\Lumen\Routing\Controller;
-use Ximdex\API\Response;
 use Ximdex\Logger;
 use Ximdex\MVC\Render\AbstractRenderer;
 use Ximdex\MVC\Render\SmartyRenderer;
 use Ximdex\Notifications\EmailNotificationStrategy;
 use ModulesManager;
 use Ximdex\Parsers\ParsingJsGetText;
+use Ximdex\Runtime\Response;
 use Ximdex\Runtime\WebRequest;
 use Ximdex\Utils\Messages;
 use Ximdex\Utils\Serializer;

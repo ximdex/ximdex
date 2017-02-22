@@ -338,16 +338,11 @@ function XimdocEditor(options) {
             content: content,
             success: function (data) {
 
-                if (url.indexOf("loadaction") == -1) {
-                    //this[propertyName] = this.createDomDocument(data,0,true);
-                }
-                else {
-                    that['_xmlDom'] = that.createDomDocument(data.xmlFile);
-                    that['_rngDom'] = that.createDomDocument(data.schemaFile);
-                    that['_xslDom'] = that.createDomDocument(data.xslFile);
-                    that['_noRenderizableElements'] = that.createDomDocument(data.noRenderizableElements);
-                    that['config'] = that.createDomDocument(data.config);
-                }
+                that['_xmlDom'] = that.createDomDocument(data.xmlFile);
+                that['_rngDom'] = that.createDomDocument(data.schemaFile);
+                that['_xslDom'] = that.createDomDocument(data.xslFile);
+                that['_noRenderizableElements'] = that.createDomDocument(data.noRenderizableElements);
+                that['config'] = that.createDomDocument(data.config);
 
                 that._afterInitialize(callback);
             },
