@@ -23,7 +23,7 @@ v3.8 (New modules - 4th quarter 2015; published)
 - Extend Dynamic Semantic publishing for the MUG module (allowing ontology based filtering)
 - New web installer
 
-v3.9 (New modules - 2nd quarter 2017)
+v3.9 (Decoupled Repository and Editor for tables - 2nd quarter 2017)
 ----
 
 - API refactor to improve the headless architecture
@@ -31,7 +31,7 @@ v3.9 (New modules - 2nd quarter 2017)
 - New nodetypes and transformation 
 - New sync methods to publish final formats into the cloud
 
-v4.0 (Decoupled Repository and Editor - 3rd quarter 2017)
+v4.0 (APP generation - 4th quarter 2017)
 ----
 - Portal Configuration Manager
 - Intelligent folders (sets)
