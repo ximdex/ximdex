@@ -1,6 +1,21 @@
 				Ximdex (Free & Semantic CMS for XML) - CHANGELOG	
 				------------------------------------------------
 
+Version 3.8
+-----------
+-> 17th-03-2016 Ximdex Development Team <dev@ximdex.org>
+
+  * New visual semantic tags management tools (Xtags component):
+    * An ontology browser for common ontologies (schema.org) or your own ontologies for structured tags,
+automatic tag suggesters (using DBpedia, freebase) or other tags in the repository
+    * Custom (non structured) tags
+  * Extended Dynamic Semantic Publishing (DSP) with adapters for publishing RDF, OWL, etc. Dynamic semantic publishing reporting tool,
+  * New UI for actions improving usability,
+  * New module XLYRE for Linked Open Data management,
+  * New API REST with semantic capabilities to provide a Linked Open Data endpoint,
+  * New configurable URLs for a better SEO,
+  * New web installer, ...
+
 Version 3.6
 -----------
 -> 17th-01-2015 Ximdex Development Team <dev@ximdex.org>
@@ -169,7 +184,6 @@ Version 3.2.1
       * Some php warning due to non-defined vars avoided.
       
       
-------------------------------------------------------------------
 
 Version 3.2
 ------------------
@@ -185,7 +199,6 @@ Version 3.2
    * Tags and links application in Xedit.
    * Roles and workflow states associations through workflow manager.
 
-------------------------------------------------------------------
 
 Version 3.1
 ------------------
@@ -224,7 +237,6 @@ Version 3.1
    * Copying recursively.
    * Avoiding to have to create a user group to be able to publish in a new instance.
 
-------------------------------------------------------------------
 
 Version 3.0
 ------------------
@@ -244,8 +256,7 @@ Version 3.0
 
 ------------------------------------------------------------------
 
-2010: Ximdex 3.0 is a fork of Ximdex 2.6 developed by Ximetrix network thoughts SL
+2010: Ximdex 3.0 is a fork of Ximdex 2.6.
 
 ------------------------------------------------------------------
 
-.
