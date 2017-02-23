@@ -32,7 +32,7 @@
 		<h1><a href="http://www.ximdex.com" title="Access"><img src="{$_URL_ROOT}/xmd/images/login/logo_ximdex.png" alt="Ximdex logo" title="Visit our web" /></a></h1>
 
 		<div id="acceso" class="triangle">
-			<form action="{$_URL_ROOT}/xmd/loadaction.php?action=login&amp;method=check" method="post" name="access">
+			<form action="{$_URL_ROOT}/?action=login&amp;method=check" method="post" name="access">
 				<div class="error">{$message}</div>
 				<p>
 					<label for="user">{t}User{/t}</label>
@@ -47,7 +47,7 @@
 
 				<p>
 					<input type="submit" name="login" id="login" value="{t}Sign in{/t}" />
-					<span>{t}Recommended browsers{/t}:<br/> Firefox &gt; 4, Chrome, Opera and Safari.</span> {* <a href="http://lab04.ximdex.net/ximdexDEMO/xmd/loadaction.php?action=forgot">Forgot your password?</a> *}
+					<span>{t}Recommended browsers{/t}:<br/> Firefox &gt; 4, Chrome, Opera and Safari.</span>
 				</p>
 			</form>
 		</div>

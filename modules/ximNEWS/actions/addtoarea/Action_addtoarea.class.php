@@ -78,7 +78,7 @@ class Action_addtoarea extends ActionAbstract {
 			'go_method' => 'addToArea',
 			'areas' => $areas,
 			'areasrelated' => $areasRelated,
-			'nodeUrl' => \App::getValue( 'UrlRoot')."/xmd/loadaction.php?actionid=$actionID&nodeid=$idNode"
+			'nodeUrl' => \App::getValue( 'UrlRoot')."/?actionid=$actionID&nodeid=$idNode"
 		);
 
 		$this->render($values, 'index', 'default-3.0.tpl');

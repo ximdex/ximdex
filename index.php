@@ -26,11 +26,10 @@
  */
 
 
-use Ximdex\MVC\FrontController;
 use Ximdex\Runtime\App;
 use Ximdex\Utils\FsUtils;
 
-include_once 'bootstrap/start.php';
+include_once __DIR__ . '/bootstrap/start.php';
 
 /**
  * Dispatch XIMDEX_START event
@@ -43,20 +42,56 @@ ModulesManager::file('/inc/mvc/App.class.php');
 ModulesManager::file('/inc/i18n/I18N.class.php');
 ModulesManager::file('/inc/install/InstallController.class.php');
 
-function goLoadAction()
-{
-    header(sprintf("Location: %s", App::getValue('UrlRoot')));
-}
-
 //Main thread
 if (!InstallController::isInstalled()) {
-    header( 'Location: ./setup/');
+    header( 'Location: ./setup/index.php');
     die();
 
 
 } else {
     $locale = \Ximdex\Utils\Session::get('locale');
-    I18N::setup($locale); // Check coherence with HTTP_ACCEPT_LANGUAGE
-    $frontController = new FrontController();
-    $frontController->dispatch();
+    I18N::setup($locale); // Check coherence with HTTP_ACCEPT_LANGUAGE*/
+
+    // Setup the app
+    \Ximdex\MVC\Manager::setupApp();
+
+    // Routes for API
+    \Ximdex\API\Manager::addApiRoutes();
+
+    // Routes for modules
+    $mManager = new ModulesManager;
+    foreach(\Ximdex\Modules\Manager::getEnabledModules() as $module){
+        $name = $module[ 'name' ];
+        $mManager->instanceModule($name)->addApiRoutes();
+    }
+
+    $webRequestHandler =  function(\Ximdex\Runtime\WebRequest $request){
+
+        /* @var $actionController \Ximdex\MVC\ActionAbstract */
+        $actionController = \Ximdex\MVC\ActionFactory::getAction($request);
+
+        if ( empty( $actionController ) ) {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Action/method not found');
+        } else {
+            // TODO: refactor this
+            //$this->setUserState();
+            //$stats = $this->actionStatsStart();
+            $actionController->execute($request);
+        }
+    };
+
+    $app = \Laravel\Lumen\Application::getInstance();
+    $app->get('/', [ 'middleware' => [ 'webauth', 'extend', 'actionauth' ], $webRequestHandler ]);
+    $app->post('/', [ 'middleware' => [ 'webauth', 'extend', 'actionauth' ], $webRequestHandler ]);
+
+    try {
+        $app->run();
+    } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e){
+        // Not found
+        dump($e->getMessage());
+        dump($e->getTraceAsString());
+    } catch (\Illuminate\Auth\AuthenticationException $e){
+        dump($e->getMessage());
+        dump($e->getTraceAsString());
+    }
 }

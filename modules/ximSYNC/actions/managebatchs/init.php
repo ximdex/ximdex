@@ -52,7 +52,7 @@ use Ximdex\Models\Action ;
 				$actionObj->Action($actionId);
 				if ($actionObj->getCommand() == "managebatchs") {
 					
-					header("Location:" . \App::getValue( 'UrlRoot') . "/xmd/loadaction.php?actionid=" . $actionId . "&nodeid=NULL&method=batchlist");
+					header("Location:" . \App::getValue( 'UrlRoot') . "/?actionid=" . $actionId . "&nodeid=NULL&method=batchlist");
 					exit();
 				}
 			}

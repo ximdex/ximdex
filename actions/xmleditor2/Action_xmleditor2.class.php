@@ -265,7 +265,7 @@ class Action_xmleditor2 extends ActionAbstract
     public function validateSchema()
     {
         $idnode = $this->request->getParam('nodeid');
-        $xmldoc = Request::post('content');
+        $xmldoc = $this->request->input('content');
         $xmldoc = \Ximdex\Utils\Strings::stripslashes($xmldoc);
         $this->getEditor($idnode);
         $ret = $this->_editor->validateSchema($idnode, $xmldoc);
@@ -275,7 +275,7 @@ class Action_xmleditor2 extends ActionAbstract
     public function saveXmlFile()
     {
         $idnode = $this->request->getParam('nodeid');
-        $content = Request::post('content');
+        $content = $this->request->input('content');
         $autoSave = ($this->request->getParam('autosave') == 'true') ? true : false;
         $this->getEditor($idnode);
         $response = $this->_editor->saveXmlFile($idnode, $content, $autoSave);
@@ -292,7 +292,7 @@ class Action_xmleditor2 extends ActionAbstract
     public function publicateFile()
     {
         $idnode = $this->request->getParam('nodeid');
-        $content = Request::post('content');
+        $content = $this->request->input('content');
         $this->getEditor($idnode);
         $response = $this->_editor->publicateFile($idnode, $content);
 
@@ -305,7 +305,7 @@ class Action_xmleditor2 extends ActionAbstract
     public function getSpellCheckingFile()
     {
         $idnode = $this->request->getParam('nodeid');
-        $content = Request::post('content');
+        $content = $this->request->input('content');
         $this->getEditor($idnode);
         $content = $this->_editor->getSpellCheckingFile($idnode, $content);
         $this->printContent($content);
@@ -314,7 +314,7 @@ class Action_xmleditor2 extends ActionAbstract
     public function getAnnotationFile()
     {
         $idnode = $this->request->getParam('nodeid');
-        $content = Request::post('content');
+        $content = $this->request->input('content');
         $this->getEditor($idnode);
         $content = $this->_editor->getAnnotationFile($idnode, $content);
         $this->printContent($content);
@@ -336,8 +336,8 @@ class Action_xmleditor2 extends ActionAbstract
     public function getPreviewInServerFile()
     {
         $idnode = $this->request->getParam('nodeid');
-        $content = Request::post('content');
-        $idChannel = Request::post('channelid');
+        $content = $this->request->input('content');
+        $idChannel = $this->request->input('channelid');
         $this->getEditor($idnode);
         $content = $this->_editor->getPreviewInServerFile($idnode, $content, $idChannel);
         $this->printContent($content);

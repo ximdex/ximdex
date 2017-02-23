@@ -44,7 +44,7 @@ class Action_updatefile extends ActionAbstract {
     }
 
     function updatefile() {
-		$idNode = Request::request('nodeid');
+		$idNode = $this->request->input('nodeid');
 		$node = new Node($idNode);
 		if (!($node->get('IdNode') > 0)) {
 			$this->messages->add(_('The node you are trying to update does not exist'), MSG_TYPE_ERROR);

@@ -9,6 +9,7 @@
 namespace Ximdex\Setup\Step;
 
 
+use Illuminate\Support\Str;
 use PDO;
 use PDOException;
 use Ximdex\Setup\Manager;
@@ -88,6 +89,20 @@ class CreateDB extends Base
             $urlRoot = strtok($urlRoot, '?');
             $this->db->exec("UPDATE Config SET ConfigValue = '{$urlRoot}' WHERE ConfigKey = 'UrlRoot'");
             $this->db->exec("UPDATE Config SET ConfigValue = 'en_US' WHERE ConfigKey = 'locale'");
+
+            $secret = Str::random(32);
+
+            $this->db->exec("UPDATE Config SET ConfigValue = '{$secret}' WHERE ConfigKey = 'Secret'");
+
+            $random = md5(rand());
+            exec('openssl enc -aes-128-cbc -k "' . $random . '" -P -md sha1', $res);
+            $key = explode("=", $res[1])[1];
+            $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+            $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
+
+            $this->db->exec("UPDATE Config SET ConfigValue='" . $key . "' where ConfigKey='ApiKey'");
+            $this->db->exec("UPDATE Config SET ConfigValue='" . $iv . "' where ConfigKey='ApiIV'");
+
             // create conf file
             $modConfStr = $this->manager->render('files/install-params.conf.php.twig', [
                     'db' => $_SESSION['db'],

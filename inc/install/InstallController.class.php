@@ -23,24 +23,17 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
-use Ximdex\MVC\IController;
-use Ximdex\Runtime\Request;
-use Ximdex\Runtime\Response;
-
-require_once(XIMDEX_ROOT_PATH . '/inc/install/InstallStepFactory.class.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/install/managers/InstallManager.class.php');
 
 /**
  * Controller for install steps.
  * It's called only when the install process is not finished.
  */
-class InstallController extends IController
+class InstallController
 {
 
 
     /*Properties*/
-    private $steps = array(); //Defined steps in installl.xml
-    private $currentState = null; //Name of the current state.
     private $installManager = null; //Install manager object
 
     /*Methods*/
@@ -50,15 +43,10 @@ class InstallController extends IController
      */
     public function __construct()
     {
-        $this->installManager = new InstallManager(InstallManager::WEB_MODE);
-        $this->request = new Request();
-        $this->response = new Response();
-        $this->steps = $this->installManager->getSteps();
-        $currentState = $this->installManager->getCurrentState();
+        $this->installManager = new InstallManager();
         if (!$currentState) {
             $this->installManager->createStatusFile();
         }
-        $this->currentState = $currentState;
     }
 
     /**
@@ -68,58 +56,8 @@ class InstallController extends IController
     public static function isInstalled()
     {
 
-        $installManager = new InstallManager(InstallManager::WEB_MODE);
+        $installManager = new InstallManager();
         return $installManager->isInstalled();
     }
 
-    /**
-     * Run the selected method for the current step.
-     */
-    public function dispatch()
-    {
-
-        //Set request with $_FILES, $_POST and $_GET arrays
-        $this->setToRequest();
-
-
-        //Instancing the step object,
-        //setting step properties
-        //and get the method to run
-        $installStep = $this->compose();
-        $method = (null !== $this->request->getParam('method')) ? $this->request->getParam('method') : "index";
-        $this->request->setParam("method", $method);
-        $installStep->setRequest($this->request);
-        $installStep->setResponse($this->response);
-
-
-        if ($installStep) {
-            $check = $installStep->check();
-            if (!$check) {
-                $this->installManager->prevStep();
-                $this->dispatch();
-                return;
-            }
-
-            if (method_exists($installStep, $method)) {
-                $installStep->$method();
-            }
-        }
-    }
-
-    private function setToRequest()
-    {
-        $this->request->setParameters($_FILES);
-        $this->request->setParameters($_GET);
-        $this->request->setParameters($_POST);
-    }
-
-    /**
-     * Instance an object for the current step
-     * @return object Step Object
-     */
-    public function compose()
-    {
-
-        return InstallStepFactory::getStep($this->steps, $this->currentState);
-    }
 }

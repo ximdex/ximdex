@@ -573,7 +573,7 @@ class SynchroFacade
 	 * @param array $flagsArray
 	 * @return unknown
 	 */
-	function pushDocInPublishingPool($idNode, $upDate, $downDate = NULL, $flagsArray = NULL, $recurrence = false)
+	static function pushDocInPublishingPool($idNode, $upDate, $downDate = NULL, $flagsArray = NULL, $recurrence = false)
 	{
 
 		if (ModulesManager::isEnabled('ximSYNC')) {
@@ -650,7 +650,7 @@ class SynchroFacade
 	 * @param unknown_type $idNode
 	 * @return unknown
 	 */
-	function HasUnlimitedLifeTime($idNode)
+	static function HasUnlimitedLifeTime($idNode)
 	{
 		// Both calls are equivalent
 		$synchronizer = new Synchronizer($idNode);

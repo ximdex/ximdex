@@ -35,6 +35,13 @@
                     "reference": "origin/master"
                 }
             }
+        },
+
+        {
+            "type": "vcs",
+            "name": "ximdex/xbuk-module",
+            "secure-http": false,
+            "url": "http://git.ximdex.net/ximdex/xbuk-module"
         }
     ],
     "require": {
@@ -47,20 +54,22 @@
         "werkint/jsmin": "dev-master",
         "pda/pheanstalk": "*",
         "symfony/console": "^3.1",
-        "illuminate/support": "5.2.*",
         "symfony/polyfill-php56": "^1.2",
         "php-di/php-di": "^5.4",
         "doctrine/cache": "^1.6",
-        "doctrine/common": "^2.7"
+        "doctrine/common": "^2.7",
+        "laravel/lumen-framework": "^5.4"
     },
      "require-dev": {
         "mockery/mockery": "0.8.0",
-        "codeception/codeception": "^2.2"
+        "codeception/codeception": "^2.2",
+        "symfony/var-dumper": "^3.2"
     },
     "autoload": {
         "psr-0": { "Ximdex": "lib"}
     },
     "config": {
-        "vendor-dir": "extensions/vendors/"
+        "vendor-dir": "extensions/vendors/",
+                    "secure-http": false
     }
 }

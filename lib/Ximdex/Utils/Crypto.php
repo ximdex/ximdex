@@ -46,7 +46,7 @@ class Crypto
         /*   Key and IV generated with the command
          * openssl enc -aes-128-cbc -k "MY_SECRET_PHRASE" -P -md sha1
          */
-        return \openssl_encrypt($plaintext, self::ALGO_AES_128_CBC, $key, 0, $iv);
+        return @\openssl_encrypt($plaintext, self::ALGO_AES_128_CBC, $key, 0, $iv);
 
     }
 

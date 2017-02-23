@@ -36,7 +36,7 @@
 		<p>
 			{t}File download will start immediately. If it does not start, click on:{/t}
 			<br>
-			<a href="{$_URL_ROOT}/xmd/loadaction.php?action=filedownload&method=downloadFile&nodeid={$id_node}" class="destacada download_link" title="{t nodename=$node_name}Descargar %1{/t}"> {$node_name}</a>
+			<a href="{$_URL_ROOT}/?action=filedownload&method=downloadFile&nodeid={$id_node}" class="destacada download_link" title="{t nodename=$node_name}Descargar %1{/t}"> {$node_name}</a>
 		</p>
 	</fieldset>
 </div>

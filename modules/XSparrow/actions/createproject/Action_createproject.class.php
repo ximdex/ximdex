@@ -564,7 +564,7 @@ class Action_createproject extends ActionAbstract
 
 
             if ($isXimlet) {
-                $actionAddximlet = new Action_addximlet();
+                $actionAddximlet = new Action_addximlet(null, $this->request);
                 $actionAddximlet->createRelXimletSection($parentId, $containerId, 1);
             }
         }

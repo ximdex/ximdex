@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 	Object.getWidgetConf({
 		wn: 'spotlight',
-		a: 'browser3',
+		a: 'composer',
 		onComplete: function(data) {
 			data = Object.extend(data, {
 				showAdvanced: true,

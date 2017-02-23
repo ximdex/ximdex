@@ -326,7 +326,7 @@ abstract class XmlEditor_Abstract
 	 * Recursive!
 	 * Called by _normalizeXmlDocument()
 	 */
-    protected function _deleteUIDAttributes(&$node)
+    protected function _deleteUIDAttributes($node)
     {
         if ($node->nodeType != 1) return;
         if ($node->hasAttribute('uid')) {

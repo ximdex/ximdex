@@ -311,7 +311,7 @@ VALUES
 	(6,'UrlRoot',''),
 	(7,'GeneralGroup','101'),
 	(8,'ProjectsNode','10000'),
-	(9,'GeneratorCommand','/modules/dexT/dexTdin_xmd25.pl'),
+	/*(9,'GeneratorCommand','/modules/dexT/dexTdin_xmd25.pl'),*/
 	(10,'EncodingTag','<?xml version="1.0" encoding="UTF-8"?>'),
 	(11,'DoctypeTag','<!DOCTYPE docxap [
 <!ENTITY Ntilde "_MAPGENcode_Ntilde_">
@@ -402,7 +402,8 @@ VALUES
 	(53,'ChunksFolder','uploaded_files'),
 	(54,'UploadsFolder','uploaded_files'),
 	(55,'MaxItemsPerGroup','50'),
-	(56,'DisableCache','0');
+	(56,'DisableCache','0'),
+	(57,'StatsServer','http://xid.ximdex.net');
  
 INSERT INTO `Contexts` (`id`, `Context`)
 VALUES

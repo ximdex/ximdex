@@ -26,8 +26,10 @@
 
 namespace Ximdex\Utils;
 
+use Illuminate\Http\Request;
 use Ximdex\Logger as XMD_log;
 use Ximdex\Logger;
+use Ximdex\Runtime\WebRequest;
 
 class Factory
 {
@@ -56,8 +58,12 @@ class Factory
      * @param array $args
      * @return mixed
      */
-    public function instantiate($type = NULL, $args = null )
+    public function instantiate($type = NULL, $args = null, WebRequest $request = null )
     {
+
+        if (empty($request)){
+            $request = WebRequest::capture();
+        }
 
         $class = $this->_root_name;
         if (!is_null($type)) {
@@ -92,11 +98,9 @@ class Factory
             $this->_setError("Factory::instantiate(): '$class' class not found in file $class_path");
             return NULL;
         }
-        if ( is_null( $args) ) {
-            $obj = new $class();
-        } else {
-            $obj = new $class($args);
-        }
+
+        $obj = new $class($args, $request);
+
         if (!is_object($obj)) {
             Logger::fatal("Could'nt instanciate the class $class");
             return null ;

@@ -33,7 +33,7 @@ function start_tour(command) {
 
     var ximTourDefaultNode = "";
     $.getJSON(
-        X.restUrl + '?method=getDefaultNode&ajax=json',
+        X.restUrl + '?action=composer&method=getDefaultNode&ajax=json',
         function (data) {
             var node_list = data["nodes"];
             ximTourDefaultNode = node_list[0]["IdNode"];

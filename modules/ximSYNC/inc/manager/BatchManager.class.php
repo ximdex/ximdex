@@ -65,7 +65,7 @@ class BatchManager
      * Public constructor
      *
      */
-    function BatchManager()
+    function __construct()
     {
         $this->setFlag('idBatchUp', NULL);
         $this->setFlag('idBatchDown', NULL);

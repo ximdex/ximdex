@@ -42,16 +42,6 @@ ModulesManager::file('/actions/browser3/inc/GenericDatasource.class.php');
 class Action_addximlet extends ActionAbstract
 {
     /**
-     *
-     */
-    public function __construct()
-    {
-
-        parent::__construct();
-
-    }
-
-    /**
      * Main method. Build the first form in the action.
      */
     function index()

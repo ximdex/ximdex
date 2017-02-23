@@ -42,7 +42,7 @@ use Ximdex\XML\Base;
 
 ModulesManager::file('/inc/utils.php');
 
- ModulesManager::file('/inc/model/orm/UnverifiedUsers_ORM.class.php');
+ModulesManager::file('/inc/model/orm/UnverifiedUsers_ORM.class.php');
 ModulesManager::file('/actions/browser3/inc/GenericDatasource.class.php');
 
 
@@ -940,11 +940,7 @@ and rug.idrole in (select idrole from RelRolesPermissions where IdPermission = 1
             $dbObj->next();
         }
 
-        $ret = Serializer::encode(SZR_JSON, array('nodetypes' => $ret));
-        $this->response->set('Content-type', 'application/json');
-        $this->response->sendHeaders();
-        print($ret);
-        exit;
+        return array('nodetypes' => $ret);
     }
 
     /**

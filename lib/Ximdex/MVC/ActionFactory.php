@@ -31,6 +31,7 @@ namespace Ximdex\MVC;
 
 use ModulesManager;
 use Ximdex\Logger;
+use Ximdex\Runtime\WebRequest;
 
 
 /**
@@ -49,16 +50,14 @@ class ActionFactory
      * @param $request
      * @return mixed|null
      */
-    public static function getAction($request)
+    public static function getAction(WebRequest $request)
     {
-
-
-        $actionRootName = "Action_";
+        $actionRootName = 'Action_';
 
         // Cogemos los datos de la accion
-        $actionPath = $request->getParam("action_path");
-        $action = $request->getParam("action");
-        $module = $request->getParam("module");
+        $actionPath = $request->getParam( 'action_path' );
+        $action = $request->getParam( 'action' );
+        $module = $request->getParam( 'module' );
 
         $absolut_actionPath = XIMDEX_ROOT_PATH . $actionPath;
 
@@ -81,7 +80,7 @@ class ActionFactory
             }
 
             $factory = new \Ximdex\Utils\Factory($actionPath, $actionRootName);
-            $actionController = $factory->instantiate($action);
+            $actionController = $factory->instantiate($action, null, $request);
         }
 
         return $actionController;

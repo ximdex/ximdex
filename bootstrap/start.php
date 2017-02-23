@@ -4,14 +4,13 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Ximdex\Runtime\App ;
 
-
+/* Debug only */
+putenv ( 'APP_DEBUG=true' );
 
 // for legacy compatibility
 if (!defined('XIMDEX_ROOT_PATH')) {
     define('XIMDEX_ROOT_PATH', dirname(dirname(__FILE__)));
 }
-
-
 
 
 if (!defined('CLI_MODE'))
@@ -23,6 +22,9 @@ include_once dirname(dirname(__FILE__)) . '/extensions/vendors/autoload.php';
 
 
 class_alias('Ximdex\Modules\Manager', 'ModulesManager');
+
+
+require_once dirname(dirname(__FILE__)) . '/extensions/vendors/illuminate/support/helpers.php';
 
 
 // Initialize App

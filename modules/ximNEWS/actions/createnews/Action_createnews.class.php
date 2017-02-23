@@ -215,7 +215,7 @@ class Action_createnews extends ActionAbstract
         $values = array(
             'messages' => $adapter->messages->messages,
             'id_node' => $idNode,
-            "nodeURL" => \App::getValue('UrlRoot') . "/xmd/loadaction.php?actionid=$actionID&nodeid=$idNode"
+            "nodeURL" => \App::getValue('UrlRoot') . "/?actionid=$actionID&nodeid=$idNode"
         );
 
         $this->render($values, NULL, 'messages.tpl');

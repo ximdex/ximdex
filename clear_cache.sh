@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/usr/bin/env bash
 
 # folders
 templates="data/tmp/templates_c/"

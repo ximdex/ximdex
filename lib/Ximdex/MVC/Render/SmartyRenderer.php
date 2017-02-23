@@ -93,7 +93,6 @@ class SmartyRenderer extends AbstractRenderer
 	 */
 	private function _set_params(& $smarty)
 	{
-
 		//Debuggins smarty
 		$debug_smarty = $this->get("debugsmarty");
 		if ($debug_smarty != NULL) {
@@ -105,12 +104,10 @@ class SmartyRenderer extends AbstractRenderer
 		else
 			$_method = $this->get('method');
 
-
 		$this->_set_controller_path($this->get('module'), $_method);
 
 		//pasamos los par�metros a smarty
 		$_parameters = $this->getParameters();
-
 		//we initialize params used in some actions
 		if (!array_key_exists("history_value", $_parameters)) {
 			$_parameters["history_value"] = 1;
@@ -136,7 +133,6 @@ class SmartyRenderer extends AbstractRenderer
 	 */
 	private function _set_controller_path($module = NULL, $_method = NULL)
 	{
-
 		if (empty($module)) {
 			$_ACTION_CONTROLLER = XIMDEX_ROOT_PATH . '/actions/' . $this->get('_ACTION_COMMAND') . '/template/Smarty/' . $_method;
 			$this->set('_ACTION_CONTROLLER', $_ACTION_CONTROLLER);

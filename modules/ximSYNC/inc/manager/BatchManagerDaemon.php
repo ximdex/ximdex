@@ -75,6 +75,7 @@ function createBatchsForBlock($nodesToPublish)
     // If the node which trigger publication do not exists anymore return null and cancel.
     $node = new Node($idNodeGenerator);
     if (!($node->get('IdNode') > 0)) {
+        Logger::debug("IDNODEGENERATOR " . $idNodeGenerator);
         Logger::error(_("Required node does not exist") . " " . $idNodeGenerator);
         return NULL;
     }
@@ -82,7 +83,8 @@ function createBatchsForBlock($nodesToPublish)
     // Get list of physicalServers related to generator node.
     $idServer = $node->GetServer();
     $nodeServer = new Node($idServer);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          $otfMode = 0; //For the moment, otfMode is disabled
+
+    $otfMode = 0; //For the moment, otfMode is disabled
     if (\App::getValue('PublishOnDisabledServers') == 1) {
         Logger::info("PublishOnDisabledServers is true", 'publication_logger');
         $physicalServers = $nodeServer->class->GetPhysicalServerList(true, $otfMode);

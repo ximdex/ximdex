@@ -161,7 +161,7 @@ class QueryManager {
         if (substr($sapi_type, 0, 3) == 'cgi') {
             return 'httpi'.$https.'://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         }
-        return 'http'.$https.'://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+        return 'http'.$https.'://' . $_SERVER['HTTP_HOST'];
 
     }
 }

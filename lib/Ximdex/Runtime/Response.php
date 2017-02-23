@@ -2,32 +2,13 @@
 
 namespace Ximdex\Runtime;
 
-class Response
+class Response extends \Illuminate\Http\Response
 {
-    /**
-     * @var \Ximdex\Utils\AssociativeArray
-     */
-    private $_headers;
-    /**
-     * @var
-     */
-    private $_content;
-
     /**
      * Response constructor.
      */
-    function __construct()
-    {
-
-        $this->_headers = new \Ximdex\Utils\AssociativeArray();
-        ob_start();
-        foreach ($_SERVER as $key => $value) {
-            if (preg_match('/^HTTP_(.*)$/', $key)) {
-                $key = str_replace('_', ' ', substr($key, 5));
-                $key = str_replace(' ', '-', ucwords(strtolower($key)));
-                $this->_headers->add($key, $value);
-            }
-        }
+    function __construct($content = '', $status = 200, $headers = array()) {
+        parent::__construct( $content, $status, $headers );
     }
 
     /**
@@ -36,26 +17,8 @@ class Response
      */
     public function set($key, $value)
     {
-        $this->_headers->set($key, $value);
-    }
-
-    /**
-     *
-     */
-    public function sendHeaders()
-    {
-        echo ob_get_clean(); // asegura que no ha habido escritura antes de enviar las cabeceras
-        $keys = $this->_headers->getKeys();
-        foreach ($keys as $key) {
-            $values = $this->get($key);
-            if (is_array($values)) {
-                foreach ($values as $value) {
-                    header($key . ":" . $value);
-                }
-            } else {
-                header($key . ": " . $values);
-            }
-        }
+        $this->header($key, $value);
+        return $this;
     }
 
     /**
@@ -64,7 +27,7 @@ class Response
      */
     public function get($key)
     {
-        return $this->_headers->get($key);
+        return $this->headers->get($key);
     }
 
     public function sendStatus($string, $replace, $status)
@@ -83,14 +46,6 @@ class Response
     public function getContent()
     {
         return $this->_content;
-    }
-
-    /**
-     * @param $content
-     */
-    public function setContent($content)
-    {
-        $this->_content = $content;
     }
 
     /**
@@ -162,6 +117,8 @@ class Response
         if ($status_codes[$statusCode] !== null) {
             $status_string = $statusCode . ' ' . $status_codes[$statusCode];
             header($_SERVER['SERVER_PROTOCOL'] . ' ' . $status_string, true, $statusCode);
+            $this->header($_SERVER['SERVER_PROTOCOL'], $status_string);
+            $this->setStatusCode($statusCode);
         }
     }
 
