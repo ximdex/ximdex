@@ -21,13 +21,13 @@ v3.8 (New modules - 4th quarter 2015; published)
 - Themes: xlyre for opendata, xhawk for secure CMS, xowl for semantic hub)
 - Decoupled & stackable repositories
 - Extend Dynamic Semantic publishing for the MUG module (allowing ontology based filtering)
+- New web installer
 
-
-v4.0 (Decoupled Repository and Editor - 3rd quarter 2016)
+v4.0 (Decoupled Repository and Editor - 3rd quarter 2017)
 ----
-- Pluggable semantic store with API
 - Portal Configuration Manager
 - Intelligent folders (sets)
-- Decoupled Repository and WYWIWYG/WYSIWYM Editor as a Service
-- EBOOK generator
+- Pluggable semantic store with API
+- EBOOK & APP generator using Ximdex headless and decoupled architecture
+- New wywiwyg canvas for making apps
 - ...
