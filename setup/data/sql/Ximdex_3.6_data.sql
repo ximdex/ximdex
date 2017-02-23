@@ -311,7 +311,7 @@ VALUES
 	(6,'UrlRoot',''),
 	(7,'GeneralGroup','101'),
 	(8,'ProjectsNode','10000'),
-	(9,'GeneratorCommand','/modules/dexT/dexTdin_xmd25.pl'),
+	/*(9,'GeneratorCommand','/modules/dexT/dexTdin_xmd25.pl'),*/
 	(10,'EncodingTag','<?xml version="1.0" encoding="UTF-8"?>'),
 	(11,'DoctypeTag','<!DOCTYPE docxap [
 <!ENTITY Ntilde "_MAPGENcode_Ntilde_">
