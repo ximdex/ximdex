@@ -34,8 +34,6 @@ use Ximdex\Utils\FsUtils;
 if (!defined('XIMDEX_ROOT_PATH'))
     define('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__) . "/../../"));
 
-include_once(XIMDEX_ROOT_PATH . '/extensions/adodb/adodb.inc.php');
-include_once(XIMDEX_ROOT_PATH . '/extensions/adodb/adodb-active-record.inc.php');
 include_once(XIMDEX_ROOT_PATH . '/inc/db/DB_orm.class.php');
 include_once(XIMDEX_ROOT_PATH . '/conf/install-params.conf.php');
 
