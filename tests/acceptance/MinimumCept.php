@@ -64,7 +64,7 @@ $I->fillField("password", "ximdex");
 
 $I->click("Sign in");
 
-$I->waitForText("Welcome to Ximdex CMS, ximdex!", 5);
+$I->waitForText("Welcome to Ximdex CMS, ximdex!", 10);
 
 $I->wantTo('ensure that publish works');
 
