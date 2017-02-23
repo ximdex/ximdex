@@ -35,13 +35,6 @@
                     "reference": "origin/master"
                 }
             }
-        },
-
-        {
-            "type": "vcs",
-            "name": "ximdex/xbuk-module",
-            "secure-http": false,
-            "url": "http://git.ximdex.net/ximdex/xbuk-module"
         }
     ],
     "require": {
