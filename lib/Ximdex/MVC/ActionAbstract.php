@@ -27,8 +27,10 @@
 
 namespace Ximdex\MVC;
 
+use Codeception\Lib\Interfaces\Web;
 use Laravel\Lumen\Application;
 use Laravel\Lumen\Routing\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Ximdex\Logger;
 use Ximdex\MVC\Render\AbstractRenderer;
 use Ximdex\MVC\Render\SmartyRenderer;
@@ -202,21 +204,11 @@ class ActionAbstract extends Controller
      * Execute the action
      */
     /**
-     * @param $request Request
+     * @param $request WebRequest
      */
-    function execute($request)
+    function execute(WebRequest $request)
     {
-        // Setting path or subset which current action belongs to
-        $nodeid = $this->request->input("nodeid");
-        //$action = $this->request->getParam("action");
-        $actionid = $this->request->input("actionid");
-
-        if ($nodeid && $actionid) {
-            // $action = new Action($actionid);
-            //Logger::debug("MVC::ActionAbstract calling action $actionid (" . $action->get('Command') . ") in node $nodeid ");
-        }
-
-        $method = ($var = $this->request->input("method")) ? $var : 'index';
+        $method = ($var = $this->request->input('method')) ? $var : 'index';
         $actionInfo = $this->getActionInfo(
             $this->request->input('action'),
             $this->request->input('module'),
@@ -385,11 +377,9 @@ class ActionAbstract extends Controller
         if ($return === true) {
             return $output;
         }
-
         $this->request->setParam('outHTML', $output);
         $this->request->setParameters($this->renderer->getParameters());
         //$this->response->sendHeaders();
-
         if ($this->request->getParam("out") == "WEB") {
             echo $this->request->getParam("outHTML");
         }

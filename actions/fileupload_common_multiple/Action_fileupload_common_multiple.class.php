@@ -32,6 +32,7 @@ use Ximdex\Models\Language;
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
 use Ximdex\MVC\ActionAbstract;
+use Ximdex\Runtime\WebRequest;
 
 ModulesManager::file('/inc/io/BaseIOInferer.class.php');
 require_once(XIMDEX_ROOT_PATH . '/extensions/flow/ConfigInterface.php');
@@ -46,10 +47,10 @@ require_once(XIMDEX_ROOT_PATH . '/extensions/flow/Uploader.php');
 
 class Action_fileupload_common_multiple extends ActionAbstract {
 
-    function __construct() {
-        parent::__construct();
+    public function __construct($_render = null, WebRequest $request = null) {
         $this->uploadsFolder = XIMDEX_ROOT_PATH . \App::getValue( 'TempRoot') .'/'. \App::getValue( 'UploadsFolder');
         $this->chunksFolder = XIMDEX_ROOT_PATH . \App::getValue( 'TempRoot') .'/'. \App::getValue( 'ChunksFolder');
+        parent::__construct( $_render, $request );
     }
 
     // Main method: shows initial form

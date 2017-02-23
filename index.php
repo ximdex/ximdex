@@ -29,7 +29,7 @@
 use Ximdex\Runtime\App;
 use Ximdex\Utils\FsUtils;
 
-include_once 'bootstrap/start.php';
+include_once __DIR__ . '/bootstrap/start.php';
 
 /**
  * Dispatch XIMDEX_START event
@@ -41,11 +41,6 @@ ModulesManager::file('/inc/io/BaseIO.class.php');
 ModulesManager::file('/inc/mvc/App.class.php');
 ModulesManager::file('/inc/i18n/I18N.class.php');
 ModulesManager::file('/inc/install/InstallController.class.php');
-
-function goLoadAction()
-{
-    header(sprintf("Location: %s", App::getValue('UrlRoot')));
-}
 
 //Main thread
 if (!InstallController::isInstalled()) {
@@ -71,7 +66,6 @@ if (!InstallController::isInstalled()) {
     }
 
     $webRequestHandler =  function(\Ximdex\Runtime\WebRequest $request){
-        $request->setUsualParams();
 
         /* @var $actionController \Ximdex\MVC\ActionAbstract */
         $actionController = \Ximdex\MVC\ActionFactory::getAction($request);
@@ -79,7 +73,7 @@ if (!InstallController::isInstalled()) {
         if ( empty( $actionController ) ) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Action/method not found');
         } else {
-            // TODO: reformat this
+            // TODO: refactor this
             //$this->setUserState();
             //$stats = $this->actionStatsStart();
             $actionController->execute($request);
@@ -87,8 +81,8 @@ if (!InstallController::isInstalled()) {
     };
 
     $app = \Laravel\Lumen\Application::getInstance();
-    $app->get('/', $webRequestHandler );
-    $app->post('/', $webRequestHandler );
+    $app->get('/', [ 'middleware' => [ 'webauth', 'extend', 'actionauth' ], $webRequestHandler ]);
+    $app->post('/', [ 'middleware' => [ 'webauth', 'extend', 'actionauth' ], $webRequestHandler ]);
 
     try {
         $app->run();

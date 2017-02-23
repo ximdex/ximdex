@@ -1,9 +1,9 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 use Symfony\Component\Console\Application;
 
-include_once "bootstrap/start.php";
+include_once __DIR__  . '/bootstrap/start.php';
 
 $application = new Application();
 
@@ -12,7 +12,7 @@ $application->add(new \Ximdex\Commands\ModulesListCommand());
 
 // Custom module commands
 foreach (ModulesManager::getEnabledModules() as $module) {
-    $name = $module["name"];
+    $name = $module[ 'name' ];
     $mManager->instanceModule($name)->addCommands( $application );
 }
 

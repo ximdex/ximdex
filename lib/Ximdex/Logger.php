@@ -12,7 +12,6 @@ namespace Ximdex;
 Class Logger
 {
     private static $instances = array();
-    private static $active = '';
     private $logger = null;
 
     public function __construct($logger)
@@ -27,9 +26,6 @@ Class Logger
     public static function addLog($logger)
     {
         self::$instances[$logger->getName()] = $logger;
-        if (count(self::$instances) == 1) {
-            self::$active = $loggerInstance;
-        }
     }
 
     /**

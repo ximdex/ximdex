@@ -8,8 +8,8 @@
 
 namespace Ximdex\MVC;
 
-
 use Laravel\Lumen\Application;
+use Ximdex\Runtime\WebRequest;
 
 class Manager {
     public static function setupApp(){
@@ -26,9 +26,14 @@ class Manager {
             return \Ximdex\Runtime\WebRequest::capture();
         });
 
+        $app->alias('Ximdex\Runtime\WebRequest', 'request');
+
         // Auth middleware
         $app->routeMiddleware([
-            'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+            'auth' => App\Http\Middleware\Authenticate::class,
+            'webauth' => \Ximdex\MVC\Middleware\WebAuthMiddleware::class,
+            'extend' => \Ximdex\MVC\Middleware\ExtendRequestMiddleware::class,
+            'actionauth' => \Ximdex\MVC\Middleware\ActionAuthMiddleware::class,
         ]);
     }
 }
