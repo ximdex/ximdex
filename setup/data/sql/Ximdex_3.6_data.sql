@@ -1314,7 +1314,12 @@ VALUES
 	(1007,'Ximdex_close','Ximdex controlled closing'),
 	(1008,'Structural_publication','Publication without structure'),
 	(1009,'Advanced_publication','Advanced publication'),
-	(1010,'Ximedit_publication_allowed','Publication from editor');
+	(1010,'Ximedit_publication_allowed','Publication from editor'),
+	(1011,'ApiCreate','Create nodes from API'),
+	(1012,'ApiRead','Read nodes from API'),
+	(1013,'ApiUpdate','Update nodes from API'),
+	(1014,'ApiDelete','Delete nodes from API'),
+	(1015,'ApiPublish','Publish nodes from API');
 
 INSERT INTO `Pipelines` (`id`, `Pipeline`, `IdNode`)
 VALUES

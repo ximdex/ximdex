@@ -30,7 +30,6 @@ class Manager {
 
         // Auth middleware
         $app->routeMiddleware([
-            'auth' => App\Http\Middleware\Authenticate::class,
             'webauth' => \Ximdex\MVC\Middleware\WebAuthMiddleware::class,
             'extend' => \Ximdex\MVC\Middleware\ExtendRequestMiddleware::class,
             'actionauth' => \Ximdex\MVC\Middleware\ActionAuthMiddleware::class,

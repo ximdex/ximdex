@@ -16,6 +16,9 @@ use Ximdex\Setup\Manager;
 
 class CreateDB extends Base
 {
+    /**
+     * @var PDO
+     */
     private $db = null;
 
     public function __construct(Manager $manager)
@@ -87,6 +90,7 @@ class CreateDB extends Base
             $urlRoot = str_replace("index.php", "", $_SERVER['HTTP_REFERER']);
             $urlRoot = str_replace("setup/", "", $urlRoot);
             $urlRoot = strtok($urlRoot, '?');
+            $urlRoot = trim($urlRoot, '/');
             $this->db->exec("UPDATE Config SET ConfigValue = '{$urlRoot}' WHERE ConfigKey = 'UrlRoot'");
             $this->db->exec("UPDATE Config SET ConfigValue = 'en_US' WHERE ConfigKey = 'locale'");
 
@@ -100,8 +104,13 @@ class CreateDB extends Base
             $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
             $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
 
-            $this->db->exec("UPDATE Config SET ConfigValue='" . $key . "' where ConfigKey='ApiKey'");
-            $this->db->exec("UPDATE Config SET ConfigValue='" . $iv . "' where ConfigKey='ApiIV'");
+            $st = $this->db->prepare("UPDATE Config SET ConfigValue=:key where ConfigKey='ApiKey'");
+            $st->bindParam(':key', $key);
+            $st->execute();
+
+            $st = $this->db->prepare("UPDATE Config SET ConfigValue=:iv where ConfigKey='ApiIV'");
+            $st->bindParam(':iv', $iv);
+            $st->execute();
 
             // create conf file
             $modConfStr = $this->manager->render('files/install-params.conf.php.twig', [
