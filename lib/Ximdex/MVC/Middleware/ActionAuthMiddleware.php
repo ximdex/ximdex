@@ -10,6 +10,7 @@ namespace Ximdex\MVC\Middleware;
 
 use Closure;
 use Ximdex\Models\Action;
+use Ximdex\Models\Role;
 use Ximdex\Models\User;
 use Ximdex\Runtime\WebRequest;
 
@@ -30,8 +31,8 @@ class ActionAuthMiddleware {
             return $next($request);
         }
 
-        $nodes = $request->input('nodes', '');
-        if ( empty($nodes) ){
+        $nodes = $request->input('nodes', []);
+        if ( empty($nodes) && $request->has('nodeid')){
             $nodes = [$request->input('nodeid')];
         }
 
@@ -39,9 +40,12 @@ class ActionAuthMiddleware {
         $user = new User($userID);
         $allowedActions = $user->getActionsOnNodeList($nodes);
 
-        if ( $request->has('actionid') && in_array( $request->input('actionid', ''), $allowedActions, true ) ){
+        $actionid = $request->input( 'actionid', '' );
+
+        if ( !empty($actionid) && in_array( $actionid, $allowedActions, true ) ){
             return $next($request);
         }
+        
         return response('Forbidden access for unknowed user', 403);
     }
 }

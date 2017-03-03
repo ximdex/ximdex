@@ -12,6 +12,7 @@
 node_modules/
 /data/
 /logs/
+.data/
 
 conf/_STATUSFILE
 conf/install-params.conf.php

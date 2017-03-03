@@ -74,7 +74,6 @@ class Action_modifystates extends ActionAbstract
                     'description' => $nextStatus->get('Description'));
         }
 
-        $this->addJs('/actions/modifystates/resources/js/manager.js');
         $this->addCss('/xmd/style/forms/tabulators.css');
         $this->addCss('/actions/modifystates/resources/css/default.css');
 
@@ -111,10 +110,9 @@ class Action_modifystates extends ActionAbstract
 
     function update_states()
     {
-        $req = json_decode($GLOBALS['HTTP_RAW_POST_DATA'], true);
-        $idNode = $req["idNode"];
-        $all_status = $req["states"];
-        $toDelete = $req["toDelete"];
+        $idNode = $this->request->input("idNode");
+        $all_status = $this->request->input("states");
+        $toDelete = $this->request->input("toDelete");
 
         $workflow = new WorkFlow(NULL, NULL, $idNode);
         $pipeProcess = $workflow->pipeProcess;

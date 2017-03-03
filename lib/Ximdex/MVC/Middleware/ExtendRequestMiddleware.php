@@ -29,6 +29,10 @@ class ExtendRequestMiddleware {
             $request['nodeid'] = $request->input('nodes')[0];
         }
 
+        if(!$request->has('nodeid') && $request->has('idNode')){
+            $request['nodeid'] = $request->input('idNode');
+        }
+
         $request['action'] = $request->input('action', $action);
         $request['method'] = $request->input('method', 'index');
         $request['module'] = $request->input('module', '');
