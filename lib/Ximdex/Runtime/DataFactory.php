@@ -46,7 +46,6 @@ require_once(XIMDEX_ROOT_PATH . "/inc/utils.php");
 //
 require_once(XIMDEX_ROOT_PATH . '/inc/poolerd/PoolerClient.class.php');
 
-ModulesManager::file('/inc/persistence/store/StoreFactory.class.php');
 ModulesManager::file('/inc/metadata/MetadataManager.class.php');
 
 
@@ -334,7 +333,7 @@ class DataFactory
         }
 
         $targetPath = \App::getValue("AppRoot") . \App::getValue("FileRoot") . "/" . $uniqueName;
-        $content = FsUtils::file_get_contents($targetPath);
+        $content = FsUtils::file_get_contents( $targetPath);
 
         Logger::info("GetContent for Node:" . $this->nodeID . ", Version: " . $versionID . "." . $subVersion . ", File: ." . $uniqueName . ", Chars: " . strlen($content));
 

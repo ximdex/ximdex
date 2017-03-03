@@ -32,7 +32,7 @@ class ModulesListCommand extends Command
 
 
 
-        foreach(Manager::getEnabledModules() as $module){
+        foreach(Manager::getModules() as $module){
 
             $installed = ($module['enable'] ) ? '<info>Installed</info>': '<error>Not installed</error>' ;
             
