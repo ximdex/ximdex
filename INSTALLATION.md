@@ -1,6 +1,6 @@
 #Installing the Semantic Web CMS Ximdex
 
-Ximdex CMS requires a Linux host, a Database server (MySQL or MariaDB) and Apache Web Server with PHP.
+Ximdex CMS requires a Linux host, a Database server (MySQL or MariaDB) and Apache Web Server with PHP or NGINX with PHP-fpm.
 
 You can install Ximdex CMS with Docker or using the web installer.
 
@@ -77,5 +77,12 @@ When Apache2 and PHP are running with the requested packages you have to downloa
 ## C) Manual and Automated Installation methods
 If the previous methods did not work, want to control all the steps or to automate the installation process, visit install/XIMDEX_manual_installation_guidelines.md file.
 
+## D) Deploy a complete docker stack to run Ximdex
+This command run a PHP container, a nginx container and a MySQL container with a database created. See docker-compose.yml file for more details. You need docker and docker-compose installed to run this.
+
+	```
+	# Launch it on the root of this repository
+	docker compose up ximdex
+	```
 
 Thank you for installing Ximdex CMS. Please, contact us at help@ximdex.org if you need further assistance.
