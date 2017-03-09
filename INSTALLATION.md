@@ -38,7 +38,7 @@ You can install Ximdex CMS with Docker or using the web installer.
 > That will run the containers for php, mysql and ximdex running on localhost:80. 
 
 3. From your chrome or safari browser visit http://localhost to end the installation.
-> Select DB as host for the database. The database should exist but empty. If the installation is aborted, please rm the .data directory at ximdex to clean it up. 
+> Select DB as database host and choose a password for the database user. The database should exist but empty. If the installation is aborted, please rm the .data directory at ximdex to clean the database data. 
 
 
 4. Play with Ximdex CMS at http://localhost using user Ximdex with the choosen password.
