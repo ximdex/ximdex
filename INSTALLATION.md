@@ -87,10 +87,8 @@ If the previous methods did not work, want to control all the steps or to automa
 
 ## D) Deploy a complete docker stack to run Ximdex
 This command run a PHP container, a nginx container and a MySQL container with a database created. See docker-compose.yml file for more details. You need docker and docker-compose installed to run this.
-
 	```
 	# Launch it on the root of this repository
 	docker compose up ximdex
 	```
-
 Thank you for installing Ximdex CMS. Please, contact us at help@ximdex.org if you need further assistance.
