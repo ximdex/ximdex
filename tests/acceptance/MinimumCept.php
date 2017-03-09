@@ -22,9 +22,9 @@ $I->see("Welcome to Ximdex CMS");
 
 $I->click("Start Installation");
 
-$I->waitForText("System Requirements", 5);
+$I->waitForText("Check System", 5);
 
-$I->click("Start Installation");
+$I->click("Check System");
 
 $I->waitForText("Database host:", 5);
 
@@ -33,15 +33,15 @@ $I->fillField("dbuser", "ximdex");
 $I->fillField("dbpass", "ximdex");
 $I->fillField("dbname", "ximdex");
 
-$I->click("Check");
+$I->click("Check Connection to DB");
 
 $I->wait(3);
 
 $I->click("Continue: Create tables");
 
-$I->waitForText("Tables and default data created", 20);
+$I->waitForText("Tables and default data have been created", 20);
 
-$I->click("Continue: Modules");
+$I->click("Continue: Install Modules");
 
 $I->waitForText("Install Modules", 10);
 
