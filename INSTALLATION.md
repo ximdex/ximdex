@@ -12,19 +12,19 @@ You can install Ximdex CMS with Docker or using the web installer.
 1. **Download Ximdex** package (https://github.com/XIMDEX/ximdex/archive/develop.zip) and expand it:
 	```
   	wget --no-check-certificate https://github.com/XIMDEX/ximdex/archive/develop.zip
-	unzip develop.zip
+	unzip develop.zip && rm develop.zip
   	```
 	
 	or
         
 	```
   	curl -L https://github.com/XIMDEX/ximdex/archive/develop.zip > develop.zip
-	unzip develop.zip
+	unzip develop.zip && rm develop.zip
   	```
 	
 	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories.
 
-2. Open a terminal where ximdex has been unzipped and run the command:
+2. Open a terminal in the directory where ximdex has been unzipped and run the command:
 
 	
 ```
@@ -35,13 +35,14 @@ You can install Ximdex CMS with Docker or using the web installer.
 ```
 
 
-> That will create the containers for php, mysql and ximdex running on localhost:80. 
+> That will run the containers for php, mysql and ximdex running on localhost:80. 
 
-2. From your browser visit http://localhost to end the installation.
+3. From your chrome or safari browser visit http://localhost to end the installation.
 > Select DB as host for the database. The database should exist but empty. If the installation is aborted, please rm the .data directory at ximdex to clean it up. 
 
 
-3. Play with Ximdex CMS at http://localhost using user Ximdex with the choosen password.
+4. Play with Ximdex CMS at http://localhost using user Ximdex with the choosen password.
+> To stop the services, run docker-compose down from the root directory where the composer was launched.
 
 
 
