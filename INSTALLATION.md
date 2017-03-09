@@ -7,21 +7,42 @@ You can install Ximdex CMS with Docker or using the web installer.
 > Additionally, a fully manual or automated installation method can be found at install/XIMDEX_manual_installation_guidelines.md.
 
 
-## A) Installing Ximdex CMS using Docker
+## A) Running Ximdex CMS using Docker composer
 
-1. From a terminal run the command:
+1. **Download Ximdex** package (https://github.com/XIMDEX/ximdex/archive/develop.zip) and expand it:
+	```
+  	wget --no-check-certificate https://github.com/XIMDEX/ximdex/archive/develop.zip
+	unzip develop.zip
+  	```
+	
+	or
+        
+	```
+  	curl -L https://github.com/XIMDEX/ximdex/archive/develop.zip > develop.zip
+	unzip develop.zip
+  	```
+	
+	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories.
 
+2. Open a terminal where ximdex has been unzipped and run the command:
+
+	
 ```
-	docker run -d -h "host.domain" -e PORT=9090 -e XIMDEX_PASS=MyPass -p 9090:5000 ximdex/ximdex
+	# Launch it on the root of this repository
+	docker compose up ximdex
+	
+	#(On OSX the command is docker-compose)
 ```
 
-> That will install Ximdex CMS running on host.domain and port 9090 with password MyPass for the admin user.
 
-2. From your browser visit http://host.domain:9090 to end the installation.
+> That will create the containers for php, mysql and ximdex running on localhost:80. 
 
-3. Play with Ximdex CMS at http://host.domain:9090 using user Ximdex with password MyPass to login in.
+2. From your browser visit http://localhost to end the installation.
+> Select DB as host for the database. The database should exist but empty. If the installation is aborted, please rm the .data directory at ximdex to clean it up. 
 
-> A shorter version of the docker command using default values is "docker run -d -p 5000:5000 ximdex/ximdex" that will end with ximdex running at http://localhost:5000 using ximdex as password for the ximdex user.
+
+3. Play with Ximdex CMS at http://localhost using user Ximdex with the choosen password.
+
 
 
 ## B) Installing from Github with the Web Installer
@@ -85,14 +106,5 @@ When Apache2 and PHP are running with the requested packages you have to downloa
 ## C) Manual and Automated Installation methods
 If the previous methods did not work, want to control all the steps or to automate the installation process, visit install/XIMDEX_manual_installation_guidelines.md file.
 
-## D) Deploy a complete docker stack to run Ximdex
-This command run a PHP container, a nginx container and a MySQL container with a database created. See docker-compose.yml file for more details. You need docker and docker-compose installed to run this.
-	
-```
-	# Launch it on the root of this repository
-	docker compose up ximdex
-	
-	#(On OSX the command is docker-compose)
-```
 	
 Thank you for installing Ximdex CMS. Please, contact us at help@ximdex.org if you need further assistance.
