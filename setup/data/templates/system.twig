@@ -11,10 +11,15 @@
     <h2>
         {{ title }}
     </h2>
+<p>
+	XCMS needs PHP with some dependencies, etc. 
+</p>
+<p>
+	Let's make a quick check...
+</p>
 
 
     {% if errors %}
-
 
 
         <div class="panel-warnings">
@@ -36,12 +41,10 @@
     {% else %}
 
 
-
-
         <div class="buttons-bottom">
             <a class="launch_ximdex action_launcher" href="{{ nextStepLink.href }}" class="btn btn-default"
-               alt="Start Installation" title="Start Installation">
-                Start Installation
+               alt="Check System" title="Check System">
+                Check System
                 &nbsp;
                 <span class="glyphicon glyphicon-cog"></span>
             </a>

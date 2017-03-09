@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: drzippie
- * Date: 28/05/16
- * Time: 11:19
- */
 
 namespace Ximdex\Setup\Step;
 
@@ -26,7 +20,7 @@ class CreateDB extends Base
         parent::__construct($manager);
         $this->label = "Create tables";
         $this->template = "createtables.twig";
-        $this->title = "Create Ximdex CMS Tables and data";
+        $this->title = "Ximdex CMS Tables and data";
         $this->vars['title'] = $this->title;
 
     }
@@ -64,8 +58,8 @@ class CreateDB extends Base
 
         if ($valid === false) {
             $this->addError(
-                sprintf("Unable to connect to database"),
-                sprintf("Unable to connect to database. Please check settings and try again"),
+                sprintf("Unable to connect to database (error 2)"),
+                sprintf("Unable to connect to database (error 2). Please check settings and try again."),
                 "DB"
             );
 
@@ -142,7 +136,7 @@ class CreateDB extends Base
 
             $this->addError(
                 sprintf("Unable to create tables "),
-                sprintf("Unable to create tables and data, database must be empty, Check database permissions"),
+                sprintf("Unable to create tables and data: Database must be empty & Check database permissions."),
                 "DB"
             );
 

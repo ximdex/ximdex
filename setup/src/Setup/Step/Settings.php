@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: drzippie
- * Date: 28/05/16
- * Time: 11:19
- */
 
 namespace Ximdex\Setup\Step;
 
@@ -91,8 +85,8 @@ class Settings extends Base
 
         if ( $valid === false  ) {
             $this->addError(
-                sprintf("Unable to connect to database"),
-                sprintf("Unable to connect to database. Please check settings and try again"),
+                sprintf("Unable to connect to database (error 1)"),
+                sprintf("1 Unable to connect to database (error 1). Please check settings and try again."),
                 "DB"
             );
 
