@@ -48,8 +48,10 @@ When Apache2 and PHP are running with the requested packages you have to downloa
   	wget --no-check-certificate https://github.com/XIMDEX/ximdex/archive/develop.zip
 	unzip develop.zip
   	```
+	
 	or
-        ```
+        
+	```
   	curl -L https://github.com/XIMDEX/ximdex/archive/develop.zip > develop.zip
 	unzip develop.zip
   	```
