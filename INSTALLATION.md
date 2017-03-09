@@ -48,6 +48,12 @@ When Apache2 and PHP are running with the requested packages you have to downloa
   	wget --no-check-certificate https://github.com/XIMDEX/ximdex/archive/develop.zip
 	unzip develop.zip
   	```
+	or
+        ```
+  	curl -L https://github.com/XIMDEX/ximdex/archive/develop.zip > develop.zip
+	unzip develop.zip
+  	```
+	
 	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories.
 
 2. **Move it to your Web Server Document Root** with the name you want (i.e.: myximdex)
