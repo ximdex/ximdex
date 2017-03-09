@@ -36,5 +36,5 @@ services:
       MYSQL_PASSWORD: ximdex
       MYSQL_DATABASE: ximdex
     # Only if you want to expose your MySQL
-    ports:
-      - 3306:3306
+#    ports:
+#      - 3306:3306
