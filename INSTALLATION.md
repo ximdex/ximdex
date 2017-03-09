@@ -92,7 +92,7 @@ This command run a PHP container, a nginx container and a MySQL container with a
 	# Launch it on the root of this repository
 	docker compose up ximdex
 	
-	#(docker-compose command on OSX)
+	#(On OSX the command is docker-compose)
 ```
 	
 Thank you for installing Ximdex CMS. Please, contact us at help@ximdex.org if you need further assistance.
