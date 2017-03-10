@@ -35,6 +35,18 @@
                     "reference": "origin/master"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "swagger-api/swagger-ui",
+                "version": "2.2.10",
+                "source": {
+                    "url": "https://github.com/swagger-api/swagger-ui.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
         }
     ],
     "require": {
@@ -51,7 +63,9 @@
         "php-di/php-di": "^5.4",
         "doctrine/cache": "^1.6",
         "doctrine/common": "^2.7",
-        "laravel/lumen-framework": "^5.4"
+        "laravel/lumen-framework": "^5.4",
+        "swagger-api/swagger-ui": "2.2.10",
+        "zircote/swagger-php": "^2.0"
     },
      "require-dev": {
         "mockery/mockery": "0.8.0",

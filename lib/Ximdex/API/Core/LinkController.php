@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Ximdex\API\APIResponse;
 use Ximdex\Models\Link as LinkModel;
 
+\ModulesManager::file('/inc/io/BaseIO.class.php');
 
 class LinkController extends Controller  {
 
@@ -31,7 +32,7 @@ class LinkController extends Controller  {
         if ($id <= 0) {
             return $response->setStatus(APIResponse::ERROR)->setMessage("An error ocurred creating the link.");
         }
-        $respContent = array('error' => 0, 'data' => array('nodeid' => $id));
+        $respContent = array('nodeid' => $id);
         return $response->setResponse($respContent);
     }
 
@@ -49,7 +50,7 @@ class LinkController extends Controller  {
             )
         );
 
-        $bio = new baseIO();
+        $bio = new \baseIO();
         $result = $bio->build($data);
 
         if ($result > 0) {

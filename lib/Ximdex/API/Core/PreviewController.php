@@ -41,6 +41,12 @@ class PreviewController extends Controller  {
     {
         $response = new APIResponse;
 
+        try {
+            $this->validate( $request, [ 'nodeid' => 'required',  'channelid' => 'required' ] );
+        } catch (ValidationException $e) {
+            return $response->setStatus( APIResponse::ERROR )->setMessage( 'Some required parameters are missing' );
+        }
+
         // Initializes variables
         $args = array();
 

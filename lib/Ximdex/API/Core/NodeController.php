@@ -23,11 +23,11 @@ use Ximdex\Utils\Session;
 use Ximdex\Workflow\WorkFlow;
 
 require_once(XIMDEX_ROOT_PATH . '/inc/model/RelNodeTypeMimeType.class.php');
-ModulesManager::file('/inc/io/BaseIOInferer.class.php');
+\ModulesManager::file('/inc/io/BaseIOInferer.class.php');
 
-ModulesManager::file('/inc/i18n/I18N.class.php');
-ModulesManager::file('/inc/utils.php');
-ModulesManager::file('/inc/utils/XHTMLEditorUtils.php', 'xBlog');
+\ModulesManager::file('/inc/i18n/I18N.class.php');
+\ModulesManager::file('/inc/utils.php');
+\ModulesManager::file('/inc/utils/XHTMLEditorUtils.php', 'xBlog');
 
 class NodeController extends Controller  {
     const SEPARATOR = ",";
@@ -729,7 +729,8 @@ class NodeController extends Controller  {
      * @param $request the current request
      * @param $response the response
      */
-    public function delete($request, $response){
+    public function delete(Request $request){
+        $response = new APIResponse;
         if (!$this->checkParameters($request, $response)) {
             return;
         }
@@ -740,7 +741,7 @@ class NodeController extends Controller  {
         if (!$result) {
             $response->setStatus(APIResponse::ERROR)->setMessage("This node couldn't be deleted.");
         } else {
-            $response->SetMessage('Node ' . $idnode . " successfully deleted.");
+            $response->SetMessage('Node ' . $idnode . ' successfully deleted.');
         }
 
         return $response;
