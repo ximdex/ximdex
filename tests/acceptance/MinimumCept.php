@@ -22,7 +22,7 @@ $I->see("Welcome to Ximdex CMS");
 
 $I->click("Start Installation");
 
-$I->waitForText("Check System", 5);
+$I->waitForText("System Requirements", 5);
 
 $I->click("Check System");
 
