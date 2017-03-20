@@ -1,0 +1,10 @@
+{
+  "name": "ximdex",
+  "homepage": "",
+  "description": "",
+  "main": "",
+  "license": "",
+  "dependencies": {
+    "swagger-ui": "2.x"
+  }
+}
