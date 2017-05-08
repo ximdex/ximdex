@@ -23,7 +23,11 @@
  *  @version $Revision$
  *}
 <div class="action_header">
-    <h2>{t}Publication result{/t}</h2>
+
+    <h5 class="direction_header"> Name Node: {t}Publication result{/t}</h5>
+    <h5 class="nodeid_header"> ID Node: {$nodeid}</h5>
+    <hr>
+
 
     {if (count($result)) }
         <h2>{t}Publication result{/t}</h2>
@@ -67,10 +71,6 @@
             </table>
         </fieldset>
     {/if}
-
-    <fieldset class="buttons-form">
-        {button class="close-button btn main_action" label="Close"}<!--message="Are you sure you want to copy this node to selected destination?"-->
-    </fieldset>
 </div>
 {if (count($messages)) }
     {foreach name=messages from=$messages key=message_id item=message}
@@ -79,4 +79,11 @@
         </div>
     {/foreach}
 {/if}
+
+<div class="action_content">
+
+        <fieldset class="buttons-form">
+            {button class="close-button btn main_action" label="Close"}<!--message="Are you sure you want to copy this node to selected destination?"-->
+        </fieldset>
+
 </div>

@@ -25,25 +25,27 @@
 
 <form method="post" id="modify_role_form" class="modify_role_form" action="{$action_url}&amp;id_pipeline={$selected_pipeline}" ng-init="status = []">
     <div class="action_header">
-	   <h2>{t}Role data{/t}</h2>
-
+        <h5 class="direction_header"> Name Node: {t}Role data{/t}</h5>
+        <h5 class="nodeid_header"> ID Node: {$nodeid}</h5>
+        <hr>
         <script>
             Array.prototype.sum = function () {
                 return this.reduce(function(a, b) { return a + b; }, 0);
             }
         </script>
 
-        <fieldset class="buttons-form">
-            <button type="button" id="" ng-click="status.sum() < status.length ? status.fill(true) : status.fill(false)" class="btn ui-state-default ui-corner-all button submit-button ladda-button" data-style="slide-up" data-size="xs" tabindex=""><span class="ladda-label">Toggle all</span></button>
 
-            {button label="Modify" onclick="window.com.ximdex.emptyActionsCache();" class="validate button-modify btn main_action"}
-
-            {button label="Select all" class="button-select-all btn"}
-            {button label="Select none" class="button-deselect-all btn"}
-		</fieldset>
 	</div>
 
 	<div ng-cloak class="action_content">
+        <fieldset class="buttons-form-special">
+            <button type="button" id="" ng-click="status.sum() < status.length ? status.fill(true) : status.fill(false)" class="btn ui-state-default ui-corner-all button submit-button ladda-button main_action" data-style="slide-up" data-size="xs" tabindex=""><span class="ladda-label">Toggle all</span></button>
+
+            {button label="Modify" onclick="window.com.ximdex.emptyActionsCache();" class="validate button-modify btn main_action"}
+
+            {button label="Select all" class="button-select-all btn main_action"}
+            {button label="Select none" class="button-deselect-all btn main_action"}
+        </fieldset>
         <fieldset>
             <accordion close-others="false" ng-init="firstOpen=true; firstDisabled=false;">
                 <!-- datos generales -->
@@ -134,5 +136,6 @@
                 <!-- / others -->
             </accordion>
         </fieldset>
+
 	</div>
 </form>

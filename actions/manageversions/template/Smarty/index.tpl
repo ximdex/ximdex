@@ -22,22 +22,26 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  *}
-
 <form method="post" name="mv_form" id="mv_form" action="{$action_url}">
-	<div class="action_header">
-		<h2>{t}Available versions{/t}: {$name}</h2>
-	</div>
+<div class="action_header">
+	<h5 class="direction_header"> Name Node: {$name}</h5>
+	<h5 class="nodeid_header"> ID Node: {$nodeid}</h5>
+	<hr>
+</div>
 
-	<div class="action_content">
-		<input type="hidden" name="nodeid" value="{$id_node}" />
-		<input type="hidden" name="nodetypename" value="{$node_type_name}" />
-		<input type="hidden" name="version" value="" />
-		<input type="hidden" name="subversion" value="" /> {foreach from=$versionList key=version item=versionInfo} {foreach from=$versionInfo item=subVersionList}
-		<div class="version-info row-item">
+<div class="action_content">
+	<div class="row tarjeta">
+		<h2 class="h2_general">{t}Available versions{/t}</h2>
+		<div class="small-12 columns">
+	<input type="hidden" name="nodeid" value="{$id_node}" />
+	<input type="hidden" name="nodetypename" value="{$node_type_name}" />
+	<input type="hidden" name="version" value="" />
+	<input type="hidden" name="subversion" value="" /> {foreach from=$versionList key=version item=versionInfo} {foreach from=$versionInfo item=subVersionList}
+		<div class="version-info row-item text-border">
 			<span class="version">
 				<strong>{$version}.{$subVersionList.SubVersion}</strong>
 				  <strong> {if ($version == 0 && $subVersionList.SubVersion == 0)}{t}New{/t} {elseif ($subVersionList.SubVersion == 0)}{t}Published{/t}
-					  {else} {t}Draft{/t} {/if}</strong>
+                      {else} {t}Draft{/t} {/if}</strong>
 				<input type="hidden" name="row-version" value="{$version}" />
 				<input type="hidden" name="row-subversion" value="{$subVersionList.SubVersion}" />
 			</span>
@@ -45,18 +49,21 @@
 			<span class="version-date row-item-col">{$subVersionList.Date}</span>
 			<span class="version-comment row-item-col">{$subVersionList.Comment}</span>
 			<div class="row-item-actions">
-				{if !empty($channels)}
-				<select class="channellist" class="channellist" name="channellist" class="normal">
-					{foreach from=$channels key=id_channel item=channel}
-					<option value="{$id_channel}">{$channel}</option>
-					{/foreach}
-				</select>
-				{button label="Preview" class="prevdoc-btn icon btn-unlabel-rounded"} {/if} {if $subVersionList.isLastVersion == 'false'} {button label="Recover" class="validate recover-btn disabled-version icon btn-unlabel-rounded" message="Are you sure you want to
+                {if !empty($channels)}
+					<select style="width: 40%;" class="channellist" class="channellist" name="channellist" class="normal">
+                        {foreach from=$channels key=id_channel item=channel}
+							<option value="{$id_channel}">{$channel}</option>
+                        {/foreach}
+					</select>
+                    {button label="Preview" class="prevdoc-btn icon btn-unlabel-rounded"} {/if} {if $subVersionList.isLastVersion == 'false'} {button label="Recover" class="validate recover-btn disabled-version icon btn-unlabel-rounded" message="Are you sure you want to
 				recover this version?"} {else} {button label="Recover" class="recover-btn enabled-version icon btn-unlabel-rounded"} {/if} {if !($versionList|@count eq 1 && $versionInfo|@count eq 1)} {if $version>0 && $subVersionList.SubVersion==0 && $subVersionList.isLastVersion
-				== 'true'} {button label="Delete" class="validate delete-btn icon btn-unlabel-rounded" message="Are you sure you want to delete this version?. This version is the latest published content."} {else} {button label="Delete" class="validate delete-btn
+                == 'true'} {button label="Delete" class="validate delete-btn icon btn-unlabel-rounded" message="Are you sure you want to delete this version?. This version is the latest published content."} {else} {button label="Delete" class="validate delete-btn
 				icon btn-unlabel-rounded" message="Are you sure you want to delete this version?"} {/if} {/if}
 			</div>
 		</div>
-		{/foreach} {/foreach}
-	</div>
+    {/foreach} {/foreach}
+		</div></div></div>
 </form>
+
+
+

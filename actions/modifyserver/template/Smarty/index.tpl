@@ -30,17 +30,10 @@
 	<input type="hidden" name="id" value="{if (!$server.id)}{$id_server}{else}none{/if}">
 
 	<div class="action_header">
-		<h2>{t}Manage servers{/t}</h2>
-		<fieldset class="buttons-form">
-			<input type="hidden" name="borrar"/>
-			{if (0 != $id_server)}
-				{button id="delete_server" label="Delete server" class="btn"}
-				{button id="create_server" label="Update" class="validate btn main_action"}{*message="Would you like to create this server?"*}
-			{else}
-				{button id="create_server" label="Save" class="validate btn main_action"}{*message="Would you like to create this server?"*}
-			{/if}
-			
-		</fieldset>
+
+		<h5 class="direction_header"> Name Node: {$node_name}</h5>
+		<h5 class="nodeid_header"> ID Node: {$nodeid}</h5>
+		<hr>
 	</div>
 
 	{if !empty($messages)}
@@ -52,6 +45,8 @@
 	{/if}
 
 	<div class="action_content">
+		<div class="row tarjeta">
+			<h2 class="h2_general">{t}Manage servers{/t}</h2>
 		<fieldset class="mdfsv_errors">
 			<p>
 				<div class="messages">
@@ -62,54 +57,56 @@
 		</fieldset>
 
 		<div id="serverid" class='server-name col1-3'>
-			<div class="create-server btn main_action">{t}Create new server{/t}</div>
+
 			{foreach from=$servers item=_server}
 			<div id="server{$_server.Id}" class="row_item_selectable {if ($_server.Id eq $server.id)}selected{/if}" value="{$_server.Id}" >{$_server.Description}
 			</div>
 			{/foreach}
 		</div>
 
-		<div class="props-server col2-3">
-			<div class="header-server">
-				<input type="text" id='description' name='description' MAXLENGTH="100" VALUE="{$server.description}" class='server-title' placeholder="{t}New server name{/t}"/>
-				<span>
-					<span class="slide-element">
+			<div class="small-12 columns">
+				<div class="input">
+				<input style=" margin-bottom:10px;" type="text" id='description' name='description' MAXLENGTH="100" VALUE="{$server.description}" class='server-title' placeholder="{t}New server name{/t}"/>
+				</div><span>
+
+
 						<input type="checkbox" id='enabled_{$id_node}' name='enabled' {if ($server.enable)}checked{/if} class="input-slide"/>
 						<label for='enabled_{$id_node}' class="label-slide"> {t}Enabled{/t}</label>
-					</span>					
-					<span class="slide-element">
+
+
 						<input type="checkbox" id='preview_{$id_node}' name='preview' {if ($server.preview)}checked{/if} class="input-slide">
 						<label for='preview_{$id_node}' class="label-slide">{t}Preview server{/t}</label>
-					</span>
+
 				</span>
 			</div>
 
-			<div class="content_server"><div name='protocol' id='protocol'>
-				<label>{t}Connection{/t}</label>
-				{foreach from=$protocols item=_protocol}
-				<input type="radio" name="protocol" id="{$_protocol.Id}" value='{$_protocol.Id}' {if ($server.protocol eq $_protocol.Id)}checked{/if} />
-				<label for="{$_protocol.Id}">{$_protocol.Id|gettext}</label>
-				{/foreach}
-			</div>
+			<div style="margin-top: 100px!important;" class="content_server"><div name='protocol' id='protocol'>
+					<label>{t}Connection{/t}</label>
+                    {foreach from=$protocols item=_protocol}
+						<label for="{$_protocol.Id}">
+							<input type="radio" name="protocol" id="{$_protocol.Id}" value='{$_protocol.Id}' {if ($server.protocol eq $_protocol.Id)}checked{/if} />
+                            {$_protocol.Id|gettext}</label>
+                    {/foreach}
+				</div>
 
 			<div class="remote_url">
-				<label for="url">{t}URL or IP{/t}</label>
+				<label for="url" class="label_general">{t}URL or IP{/t}</label>
 				<input type="text" id='url' name='url' MAXLENGTH="100" VALUE="{$server.url}" class='cajag'/>
 			</div>
 
 			<div class="remote_folder">
-				<label id='labelDirectorio' for='initialdirectory' class="aligned">{t}Remote directory{/t}</label>
+				<label id='labelDirectorio' for='initialdirectory' class="aligned label_general">{t}Remote directory{/t}</label>
 				<input type="text" id='initialdirectory' name='initialdirectory' MAXLENGTH="100" VALUE="{$server.directory}" class='cajag'/>
 			</div>
 
 			<div class="port not_local">
-				<label for='port' class="aligned">{t}Port{/t}</label>
+				<label for='port' class="aligned label_general">{t}Port{/t}</label>
 				<input type="text" id='port' name='port' MAXLENGTH="100" VALUE="{$server.port}" class='cajag'/>
 			</div>
 
 			<div class="host not_local">
-				<label id='labeldirRemota' for='host' class="aligned">{t}Web URL{/t}</label>
-				<input type="text" id='host' name='host' MAXLENGTH="100" VALUE="{$server.host}" class='cajag'/>
+				<label id='labeldirRemota' for='host' class="aligned label_general">{t}Web URL{/t}</label>
+				<input style="margin-bottom:10px;" type="text" id='host' name='host' MAXLENGTH="100" VALUE="{$server.host}" class='cajag'/>
 				<div class="abs_url">
 					<span class="slide-element">
 						<input type="checkbox" id='override_{$id_node}' name='overridelocalpaths' {if ($server.path)}checked{/if} class="input-slide"/>
@@ -119,21 +116,22 @@
 			</div>
 
 			<div class="login not_local">
-				<label for='login' class="aligned">{t}User{/t}</label>
+				<label for='login' class="aligned label_general">{t}User{/t}</label>
 				<input type="text" id='login' name='login' MAXLENGTH="100" VALUE="{$server.user}" class='cajag'/>
 			</div>
 
 				<div class="password not_local">
-					<label for='password' class="aligned">{t}Password{/t}</label>
+					<label for='password' class="aligned label_general">{t}Password{/t}</label>
 					<input type="password" id='password' name='password' class='cajag'>
 				</div>
 
 				<div class="encoding">
 					<label>{t}Encoding{/t}</label>
-					{foreach from=$encodes item=_encode}
-					<input type="radio" name="encode" value='{$_encode.Id}' {if ($server.encode eq $_encode.Id)}checked{/if} id="{$_encode.Id}"/>
-					<label for="{$_encode.Id}">{$_encode.Id}</label>
-					{/foreach}
+                    {foreach from=$encodes item=_encode}
+						<label for="{$_encode.Id}">
+							<input type="radio" name="encode" value='{$_encode.Id}' {if ($server.encode eq $_encode.Id)}checked{/if} id="{$_encode.Id}"/>
+                            {$_encode.Id}</label>
+                    {/foreach}
 				</div>
 
 				<label>{t}Channels{/t}</label>
@@ -144,12 +142,25 @@
 							<label for='channels{$_channel.IdChannel}_{$id_node}' class="label-slide server_channel"> {$_channel.Description|gettext}</label>
 						</span>
 						{/foreach}
-								
+
 					{else}
 					<p>{t}There are no channels associated to this project{/t}.</p>
 					{/if}</div>
 			</div>
+			<div class="small-10 columns">
+			<fieldset class="buttons-form">
+			<div class="create-server btn main_action">{t}Create new server{/t}</div>
+			</fieldset></div>
+		<div class="small-2 columns">
+		<fieldset class="buttons-form">
+			<input type="hidden" name="borrar"/>
+            {if (0 != $id_server)}
+                {button id="delete_server" label="Delete server" class="btn"}
+                {button id="create_server" label="Update" class="validate btn main_action"}{*message="Would you like to create this server?"*}
+            {else}
+                {button id="create_server" label="Save" class="validate btn main_action"}{*message="Would you like to create this server?"*}
+            {/if}
 
-		</div>
-	</div>
+		</fieldset></div>
+		</div></div>
 </form>

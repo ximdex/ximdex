@@ -30,10 +30,10 @@
     <input type="hidden" name="stateid" value="{$stateid}" />
 
     <div class="action_header">
-        <h2>{t}Publishing period{/t} {$name}</h2>
-        <fieldset class="buttons-form">
-            {button class="validate publicate-button  btn main_action" label="Publish"}
-        </fieldset>
+        <h5 class="direction_header"> Name Node: {$name}</h5>
+        <h5 class="nodeid_header"> ID Node: {$nodeid}</h5>
+        <hr>
+
     </div>
 
     {if $hasDisabledFunctions}
@@ -83,26 +83,27 @@
 					</span>
                     <ol>
                         <li class="conditioned {if $required != 1}hidden{/if}">
-                            <label for="groups" class="label_title">{t}Group{/t}</label>
+                            <label for="groups" class="label_title label_general">{t}Group{/t}</label>
+                            <div class="input-select">
                             <select id="groups" name="groups" class="cajaxg group_info">
                                 {counter assign=index start=1}
                                 {foreach from=$group_state_info key=index item=group}
                                     <option value="{$group.IdGroup}|{$group.IdState}" {if $index == 0}selected="selected"{/if}>{$group.groupName} ({$group.stateName})</option>
                                     {counter assign=index}
                                 {/foreach}
-                            </select>
+                            </select></div>
                         </li>
 
                         <li class="conditioned {if $required != 1}hidden{/if}">
-                            <label class="label_title">{t}Users{/t}</label>
+                            <label class="label_title label_general">{t}Users{/t}</label>
                             <div class="user-list-container">
                                 <ol class="user-list">
                                     {if (isset($notificableUsers))}
                                         {counter assign=index start=1}
                                         {foreach from=$notificableUsers item=notificable_user_info}
                                             <li class="user-info">
-                                                <input type="checkbox" name="users[]" class="validable notificable check_group__notificable" id="user_{$notificable_user_info.idUser}" value="{$notificable_user_info.idUser}" {if $index == 1}checked="checked"{/if} />
-                                                <label for="user_{$notificable_user_info.idUser}">{$notificable_user_info.userName}</label>
+                                                <input type="checkbox" name="users[]" class="validable notificable check_group__notificable hidden-focus" id="user_{$notificable_user_info.idUser}" value="{$notificable_user_info.idUser}" {if $index == 1}checked="checked"{/if} />
+                                                <label for="user_{$notificable_user_info.idUser}" class="checkbox-label icon">{$notificable_user_info.userName}</label>
                                             </li>
                                             {counter assign=index}
                                         {/foreach}
@@ -112,15 +113,15 @@
                         </li>
 
                         <li class="conditioned {if $required != 1}hidden{/if}">
-                            <label for="texttosend" class="label_title">{t}Comments{/t}:</label>
-                            <textarea class="validable not_empty comments" name="texttosend" id="texttosend" rows="4" wrap="soft" tabindex="7">{$defaultMessage}</textarea>
+                            <label for="texttosend" class="label_title label_general">{t}Comments{/t}:</label>
+                            <textarea style="border: 2px solid lightgray!important;" class="validable not_empty comments" name="texttosend" id="texttosend" rows="4" wrap="soft" tabindex="7">{$defaultMessage}</textarea>
                         </li>
                     </ol>
                 </fieldset>
             </div>
 
             <div class="programed_publication row-item">
-                <h2 class="icon clock">{t}Scheduled publications{/t}</h2>
+                <h2 class="icon clock" style="color:white!important; margin-bottom:0!important;">{t}Scheduled publications{/t}</h2>
                 {if $gap_info|@count gt 0}
                     {foreach from=$gap_info key=index item=gap}
                         <div class="publication">
@@ -145,5 +146,9 @@
             {/if}
 
         </fieldset>
-    </div>
+        <div class="small-12 columns">
+        <fieldset class="buttons-form">
+            {button class="validate publicate-button  btn main_action" label="Publish"}
+        </fieldset>
+        </div></div>
 </form>

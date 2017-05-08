@@ -28,8 +28,9 @@
 
 <fieldset>
 	<div class="manageproperties">
-		<h3 class="icon icon-language">{t}Languages{/t}</h3>
-		<div class="row-item">
+		<div class="small-12 columns">
+		<label class="label_title label_general2">{t}Languages{/t}</label>
+		<div class="row-item row-special">
 			<div class="hidden">
 				<input type="radio" name="inherited_languages" class="languages_overwritten"
 					value="overwrite" checked />
@@ -47,9 +48,9 @@
 							checked="checked"
 						{/if}						
 						/>
-					<label for="{$language.Name}_{$id_node}" class="label-slide">{$language.Name}</label>
+					<label for="{$language.Name}_{$id_node}" class="label-slide "> {$language.Name}</label>
 				</span>
 			{/foreach}
 		</div>
-	</div>
+		</div></div>
 </fieldset>
