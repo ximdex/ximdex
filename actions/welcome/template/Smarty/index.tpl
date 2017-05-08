@@ -25,7 +25,7 @@
 
 <div class="welcome">
     <div class="action_header">
-	    <h2 style="text-align: center;">{t}Welcome to Ximdex CMS{/t}, <em>{$user}</em>!</h2>
+	    <h5 style="text-align: center;">{t}Welcome to Ximdex CMS{/t}, <em>{$user}</em>!</h5>
 		<hr>
     </div>
 	<div class="action_content">
