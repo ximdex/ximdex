@@ -70,33 +70,34 @@
 
                 <div ng-repeat="user in users_associated" class="row-item icon">
 
-                    <div class="input-select icon small-12 columns">
-                        <label ng-init="" class="label_title label_general label-select">#/user.UserName/#</label>
+                    <span class="col-1-3">
+                        <label ng-init="" class="label_title label_general label-select">#/user.UserName/#</label></span>
                         <span class="col1-3">
+                            <div class="input-select icon">
                         <select name='idRole' class='block'
                                 ng-model="users_associated[$index].IdRole"
                                 ng-change="users_associated[$index].dirty=true"
                                 ng-options="key as role for (key, role) in roles">
 
-    </select></span>
+                        </select></div></span>
 
-                    <div class="buttons-form row-item-actions col1-3">
+                    <div style=" bottom: -70px;" class="buttons-form row-item-actions col1-3">
                         <span ng-show="users_associated[$index].dirty">
-                            <button type="button" class="recover-btn icon btn-unlabel-rounded"
+                            <button type="button" class="recover-btn icon btn-unlabel-rounded-recover"
                                     ng-click="update($index)"
                             >
                                 <span>{t}Update{/t}</span>
                             </button>
                         </span>
                         <span ng-if="nodeid != '101'">
-                            <button type="button" class="delete-btn icon btn-unlabel-rounded"
+                            <button type="button" class="delete-btn icon btn-unlabel-rounded-delete"
                                     ng-click="openDeleteModal($index)">
                                 <span>{t}Delete{/t}</span>
                             </button>
                             <button ng-if="$middle" type="button" class="delete-btn icon btn-unlabel-rounded" ng-click="openDeleteModal($index)"></butto
                         </span>
                     </div>
-                    </div></div>
+                    </div>
                 <div class="small-12 columns">
                     <div class="alert alert-info" ng-if="users_associated.length<=0">
                         <strong>Info!</strong> {t}There are no users associated with this group yet{/t}.

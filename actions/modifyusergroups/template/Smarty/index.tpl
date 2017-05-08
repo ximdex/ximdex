@@ -75,18 +75,20 @@
 
                 <div ng-repeat="user_group_info in user_groups_with_role" class="row-item icon">
 
-                    <div class="input-select icon small-12 columns">
-                        <label ng-init="" class="label_title label_general label-select">#/user_group_info.Name/#</label>
+                    <span class=" col1-3 columns">
+                        <label ng-init="" class="label_title label_general label-select">#/user_group_info.Name/#</label></span>
                     <span class="col1-3">
+                      <div  class="input-select icon">
                         <select name='idRole' class='block'
                                 ng-model="user_groups_with_role[$index].IdRole"
                                 ng-change="user_groups_with_role[$index].dirty=true"
+
                                 ng-options="rol_info.IdRole as rol_info.Name for rol_info in all_roles">
 
-                        </select>
-                    </span></div>
+                        </select></div>
+                    </span>
 
-                    <div class="buttons-form row-item-actions col1-3">
+                    <div style=" bottom: -70px; " class="buttons-form row-item-actions col1-3">
                         <span ng-show="user_groups_with_role[$index].dirty">
 
                             <button type="button" class="recover-btn icon btn-unlabel-rounded-recover"
@@ -103,7 +105,7 @@
                             </button>
                         </span>
                     </div>
-                </div>
+                </span>
         </div>
         </div>
     </div>
