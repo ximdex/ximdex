@@ -79,7 +79,7 @@
         <div class="language">
             <div class="menu-header">
                 <span class="current-language icon">{$user_locale.Lang}</span>
-                <span class="login-name session-info-text">{$loginName}</span>
+
             </div>
             <div ng-controller="XUserMenuCtrl" class="user-menu">
                 <ul>
@@ -94,7 +94,7 @@
                             {/section}
                         </ul>
                     </li>
-                    <li class="icon config" ng-click="modifyAccount('{$userID}', '{t}Modify your account{/t}')">
+                  <!--  <li class="icon config" ng-click="modifyAccount('{$userID}', '{t}Modify your account{/t}')">
                         <a href="#">{t}Modify your account{/t}</a>
                     </li>
                     <li class="icon help">
@@ -102,12 +102,15 @@
                     </li>
                     <li class="icon contact">
                         <a target="_blank" href="mailto:help@ximdex.org">{t}Contact us{/t}</a>
-                    </li>
-                    <li class="icon logout">
-                        <a href="{$_URL_ROOT}?action=logout">{t}Logout{/t}</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
+        </div>
+        <div style="display: inline-block;" class="menu-header">
+            <span class="login-name session-info-text">{$loginName}</span>
+
+                    <a class="a_especial" href="{$_URL_ROOT}?action=logout"><span class="icon logout"></span>{t}Logout{/t}</a>
+
         </div>
     </div>
     <spotlight id="mini-spotlight"/>

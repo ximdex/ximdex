@@ -316,17 +316,18 @@ button::-moz-focus-inner {
 
 .login-name {
   position: relative;
-  margin-right: .8em;
+  margin-right: .4em;
   display: inline-block;
   width: 3.5em;
-  height: 3em; }
+  height: 3em;
+  color:white}
 
 .current-language {
   position: relative;
   top: -.7em;
   color: #43a1a2;
   font-weight: bold;
-  margin-right: .8em;
+  margin-right: -1em;
   display: inline-block;
   width: 3em;
   height: 3em; }
@@ -391,6 +392,25 @@ button::-moz-focus-inner {
       font-size: 1.95rem;
       top: .6em;
       left: .6em; }
+    .menu-header > a > span.logout::before{
+      content: '\e61f';
+      font-size: 1.95rem;
+      top: .6em;
+      left: .6em;
+    }
+
+    .a_especial{
+      padding: 5px;
+      color:white;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .a_especial:hover{
+      background: #43a1a2;
+      padding: 5px;
+      border-radius: 5px;
+    }
   .user-menu li {
     cursor: pointer;
     position: relative; }
