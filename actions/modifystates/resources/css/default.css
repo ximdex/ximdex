@@ -81,7 +81,7 @@ label.status{
 
 button.delete-btn{
     position: relative;
-    visibility: hidden;
+   /* visibility: hidden;*/
 }
 
 ul.sortable li:hover button.delete-btn{
