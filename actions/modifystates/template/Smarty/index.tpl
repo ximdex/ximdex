@@ -94,12 +94,13 @@
                 <label class="icon checkbox-label">{t}This workflow will behave as default item{/t}</label>
                 </div>
                 </div></div>
-        </div></div>
+            <div class="small-12 columns">
+            <fieldset ng-init="loading=false; label='{t}Save changes{/t}';" class="buttons-form">
+                <button class="button_main_action" xim-button xim-loading="loading" xim-label="label" xim-progress="" xim-disabled="" ng-click="saveChanges();"></button>
+            </fieldset>
+            </div></div></div>
     <!-- / content -->
 </form>
 
 
 
-<fieldset ng-init="loading=false; label='{t}Save changes{/t}';" class="buttons-form">
-    <button class="button_main_action" xim-button xim-loading="loading" xim-label="label" xim-progress="" xim-disabled="" ng-click="saveChanges();"></button>
-</fieldset>

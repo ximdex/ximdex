@@ -25,7 +25,9 @@
 
 <form method="POST" name="tags_form" class="setmetadata-tags_form" ng-controller="XTagsCtrl" xim-document-tags='{$tags}' xim-cloud-tags='{$cloud_tags}' xim-namespaces='{$namespaces}' xim-node-id="{$id_node}" ng-cloak>
     <div class="action_header">
-        <h2>{t}Tag this node{/t}: {$node_name}</h2>
+        <h5 class="direction_header"> Name Node: {$node_name}</h5>
+        <h5 class="nodeid_header"> ID Node: {$nodeid}</h5>
+        <hr>
     </div>
 
     <div class="message slide-item" ng-show="submitMessages.length" ng-class="{literal}{'message-success': submitState == 'success'}{/literal}">
@@ -36,7 +38,7 @@
 
     <div class="action_content">
         <div class="row">
-            <div class="small-12 columns">
+            <div class="small-10 columns">
                 <div class="xim-tagsinput-newtag">
                     <xim-select class="tag-type btn-rounded" ng-model="newTag.IdNamespace" xim-options="namespaces" xim-label-prop="type" xim-style-prop="nemo" xim-sel-prop="id" ng-init="newTag.IdNamespace = namespaces['1'].id">
                     </xim-select>
@@ -44,7 +46,17 @@
                     <button type="button" class="btn-unlabel-rounded icon add-btn" ng-show="newTag.Name.length" ng-click="addNewTag()" ng-disabled="tagExistInArray(newTag, documentTags)" ng-class="{literal}{disabled:tagExistInArray(newTag, documentTags)}{/literal}">{t}Add{/t}</button>
                 </div>
             </div>
-
+            <div class="small-2 columns">
+            <fieldset class="buttons-form ">
+                <button
+                        class="btn main_action ui-state-default ui-corner-all button submit-button ladda-button"
+                        xim-button xim-state="submitState"
+                        xim-label="'ui.dialog.confirmation.save' | xI18n"
+                        ng-click="saveTags(documentTags)"
+                        xim-disabled="!dirty">
+                </button>
+            </fieldset>
+            </div>
             <div class="small-8 columns">
                 <div class="xim-tagsinput-container">
                     <div class="title-box">{t}Document tags{/t}</div>
@@ -106,7 +118,7 @@
         </div>
     </div>
 
-    <fieldset class="buttons-form positioned_btn">
+    <fieldset class="buttons-form ">
         <button
             class="btn main_action ui-state-default ui-corner-all button submit-button ladda-button"
             xim-button xim-state="submitState"
