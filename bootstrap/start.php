@@ -5,7 +5,7 @@ use Monolog\Handler\StreamHandler;
 use Ximdex\Runtime\App ;
 
 /* Debug only */
-// putenv ( 'APP_DEBUG=true' );
+ putenv ( 'APP_DEBUG=true' );
 
 // for legacy compatibility
 if (!defined('XIMDEX_ROOT_PATH')) {
