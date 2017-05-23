@@ -19,7 +19,7 @@ You can install Ximdex CMS with Docker or using the web installer.
 	unzip develop.zip && rm develop.zip
   	```
   	
-	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories.
+	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories. 
 
 	If you **don´t have installed the docker package**, install it using the next command line in a terminal console:
 	
@@ -27,16 +27,24 @@ You can install Ximdex CMS with Docker or using the web installer.
 	sudo apt-get install docker-compose
     ```
     
-2. Open a terminal under the directory ximdex-develop, which has been unzipped, and run the command (launch it into the root of this repository, where the file docker-compose.yml is alocated):
+2. Open a terminal under the directory ximdex-develop, which has been unzipped, and run the command (launch it into the root of this repository, where the file docker-compose.yml is located):
 
     ```
 	docker-compose up
     ```
+    > That will run the containers for Apache2, PHP, MySQL and Ximdex running on localhost:80.
 
-    > That will run the containers for php, mysql and ximdex running on localhost:80. 
+3. From your Chrome, Firefox, Safari or different browser visit http://localhost to end the installation.
+    
+    > You need to type the password **ximdex** in the "*Database password*" field, to make Ximdex installation able to access to the database server, and create the data schema.
+    You don't need to create a schema data or database user by this way.
+    
+    This step will create the database schema in first place and, after this process, it will create the tables.
 
-3. From your chrome or safari browser visit http://localhost to end the installation.
-    > Select DB as database host and choose a password for the database user. The database should exist but empty. If the installation is aborted, please rm the .data directory at ximdex to clean the database data. 
+    If the **installation is aborted**, please use the next conmmand to remove the .data directory at ximdex to clean the database data:
+    ```
+    sudo rm -rf .data
+    ```
 
 4. Play with Ximdex CMS at http://localhost using user Ximdex with the choosen password.
     > To stop the services, run docker-compose down from the root directory where the composer was launched.
@@ -89,14 +97,15 @@ When Apache2 and PHP are running with the requested packages you have to downloa
 
 *  An **internet connection** if you want to use some features as the automatic suggestion system based on ontologies (XOWL module), Dynamic Semantic Publishing (DSP) of semantic entities or to publish your content into the cloud.
 
-*  *Postfix* or *Sendmail* (if you want to use notification by mail see 'conf/mail.php')
-        ```
-        sudo apt-get install postfix
-        ```
-        or
-        ```
-        sudo apt-get install sendmail
-        ```
+*  *Postfix* or *Sendmail* (if you want to use notification by mail see 'conf/mail.php').
+    So, for Postfix use:
+    ```
+    sudo apt-get install postfix
+    ```
+    or for Sendmail use:
+    ```
+    sudo apt-get install sendmail
+    ```
 
 ### Steps
 1. **Download Ximdex** package (https://github.com/XIMDEX/ximdex/archive/develop.zip) and expand it:
@@ -136,7 +145,23 @@ When Apache2 and PHP are running with the requested packages you have to downloa
 
 	> So, in this example, user and group 'www-data' are running the web processes as declared in the apache configuration file.
 
-4. **Point your web browser** to your just installed Ximdex CMS instance URL (i.e.: http://YOURHOST/myximdex or http://localhost/myximdex) to run the configuration tool that will load the database, create users and install Ximdex's modules.
+4. In your database administrator (like _MySQL Workbench_ or _PHPMyAdmin_) you must **create a new database schema** which name will be used when the installation process begin.
+Here we provide the SQL code to make it in SQL command way (use de database and user names as you prefer):
+    ```
+    CREATE DATABASE ximdex-db;
+    ```
+    Now we need an user to accesss this schema, with all privileges. If you have to create a new one, we can help you with this SQL statements:
+    ```
+    CREATE USER 'ximdex-user'@'localhost' IDENTIFIED WITH mysql_native_password AS 'ximdex-pass';
+    GRANT USAGE ON *.* TO 'ximdex-user'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+    ```
+    Finally we will make access for the new database created to this new user:
+    ```
+    GRANT ALL PRIVILEGES ON `ximdex-db`.* TO 'ximdex-user'@'localhost' WITH GRANT OPTION;
+    ```
+    > Remember to use this information to generate de database schema in the point 5.
+
+5. **Point your web browser** to your just installed Ximdex CMS instance URL (i.e.: http://YOURHOST/myximdex or http://localhost/myximdex) to run the configuration tool that will load the database, create users and install Ximdex's modules.
 
 ## C) Manual and Automated Installation methods
 If the previous methods did not work, want to control all the steps or to automate the installation process, visit:
