@@ -19,7 +19,7 @@ You can install Ximdex CMS with Docker or using the web installer.
 	unzip develop.zip && rm develop.zip
   	```
   	
-	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories.  
+	> You should end with a directory (i.e.: ximdex-develop) containing all the Ximdex files and directories. 
 
 	If you **don´t have installed the docker package**, install it using the next command line in a terminal console:
 	
