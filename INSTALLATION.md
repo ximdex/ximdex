@@ -82,6 +82,7 @@ When Apache2 and PHP are running with the requested packages you have to downloa
         sudo apt-get install php-curl
         sudo apt-get install php-gd
         sudo apt-get install php-mysql
+        sudo apt-get install php-mcrypt
         sudo apt-get install php-pear
         ```
 	*  To use the spelling checker in Xedit (our wysiwyg XML editor), install php-enchant module:
@@ -148,16 +149,15 @@ When Apache2 and PHP are running with the requested packages you have to downloa
 4. In your database administrator (like _MySQL Workbench_ or _PHPMyAdmin_) you must **create a new database schema** which name will be used when the installation process begin.
 Here we provide the SQL code to make it in SQL command way (use de database and user names as you prefer):
     ```
-    CREATE DATABASE ximdex-db;
+    CREATE DATABASE `ximdex-db`;
     ```
     Now we need an user to accesss this schema, with all privileges. If you have to create a new one, we can help you with this SQL statements:
     ```
-    CREATE USER 'ximdex-user'@'localhost' IDENTIFIED WITH mysql_native_password AS 'ximdex-pass';
-    GRANT USAGE ON *.* TO 'ximdex-user'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+    CREATE USER `ximdex-user`@`localhost` IDENTIFIED WITH mysql_native_password AS `ximdex-pass`;
     ```
     Finally we will make access for the new database created to this new user:
     ```
-    GRANT ALL PRIVILEGES ON `ximdex-db`.* TO 'ximdex-user'@'localhost' WITH GRANT OPTION;
+    GRANT ALL PRIVILEGES ON `ximdex-db`.* TO `ximdex-user`@`localhost` WITH GRANT OPTION;
     ```
     > Remember to use this information to generate de database schema in the point 5.
 
