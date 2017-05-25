@@ -75,7 +75,11 @@ When Apache2 and PHP are running with the requested packages you have to downloa
     ```
     
 *  **PHP** (>= 5.2.5)
-	*  PHP modules: php-fxsl, php-cli, php-curl, php-gd, php-mysql, php-pear:
+    * PHP package:
+        ```
+        sudo apt-get install php
+        ```
+	* PHP modules: php-fxsl, php-cli, php-curl, php-gd, php-mysql, php-pear:
         ```
         sudo apt-get install php-fxsl
         sudo apt-get install php-cli
