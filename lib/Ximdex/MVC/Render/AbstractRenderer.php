@@ -248,7 +248,7 @@ class AbstractRenderer
      */
     private function _set_action_url($action_url = NULL, $nodeID = NULL, $actionID = NULL, $actionName = NULL)
     {
-        //Si no se ha especificado ninguna url de destino se a�ade la de la acci�n por defecto.
+        //Si no se ha especificado ninguna url de destino se añade la de la acción por defecto.
         if ($action_url == null) {
             $query = App::get('\Ximdex\Utils\QueryManager');
 
@@ -285,7 +285,7 @@ class AbstractRenderer
     {
         if ($module) {
             $base_action = App::getValue('AppRoot') . ModulesManager::path($module) . "/actions/" . $_ACTION_COMMAND . "/";
-            //Especificamos los par�metros especificos de m�dulo
+            //Especificamos los parámetros especificos de módulo
             $this->set("base_module", App::getValue('AppRoot') . ModulesManager::path($module) . "/");
             $this->set("module", $module);
         } else {
