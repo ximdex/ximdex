@@ -160,6 +160,7 @@ class QueryManager {
     function getPage()
     {
     	//Changed getPage method to use UrlRoot value obtained from database table Config value
+    	//NOTE: We add / diretory separator at the end
     	return App::getValue('UrlRoot') . '/';
     	/*
         $sapi_type = php_sapi_name();

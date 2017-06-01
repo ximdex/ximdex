@@ -31,7 +31,7 @@ use Ximdex\Utils\Extensions as Extensions;
 use ModulesManager;
 use Smarty;
 use Ximdex\Widgets\Widget;
-use Ximdex\Logger;
+//use Ximdex\Logger;
 
 require_once(XIMDEX_ROOT_PATH . Extensions::SMARTY);
 
