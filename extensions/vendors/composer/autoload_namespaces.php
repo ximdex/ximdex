@@ -8,7 +8,6 @@ $baseDir = dirname(dirname($vendorDir));
 return array(
     'Ximdex' => array($baseDir . '/lib'),
     'Solarium\\' => array($vendorDir . '/solarium/solarium/library'),
-    'JsMin' => array($vendorDir . '/werkint/jsmin'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),

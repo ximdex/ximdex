@@ -44,7 +44,6 @@
         "codemirror/Codemirror": "4.7.0",
         "RyanMullins/angular-hammer": "2.1.10",
         "hammerjs/hammer.js": "2.0.4",
-        "werkint/jsmin": "dev-master",
         "pda/pheanstalk": "*",
         "symfony/console": "^3.1",
         "symfony/polyfill-php56": "^1.2",
