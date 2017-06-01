@@ -394,9 +394,6 @@
         "provide": {
             "container-interop/container-interop-implementation": "^1.0"
         },
-        "replace": {
-            "mnapoli/php-di": "*"
-        },
         "require-dev": {
             "doctrine/annotations": "~1.2",
             "doctrine/cache": "~1.4",

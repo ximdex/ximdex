@@ -39,7 +39,6 @@
     ],
     "require": {
         "solarium/solarium": "3.5.1",
-        "mnapoli/php-di": "5.1.0",
         "monolog/monolog": "1.11.0",
         "codemirror/Codemirror": "4.7.0",
         "RyanMullins/angular-hammer": "2.1.10",
