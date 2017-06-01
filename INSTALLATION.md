@@ -142,6 +142,7 @@ When Apache2 and PHP are running with the requested packages you have to downloa
 	cd myximdex
 	chmod g+s data
 	chmod g+s logs
+	chmod g+s conf
 	```
 	You may **need superuser privileges** to do that! (Type *sudo* before the above commands)
 
