@@ -32,14 +32,11 @@ You can install Ximdex CMS with Docker or using the web installer.
     ```
 	docker-compose up
     ```
-    > That will run the containers for Apache2, PHP, MySQL and Ximdex running on localhost:80.
+    > That will run the containers for Apache2, PHP, MySQL and Ximdex running on localhost:80 (the directory with ximdex has to be in a shared path for docker)
 
 3. From your Chrome, Firefox, Safari or different browser visit http://localhost to end the installation.
     
-    > You need to type the password **ximdex** in the "*Database password*" field, to make Ximdex installation able to access to the database server, and create the data schema.
-    You don't need to create a schema data or database user by this way.
-    
-    This step will create the database schema in first place and, after this process, it will create the tables.
+    > For docker, you will need to use the host **db** instead of the suggested **localhost** and the password **ximdex** in the "*Database password*" field, to make Ximdex installation able to access to the database server, and create the data schema.
 
     If the **installation is aborted**, please use the next conmmand to remove the .data directory at ximdex to clean the database data:
     ```
