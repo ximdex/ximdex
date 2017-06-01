@@ -35,9 +35,9 @@ use Ximdex\Models\XimLocale;
 use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\Db;
-use Ximdex\Runtime\WebRequest;
+//use Ximdex\Runtime\WebRequest;
 use Ximdex\Utils\Extensions;
-use Ximdex\Utils\Serializer;
+//use Ximdex\Utils\Serializer;
 use Ximdex\Utils\Session;
 
 ModulesManager::file('/inc/search/QueryProcessor.class.php');
