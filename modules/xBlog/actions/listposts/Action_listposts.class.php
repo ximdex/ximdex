@@ -23,12 +23,12 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
-use Ximdex\Models\Action ;
+//use Ximdex\Models\Action;
 use Ximdex\Models\Node;
 use Ximdex\Models\User;
 use Ximdex\MVC\ActionAbstract;
 use DiDom\Document;
-use DiDom\Element;
+//use DiDom\Element;
 use Ximdex\Services\NodeType;
 
 ModulesManager::file("/actions/browser3/Action_browser3.class.php");
@@ -112,4 +112,3 @@ class Action_listposts extends ActionAbstract
         $this->sendJSON($lastestDocs);
     }
 }
-
