@@ -150,10 +150,6 @@ class ComposerStaticInit49ce0fed9e6c161c1c57d2afb6833eaa
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'PhpDocReader\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-di/phpdoc-reader/src/PhpDocReader',
-        ),
         'Pheanstalk\\' => 
         array (
             0 => __DIR__ . '/..' . '/pda/pheanstalk/src',
