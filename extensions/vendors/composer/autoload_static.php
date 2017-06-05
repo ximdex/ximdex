@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit49ce0fed9e6c161c1c57d2afb6833eaa
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
@@ -19,8 +18,6 @@ class ComposerStaticInit49ce0fed9e6c161c1c57d2afb6833eaa
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Symfony\\Polyfill\\Util\\' => 22,
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\HttpKernel\\' => 29,
@@ -92,14 +89,6 @@ class ComposerStaticInit49ce0fed9e6c161c1c57d2afb6833eaa
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Util\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-util',
-        ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
