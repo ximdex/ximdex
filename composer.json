@@ -45,7 +45,6 @@
         "hammerjs/hammer.js": "2.0.4",
         "pda/pheanstalk": "*",
         "symfony/console": "^3.1",
-        "symfony/polyfill-php56": "^1.2",
         "php-di/php-di": "^5.4",
         "doctrine/cache": "^1.6",
         "doctrine/common": "^2.7",
