@@ -8,9 +8,6 @@
 
 namespace Ximdex\API\Core;
 
-
-
-use Illuminate\Support\Facades\Auth;
 use Laravel\Lumen\Routing\Controller;
 use Illuminate\Http\Request;
 use Ximdex\API\APIResponse;

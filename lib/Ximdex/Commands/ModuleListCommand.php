@@ -2,9 +2,7 @@
 
 namespace Ximdex\Commands;
 
-
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,15 +21,11 @@ class ModulesListCommand extends Command
                 InputOption::VALUE_NONE,
                 'Show Module full path'
             )
-
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-
-
         foreach(Manager::getModules() as $module){
 
             $installed = ($module['enable'] ) ? '<info>Installed</info>': '<error>Not installed</error>' ;
@@ -43,8 +37,6 @@ class ModulesListCommand extends Command
 
             }
             $output->writeln( "" ) ;
-
-
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Ximdex\MVC\Middleware;
 
 use Closure;
 use Ximdex\Models\Action;
-use Ximdex\Models\Role;
 use Ximdex\Models\User;
 use Ximdex\Runtime\WebRequest;
 

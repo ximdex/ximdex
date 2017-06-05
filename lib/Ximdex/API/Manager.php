@@ -2,13 +2,8 @@
 namespace Ximdex\API;
 
 use Illuminate\Auth\Middleware\Authenticate;
-use Illuminate\Container\Container;
 use Illuminate\Http\Request;
-use Illuminate\Routing\RouteGroup;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
 use Laravel\Lumen\Application;
-use Ximdex\Authenticator;
 use Ximdex\Models\User;
 use Ximdex\Runtime\App;
 use Ximdex\Utils\FsUtils;

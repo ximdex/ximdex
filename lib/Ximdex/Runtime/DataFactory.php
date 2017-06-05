@@ -26,11 +26,12 @@
  */
 
 namespace Ximdex\Runtime;
+
 use Exception;
 use MetadataManager;
 use ModulesManager;
 use PoolerClient;
-use SolrConector;
+//use SolrConector;
 use Ximdex\Event\NodeEvent;
 use Ximdex\Logger;
 use Ximdex\Models\Node;

@@ -24,7 +24,7 @@
  *  @version $Revision$
  */
 
-use Ximdex\Logger;
+//use Ximdex\Logger;
 use Ximdex\Utils\FsUtils;
 
 if (!defined('XIMDEX_ROOT_PATH'))

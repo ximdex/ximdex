@@ -27,7 +27,6 @@
 namespace Ximdex\Utils;
 
 use Illuminate\Http\Request;
-use Ximdex\Logger as XMD_log;
 use Ximdex\Logger;
 use Ximdex\Runtime\WebRequest;
 

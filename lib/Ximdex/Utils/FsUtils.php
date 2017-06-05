@@ -26,7 +26,6 @@
 
 namespace Ximdex\Utils;
 
-use Ximdex\Logger as XMD_log;
 use Ximdex\Logger;
 
 class FsUtils

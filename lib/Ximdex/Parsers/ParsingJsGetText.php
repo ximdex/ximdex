@@ -3,7 +3,7 @@ namespace Ximdex\Parsers;
 
 use Ximdex\Logger;
 use Ximdex\Runtime\App;
-use Ximdex\Logger as XMD_LOG;
+//use Ximdex\Logger as XMD_LOG;
 
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]

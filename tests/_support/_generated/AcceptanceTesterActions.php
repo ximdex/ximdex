@@ -5,7 +5,6 @@ namespace _generated;
 // You should not change it manually as it will be overwritten on next build
 // @codingStandardsIgnoreFile
 
-use Helper\Acceptance;
 use Codeception\Module\Filesystem;
 use Codeception\Module\WebDriver;
 use Codeception\Module\Db;

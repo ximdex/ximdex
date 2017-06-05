@@ -10,7 +10,6 @@ namespace Ximdex\API\Core;
 
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Routing\Controller;
-use Ximdex\API\AbstractAPIAction;
 use Illuminate\Http\Request;
 use Ximdex\API\APIResponse;
 use Ximdex\Authenticator;

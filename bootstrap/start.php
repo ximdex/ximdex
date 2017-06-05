@@ -1,7 +1,5 @@
 <?php
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use Ximdex\Runtime\App ;
 
 /* Debug only */

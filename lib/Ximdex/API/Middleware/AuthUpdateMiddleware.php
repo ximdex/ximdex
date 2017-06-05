@@ -4,7 +4,6 @@ namespace Ximdex\API\Middleware;
 
 use Illuminate\Http\Request;
 use Closure;
-use Ximdex\API\APIException;
 use Ximdex\API\APIResponse;
 use Ximdex\Models\User;
 
