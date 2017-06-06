@@ -178,16 +178,15 @@ function get_bulletin_header()
 }
 function filter_pvd($nodeID)
 {     
-    	$strDoc = new StructuredDocument($nodeID);
-    	$templateID = $strDoc->GetDocumentType();
-    	$templateNode = new Node($templateID);
+    $strDoc = new StructuredDocument($nodeID);
+    $templateID = $strDoc->GetDocumentType();
+    $templateNode = new Node($templateID);
  	$templateContent = $templateNode ->class-> GetContent();
 	$templateContent = split("##########",$templateContent);
 	$content = str_replace("'", "\'", $templateContent[1]);
-    	$templateNew =& new DOMIT_Document();
-    	$success = $templateNew->parseXML($content,true);
+    $templateNew = new DOMIT_Document();
+    $success = $templateNew->parseXML($content,true);
 	$this->root  = & $templateNew->documentElement->firstChild;
 }
 
 }
-?>
