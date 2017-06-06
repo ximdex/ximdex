@@ -7,7 +7,6 @@
 namespace Swagger\Processors;
 
 use Swagger\Analysis;
-use SplObjectStorage;
 
 /**
  *
