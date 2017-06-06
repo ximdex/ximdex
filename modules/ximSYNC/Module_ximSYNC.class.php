@@ -24,7 +24,7 @@
  * @version $Revision$
  */
 use Ximdex\Modules\Module;
-use Ximdex\Runtime\Cli\Shell;
+//use Ximdex\Runtime\Cli\Shell;
 
 
 class Module_ximSYNC extends Module

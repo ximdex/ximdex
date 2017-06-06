@@ -24,20 +24,14 @@
  * @version $Revision$
  */
 
-
 use Ximdex\Logger;
-use Ximdex\Models\Node;
-use Ximdex\Models\PipeCacheTemplates;
 use Ximdex\Models\Version;
-use Ximdex\Utils\FsUtils;
-
 
 require_once(XIMDEX_ROOT_PATH . '/inc/repository/nodeviews/Abstract_View.class.php');
 require_once(XIMDEX_ROOT_PATH . '/inc/repository/nodeviews/Interface_View.class.php');
 
 class View_Dext extends Abstract_View implements Interface_View
 {
-
     public function transform($idVersion = NULL, $pointer = NULL, $args = NULL)
     {
         Logger::error('Dext is not longer supported. Returning the same content...');
@@ -45,7 +39,4 @@ class View_Dext extends Abstract_View implements Interface_View
 
         return $this->storeTmpContent($content);
     }
-
-
-
 }

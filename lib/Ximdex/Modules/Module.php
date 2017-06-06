@@ -28,7 +28,6 @@
 namespace Ximdex\Modules;
 
 use Symfony\Component\Console\Application;
-use Ximdex\API\Router;
 use Ximdex\Runtime\Cli\Shell,
     Ximdex\Logger,
     Ximdex\Runtime\App;

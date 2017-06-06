@@ -24,8 +24,6 @@
  * @version $Revision$
  */
 
-use Ximdex\Helpers\ServerConfig;
-use Ximdex\Utils\Crypto;
 use Ximdex\Utils\FsUtils;
 
 
