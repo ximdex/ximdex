@@ -50,143 +50,142 @@ ModulesManager::file('/extensions/domit/php_file_utilities.php');
 
 class xml_reader
 {
-var $doc;
-var $root;
-
-function xml_reader()
-{
-}
-function set_file($path)
-{
-	$this->doc = & new DOMIT_Document();
-     	$success = $this->doc ->loadXML($path);
-	$this->root = & $this->doc->documentElement;
-}
-function set_xmlString($content)
-{
-	$this->doc = & new DOMIT_Document();
-	$this->doc->parseXML($content,true);
-	$this->root = & $this->doc->documentElement;
-}
-
-function getDataList($from,$name,$value)
-{
-	$dbObj = new DB();
-	$resultado = array();
-	$sql = "SELECT " . $name . ", ".$value. " FROM " . $from;
-	$dbObj->Query($sql);
-	while (!$dbObj->EOF) { 	
-		$index = $dbObj->GetValue($name);
-		$resultado[$index] = $dbObj->GetValue($value);
-		$dbObj->Next();
-	}       
-	return $resultado;
-}
-
-//Grupo de elementos, con posibles opciones.
-function get_group($tag)
-{
-	$result = array();
-	$grupo = & $this->root->getElementsByTagName($tag);
-	$grupo = $grupo->item(0);
+	var $doc;
+	var $root;
 	
-        $elements = & $grupo->childNodes;
-	$num_elements = $grupo->childCount;
+	function xml_reader()
+	{
+	}
+	function set_file($path)
+	{
+		$this->doc = new DOMIT_Document();
+	     	$success = $this->doc ->loadXML($path);
+		$this->root = & $this->doc->documentElement;
+	}
+	function set_xmlString($content)
+	{
+		$this->doc = new DOMIT_Document();
+		$this->doc->parseXML($content,true);
+		$this->root = & $this->doc->documentElement;
+	}
 	
-	for($n=0; $n < $num_elements; $n++){
-		$data = array();
-		$element = $elements[$n];
-		$attrs = $element->attributes->arNodeMap;
-                foreach($attrs as $attr){
-			$name = $attr->getName();
-			$data[$name] = $element->getAttribute($name);
-		}
-		if($element->hasChildNodes()){
-			$childs = & $element->childNodes;
-			$num_childs = $element->childCount;
-			for($c=0; $c < $num_childs; $c++){
-				$child = $childs[$c];
-				if($child->nodeName == "option"){
-					$option = array();
-					$name = $child->getAttribute("name");
-					$value = $child->getAttribute("value");
-					$option[$name] = $value; 
-					if(!$data["options"]){
-						$data["options"] = array();
-					}
-					$data["options"][$name] = $value;
-				}
-				else if($child->nodeName == "options"){
-					$from = $child->getAttribute("from");
-					$name = $child->getAttribute("name");
-					$value = $child->getAttribute("value");
-					$option = $this->getDataList($from,$name,$value);
-					if(!$data["options"]){
-						$data["options"] = array();
-					}
-					foreach($option as $name=>$value){
+	function getDataList($from,$name,$value)
+	{
+		$dbObj = new DB();
+		$resultado = array();
+		$sql = "SELECT " . $name . ", ".$value. " FROM " . $from;
+		$dbObj->Query($sql);
+		while (!$dbObj->EOF) { 	
+			$index = $dbObj->GetValue($name);
+			$resultado[$index] = $dbObj->GetValue($value);
+			$dbObj->Next();
+		}       
+		return $resultado;
+	}
+	
+	//Grupo de elementos, con posibles opciones.
+	function get_group($tag)
+	{
+		$result = array();
+		$grupo = & $this->root->getElementsByTagName($tag);
+		$grupo = $grupo->item(0);
+		
+	        $elements = & $grupo->childNodes;
+		$num_elements = $grupo->childCount;
+		
+		for($n=0; $n < $num_elements; $n++){
+			$data = array();
+			$element = $elements[$n];
+			$attrs = $element->attributes->arNodeMap;
+	                foreach($attrs as $attr){
+				$name = $attr->getName();
+				$data[$name] = $element->getAttribute($name);
+			}
+			if($element->hasChildNodes()){
+				$childs = & $element->childNodes;
+				$num_childs = $element->childCount;
+				for($c=0; $c < $num_childs; $c++){
+					$child = $childs[$c];
+					if($child->nodeName == "option"){
+						$option = array();
+						$name = $child->getAttribute("name");
+						$value = $child->getAttribute("value");
+						$option[$name] = $value; 
+						if(!$data["options"]){
+							$data["options"] = array();
+						}
 						$data["options"][$name] = $value;
+					}
+					else if($child->nodeName == "options"){
+						$from = $child->getAttribute("from");
+						$name = $child->getAttribute("name");
+						$value = $child->getAttribute("value");
+						$option = $this->getDataList($from,$name,$value);
+						if(!$data["options"]){
+							$data["options"] = array();
+						}
+						foreach($option as $name=>$value){
+							$data["options"][$name] = $value;
+						}
 					}
 				}
 			}
+			$result[] = $data;
 		}
-		$result[] = $data;
+		
+		return $result;
+	}
+	function get_bulletin_info()
+	{
+		$info = array();
+		$elements = & $this->root->firstChild ->childNodes;
+		$num_elements = $this->root->firstChild->childCount;
+		for($n=0; $n < $num_elements; $n++){
+	             $element = $elements[$n];
+		     if($element->hasAttribute("visor")){
+		        $index = $element->getAttribute("visor");
+			$info[$index] = $element->getText();
+		     }	
+	        }
+		return $info;
+	}
+	function get_bulletin_info2()
+	{
+		$info = array();
+		$elements = & $this->root->firstChild ->childNodes;
+		$num_elements = $this->root->firstChild->childCount;
+		for($n=0; $n < $num_elements; $n++){
+	             $element = $elements[$n];
+	             $index = $element->getAttribute("label");
+		     $info[$index] = $element->getText();	
+	        }
+		return $info;
 	}
 	
-	return $result;
-}
-function get_bulletin_info()
-{
-	$info = array();
-	$elements = & $this->root->firstChild ->childNodes;
-	$num_elements = $this->root->firstChild->childCount;
-	for($n=0; $n < $num_elements; $n++){
-             $element = $elements[$n];
-	     if($element->hasAttribute("visor")){
-	        $index = $element->getAttribute("visor");
-		$info[$index] = $element->getText();
-	     }	
-        }
-	return $info;
-}
-function get_bulletin_info2()
-{
-	$info = array();
-	$elements = & $this->root->firstChild ->childNodes;
-	$num_elements = $this->root->firstChild->childCount;
-	for($n=0; $n < $num_elements; $n++){
-             $element = $elements[$n];
-             $index = $element->getAttribute("label");
-	     $info[$index] = $element->getText();	
-        }
-	return $info;
-}
-
-function get_bulletin_header()
-{
-        $header = array();
-	$elements = & $this->root->childNodes;
-	$num_elements = $this->root->childCount;
-	for($n=0; $n < $num_elements; $n++){
-             $element = $elements[$n];
-	     if($element->hasAttribute("visor")){
-	        $index = $element->getAttribute("visor");
-		$header[$index] = $element->getAttribute("label");
-	     }	
-        }
-	return $header;
-}
-function filter_pvd($nodeID)
-{     
-    $strDoc = new StructuredDocument($nodeID);
-    $templateID = $strDoc->GetDocumentType();
-    $templateNode = new Node($templateID);
- 	$templateContent = $templateNode ->class-> GetContent();
-	$templateContent = split("##########",$templateContent);
-	$content = str_replace("'", "\'", $templateContent[1]);
-    $templateNew = new DOMIT_Document();
-    $success = $templateNew->parseXML($content,true);
-	$this->root  = & $templateNew->documentElement->firstChild;
-}
-
+	function get_bulletin_header()
+	{
+	        $header = array();
+		$elements = & $this->root->childNodes;
+		$num_elements = $this->root->childCount;
+		for($n=0; $n < $num_elements; $n++){
+	             $element = $elements[$n];
+		     if($element->hasAttribute("visor")){
+		        $index = $element->getAttribute("visor");
+			$header[$index] = $element->getAttribute("label");
+		     }	
+	        }
+		return $header;
+	}
+	function filter_pvd($nodeID)
+	{     
+	    $strDoc = new StructuredDocument($nodeID);
+	    $templateID = $strDoc->GetDocumentType();
+	    $templateNode = new Node($templateID);
+	 	$templateContent = $templateNode ->class-> GetContent();
+		$templateContent = split("##########",$templateContent);
+		$content = str_replace("'", "\'", $templateContent[1]);
+	    $templateNew = new DOMIT_Document();
+	    $success = $templateNew->parseXML($content,true);
+		$this->root  = & $templateNew->documentElement->firstChild;
+	}
 }
