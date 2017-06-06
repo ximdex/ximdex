@@ -29,7 +29,6 @@ use Ximdex\Authenticator;
 use Ximdex\Models\User;
 use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
-use Ximdex\Runtime\WebRequest;
 
 ModulesManager::file('/inc/i18n/I18N.class.php');
 
