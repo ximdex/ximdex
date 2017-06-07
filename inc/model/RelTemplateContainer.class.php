@@ -27,6 +27,7 @@
 
 use Ximdex\Models\Node;
 use Ximdex\Models\StructuredDocument;
+use Ximdex\Models\Dependencies;
 
 if (!defined('XIMDEX_ROOT_PATH')) {
 	define ('XIMDEX_ROOT_PATH', realpath(dirname(__FILE__)) . '/../..');
@@ -70,7 +71,7 @@ class RelTemplateContainer extends RelTemplateContainer_ORM {
 
 				$doc = new StructuredDocument($child);
 				$version = $doc->GetLastVersion();
-				$dependencies = new dependencies();
+				$dependencies = new Dependencies();
 				$dependencies->insertDependence($idTemplate,$child,'PVD',$version);
 			}
 		}

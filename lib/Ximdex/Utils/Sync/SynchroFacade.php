@@ -44,8 +44,7 @@ use Ximdex\Models\StructuredDocument;
 use XimNewsBulletin;
 use XimNewsCache;
 use Ximdex\Logger as XMD_log;
-
-
+use Ximdex\Models\Dependencies;
 
 if (ModulesManager::isEnabled('ximSYNC')) {
 	ModulesManager::file('/inc/model/ServerFrame.class.php', 'ximSYNC');
@@ -764,7 +763,7 @@ class SynchroFacade
 					$result['notok'] = array_merge_recursive($result['notok'], $resultNew['notok']);
 					$result['unchanged'] = array_merge_recursive($result['unchanged'], $resultNew['unchanged']);
 
-					$dependencies = new dependencies();
+					$dependencies = new Dependencies();
 					$deps_tmp = $dependencies->GetMastersByType($newsID, 'LINK');
 
 					if (($deps_tmp != null) && (is_array($deps_tmp))) {

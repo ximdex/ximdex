@@ -175,7 +175,7 @@ class ParsingDependencies
         $nodeDependencies = new NodeDependencies();
         $nodeDependencies->deleteBySource($idNode);
 
-        $dependencies = new dependencies();
+        $dependencies = new Dependencies();
         $dependencies->deleteMasterNodeandType($idNode, $type);
 
         $depsMngr = new DepsManager();
@@ -189,9 +189,9 @@ class ParsingDependencies
             $images = array_unique(array_values($matches[1]));
 
 
-            //inserting new dependencies between css file and images.
+            //inserting new Dependencies between css file and images.
             foreach ($images as $_image) {
-                $dependencies = new dependencies();
+                $dependencies = new Dependencies();
                 $pathImage = preg_replace("/\.\.(\/\.\.)*/", $server_path, $_image);
                 $idNodeDep = self::_getIdNode($pathImage);
                 $res = $dependencies->find('IdDep', 'IdNodeMaster = %s and IdNodeDependent = %s', array($idNode, $idNodeDep), MONO);

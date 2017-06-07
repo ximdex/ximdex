@@ -29,7 +29,7 @@ namespace Ximdex\Models;
 
 use Ximdex\Runtime\DataFactory;
 use DB;
-use Ximdex\Models\dependencies;
+use Ximdex\Models\Dependencies;
 use Ximdex\Models\NodeType;
 use Ximdex\Models\Node;
 use Ximdex\Models\ORM\StructuredDocumentsOrm;
@@ -200,7 +200,7 @@ class StructuredDocument extends StructuredDocumentsOrm
 				$this->update();
 			}
 
-			$dependencies = new dependencies();
+			$dependencies = new Dependencies();
 			$dependencies->insertDependence($docID, $this->get('IdDoc'), 'SYMLINK', $this->GetLastVersion());
 			return true;
 		} else
@@ -222,7 +222,7 @@ class StructuredDocument extends StructuredDocumentsOrm
 			$this->SetContent($this->GetContent());
 
 			// Elimina la dependencia
-			$dependencies = new dependencies();
+			$dependencies = new Dependencies();
 			$dependencies->deleteDependenciesByDependentAndType($this->get('IdDoc'), 'SYMLINK');
 
 			return $result;
