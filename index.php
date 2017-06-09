@@ -25,9 +25,7 @@
  *
  */
 
-
 use Ximdex\Runtime\App;
-//use Ximdex\Utils\FsUtils;
 
 include_once __DIR__ . '/bootstrap/start.php';
 
@@ -73,7 +71,7 @@ if (!InstallController::isInstalled()) {
         if ( empty( $actionController ) ) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Action/method not found');
         } else {
-            // TODO: refactor this
+            //TODO: refactor this
             //$this->setUserState();
             //$stats = $this->actionStatsStart();
             $actionController->execute($request);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
@@ -23,18 +24,16 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
+
 use Ximdex\Modules\Module;
 //use Ximdex\Runtime\Cli\Shell;
 
-
 class Module_ximSYNC extends Module
 {
-
     var $syncPaths;
 
     public function __construct()
     {
-
         // Call Module constructor.
         parent::__construct("ximSYNC", dirname(__FILE__));
 
@@ -47,11 +46,10 @@ class Module_ximSYNC extends Module
 
     function install()
     {
-
         // Install logic.
 
-        // �get module from ftp, webdav, subversion, etc...?
-        // �need to be extracted?
+        // get module from ftp, webdav, subversion, etc...?
+        // need to be extracted?
         // extract and copy files to modules location.
 
         // get constructor SQL
@@ -60,6 +58,7 @@ class Module_ximSYNC extends Module
         // Install !
         $install_ret = parent::install();
         //Shell::exec('php ' . XIMDEX_ROOT_PATH . '/script/orm/generate.php Servers');
+        
         // Success
         $successInstall = true;
 
@@ -96,9 +95,7 @@ class Module_ximSYNC extends Module
 
     function preInstall()
     {
-
         $ret = $this->checkDependences(array());
-
         if (!is_null($ret)) {
 
             $this->messages->add(sprintf(_("* ERROR: dependence '%s' not found"), $ret), MSG_TYPE_ERROR);
@@ -111,7 +108,6 @@ class Module_ximSYNC extends Module
 
     function uninstall()
     {
-
         // Sync directories created
         $this->syncPaths = array(
             'channelframes' => 'created',
@@ -129,5 +125,3 @@ class Module_ximSYNC extends Module
         parent::uninstall();
     }
 }
-
-?>

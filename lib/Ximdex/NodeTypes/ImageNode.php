@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
@@ -25,6 +26,7 @@
  */
 
 namespace Ximdex\NodeTypes;
+
 use DOMDocument;
 use MetadataManager;
 use ModulesManager;
@@ -82,23 +84,18 @@ class ImageNode extends FileNode
 
         $width = $domNode->createElement("width");
         $height = $domNode->createElement('height');
-
+		/*
         $node = new Node($this->nodeID);
         $info = $node->GetLastVersion();
-        /*
         $pathToFile = App::get('AppRoot') . '/data/files/' . $info['File'];
         list($w, $h) =  getimagesize($pathToFile);
         $width->nodeValue = $w;
         $height->nodeValue = $h;
-
-
         */
-
         $fileData = $domNode->createElement("file_data");
         $fileData->appendChild($width);
         $fileData->appendChild($height);
         $domNode->appendChild($fileData);
         return $fileData;
     }
-
 }

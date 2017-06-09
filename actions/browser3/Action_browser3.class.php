@@ -35,7 +35,6 @@ use Ximdex\Models\XimLocale;
 use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
 use Ximdex\Runtime\Db;
-//use Ximdex\Runtime\WebRequest;
 use Ximdex\Utils\Extensions;
 //use Ximdex\Utils\Serializer;
 use Ximdex\Utils\Session;
@@ -291,12 +290,14 @@ class Action_browser3 extends ActionAbstract
         $this->render($values, $template, 'only_template.tpl');
     }
 
-//	protected function sendJSON($data) {
-//		$data = Serializer::encode(SZR_JSON, $data);
-//		header('Content-type: application/json');
-//		echo $data;
-//	}
-
+    /*
+    protected function sendJSON($data) {
+		$data = Serializer::encode(SZR_JSON, $data);
+		header('Content-type: application/json');
+		echo $data;
+    }
+	*/
+    
     /**
      * Returns a JSON object with the allowed nodetypes for searches
      */
