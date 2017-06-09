@@ -49,7 +49,7 @@
 					{t}and its subsections{/t}.
 				</label>
 			</p>
-			{if $synchronizer_to_use eq 'ximSYNC' && $ximpublish_tools_enabled}
+			{if $synchronizer_to_use eq 'ximSYNC' && $ximpublish_tools_enabled && isset($publishabledtypes)}
 				<p>
 					<label>{t}Node types to publish{/t}:</label>
 				</p>
