@@ -24,42 +24,37 @@
  * @version $Revision$
  */
 
-
 use Ximdex\Models\Node;
 use Ximdex\Models\NodeType;
 use Ximdex\MVC\ActionAbstract;
 use Ximdex\Utils\Logs\Log;
 use Ximdex\Utils\Sync\SynchroFacade;
 
-
 class Action_publicatesection extends ActionAbstract
 {
-	
+
     // Main method: shows initial form
     function index()
     {
+
         $idNode = (int)$this->request->getParam("nodeid");
         $node = new Node($idNode);
         $nodeTypeName = $node->nodeType->GetName();
-        
-        //TODO ajlucena: these are the pubishable types in this moment, Image and XML document
+        /*
         $nodeTypes = array('ImageFile', 'XmlDocument');
+
         foreach ($nodeTypes as $type) {
             $nodeType = new NodeType();
             $nodeType->SetByName($type);
-            
-            //TODO ajlucena: these lines have been uncommented
-            $nameShowed = preg_match('/image/i', $type) > 0 ? 'Imagen' : 'Documento';
-            $publishabledNodeTypes[] = array('id' => $nodeType->get('IdNodeType'), 'name' => $nameShowed);
+            //$nameShowed = preg_match('/image/i', $type) > 0 ? 'Imagen' : 'Documento';
+            //$publishabledNodeTypes[] = array('id' => $nodeType->get('IdNodeType'), 'name' => $nameShowed);
         }
-	
+		*/
+        
         $values = array(
             'go_method' => 'publicate_section',
-            
-            //TODO ajlucena: this line has been uncommented
-            'publishabledtypes' => $publishabledNodeTypes,
-            
-        	'synchronizer_to_use' => ModulesManager::isEnabled('ximSYNC') ? 'ximSYNC' : 'default',
+            //'publishabledtypes' => $publishabledNodeTypes,
+            'synchronizer_to_use' => ModulesManager::isEnabled('ximSYNC') ? 'ximSYNC' : 'default',
             'ximpublish_tools_enabled' => ModulesManager::isEnabled('ximPUBLISHtools'),
             'folderName' => in_array($nodeTypeName, array('XimNewsSection', 'Section', 'XimNewsImagesFolder', 'XimNewsImagesRootFolder', 'ImagesFolder', 'ImagesRootFolder', 'CssRootFolder', 'CssFolder', 'CommonFolder', 'CommonRootFolder', 'XimNewsImagesFolder')) ? 'section' : 'server',
             'name' => $node->GetNodeName()
