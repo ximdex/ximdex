@@ -166,7 +166,7 @@ define ('OPERATION_ADD', 'add');
 					"NODETYPENAME" => "BINARYFILE",
 					"NAME" => $name,
 					"PARENTID" => $idParent,
-					"STATE" => "Publicaci�n",
+					"STATE" => "Publicación",
 					"CHILDRENS" => 
 					array (
 						array (
@@ -183,7 +183,7 @@ define ('OPERATION_ADD', 'add');
 					'ID' => $idNode,
 					"NODETYPENAME" => "BINARYFILE",
 					"NAME" => $name,
-					"STATE" => "Publicaci�n",
+					"STATE" => "Publicación",
 					"CHILDRENS" => 
 					array (
 						array (
@@ -215,5 +215,3 @@ define ('OPERATION_ADD', 'add');
 	
 	cleanup($messages, $paquete, $destFolder, $result);
 	//Return result
-	
-?>
