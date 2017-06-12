@@ -1,11 +1,6 @@
-# sudo: required
+sudo: required
 
-# language: generic
-language: php
-php:
-  - '5.6'
-  - '7.0'
-  - '7.1'
+language: generic
 
 services:
   - docker
