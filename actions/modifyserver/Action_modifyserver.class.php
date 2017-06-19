@@ -63,7 +63,7 @@ class Action_modifyserver extends ActionAbstract {
 			$isServerOTF=false;
 		}
 
-		if($servers) {
+		if ($servers and $serverID) {
 			$server = array(
 				"id" => $serverID,
 				"name" => $servers->GetNodeName(),
@@ -81,6 +81,10 @@ class Action_modifyserver extends ActionAbstract {
 				'isServerOTF' => $isServerOTF
 
 			);
+		}
+		else
+		{
+			$server = array();
 		}
 
 		//Getting encodes
@@ -135,8 +139,10 @@ class Action_modifyserver extends ActionAbstract {
 		$login		= $this->request->getParam('login');
 		$password	= $this->request->getParam('password');
 		$description= $this->request->getParam('description');
+		
 		$enabled	= $this->request->getParam('enabled');
 		$preview	= $this->request->getParam('preview');
+		
 		$override	= $this->request->getParam('overridelocalpaths');
 		$channels	= $this->request->getParam('channels');
 		$states		= $this->request->getParam('states');
