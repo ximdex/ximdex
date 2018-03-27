@@ -37,19 +37,6 @@
 	<div class="action_content">
 		<div class="row tarjeta">
 			<h2 class="h2_general">{t}Manage servers{/t}</h2>
-			<fieldset class="mdfsv_errors">
-				<div class="messages">
-					<div class="ui-widget messages errors-container">
-					</div>
-				</div>
-			</fieldset>
-			{if !empty($messages)}
-				<div class="message">
-					{foreach name=messages from=$messages key=message_id item=message}
-						<p>{$message.message}</p>
-					{/foreach}
-				</div>
-			{/if}
 			<div id="serverid" class='server-name col1-3'>
 				<div class="create-server btn main_action">{t}Create new server{/t}</div>
 				{foreach from=$servers item=_server}
@@ -64,7 +51,7 @@
 						<label for="description" class="label_title label_general"></label>
 						<input style=" margin-bottom:10px;" type="text" id='description' name='description' MAXLENGTH="100" 
 								value="{$server.description}" 
-								class='server-title cajaxg validable not_empty js_val_alphanumeric js_val_unique_name full-size' 
+								class='input_general validable not_empty full-size' 
 								placeholder="{t}New server name{/t}" />
 					</div>
 					<span>
@@ -137,8 +124,8 @@
 									<input id='channels{$_channel.IdChannel}_{$id_node}' name='channels[]' type='checkbox' 
 											value='{$_channel.IdChannel}' {if isset($_channel.InServer) 
 											and ($_channel.InServer)}checked="checked"{/if} class="input-slide"/>
-									<label for='channels{$_channel.IdChannel}_{$id_node}' 
-											class="label-slide server_channel">{$_channel.Description|gettext}</label>
+									<label for='channels{$_channel.IdChannel}_{$id_node}' title="{$_channel.Name|gettext}" 
+											class="label-slide server_channel">{$_channel.Name|gettext}</label>
 								</div>
 							{/foreach}
 						{else}
@@ -150,7 +137,7 @@
 							<input type="hidden" name="borrar" />
 							{if (0 != $id_server)}
 									{button id="delete_server" label="Delete server" class="btn"}
-									{button id="save_server" label="Update server" 
+									{button id="update_server" label="Update server" 
 									class="validate btn main_action update-server"}{*message="Would you like to create this server?"*}
 								{else}
 									{button id="save_server" label="Save server" 

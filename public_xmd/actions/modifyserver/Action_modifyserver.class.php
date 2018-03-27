@@ -126,7 +126,7 @@ class Action_modifyserver extends ActionAbstract {
 			'id_server' => (int) $serverID,
 			'messages' => $this->messages->messages
 		);
-		$this->render($values, "index", 'default-3.0.tpl');
+		$this->render($values, 'index', 'default-3.0.tpl');
 	}
 
 	public function modify_server() {
@@ -151,6 +151,7 @@ class Action_modifyserver extends ActionAbstract {
 		$states		= $this->request->getParam('states');
 		$encode		= $this->request->getParam('encode');
 
+		$node = new Node($nodeID);
 		$server = new Node($nodeID);
 		$list = $server->class->GetPhysicalServerList();
 		
@@ -160,9 +161,6 @@ class Action_modifyserver extends ActionAbstract {
 		    $action = "new";
 		
 		if ($this->_validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)){
-
-			$node = new Node($nodeID);
-            
 			if ($this->request->getParam('borrar') == 1) {
 			    
 				$server = new Node($nodeID);
@@ -239,15 +237,12 @@ class Action_modifyserver extends ActionAbstract {
 			}
 		}
 
+		$this->messages->mergeMessages($node->messages);	
 		$values = array(
-			'messages' => $this->messages->messages,
-			'goback' => true,
-			'id_node' => $idNode,
-			'params' => $params,
-			'nodeURL' => App::getUrl("?actionid=$actionID&nodeid={$idNode}"),
+		    'messages' => $this->messages->messages, 
+		    'parentID' => $node->get('IdParent')
 		);
-		
-		$this->index($action, $serverID);
+		$this->sendJSON($values);
 	}
 
 	/**
@@ -257,7 +252,10 @@ class Action_modifyserver extends ActionAbstract {
 	    
 		$validation = true;
 
-		if ($protocol == 'LOCAL'){
+		if (empty($protocol)){
+		    $this->messages->add(_("A protocol is required"), MSG_TYPE_ERROR);
+		    $validation=false;
+		} else if ($protocol == 'LOCAL'){
 		    
 			if ((!$initialDir) || ($initialDir=='')){
 			    
@@ -269,7 +267,7 @@ class Action_modifyserver extends ActionAbstract {
 				$this->messages->add(_("A local url is required"), MSG_TYPE_ERROR);
 				$validation=false;
 			}
-		} else if (($protocol == 'FTP') || ($protocol == 'SSH')){
+		} else {
 		    
 			if (!$serverID and (!$password)){
 				$this->messages->add(_("A password is required"), MSG_TYPE_ERROR);
