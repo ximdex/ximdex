@@ -142,11 +142,8 @@ class Action_modifyserver extends ActionAbstract
 		$channels	= $this->request->getParam('channels');
 		$states		= $this->request->getParam('states');
 		$encode		= $this->request->getParam('encode');
-<<<<<<< HEAD
 
 		$node = new Node($nodeID);
-=======
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
 		$server = new Node($nodeID);
 		$list = $server->class->GetPhysicalServerList();
 		if (is_array($list) && in_array($serverID, $list)) {
@@ -154,14 +151,8 @@ class Action_modifyserver extends ActionAbstract
 		}
 		else {
 		    $action = "new";
-<<<<<<< HEAD
-		
-		if ($this->_validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)){
-=======
 		}
-		if ($this->_validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)) {
-			$node = new Node($nodeID);
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
+		if ($this->_validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)){
 			if ($this->request->getParam('borrar') == 1) {
 				$server = new Node($nodeID);
 				$server->class->DeletePhysicalServer($serverID);
@@ -221,20 +212,12 @@ class Action_modifyserver extends ActionAbstract
 				}
 			}
 		}
-<<<<<<< HEAD
-
 		$this->messages->mergeMessages($node->messages);	
-=======
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
 		$values = array(
 		    'messages' => $this->messages->messages, 
 		    'parentID' => $node->get('IdParent')
 		);
-<<<<<<< HEAD
 		$this->sendJSON($values);
-=======
-		$this->index($action, $serverID);
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
 	}
 
 	/**
@@ -243,18 +226,12 @@ class Action_modifyserver extends ActionAbstract
 	private function _validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)
 	{
 		$validation = true;
-<<<<<<< HEAD
-
 		if (empty($protocol)){
 		    $this->messages->add(_("A protocol is required"), MSG_TYPE_ERROR);
 		    $validation=false;
 		} else if ($protocol == 'LOCAL'){
 		    
 			if ((!$initialDir) || ($initialDir=='')){
-=======
-		if ($protocol == 'LOCAL') {
-			if ((!$initialDir) || ($initialDir=='')) {
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
 			    
 				$this->messages->add(_("A local directory is required"), MSG_TYPE_ERROR);
 				$validation=false;
@@ -264,14 +241,9 @@ class Action_modifyserver extends ActionAbstract
 				$this->messages->add(_("A local url is required"), MSG_TYPE_ERROR);
 				$validation=false;
 			}
-<<<<<<< HEAD
 		} else {
 		    
 			if (!$serverID and (!$password)){
-=======
-		} else if (($protocol == 'FTP') || ($protocol == 'SSH')) {
-			if (!$serverID and (!$password)) {
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
 				$this->messages->add(_("A password is required"), MSG_TYPE_ERROR);
 				$validation=false;
 			}

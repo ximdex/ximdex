@@ -159,13 +159,8 @@ class DexPumper {
 					// Manual stop for pumpers in sleeping mode
 					$stopper_file_path = XIMDEX_ROOT_PATH . App::getValue("TempRoot") . "/pumper.stop";
 					if (file_exists($stopper_file_path)) {
-<<<<<<< HEAD
 					    Logger::warning('[PUMPERS] ' . "STOP: Detected file" . " $stopper_file_path");
 					    break;
-=======
-					    Logger::warning('[PUMPERS] ' . _("STOP: Detected file") . " $stopper_file_path");
-					    exit();
->>>>>>> branch 'ximdex4' of https://github.com/XIMDEX/ximdex.git
 					}
 					$this->info("cycle $cycle without working. Sleeping.....");
 					continue;
