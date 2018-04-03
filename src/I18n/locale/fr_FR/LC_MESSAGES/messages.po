@@ -85,7 +85,7 @@ msgstr "Une erreur est survenue lors de la sauvegarde du document"
 msgid "The ISO code entered is already assigned to another language"
 msgstr "Le code ISO entré est déjà affecté a une autre langue"
 
-#: src/NodeTypes/Factory.php:76 src/NodeTypes/Factory.php:77
+#: src/NodeTypes/Factory.php:77
 #, php-format
 msgid "Fatal error: the nodetype associated to %s does not exist"
 msgstr "Fatal error: le noeud associé a %s n'existe pas"
@@ -97,24 +97,6 @@ msgstr "La transaction n'a pas pu être trouvée, vérifiez auprès de votre adm
 #: src/NodeTypes/StateNode.php:82
 msgid "No se pueden eliminar los estados primero y último del workflow"
 msgstr "Le premier et dernier état du workflow ne peuvent pas être supprimés"
-
-#: src/Properties/InheritedPropertiesManager.php:63
-#: src/Properties/InheritedPropertiesManager.php:136
-msgid "Inheritable property cannot be instantiate: "
-msgstr "La propriété héritable ne peut pas être instanciée: "
-
-#: src/Workflow/WorkFlow.php:236
-msgid "This nodetype is already associated to other workflow"
-msgstr "Ce noeud est déjà associé a d'autres flux de travail"
-
-#: src/IO/BaseIOInferer.php:119
-#, php-format
-msgid "Unsupported mime-type %s extension %s"
-msgstr "Extension de type-mime %s non prise en charge %s"
-
-#: src/IO/BaseIOInferer.php:144
-msgid "Empty mimetype detected on _infereFileType"
-msgstr "Type-mime vide détecté sur _infereFileType"
 
 #: src/IO/BaseIOInferer.php:174
 #, php-format
@@ -180,42 +162,9 @@ msgstr "un dossier de JS"
 msgid "Ximlet folder"
 msgstr "un dossier de Ximlet"
 
-#: src/IO/BaseIO.php:78
-msgid "Empty nodetype in baseIO"
-msgstr "Noeud vide dans baseIO"
-
 #: src/IO/BaseIO.php:79
 msgid "Empty nodetype"
 msgstr "Noeud vide"
-
-#: src/IO/BaseIO.php:92 src/IO/BaseIO.php:93 src/IO/BaseIO.php:821
-#: src/IO/BaseIO.php:822
-msgid "Nodetype could not be infered"
-msgstr "Le noeud n'a pas pu être déduit"
-
-#: src/IO/BaseIO.php:110 src/IO/BaseIO.php:111
-msgid "Node could not be inserted due to lack of permits"
-msgstr "Permission refusée : le noeud n'a pas pu être inséré"
-
-#: src/IO/BaseIO.php:119
-msgid "Node could not be inserted due to it is not allowed in the folder"
-msgstr "Le noeud n'a pas pu être inséré car il n'est pas autorisé dans le dossier"
-
-#: src/IO/BaseIO.php:127
-msgid "Parentid was not specified"
-msgstr "L'Id du parent n'a pas été spécifié"
-
-#: src/IO/BaseIO.php:128
-msgid "Node parent was not specified"
-msgstr "Le noeud du parent n'a pas été spécifié"
-
-#: src/IO/BaseIO.php:132 src/IO/BaseIO.php:133
-msgid "Node name was not specified"
-msgstr "Le nom du noeud n'a pas été spécifié"
-
-#: src/IO/BaseIO.php:254
-msgid "Error obtaining object messages"
-msgstr "Erreur d'obtention des messages d'objet"
 
 #: src/IO/BaseIO.php:338 src/IO/BaseIO.php:555 src/IO/BaseIO.php:579
 msgid "A file for node creation could not be obtained"
@@ -245,11 +194,6 @@ msgstr "La langue pour le noeud n'a pas été spécifiée "
 msgid "An error occurred trying to insert the node"
 msgstr "Une erreur s'est produite lors de l'insertion du noeud"
 
-#: src/IO/BaseIO.php:606 src/IO/BaseIO.php:1211
-#, php-format
-msgid "The class %s does not exist in BaseIO"
-msgstr "La class %s n'existe pas dans BaseIO"
-
 #: src/IO/BaseIO.php:844
 msgid "The identifier to update could not be found"
 msgstr "L'identifiant a mettre a jour n'a pas pu être trouvé"
@@ -266,11 +210,6 @@ msgstr "Le noeud %s n'a pas pu être trouvé"
 #: src/IO/BaseIO.php:984
 msgid "It has been specified a node of type xmldocument and the found node is of type "
 msgstr "Un noeud du type Xmldocument a été spécifié et le noeud est du type "
-
-#: src/IO/BaseIO.php:1058
-#, php-format
-msgid "The class %s is no existing in BaseIO update"
-msgstr "La classe %s n'existe pas dans la mise a jour de BaseIO"
 
 #: src/IO/BaseIO.php:1059
 msgid "A nodetype could not be determined for insertion"
@@ -296,10 +235,6 @@ msgstr "Erreur lors de l'exécution du script SQL: %s"
 msgid "%s not exists"
 msgstr "%s n'existe pas"
 
-#: src/Modules/Module.php:231
-msgid "-- SQL constructor loaded"
-msgstr "-- Constructeur SQL chargé"
-
 #: src/Modules/Module.php:233
 msgid "* ERROR: SQL constructor not loaded"
 msgstr "* ERREUR: Constructeur SQL non chargé"
@@ -312,7 +247,7 @@ msgstr "-- Destructeur SQL chargé"
 msgid "* ERROR: SQL destructor not loaded"
 msgstr "* ERREUR: Destructeur SQL non chargé"
 
-#: src/Sync/Synchronizer.php:78 src/Models/Node.php:113
+#: src/Sync/Synchronizer.php:78
 msgid "The node does not exist"
 msgstr "Le noeud n'existe pas"
 
@@ -352,118 +287,14 @@ msgstr "Les cadres ne peuvent pas se chevaucher"
 msgid "Document language is not enabled"
 msgstr "La langue du document n'est pas activée"
 
-#: src/Sync/Synchronizer.php:121
-#, php-format
-msgid "nodeID %s dateUp %s dateDown %s markEnd %s linked %s"
-msgstr "nodeID %s date de création %s date d'expiration %s markEnd %s linked %s"
-
-#: src/Sync/Synchronizer.php:126 src/Sync/SynchroFacade.php:475
-msgid "Void node"
-msgstr "Nœud vide"
-
-#: src/Sync/Synchronizer.php:143
-msgid "There is a frame in this interval"
-msgstr "Il y a un cadre dans cet intervalle"
-
-#: src/Sync/Synchronizer.php:162
-msgid "Any physical server available"
-msgstr "Plusieurs serveurs physique disponible"
-
-#: src/Sync/Synchronizer.php:185
-msgid "Disabled language"
-msgstr "Langue désactivée"
-
-#: src/Sync/Synchronizer.php:195
-msgid "Generation error for channel"
-msgstr "Erreur de génération pour la chaîne"
-
-#: src/Sync/SynchroFacade.php:55
-msgid "No correct node received"
-msgstr "Aucun noeud correct reçu"
-
-#: src/Sync/SynchroFacade.php:61
-msgid "No correct server received"
-msgstr "Aucun serveur correct reçu"
-
-#: src/Sync/SynchroFacade.php:73
-msgid "No target frame available"
-msgstr "Aucun cadre disponible"
-
-#: src/Sync/SynchroFacade.php:81 src/Sync/SynchroFacade.php:105
-msgid "No physical target server available"
-msgstr "Aucun serveur physique disponible"
-
-#: src/Sync/SynchroFacade.php:98
-msgid "Not target frame available"
-msgstr "Pas de cadre disponible"
-
-#: src/Sync/SynchroFacade.php:134
-#, php-format
-msgid "Deleting frames in table %s - server %s"
-msgstr "Suppression des cadres dans la table %s - serveur %s"
-
-#: src/Sync/SynchroFacade.php:136
-#, php-format
-msgid "No deletion in table %s - server %s"
-msgstr "Pas de suppression dans la table %s - serveur %s"
-
-#: src/Sync/SynchroFacade.php:240
-msgid "Unpublish documents before deleting node"
-msgstr "Annuler la publication des documents avant la suppression du noeud"
-
-#: src/Sync/SynchroFacade.php:242
-msgid "Delete node and keep documents published"
-msgstr "Supprimer le noeud et conserver les documents publiés"
-
-#: src/Sync/SynchroFacade.php:327 src/Sync/SynchroFacade.php:356
-#: src/Sync/SynchroFacade.php:385 src/Sync/SynchroFacade.php:414
-#: src/Sync/SynchroFacade.php:443
-msgid "Void param idFrame"
-msgstr "Parametre idFrame vide"
-
 #: src/Utils/PipelineManager.php:111
 msgid "[PipelineManager:getCacheFromProcess] Process not found: "
 msgstr "[PipelineManager:getCacheFromProcess] Processus non trouvé: "
-
-#: src/Utils/FsUtils.php:128
-#, php-format
-msgid "Error writing in file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s file: %s"
-msgstr "Erreur d'écriture dans le fichier [inc/fsutils/FsUtils.class.php] script: %s file: %s Ligne: %s fichier: %s"
-
-#: src/Utils/FsUtils.php:180
-#, php-format
-msgid "Trying to obtaing the content of a nonexistent file [lib/Ximdex/Utils/FsUtils.php] script: %s file: %s line: %s nonexistent_file: %s"
-msgstr "Tentative d'accés au contenu d'un fichier inexistant [lib/Ximdex/Utils/FsUtils.php] script: %s fichier: %s ligne: %s fichier_inexistant: %s"
-
-#: src/Utils/FsUtils.php:301
-#, php-format
-msgid "It has been applied to delete recursively a folder [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s folder: %s"
-msgstr "La suppression récursive d'un dossier [inc/fsutils/FsUtils.class.php] a été appliqué script: %s fichier: %s ligne: %s dossier: %s"
-
-#: src/Utils/FsUtils.php:308
-#, php-format
-msgid "Error estimating folder %s"
-msgstr "Erreur du dossier d'estimation %s"
 
 #: src/Utils/FsUtils.php:313
 #, php-format
 msgid "It was not possible to open the folder %s %s, %s"
 msgstr "Impossible d'ouvrir le dossier %s %s, %s"
-
-#: src/Utils/FsUtils.php:347
-#, php-format
-msgid "It has been applied to delete a nonexistent file %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s"
-msgstr "La suppression d'un fichier inexistant %s [inc/fsutils/FsUtils.class.php] a été appliquée script: %s fichier: %s ligne: %s"
-
-#: src/Utils/FsUtils.php:356
-#, php-format
-msgid "It has been applied to delete a file which could not been deleted %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s"
-msgstr "La suppression d'un fichier qui ne peut pas être supprimé %s [inc/fsutils/FsUtils.class.php] a été appliquée script: %s fichier: %s ligne: %s"
-
-#: src/Utils/Serializer.php:70
-#, php-format
-msgid "Serializer :: The class {%s} could not be instanced."
-msgstr "Serializer :: La classe {%s} n'a pas pu être instanciée"
 
 #: src/Utils/TarArchiver.class.php:116
 #, php-format
@@ -615,46 +446,13 @@ msgstr "La suppression du nœud a été refusée"
 msgid "Alias could not be updated, incorrect operation"
 msgstr "L'alias ​​n'a pas pu être mis a jour, opération incorrecte"
 
-#: src/Models/Node.php:2148
-#, php-format
-msgid "Error in query %s or %s"
-msgstr "Erreur dans la requête %s ou %s"
-
 #: src/Models/Node.php:2154 src/Models/Node.php:2182
 msgid "The node you want to operate with does not exist"
 msgstr "Le nœud que vous voulez utiliser n'existe pas"
 
-#: src/Models/Node.php:2155 src/Models/Node.php:2183
-msgid "Error: unexisting node"
-msgstr "Erreur: nœud inexistant"
-
 #: src/Models/Node.php:2176
 msgid "Alias could not be deleted, incorrect operation"
 msgstr "L'alias ​​n'a pas pu être supprimé, opération incorrecte"
-
-#: src/Models/Node.php:2177
-#, php-format
-msgid "Error in query %s"
-msgstr "Erreur dans la requête %s"
-
-#: src/Models/Node.php:2300
-msgid "It is being tried to call a function without param"
-msgstr "Tentative d'appel d'une fonction sans paramètre(s)"
-
-#: src/Models/Node.php:2317
-#, php-format
-msgid "The nodetype %s could not be obtained for node "
-msgstr "Le type de nœud %s n'a pas pu être obtenu pour le nœud "
-
-#: src/Models/Node.php:2775
-#, php-format
-msgid "It is being tried to load the unexistent node %s"
-msgstr "Tentative de chargement du nœud inexistant %s"
-
-#: src/Models/Node.php:2850 src/Models/Node.php:2859 src/Models/Node.php:2932
-#, php-format
-msgid "It is being tried to load the node %s from the unexistent node %s"
-msgstr "On essaie de charger le nœud %s a partir du nœud inexistant %s"
 
 #: src/Models/Node.php:2913
 #, php-format
@@ -666,31 +464,13 @@ msgstr "Il a été traité a %s%% des nœuds"
 msgid "The last processed node was %s"
 msgstr "Le dernier nœud traité était %s"
 
-#: src/Models/Node.php:2996
-msgid "Error checking if the node is allowed - parent does not exist [1]"
-msgstr "Erreur de vérification si le noeud est autorisé - parent n'existe pas [1]"
-
-#: src/Models/Node.php:3003
-msgid "Error checking if the node is allowed - parent does not exist [2]"
-msgstr "Erreur de vérification si le noeud est autorisé - parent n'existe pas [2]"
-
 #: src/Models/Node.php:3004
 msgid "The specified parent node does not exist"
 msgstr "Le noeud parent spécifié n'existe pas"
 
-#: src/Models/Node.php:3010
-#, php-format
-msgid "The parent %s does not allow any nested node from him"
-msgstr "Le parent %s n'autorise aucun nœud imbriqué"
-
 #: src/Models/Node.php:3011 src/Models/Node.php:3024
 msgid "This node type is not allowed in this position"
 msgstr "Ce type de nœud n'est pas autorisé dans cette position"
-
-#: src/Models/Node.php:3017
-#, php-format
-msgid "The introduced nodetype %s does not exist"
-msgstr "Le type de nœud introduit %s n'existe pas"
 
 #: src/Models/Node.php:3034
 msgid "The node is not allowed inside this parent"
@@ -700,18 +480,9 @@ msgstr "Ce nœud n'est pas autorisé a l'intérieur de ce parent"
 msgid "No more nodes can be created in this folder type"
 msgstr "Aucun autre nœud ne peut être créé dans ce type de dossier"
 
-#: src/Models/Node.php:3122
-#, php-format
-msgid "Property %s not found for node %d"
-msgstr "Propriété %s introuvable pour le nœud %d"
-
 #: src/Models/Node.php:3250 src/Models/Node.php:3265
 msgid "The node over which property want to be deleted does not exist "
 msgstr "Le noeud sur lequel la propriété veut être supprimée n'existe pas "
-
-#: src/Models/Node.php:3413
-msgid "It was not possible to obtain the node project folder"
-msgstr "Il n'a pas été possible d'obtenir le dossier de projet de noeud"
 
 #: src/Models/XimLocale.php:49
 msgid "Locale does not exist"
@@ -752,15 +523,6 @@ msgstr "Erreur dans l'objet associé"
 #: src/Models/User.php:65
 msgid "Role for group missing"
 msgstr "Rôle pour le groupe manquant"
-
-#: src/Models/User.php:488
-msgid "The node must be previously created"
-msgstr "Le nœud doit être créé précédemment"
-
-#: src/Models/User.php:867
-#, php-format
-msgid "The nodetype %d has no create action associated"
-msgstr "Le type de nœud %d n'a aucune action de création associée"
 
 #: src/Models/Pipeline.php:93
 msgid "An error has occurred while the document's transformation and the process cannot continue"
@@ -816,30 +578,6 @@ msgstr "La permission n'existe pas"
 #: src/Models/Permission.php:52
 msgid "Not initialized object"
 msgstr "Objet non initialisé"
-
-#: src/Models/NodeEdition.php:63 src/Models/NodeEdition.php:120
-msgid "Params node and user are mandatory"
-msgstr "Le nœud Params et l'utilisateur sont obligatoires"
-
-#: src/Models/NodeEdition.php:75
-msgid "Error Adding NodeEdition"
-msgstr "Erreur lors de l'ajout de NodeEdition"
-
-#: src/Models/NodeEdition.php:141
-msgid "Param user is mandatory"
-msgstr "Le params de l'utilisateur est obligatoire"
-
-#: src/Models/NodeProperty.php:51 src/Models/NodeProperty.php:80
-msgid "Params node and property are mandatory"
-msgstr "Le nœud Params et les propriétés sont obligatoires"
-
-#: src/Models/NodeProperty.php:97
-msgid "Param nodeId is mandatory"
-msgstr "Le params nodId est obligatoire"
-
-#: src/Models/NodeProperty.php:119
-msgid "Params nodeId and property are mandatories"
-msgstr "Le Params nodeId et les propriétés sont obligatoires"
 
 #: src/Cli/Shell.php:86
 msgid "Error of proc_open"
@@ -1067,10 +805,6 @@ msgstr "Au moins un canal est requis"
 msgid "A temporal directory to export could not be created"
 msgstr "Un répertoire temporel a exporter n'a pas pu être créé"
 
-#: public_xmd/actions/filedownload_multiple/Action_filedownload_multiple.class.php:123
-msgid "Directory could not be deleted "
-msgstr "Le répertoire n'a pas pu être supprimé "
-
 #: public_xmd/actions/publicatesection/Action_publicatesection.class.php:57
 #, php-format
 msgid "There is not any defined physical server in: '%s'"
@@ -1198,11 +932,6 @@ msgstr "La langue de Ximdex a changé en %s. Les modifications prendront effet u
 msgid "User could not be found"
 msgstr "L'utilisateur n'a pas pu être trouvé"
 
-#: public_xmd/actions/composer/Action_composer.class.php:594
-#, php-format
-msgid "A Node without NodeType was requested: idNode=%s, nodeType=%s"
-msgstr "Un noeud sans NodeType a été demandé: idNode =%s, nodeType =%s"
-
 #: public_xmd/actions/login/Action_login.class.php:72
 #, php-format
 msgid "Access to %s"
@@ -1316,10 +1045,6 @@ msgstr "L'insertion du document %s avec la langue %s a échoué"
 msgid "Language could not be successfully loaded, contact with your administrator"
 msgstr "Impossible de charger la langue avec succès, contactez votre administrateur"
 
-#: public_xmd/actions/modifylanguage/Action_modifylanguage.class.php:42
-msgid "Error while loading language"
-msgstr "Erreur lors du chargement de la langue"
-
 #: public_xmd/actions/modifylanguage/Action_modifylanguage.class.php:74
 msgid "Language has been successfully updated"
 msgstr "La langue a été mise a jour avec succès"
@@ -1387,77 +1112,18 @@ msgstr "L'opération a échouée"
 msgid "Not found"
 msgstr "Non trouvé"
 
-#: public_xmd/actions/xmleditor2/XimlinkResolver.class.php:198
-msgid "A new ximlink could not be created: "
-msgstr "Un nouveau ximlink n'a pas pu être créé: "
-
-#: public_xmd/actions/xmleditor2/XimlinkResolver.class.php:200
-msgid "ximlink: "
-msgstr "ximlink: "
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:87
-#: public_xmd/actions/xmleditor2/model/XmlEditor_Abstract.class.php:68
-#: public_xmd/actions/xmleditor2/model/XmlEditor_Abstract.class.php:126
-msgid "A non-existing node cannot be obtained: "
-msgstr "Un nœud non existant ne peut pas être obtenu: "
-
 #: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:97
 msgid "Preview as"
 msgstr "Aperçu en tant que"
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:359
-msgid "A non-existing node cannot be edited: "
-msgstr "Un nœud non existant ne peut pas être modifié: "
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:453
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:479
-msgid "A non-existing node cannot be saved: "
-msgstr "Un nœud non existant ne peut pas être sauvegardé: "
 
 #: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:477
 msgid "Document cannot be saved."
 msgstr "Le document ne peut pas être enregistré."
 
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:502
-msgid "The content of "
-msgstr "Le contenu de "
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:539
-msgid "A non-existing node content cannot be obtained: "
-msgstr "Un contenu de nœud non existant ne peut pas être obtenu: "
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:589
-msgid "The php-enchant module should be installed to use the spell checker"
-msgstr "Le module php-enchant doit être installé pour utiliser le vérificateur d'orthographe"
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:643
-msgid "Xowl_token configuration value has not been defined"
-msgstr "La valeur de configuration Xowl_token n'a pas été définie"
-
 #: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:652
 #, php-format
 msgid "Xowl module has not been installed.<br/><br/> If you want to realize the noticeable improvements that you will obtain with Xowl, a demonstrative video is shown below (%s)<br/><br/>Also, you can test it at <a target='_blank' href='http:/demo.ximdex.com'>demo.ximdex.com</a><br/><br/>"
 msgstr "Le module Xowl n'a pas été installé. <br/><br/> Si vous voulez réaliser les améliorations notables que vous obtiendrez avec Xowl, une vidéo démonstrative est montrée ci-dessous(%s) <br/><br/> vous pouvez le tester sur <a target='_blank'href='http:/demo.ximdex.com'>demo.ximdex.com</a><br/><br/>"
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:655
-msgid "Xowl module has not been installed. It is included in the advanced package WIX."
-msgstr "Le module Xowl n'a pas été installé. Il est inclus dans le package avancé WIX."
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_KUPU.class.php:710
-msgid "docxap can not be found for node: "
-msgstr "docxap est introuvable pour le nœud: "
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_Enricher.class.php:47
-msgid "Error while loading the xml enricher"
-msgstr "Erreur lors du chargement de l'enricher xml"
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_Enricher.class.php:82
-msgid "Error while enriching the scheme, a RNG grammar label"
-msgstr "Erreur lors de l'enrichissement du schéma, une étiquette de grammaire RNG"
-
-#: public_xmd/actions/xmleditor2/model/XmlEditor_Enricher.class.php:126
-msgid "Error while enriching the scheme, a 'define' was not found in the configuration file"
-msgstr "Erreur lors de l'enrichissement du schéma, un 'define' n'a pas été trouvé dans le fichier de configuration"
 
 #: public_xmd/actions/xmleditor2/Action_xmleditor2.class.php:72
 #: public_xmd/actions/edittext/Action_edittext.class.php:121
@@ -1469,31 +1135,10 @@ msgstr "Vous ne pouvez pas modifier le document."
 msgid "A non-existing editor has been refered."
 msgstr "Un éditeur non existant a été référé."
 
-#: public_xmd/actions/xmleditor2/Action_xmleditor2.class.php:436
-msgid "Error creating a new Node Edition"
-msgstr "Erreur lors de la création d'une nouvelle édition de noeud"
-
 #: public_xmd/actions/xmleditor2/Action_xmleditor2.class.php:469
 msgid "A link with that name already exists in the selected folder"
 msgstr "Un lien avec ce nom existe déjà dans le dossier sélectionné"
 
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:192
-msgid "Getting parent node with set uid..."
-msgstr "Obtenir le nœud parent avec set uid ..."
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:196
-msgid "Parent Node retrieved"
-msgstr "Nœud principal récupéré"
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:196
-msgid "with uid = "
-msgstr "avec uid = "
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:213
-msgid "Searching for edited nodes (uid set) and new nodes (uidtype) in html"
-msgstr "Recherche de nœuds édités (uid set) et de nouveaux nœuds (uidtype) en html"
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:221
 #: public_xmd/actions/workflow_forward/template/Smarty/show_results.tpl:38
 #: public_xmd/actions/workflow_forward/template/Smarty/show_results.tpl:42
 #: public_xmd/actions/xmlsetlink/template/Smarty/show_translation.tpl:25
@@ -1509,50 +1154,6 @@ msgstr "Recherche de nœuds édités (uid set) et de nouveaux nœuds (uidtype) e
 #: modules/ximSYNC/actions/managebatchs/template/Smarty/batchlistamp.tpl:186
 msgid "Node"
 msgstr "Noeud"
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:225
-msgid "exists. Editing content..."
-msgstr "existe. Modification du contenu ..."
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:237
-msgid "Non-existing uid. Getting type..."
-msgstr "Uid non-existant. Obtenir le type ..."
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:240
-msgid "Type retrieved: "
-msgstr "Type récupéré: "
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:242
-msgid "Type retrieved: none :: No translation applied"
-msgstr "Type extrait: aucun :: Aucune traduction appliquée"
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:250
-msgid "Parent node retrieved: "
-msgstr "Nœud parent récupéré: "
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:251
-msgid "Parent Uid retrieved: "
-msgstr "Uid parent récupéré: "
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:252
-msgid "Appending new child to parent node in XML document..."
-msgstr "Ajout d'un nouvel enfant au nœud parent dans un document XML ..."
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:264
-msgid "Setting uid "
-msgstr "Réglage de l'uid "
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:268
-msgid "Appending "
-msgstr "Ajouter "
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:290
-msgid "Searching for deleted elements..."
-msgstr "Recherche d'éléments supprimés ..."
-
-#: public_xmd/actions/xmleditor2/HTML2XML.class.php:320
-msgid "Deleting element with uid "
-msgstr "Suppression d'un élément avec uid "
 
 #: public_xmd/actions/fileupload_common_multiple/Action_fileupload_common_multiple.class.php:71
 msgid "It is necessary to be an active user to upload files"
@@ -1613,10 +1214,6 @@ msgstr "Le fichier a été écrasé avec succès."
 #: public_xmd/actions/fileupload_common_multiple/Action_fileupload_common_multiple.class.php:383
 msgid "File has been successfully uploaded."
 msgstr "Le fichier a été téléchargé avec succès."
-
-#: public_xmd/actions/fileupload_common_multiple/Action_fileupload_common_multiple.class.php:386
-msgid "BaseIO has returned the error code"
-msgstr "BaseIO a retourné le code d'erreur"
 
 #: public_xmd/actions/modifychannel/Action_modifychannel.class.php:86
 msgid "Any change has been perfomed"
@@ -1826,23 +1423,6 @@ msgstr "Une erreur s'est produite lors de la modification du groupe"
 msgid "There are no specified languages"
 msgstr "Il n'y a pas de langues spécifiées"
 
-#: public_xmd/actions/addlangxmlcontainer/Action_addlangxmlcontainer.class.php:105
-msgid "The selected node was not found:"
-msgstr "Le noeud sélectionné n'a pas été trouvé:"
-
-#: public_xmd/actions/addlangxmlcontainer/Action_addlangxmlcontainer.class.php:116
-msgid "More than one allowed nodetype has been found for this folder, it is recovered returning to the first"
-msgstr "Plus d'un nodetype autorisé a été trouvé pour ce dossier, il est récupéré en retournant au premier"
-
-#: public_xmd/actions/addlangxmlcontainer/Action_addlangxmlcontainer.class.php:121
-#, php-format
-msgid "The node with id %d has not any nodeAllowedContent with necessary features to store a language list"
-msgstr "Le noeud avec l'ID %d n'a aucun noeudAllowedContent avec les fonctionnalités nécessaires pour stocker une liste de langues"
-
-#: public_xmd/actions/addlangxmlcontainer/Action_addlangxmlcontainer.class.php:134
-msgid "No language has been found"
-msgstr "Aucune langue n'a été trouvée"
-
 #: public_xmd/actions/addlangxmlcontainer/Action_addlangxmlcontainer.class.php:221
 msgid "Changes have been successfully done"
 msgstr "Les modifications ont été effectuées avec succès"
@@ -1930,14 +1510,6 @@ msgstr "Le document"
 msgid " has been associated to the ximlet "
 msgstr " a été associé a l'ximlet "
 
-#: public_xmd/actions/addximlet/Action_addximlet.class.php:208
-msgid "Ximlet with id "
-msgstr "Ximlet avec l'Id "
-
-#: public_xmd/actions/addximlet/Action_addximlet.class.php:208
-msgid " has been deleted."
-msgstr " a été supprimé."
-
 #: public_xmd/actions/addximlet/Action_addximlet.class.php:237
 msgid "No ximlet has been found to be disassociated."
 msgstr "Aucune ximlet n'a été trouvée dissociée."
@@ -1971,14 +1543,6 @@ msgstr "Le fichier a été mis a jour avec succès"
 #: public_xmd/actions/browser3/inc/Datasource_Composer.class.php:205
 msgid "The query handler was not found."
 msgstr "Le gestionnaire de requête n'a pas été trouvé."
-
-#: public_xmd/actions/browser3/inc/GenericDatasource.class.php:51
-msgid "A class which does not exist is trying to be requested: Datasource_"
-msgstr "Un cours qui n'existe pas essaie d'être demandé: Datasource_"
-
-#: public_xmd/actions/browser3/Action_browser3.class.php:326
-msgid "Empty nodes in checkNodeAction [ browser3 ]"
-msgstr "Nœuds vides dans checkNodeAction [browser3]"
 
 #: public_xmd/actions/browser3/Action_browser3.class.php:558
 #: public_xmd/actions/browser3/Action_browser3.class.php:709
@@ -2318,14 +1882,6 @@ msgstr "L'opération a échoué: %s"
 msgid " has been successfully created"
 msgstr " a été créé avec succès"
 
-#: public_xmd/actions/showassocnodes/Action_showassocnodes.class.php:89
-msgid "Ximlet with identity "
-msgstr "Ximlet avec identité "
-
-#: public_xmd/actions/showassocnodes/Action_showassocnodes.class.php:89
-msgid "has been deleted"
-msgstr "a été supprimé"
-
 #: public_xmd/actions/showassocnodes/Action_showassocnodes.class.php:270
 #: public_xmd/actions/showassocnodes/Action_showassocnodes.class.php:273
 msgid "Ximlet"
@@ -2377,10 +1933,6 @@ msgstr "Le noeud a été envoyé avec succès pour publier"
 #: public_xmd/actions/modifyrolesstate/Action_modifyrolesstate.class.php:88
 msgid "Error: Role which you want to associate with workflow status could not be found"
 msgstr "Erreur: Le rôle que vous souhaitez associer au statut du flux de travail n'a pas pu être trouvé"
-
-#: public_xmd/actions/modifyrolesstate/Action_modifyrolesstate.class.php:89
-msgid "IdRole has not been found in action modifyrolestate"
-msgstr "IdRole n'a pas été trouvé en action modifyrolestate"
 
 #: public_xmd/actions/modifyrolesstate/Action_modifyrolesstate.class.php:93
 msgid "Role has been successfully associated with workflow status"
@@ -2463,44 +2015,6 @@ msgstr "L'utilisateur a été supprimé avec succès"
 #: public_xmd/actions/createlink/Action_createlink.class.php:81
 msgid "Link has been successfully added"
 msgstr "Le lien a été ajouté avec succès"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:93
-msgid "Idnode does not arrive"
-msgstr "L'id du noeud n'arrive pas"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:98
-msgid "Instantiated node has not idNode"
-msgstr "Le noeud instancié n'a pas idNode"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:173
-msgid "Label cannot be associated with version, empty idnode"
-msgstr "L'étiquette ne peut pas être associée a la version, idnode vide"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:176
-msgid "Wrong label value"
-msgstr "Mauvaise valeur de l'étiquette"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:188
-msgid "Id version has not been found in the association of labels with versions"
-msgstr "La version de l'ID n'a pas été trouvée dans l'association d'étiquettes avec des versions"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:190
-msgid "Labels are going to be associated with version"
-msgstr "Les étiquettes vont être associées a la version"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:196
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:204
-msgid "It is associated IdVersion"
-msgstr "Il est associé a IdVersion"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:196
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:204
-msgid "with label"
-msgstr "avec étiquette"
-
-#: public_xmd/actions/poolPreview/Action_poolPreview.class.php:210
-msgid "Correct association"
-msgstr "Association correcte"
 
 #: public_xmd/src/Widgets/calendar/Widget_calendar.class.php:47
 msgid "m-d-Y H:i:s"
@@ -2901,28 +2415,6 @@ msgstr "Les associations n'ont pas pu être supprimées de XimIONodeTranslations
 msgid "Importation information will not be deleted"
 msgstr "Les informations d'importation ne seront pas supprimées"
 
-#: modules/ximIO/inc/FileUpdater.class.php:61
-msgid "Starting the decompression of files of the package"
-msgstr "Commencer la décompression des fichiers du paquet"
-
-#: modules/ximIO/inc/FileUpdater.class.php:89
-msgid "Ignoring unexisting file"
-msgstr "Ignorer le fichier inexistant"
-
-#: modules/ximIO/inc/FileUpdater.class.php:99
-#, php-format
-msgid "The document %s with id %s could not been imported due to it could not been loaded"
-msgstr "Le document %s avec l'identifiant %s n'a pas pu être importé car il n'a pas pu être chargé"
-
-#: modules/ximIO/inc/FileUpdater.class.php:105
-msgid "Execution mode could not been estimated"
-msgstr "Le mode d'exécution n'a pas pu être estimé"
-
-#: modules/ximIO/inc/FileUpdater.class.php:110
-#, php-format
-msgid "Content of document %s with filepath %s could not been obtained"
-msgstr "Le contenu du document %s avec filepath %s n'a pas pu être obtenu"
-
 #: modules/ximIO/inc/ImportXml.class.php:206
 #, php-format
 msgid "The association %s=%s has been dismissed due to the node %s is not existing in the destiny ximdex"
@@ -2960,21 +2452,9 @@ msgstr "Des informations incomplètes sur le noeud racine ont été fournies"
 msgid "No valid user to perform the importation found"
 msgstr "Aucun utilisateur valide pour effectuer l'importation trouvée"
 
-#: modules/ximIO/inc/ImportXml.class.php:761
-msgid "Error inserting the node"
-msgstr "Erreur lors de l'insertion du noeud"
-
 #: modules/ximIO/inc/ImportXml.class.php:1072
 msgid "No se ha podido resolver el template"
 msgstr "Le template n'a pas pu être résolu"
-
-#: modules/ximIO/inc/ImportXml.class.php:1167
-msgid "No pvd could be successfully estimated for the node "
-msgstr "Aucun pvd n'a pu être estimé avec succès pour le noeud "
-
-#: modules/ximIO/inc/ImportXml.class.php:1198
-msgid "An inconsistency was found in database, there are several UUID in NodeProperties table with same value"
-msgstr "Une incohérence a été trouvée dans la base de données, il y a plusieurs UUID dans la table NodeProperties avec la même valeur"
 
 #: modules/ximIO/inc/ExportXml.class.php:66
 #, php-format
@@ -3122,24 +2602,6 @@ msgstr "Supprimé"
 msgid "Cancelled"
 msgstr "Annulé"
 
-#: modules/ximSYNC/inc/model/ServerErrorByPumper.class.php:53
-#, php-format
-msgid "Pumper %s does not exist"
-msgstr "Le pumper %s n'existe pas"
-
-#: modules/ximSYNC/inc/model/ServerErrorByPumper.class.php:82
-msgid "Creating serverError"
-msgstr "Création de serverError"
-
-#: modules/ximSYNC/inc/model/ServerErrorByPumper.class.php:94
-#, php-format
-msgid "Server %d has %d cycles inactive"
-msgstr "Le serveur %d a %d cycles inactifs"
-
-#: modules/ximSYNC/inc/model/Batch.class.php:184
-msgid "Error in DB: "
-msgstr "Erreur dans la BDD: "
-
 #: modules/ximSYNC/inc/model/PublishingReport.class.php:211
 msgid "is active"
 msgstr "est actif"
@@ -3147,18 +2609,6 @@ msgstr "est actif"
 #: modules/ximSYNC/inc/model/PublishingReport.class.php:211
 msgid "is stopped"
 msgstr "est stoppé"
-
-#: modules/ximSYNC/inc/manager/ServerErrorManager.class.php:98
-msgid "Disabling server"
-msgstr "Désactivation du serveur"
-
-#: modules/ximSYNC/inc/manager/ServerErrorManager.class.php:114
-msgid "Enabling server"
-msgstr "Activation du serveur"
-
-#: modules/ximSYNC/inc/manager/ServerErrorManager.class.php:121
-msgid "Setting ServerFrames to Due2In/Out to retry pumping"
-msgstr "Définition de ServerFrames a Due2In/Out pour réessayer le pompage"
 
 #: modules/ximSYNC/inc/manager/ServerFrameManager.class.php:79
 msgid "ERROR Params needed"
@@ -3208,144 +2658,14 @@ msgstr "Tous les pumpers avec des erreurs"
 msgid "No pumpers to be called"
 msgstr "Aucun pumper a appeler"
 
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:100
-msgid "Publication starts for "
-msgstr "La publication commence pour "
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:112
-msgid "Unexisting node"
-msgstr "Noeud non existant"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:170
-#, php-format
-msgid "[Generator %s]: Creating bach %s / %s"
-msgstr "[Générateur %s]: Création de lot %s/%s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:183
-msgid "Publication ended; time for publication"
-msgstr "Publication terminée: temps pour la publication"
-
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:183
 msgid " minutes"
 msgstr " minutes"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:207
-#, php-format
-msgid "Node %s belongs to an unpublished nodetype"
-msgstr "Le noeud %s appartient a un nodetype non publié"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:223
-#, php-format
-msgid "Node %s already exists in a NodeFrame"
-msgstr "Le noeud %s existe déjà dans un noeud NodeFrame"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:235
-#, php-format
-msgid "Incrementing version for %d documents"
-msgstr "Incrémenter la version pour les documents %d"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:241
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:309
-msgid "completed"
-msgstr "terminé"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:273
-msgid "Creating down batch: "
-msgstr "Créer un lot vers le bas: "
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:274
-#, php-format
-msgid "[Generator %s]: Creating down batch with id %s"
-msgstr "[Générateur %s]: Création d'un lot descendant avec l'identifiant %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:282
-msgid "Creating up batch: "
-msgstr "Créer un lot vers le haut: "
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:283
-#, php-format
-msgid "[Generator %s]: Creating up batch with id %s"
-msgstr "[Générateur %s]: Création du lot avec l'identifiant %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:337
-msgid "No version for node"
-msgstr "Aucune version pour le noeud"
 
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:338
 #, php-format
 msgid "Last version could not be obtained for node %s"
 msgstr "La dernière version n'a pas pu être obtenue pour le noeud %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:371
-#, php-format
-msgid "A NodeFrame could not be obtained for node %s"
-msgstr "Un NodeFrame n'a pas pu être obtenu pour le noeud %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:403
-#, php-format
-msgid "A ChannelFrame could not be obtained for node %s and channel %s"
-msgstr "Un ChannelFrame n'a pas pu être obtenu pour le noeud %s et le canal %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:404
-#, php-format
-msgid "Deleting Nodeframe for node %s"
-msgstr "Suppression de Nodeframe pour le noeud %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:441
-#, php-format
-msgid "Creation of ServerFrame could not be done: node %s, channel %s, batch %s"
-msgstr "La création de ServerFrame n'a pas pu être effectuée: noeud %s, canal %s, lot %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:452
-#, php-format
-msgid "Creation of ServerFrame could not be done: node %s, channel %s"
-msgstr "La création de ServerFrame n'a pas pu être effectuée: noeud %s, canal %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:453
-#, php-format
-msgid "ChannelFrame %s will be removed"
-msgstr "ChannelFrame %s sera supprimé"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:461
-#, php-format
-msgid "Creation of ServerFrame could not be done: node %s"
-msgstr "La création de ServerFrame n'a pas pu être effectuée: node %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:462
-#, php-format
-msgid "NodeFrame %s will be eliminated"
-msgstr "NodeFrame %s sera éliminé"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:479
-#, php-format
-msgid "The number of frames in %s batchs will be updated"
-msgstr "Le nombre d'images dans les lots %s sera mis a jour"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:487
-#, php-format
-msgid "Batch %s uploaded"
-msgstr "Lot %s importé"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:487
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:496
-#, php-format
-msgid "total frames %s"
-msgstr "nombre total d'images %s"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:496
-#, php-format
-msgid "Batch %s downloaded"
-msgstr "Lot %s téléchargé"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:511
-#, php-format
-msgid "Baths %s will be removed for being empty"
-msgstr "Les lots %s seront supprimés pour être vides"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:547
-#, php-format
-msgid "Found %s Batchs without Frames, were marked as NoFrames"
-msgstr "Trouvé %s lots sans cadres, ils ont été marqués comme NoFrames"
 
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:590
 #, php-format
@@ -3357,30 +2677,13 @@ msgstr "Définition de l'état \"Fermeture\" sur %s lot %d UP"
 msgid "Ending %s  batch %d UP"
 msgstr "Fin du lot %s vers le haut %d"
 
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:595
-msgid "Ending up batch with id "
-msgstr "Terminer le lot avec l'ID "
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:629
-#, php-format
-msgid "Batch %d type down without associated batch type up"
-msgstr ""
-
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:653
 msgid "Ending "
 msgstr "Fin "
 
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:654
-msgid "Ending down batch with id "
-msgstr "Fin du lot avec ID "
-
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:687
 msgid "Starting batch"
 msgstr "Lot où l'exportation commence"
-
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:757
-msgid "Nodesframes to be added to the portal review do not exist"
-msgstr "Les noeuds a ajouter a la révision du portail n'existent pas"
 
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:817
 msgid "Unplaying batch"
@@ -3404,12 +2707,6 @@ msgstr "priorité du lot du bas %d"
 msgid "ERROR Calc cycles"
 msgstr "ERREUR Cycles de calcul"
 
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:908
-#: modules/ximSYNC/inc/manager/BatchManager.class.php:923
-#, php-format
-msgid "ERROR: %s rare type of batch"
-msgstr "ERREUR: %s type de lot rare"
-
 #: modules/ximSYNC/inc/manager/BatchManager.class.php:946
 msgid "Setting batchs to"
 msgstr "Définition des lots a"
@@ -3418,39 +2715,6 @@ msgstr "Définition des lots a"
 #, php-format
 msgid "Batch %d does not exist"
 msgstr "Le lot %d n'existe pas"
-
-#: modules/ximSYNC/inc/manager/BatchManagerDaemon.php:54
-msgid "IdNode passed:"
-msgstr "IdNode transmis:"
-
-#: modules/ximSYNC/inc/manager/BatchManagerDaemon.php:66
-msgid "Publication cycle triggered by"
-msgstr "Cycle de publication déclenché par"
-
-#: modules/ximSYNC/inc/manager/BatchManagerDaemon.php:81
-msgid "Required node does not exist"
-msgstr "Le noeud requis n'existe pas"
-
-#: modules/ximSYNC/inc/manager/BatchManagerDaemon.php:95
-msgid "Fisical server does not exist for nodeId:"
-msgstr "Le serveur physique n'existe pas pour nodeId:"
-
-#: modules/ximSYNC/inc/manager/BatchManagerDaemon.php:95
-msgid "returning empty arrays."
-msgstr "retourne des tableaux vides."
-
-#: modules/ximSYNC/inc/manager/BatchManagerDaemon.php:134
-msgid "Purging subversions for node"
-msgstr "Purge des subversions pour le noeud"
-
-#: modules/ximSYNC/inc/manager/SyncManager.class.php:128
-msgid "Pushdocinpool - Empty IdNode"
-msgstr "Pushdocinpool - IdNode vide"
-
-#: modules/ximSYNC/inc/manager/SyncManager.class.php:139
-#, php-format
-msgid "Node %s does not exist"
-msgstr "Le noeud %s n'existe pas"
 
 #: modules/ximSYNC/inc/manager/SyncManager.class.php:237
 #, php-format
@@ -3509,107 +2773,10 @@ msgstr "ERREUR Définition de l'activité de NodeFrame %s sur %s"
 msgid "Procesing serverFrame"
 msgstr "Traitement de serverFrame"
 
-#: modules/ximSYNC/inc/manager/NodeFrameManager.class.php:239
-msgid "The Serverframe state change has failed"
-msgstr "Le changement d'état Serverframe a échoué"
-
 #: modules/ximSYNC/inc/manager/NodeFrameManager.class.php:321
 #, php-format
 msgid "ERROR: batch %s is a non-existent type of batch %s"
 msgstr "ERREUR: le lot %s est un type de lot inexistant %s"
-
-#: modules/ximSYNC/inc/manager/NodeFrameManager.class.php:431
-msgid "Affected batchs:"
-msgstr "Lots concernés:"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:51
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:44
-msgid "ximSYNC module is not active, you must run syncronizer module"
-msgstr "Le module ximSYNC n'est pas actif, vous devez exécuter le module syncronizer"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:76
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:82
-msgid "Starting Scheduler"
-msgstr "Début du planificateur"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:81
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:91
-msgid "Lock file existing"
-msgstr "Verrouiller le fichier existant"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:85
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:97
-msgid "Getting lock..."
-msgstr "Obtenir la serrure ..."
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:93
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:114
-msgid "STOP: Detected file"
-msgstr "STOP: Fichier détecté"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:93
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:114
-msgid "You need to delete this file in order to restart Scheduler successfully"
-msgstr "Vous devez supprimer ce fichier afin de redémarrer le planificateur avec succès"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:124
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:193
-#, php-format
-msgid "Exceding max. cycles (%d > %d). Exiting scheduler"
-msgstr "Dépassement max. cycles (%d > %d). Le planificateur se ferme"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:139
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:159
-msgid "No proccessable batchs found"
-msgstr "Aucun lot n'a été trouvé"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:154
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:137
-msgid "No active server"
-msgstr "Pas de serveur actif"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:158
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:145
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:167
-msgid "Sleeping..."
-msgstr "En train de s'éteindre..."
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:195
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:177
-msgid "STARTING BATCH PROCESSING"
-msgstr "TRAITEMENT DE LOTS DE LANCEMENT"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:197
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:215
-#, php-format
-msgid "Processing batch %s type %s"
-msgstr "Traitement du lot %s type %s"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:208
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:231
-#, php-format
-msgid "Checking activity, nodeframe %s for batch %s"
-msgstr "Activité de vérification, nodeframe %s pour le lot %s"
-
-#: modules/ximSYNC/scripts/scheduler/schedulerMPM.php:219
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:196
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:272
-msgid "STOPPING BATCH PROCESSING"
-msgstr "ARRÊT DU TRAITEMENT DES LOTS"
-
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:79
-msgid "Closing scheduler. Disabled pcntl_fork and pcntl_waitpid functions are required. Please, check php.ini file."
-msgstr "Fermeture du planificateur. Les fonctions pcntl_fork et pcntl_waitpid désactivées sont requises. S'il vous plaît, vérifiez le fichier php.ini."
-
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:185
-msgid "Cycle num"
-msgstr "numéro de cycle"
-
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:281
-#: modules/ximSYNC/scripts/scheduler/scheduler.class.php:296
-#, php-format
-msgid "Exceding max. cycles (%d > %d). Exit scheduler"
-msgstr "Dépassement max. cycles (%d > %d). Quitter le planificateur"
 
 #: modules/ximSYNC/scripts/pumper/php/dexpumper.php:84
 msgid "Username (or identifier)"
@@ -4838,6 +4005,10 @@ msgstr "Période d'inactivité atteinte"
 #: public_xmd/assets/js/sess.js:140
 msgid "You have reached the limit of inactivity period. Please, re-authenticate again in order to continue working."
 msgstr "Vous avez atteint la limite de la période d'inactivité. Merci de vous ré-authentifier a nouveau afin de continuer a travailler."
+
+#: public_xmd/assets/js/sess.js:141
+msgid "Login"
+msgstr "S'identifier"
 
 #: public_xmd/assets/js/browser_checker.js:53
 msgid "We have noticed some compatibility issues with your current browser. For now, some features just work fully fine in Firefox 4 or higher.<br/>Please, log in with Mozilla Firefox Browser."

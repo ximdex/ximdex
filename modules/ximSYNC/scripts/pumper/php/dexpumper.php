@@ -159,7 +159,7 @@ class DexPumper {
 					// Manual stop for pumpers in sleeping mode
 					$stopper_file_path = XIMDEX_ROOT_PATH . App::getValue("TempRoot") . "/pumper.stop";
 					if (file_exists($stopper_file_path)) {
-					    Logger::warning('[PUMPERS] ' . _("STOP: Detected file") . " $stopper_file_path");
+					    Logger::warning('[PUMPERS] ' . "STOP: Detected file" . " $stopper_file_path");
 					    break;
 					}
 					$this->info("cycle $cycle without working. Sleeping.....");
@@ -414,7 +414,7 @@ class DexPumper {
 		    $this->error("Could not rename the target document: {$targetFile} -> {$targetFolder}{$newFile} ");
             return false;
 		}
-		Logger::info(_('The file has been published succesfuslly') . ': ' . $newFile . ' (' . $idSync . ')', true);
+		Logger::info('The file has been published succesfuslly' . ': ' . $newFile . ' (' . $idSync . ')', true);
 		return true;
 	}
 

@@ -118,12 +118,12 @@ class Synchronizer
     {
         $node_id = $this->nodeID;
 
-        Logger::info(sprintf(_("nodeID %s dateUp %s dateDown %s markEnd %s linked %s"), $node_id, $dateUp, $dateDown, $markEnd, $linked));
+        Logger::info(sprintf("nodeID %s dateUp %s dateDown %s markEnd %s linked %s", $node_id, $dateUp, $dateDown, $markEnd, $linked));
 
         $ret_val = array();
 
         if (!($this->nodeID > 0)) {
-            Logger::error(_('Void node'));
+            Logger::error('Void node');
             return NULL;
         }
 
@@ -140,7 +140,7 @@ class Synchronizer
 
 
         if ($this->HasFrameOnInterval($dateUp, $dateDown)) {
-            Logger::error(_('There is a frame in this interval'));
+            Logger::error('There is a frame in this interval');
             return NULL;
         }
 
@@ -159,7 +159,7 @@ class Synchronizer
         }
 
         if (is_null($physicalServers)) {
-            Logger::error(_('Any physical server available'));
+            Logger::error('Any physical server available');
             return NULL;
         }
 
@@ -182,7 +182,7 @@ class Synchronizer
             $lang_doc = new Language();
 
             if (!$lang_doc->LanguageEnabled($lang_id)) {
-                Logger::error(_('Disabled language'));
+                Logger::error('Disabled language');
                 return NULL;
             }
 
@@ -192,7 +192,7 @@ class Synchronizer
             foreach ($generations as $contents) {
 
                 if (empty($contents['content'])) {
-                    Logger::error(_("Generation error for channel") . " {$contents['channel']}");
+                    Logger::error("Generation error for channel" . " {$contents['channel']}");
                     foreach ($node->class->messages as $message) {
                         Logger::error($message['message']);
                     }

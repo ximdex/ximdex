@@ -189,11 +189,11 @@ class HTML2XML {
 	private function getParentNodeWithUid ($node, &$parentNode) {
 
 		// Retrieving parent Node with set uid
-		Logger::info(_('Getting parent node with set uid...'));
+		Logger::info('Getting parent node with set uid...');
 		$parentUid = null;
 		while($parentNode = $node->parentNode) {
 			if(get_class($parentNode) == "DOMElement" && $parentUid = $parentNode->getAttribute('uid')) {
-				Logger::info(_('Parent Node retrieved').' (' . $parentNode->nodeName . ')  '._('with uid = ' ). $parentUid);
+				Logger::info('Parent Node retrieved'.' (' . $parentNode->nodeName . ')  '.'with uid = ' . $parentUid);
 				break;
 			}
 			$node = $parentNode;
@@ -210,7 +210,7 @@ class HTML2XML {
 		$lastUid = 0;
 
 		// Searching for edited nodes (uid set) and new nodes (uidtype) in html
-		Logger::info(_('Searching for edited nodes (uid set) and new nodes (uidtype) in html'));
+		Logger::info('Searching for edited nodes (uid set) and new nodes (uidtype) in html');
 		foreach ($nodeList as $idChild => $child) {
 
 			if ($child && $child->nodeType == 1) {
@@ -218,11 +218,11 @@ class HTML2XML {
 				// Getting uid
 				$tagCounter = $child->getAttribute('uid');
 
-				Logger::info(_('Node').': ' . $child->nodeName);
+				Logger::info('Node'.': ' . $child->nodeName);
 				if (in_array($tagCounter, array_keys($this->_uidMap))) {
 
 					// Uid exists. Editting content in XML
-					Logger::info('uid (' . $tagCounter . ') '._('exists. Editing content...'));
+					Logger::info('uid (' . $tagCounter . ') '.'exists. Editing content...');
 					$newChild = $this->_uidMap[$tagCounter];
 					if($textContent = $this->getTextContent($child)) {
 						$this->setTextContent($newChild, $textContent);
@@ -234,12 +234,12 @@ class HTML2XML {
 				} else {
 
 					// Non-existing uid. Getting Type
-					Logger::info(_('Non-existing uid. Getting type...'));
+					Logger::info('Non-existing uid. Getting type...');
 					$type = $child->getAttribute('uidtype');
 					if($type) {
-						Logger::info(_('Type retrieved: ') . $type);
+						Logger::info('Type retrieved: ' . $type);
 					} else {
-						Logger::info(_('Type retrieved: none :: No translation applied'));
+						Logger::info('Type retrieved: none :: No translation applied');
 						continue;
 					}
 
@@ -247,9 +247,9 @@ class HTML2XML {
 					$parentNode = null;
 					if($parentUid = $this->getParentNodeWithUid($child, $parentNode)) {
 
-						Logger::info(_('Parent node retrieved: ') . $parentNode->nodeName);
-						Logger::info(_('Parent Uid retrieved: ') . $parentUid);
-						Logger::info(_('Appending new child to parent node in XML document...'));
+						Logger::info('Parent node retrieved: ' . $parentNode->nodeName);
+						Logger::info('Parent Uid retrieved: ' . $parentUid);
+						Logger::info('Appending new child to parent node in XML document...');
 
 						// Appending new child to parent Node in XML document
 						$parent = $this->_uidMap[$parentNode->getAttribute('uid')];
@@ -261,11 +261,11 @@ class HTML2XML {
 
 						// Assigning new uid to actual node
 						$lastUid ++;
-						Logger::info(_('Setting uid ' . $lastUid . ' to ') . $child->nodeName);
+						Logger::info('Setting uid ' . $lastUid . ' to ' . $child->nodeName);
 						$child->setAttribute('uid', $this->_ximNode . "." . $lastUid);
 
 						// Appending
-						Logger::info(_('Appending ' . $newChild->nodeName . ' to ' . $parent->nodeName . ' before node with uid ') . $lastUid);
+						Logger::info('Appending ' . $newChild->nodeName . ' to ' . $parent->nodeName . ' before node with uid ' . $lastUid);
 						if($nextSiblingUid = $this->getNextSiblingUid($child)) {
 							$nextSibling = $this->_uidMap[$nextSiblingUid];
 						} else {
@@ -287,7 +287,7 @@ class HTML2XML {
 		}
 
 		// Searching for deleted elements
-		Logger::info(_('Searching for deleted elements...'));
+		Logger::info('Searching for deleted elements...');
 		$this->deleteXmlElements();
 
 	}
@@ -317,7 +317,7 @@ class HTML2XML {
 
 		foreach($this->_uidMap as $uid => $node) {
 			if(!in_array($uid, $this->_uidMapHtml)) {
-				Logger::info(_('Deleting element with uid ') . $uid);
+				Logger::info('Deleting element with uid ' . $uid);
 				$node->parentNode->removeChild($node);
 				unset($this->_uidMap[$uid]);
 			}

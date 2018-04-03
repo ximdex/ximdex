@@ -101,7 +101,7 @@ class Action_addlangxmlcontainer extends ActionAbstract {
 			$node = new Node($nodeid);
 			if (!($node->get('IdNode') > 0)) {
 			    
-				$msg = _('The selected node was not found:') . $nodeid;
+				$msg = 'The selected node was not found:' . $nodeid;
 				Logger::error($msg);
 				$this->messages->add($msg, MSG_TYPE_ERROR);
 				$this->render(array('messages' => $this->messages->messages));
@@ -113,13 +113,13 @@ class Action_addlangxmlcontainer extends ActionAbstract {
 				$idNodeType = $allowedNodeTypes[0]['nodetype'];
 			else {
 			    
-				Logger::error(_('More than one allowed nodetype has been found for this folder, it is recovered returning to the first'));
+				Logger::error('More than one allowed nodetype has been found for this folder, it is recovered returning to the first');
 				$idNodeType = $allowedNodeTypes[0]['nodetype'];
 			}
 
 			if (!isset($idNodeType)) {
 			    
-				$msg = sprintf(_('The node with id %d has not any nodeAllowedContent with necessary features to store a language list'), $nodeid);
+				$msg = sprintf('The node with id %d has not any nodeAllowedContent with necessary features to store a language list', $nodeid);
 				Logger::error($msg);
 				$this->messages->add($msg, MSG_TYPE_ERROR);
 				$this->render(array('messages' => $this->messages->messages));
@@ -133,7 +133,7 @@ class Action_addlangxmlcontainer extends ActionAbstract {
 
 			if (!$allLanguages) {
 			    
-				$msg = _('No language has been found');
+				$msg = 'No language has been found';
 				Logger::error($msg);
 				$this->messages->add($msg, MSG_TYPE_ERROR);
 				$this->render(array('messages' => $this->messages->messages));

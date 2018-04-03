@@ -195,9 +195,9 @@ class ximlinkResolver {
 		$result = $bio->build($data);
 
 		if ($result < 1) {
-			Logger::error(_('A new ximlink could not be created: ') . $url);
+			Logger::error('A new ximlink could not be created: ' . $url);
 			foreach ($bio->messages->messages as $msg) {
-				Logger::error(_('ximlink: ') . $msg['message']);
+				Logger::error('ximlink: ' . $msg['message']);
 			}
 		}
 

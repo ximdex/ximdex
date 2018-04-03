@@ -42,7 +42,7 @@ function DoPublicate($sectionID, $recursive = false) {
 	$childList = $node->GetChildren();
 
 	if ($childList) {
-		Logger::display(_("Precalculating list of nodes to expire"));
+		Logger::display("Precalculating list of nodes to expire");
 		foreach($childList as $child) {
 			$childNode = new Node($child);
 			//It adds children nodes except it they are of section type and they have not been specified like recursives
@@ -54,7 +54,7 @@ function DoPublicate($sectionID, $recursive = false) {
 		foreach($childList as $nodeID) {
 			Logger::display("");
 			Logger::display("---------------------------------------------------------------------");
-			Logger::display(_("Expiring node '").$nodeID."'");
+			Logger::display("Expiring node '").$nodeID."'";
 			$sync = new Synchronizer($nodeID);
 			$sync->DeleteFramesFromNow($nodeID);
 
@@ -67,7 +67,7 @@ function Main($argv, $argc)
 	global $config;
 	
 	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Executing: Expire section"));
+	Logger::display("Executing: Expire section");
 	Logger::display("---------------------------------------------------------------------");
 	
 	
@@ -83,7 +83,7 @@ function Main($argv, $argc)
 				$config['sectionid'] = $argv[++$i];
 			else
 				{
-				Logger::display(_("Section does not exist: '").$argv[++$i]."'");
+				Logger::display("Section does not exist: '".$argv[++$i]."'");
 				exit(1);
 				}
 			}
@@ -96,20 +96,20 @@ function Main($argv, $argc)
 	
 	if(!$config['sectionid'])
 		{
-		Logger::display(_("Uso del comando:"));
-		Logger::display(_("./expiresection_IO.php --sectionid {id de la seccion} [-r]"));
+		Logger::display("Uso del comando:");
+		Logger::display("./expiresection_IO.php --sectionid {id de la seccion} [-r]");
 		exit(1);
 		}
 	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Read parameters: "));
-	Logger::display(_("\t\tXimdex section: ").$config['sectionid'].", ".$node->GetNodeName());
+	Logger::display("Read parameters: ");
+	Logger::display("\t\tXimdex section: ".$config['sectionid'].", ".$node->GetNodeName());
 	Logger::display("---------------------------------------------------------------------");
 	//var_dump($config);
 
 	Logger::display("");
-	Logger::display(_(" Are read parameters correct?"));
-	Logger::display(_("To confirm press uppercase 'A' and then press 'Intro'."));
-	Logger::display(_(" Press Ctrl+C to exit."));
+	Logger::display(" Are read parameters correct?");
+	Logger::display("To confirm press uppercase 'A' and then press 'Intro'.");
+	Logger::display(" Press Ctrl+C to exit.");
 	$stdin = fopen('php://stdin', 'r');
 	do	{
 		;

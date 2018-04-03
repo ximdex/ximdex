@@ -273,7 +273,7 @@ class XeditAction extends Action
 
             return $nodes;
         } else {
-            Logger::info(_('Empty nodes in checkNodeAction [browser3]'));
+            Logger::info('Empty nodes in checkNodeAction [browser3]');
             return null;
         }
     }

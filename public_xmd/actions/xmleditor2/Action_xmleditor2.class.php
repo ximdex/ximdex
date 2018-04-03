@@ -433,7 +433,7 @@ class Action_xmleditor2 extends ActionAbstract
         // Creating the new edition for this user
         $res = $nodeEdition->create($idnode, $userID);
         if (!$res) {
-            Logger::error(_('Error creating a new Node Edition'));
+            Logger::error('Error creating a new Node Edition');
         }
         $return = array('edition' => $edition, 'data' => $extraEdition);
         header('Content-type: application/json');

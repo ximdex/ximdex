@@ -485,7 +485,7 @@ class User extends UsersOrm
     {
 
         if (is_null($idUser)) {
-            Logger::error(_("The node must be previously created"));
+            Logger::error("The node must be previously created");
             return NULL;
         }
 
@@ -497,7 +497,7 @@ class User extends UsersOrm
         $this->set('Locale', $locale);
 
         if (!parent::add()) {
-            Logger::error(_("Error in User persistence for $idUser"));
+            Logger::error("Error in User persistence for $idUser");
             return NULL;
         }
 
@@ -859,7 +859,7 @@ class User extends UsersOrm
         unset($nodeType);
         if (!$actionId > 0)
         {
-            Logger::warning(sprintf(_("The nodetype %d has no create action associated"), $nodeTypeId));
+            Logger::warning(sprintf("The nodetype %d has no create action associated", $nodeTypeId));
             return false;
         }
         foreach ($userRoles as $userRole)

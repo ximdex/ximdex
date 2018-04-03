@@ -54,10 +54,10 @@ function Main($argv, $argc)
 	{
 	global $config;
 	
-	Logger::info(_("Launching publicate section"));
+	Logger::info("Launching publicate section");
 
 	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Executing: Publicate Section"));
+	Logger::display("Executing: Publicate Section");
 	Logger::display("---------------------------------------------------------------------");
 	
 	
@@ -77,7 +77,7 @@ function Main($argv, $argc)
 				$config['sectionid'] = $argv[++$i];
 			else
 				{
-				Logger::display(_("Section does not exist: '").$argv[++$i]."'");
+				Logger::display("Section does not exist: '".$argv[++$i]."'");
 				exit(1);
 				}
 			}
@@ -90,19 +90,19 @@ function Main($argv, $argc)
 	
 	if(!$config['sectionid'])
 		{
-		Logger::display(_("Uso del comando:"));
+		Logger::display("Uso del comando:");
 		Logger::display("./publicatesection_IO.php --sectionid {id de la seccion} [-r]");
 		exit(1);
 		}
 	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Read parameters: "));
-	Logger::display(_("\tXimdex section: ").$config['sectionid'].", ".$node->GetNodeName());
+	Logger::display("Read parameters: ");
+	Logger::display("\tXimdex section: ".$config['sectionid'].", ".$node->GetNodeName());
 	Logger::display("---------------------------------------------------------------------");
 
 	Logger::display("");
-	Logger::display(_(" Are read parameters corrects?"));
-	Logger::display(_("To confirm press uppercase 'A' and then press 'Intro'."));
-	Logger::display(_(" Press Ctrl+C to exit."));
+	Logger::display(" Are read parameters corrects?");
+	Logger::display("To confirm press uppercase 'A' and then press 'Intro'.");
+	Logger::display(" Press Ctrl+C to exit.");
 
 	session_write_close();
 	ob_flush();
@@ -130,7 +130,7 @@ function PublicateSection($sectionID,$dateUp,$recurrence) {
 
         $node = new Node($sectionID);
 	if (!($node->nodeType->GetName() == 'Section' || $node->nodeType->GetName() == 'Server')) {
-	    Logger::display(_("Aborting publication, it is just allowed to publish over sections and servers"));
+	    Logger::display("Aborting publication, it is just allowed to publish over sections and servers");
 	    die();
 	}
 

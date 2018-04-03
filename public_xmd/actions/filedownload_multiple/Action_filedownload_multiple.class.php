@@ -120,7 +120,7 @@ class Action_filedownload_multiple extends ActionAbstract {
     private function deleteContents($tmpFolder) {
        	$ret = FsUtils::deltree($tmpFolder);
 	    if (!$ret) {
-    		Logger::info(_("Directory could not be deleted ").$tmpFolder);
+    		Logger::info("Directory could not be deleted ".$tmpFolder);
     	}
     }
 
