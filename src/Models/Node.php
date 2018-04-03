@@ -64,7 +64,6 @@ if (! defined('COUNT')) {
 class Node extends NodesOrm
 {
     /**
-     *
      * @var bool|string
      */
     var $nodeID;
@@ -72,7 +71,6 @@ class Node extends NodesOrm
     // current node ID.
     
     /**
-     *
      * @var mixed
      */
     var $class;
@@ -90,7 +88,6 @@ class Node extends NodesOrm
     // DB object which will be used in the methods.
     
     /**
-     *
      * @var
      */
     var $numErr;
@@ -98,7 +95,6 @@ class Node extends NodesOrm
     // Error code.
     
     /**
-     *
      * @var
      */
     var $msgErr;
@@ -106,7 +102,6 @@ class Node extends NodesOrm
     // Error message.
     
     /**
-     *
      * @var array
      */
     var $errorList = array();
@@ -141,6 +136,7 @@ class Node extends NodesOrm
         $this->flagErr = FALSE;
         $this->autoCleanErr = TRUE;
         parent::__construct($nodeID);
+        
         // In order to do not breack compatibility with previous version
         if ($this->get('IdNode') > 0) {
             $this->nodeID = $this->get('IdNode');
@@ -159,8 +155,7 @@ class Node extends NodesOrm
     }
 
     /**
-     *
-     * @return null
+     * @return NULL|string
      */
     function GetRoot()
     {
@@ -169,13 +164,11 @@ class Node extends NodesOrm
         if ($dbObj->numRows) {
             return $dbObj->GetValue('IdNode');
         }
-        
         $this->SetError(6);
         return NULL;
     }
 
     /**
-     *
      * @return bool|string
      */
     function GetID()
@@ -184,7 +177,6 @@ class Node extends NodesOrm
     }
 
     /**
-     *
      * @param null $nodeID
      */
     function SetID($nodeID = null)
@@ -194,7 +186,6 @@ class Node extends NodesOrm
     }
 
     /**
-     *
      * @return bool|string
      */
     function GetNodeName()
@@ -227,7 +218,7 @@ class Node extends NodesOrm
      */
     function SetNodeName($name)
     {
-        // it is a renamenode alias
+        // It is a renamenode alias
         return $this->RenameNode($name);
     }
 
@@ -242,7 +233,6 @@ class Node extends NodesOrm
     }
 
     /**
-     *
      * @return bool|string
      */
     function GetTypeName()
@@ -262,7 +252,6 @@ class Node extends NodesOrm
             $this->SetError(2);
             return false;
         }
-        
         $result = $this->set('IdNodeType', $nodeTypeID);
         if ($result) {
             return $this->update();
@@ -292,7 +281,6 @@ class Node extends NodesOrm
             $this->SetError(2);
             return false;
         }
-        
         $result = $this->set('Description', $description);
         if ($result) {
             return $this->update();
@@ -314,21 +302,53 @@ class Node extends NodesOrm
     /**
      * Changes the node workflow state
      * 
-     * @param $stateID
+     * @param int $stateID
      * @return boolean
      */
-    function SetState($stateID)
+    function SetState(int $stateID) : bool
     {
-        $dbObj = new \Ximdex\Runtime\Db();
-        if (($this->get('IdNode') > 0)) {
-            $sql = sprintf("UPDATE Nodes SET IdState= %d WHERE IdNode=%d OR SharedWorkflow = %d", $stateID, $this->get('IdNode'), $this->get('IdNode'));
-            
-            $result = $dbObj->Execute($sql);
-            if ($result) {
-                return true;
-            }
+        if (!$this->GetID()) {
+            $this->messages->add(_('The node ID is mandatory in order to change the state'), MSG_TYPE_ERROR);
+            return false;
         }
-        
+        $workflowStatus = new PipeStatus($stateID);
+        if (!$workflowStatus->get('id')) {
+            $this->messages->add(sprintf(_('The state %s does not exist'), $stateID), MSG_TYPE_ERROR);
+            return false;
+        }
+        if ($workflowStatus->get('Action')) {
+            
+            // Call a specified action in this transition to the new state
+            $actions = WorkFlow::getActions();
+            if (!isset($actions[$workflowStatus->get('Action')])) {
+                $this->messages->add(sprintf(_('The action %s does not exist'), $workflowStatus->get('Action')), MSG_TYPE_ERROR);
+                return false;
+            }
+            $action = explode('@', $workflowStatus->get('Action'));
+            $className = WorkFlow::WORKFLOW_ACTIONS_NAMESPACE . $action[0];
+            $class = new $className($this);
+            $method = $action[1];
+            Logger::info('Calling method ' . $method . ' in ' . $action[0] . ' class before change the status to ' . $workflowStatus->get('Name'));
+            if ($class->$method() === false) {
+                if ($class->getError()) {
+                    $error = $class->getError();
+                }
+                else {
+                    $error = 'The action ' . $method . ' (' . $action[0] . ') is not working propertly';
+                }
+                $this->messages->add($error, MSG_TYPE_ERROR);
+                Logger::error($error);
+                return false;
+            }
+            Logger::info('Method ' . $method . ' (' . $className . ') for node ' . $this->GetID() . ' run succefuslly', true);
+        }
+        $dbObj = new \Ximdex\Runtime\Db();
+        $sql = sprintf("UPDATE Nodes SET IdState= %d WHERE IdNode=%d OR SharedWorkflow = %d"
+                , $stateID, $this->get('IdNode'), $this->get('IdNode'));
+        $result = $dbObj->Execute($sql);
+        if ($result) {
+            return true;
+        }
         $this->messages->add(sprintf(_('The node could not be moved to state %s'), $stateID), MSG_TYPE_ERROR);
         return false;
     }
@@ -345,7 +365,6 @@ class Node extends NodesOrm
             if (method_exists($this->class, 'GetIcon')) {
                 return $this->class->GetIcon();
             }
-            
             return $this->nodeType->GetIcon();
         }
         $this->SetError(1);
@@ -395,8 +414,9 @@ class Node extends NodesOrm
             }
             $this->set('IdParent', $parentID);
             $result = $this->update();
-            if (! $result)
+            if (! $result) {
                 $this->messages->add(_('Node could not be moved'), MSG_TYPE_ERROR);
+            }
             $this->msgErr = _('Node could not be moved');
             $this->numErr = 1;
         }
@@ -415,17 +435,14 @@ class Node extends NodesOrm
         if (! $this->get('IdNode')) {
             return array();
         }
-        
         $where = 'IdParent = %s';
         $params = array(
             $this->get('IdNode')
         );
-        
         if (! empty($idtype)) {
             $where .= ' AND IdNodeType = %s';
             $params[] = $idtype;
         }
-        
         $validDirs = array(
             'ASC',
             'DESC'
@@ -433,7 +450,6 @@ class Node extends NodesOrm
         if (! empty($order) && is_array($order) && isset($order['FIELD'])) {
             $where .= sprintf(" ORDER BY %s %s", $order['FIELD'], isset($order['DIR']) && in_array($order['DIR'], $validDirs) ? $order['DIR'] : '');
         }
-        
         return $this->find('IdNode', $where, $params, MONO);
     }
 
@@ -3660,7 +3676,12 @@ class Node extends NodesOrm
             
             // Get the mime type from node content
             $info = pathinfo($this->GetNodeName());
-            if (strtolower($info['extension']) == 'css') {
+            if (strtolower($info['extension']) == 'svg') {
+                
+                // SVG files return text/plain by default
+                return 'image/svg+xml';
+            }
+            elseif (strtolower($info['extension']) == 'css') {
                 
                 // CSS files return text/plain by default
                 return 'text/css';

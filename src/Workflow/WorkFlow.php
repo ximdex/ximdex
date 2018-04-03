@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
@@ -24,7 +25,6 @@
  * @version $Revision$
  */
 
-
 namespace Ximdex\Workflow;
 
 use Ximdex\Models\Pipeline;
@@ -44,19 +44,23 @@ class WorkFlow
      * @var $pipeStatus PipeStatus
      */
     var $pipeStatus;
+    
     /**
      * @var $pipeProcess PipeProcess
      */
     var $pipeProcess;
+    
     /**
      * @var $pipeline Pipeline
      */
     var $pipeline;
+    
+    const WORKFLOW_ACTIONS_DIR = 'src/Workflow/Actions';
+    const WORKFLOW_ACTIONS_NAMESPACE = 'Ximdex\\Workflow\\Actions\\';
 
     public function __construct($idNode, $idStatus = NULL, $idPipelineNode = NULL)
     {
         if (!($idPipelineNode > 0)) {
-            
             if ($idNode)
             {
                 $node = new Node($idNode);
@@ -77,9 +81,7 @@ class WorkFlow
                 $idPipelineNode =  App::getValue('IdDefaultWorkflow');
             }
         }
-
         $this->pipeStatus = new PipeStatus($idStatus);
-
         $this->pipeline = new Pipeline($idPipelineNode);
         if (!$this->pipeline->get('id') > 0) {
             $this->pipeline->loadByIdNode($idPipelineNode);
@@ -95,7 +97,6 @@ class WorkFlow
     function SetID($id)
     {
         $this->WorkFlow($id);
-
     }
 
     function GetAllStates()
@@ -109,7 +110,6 @@ class WorkFlow
         return $role->GetAllowedStates();
     }
 
-
     function IsAllowedState($roleID)
     {
         $allowedStates = $this->GetAllowedStates($roleID);
@@ -119,21 +119,33 @@ class WorkFlow
         return false;
     }
 
-
-    // Devuelve el nombre del estado correspondiente
+    /**
+     * Devuelve el nombre del estado correspondiente
+     * 
+     * @return string
+     */
     function GetName()
     {
         return $this->pipeStatus->get('Name');
     }
 
-    // Nos permite cambiar el nombre a un estado
+    /**
+     * Nos permite cambiar el nombre a un estado
+     * 
+     * @param $name
+     * @return boolean|number|NULL|string
+     */
     function SetName($name)
     {
         $this->pipeStatus->set('Name', $name);
         return $this->pipeStatus->update();
     }
 
-    // Devuelve la descripcion del estado correspondiente
+    /**
+     * Devuelve la descripcion del estado correspondiente
+     * 
+     * @return boolean|string
+     */
     function GetDescription()
     {
         return $this->pipeStatus->get('Description');
@@ -142,7 +154,7 @@ class WorkFlow
     /**
      * @param $description
      */
-     function SetDescription($description)
+    function SetDescription($description)
     {
         $this->pipeStatus->set('Description', $description);
         $this->pipeStatus->update();
@@ -192,13 +204,16 @@ class WorkFlow
         return $this->pipeProcess->isStatusLast($this->pipeStatus->get('id'));
     }
 
-    // Nos devuelve los siguientes estados posibles al estado actual
+    /**
+     * Nos devuelve los siguientes estados posibles al estado actual
+     * 
+     * @return boolean|string
+     */
     function GetNextState()
     {
         $idStatus = $this->pipeProcess->getNextStatus($this->pipeStatus->get('id'));
         $pipeStatus = new PipeStatus($idStatus);
         return $pipeStatus->get('id');
-
     }
 
     /**
@@ -229,7 +244,6 @@ class WorkFlow
      */
     function setNodeType($idNodeType)
     {
-
         $pipeNodeTypes = new PipeNodeTypes();
         $result = $pipeNodeTypes->find('id, IdPipeline', 'IdNodeType = %s', array($idNodeType));
         if (count($result) > 0) {
@@ -238,15 +252,46 @@ class WorkFlow
         }
         $this->pipeline->set('IdNodeType', $idNodeType);
         $this->pipeline->update();
-        return true ;
+        return true;
     }
 
-    /**
-     *
-     */
     function setWorkflowMaster()
     {
         $this->pipeline->activatePipelineForNodes( App::getValue('IdDefaultWorkflow'));
-         App::setValue('IdDefaultWorkflow', $this->pipeline->get('id'));
+        App::setValue('IdDefaultWorkflow', $this->pipeline->get('id'));
+    }
+    
+    /**
+     * Get all class names and its public methods, inside the workflow actions directory
+     * 
+     * @return array
+     */
+    public static function & getActions() : array
+    {
+        $actions = array();
+        if ($dir = opendir(XIMDEX_ROOT_PATH . '/' . self::WORKFLOW_ACTIONS_DIR)) {
+            do {
+                $file = readdir($dir);
+                if (is_dir($file)) {
+                    continue;
+                }
+                $info = pathinfo($file);
+                if (!isset($info['extension']) or $info['extension'] != 'php') {
+                    continue;
+                }
+                $className = $info['filename'];
+                $class = self::WORKFLOW_ACTIONS_NAMESPACE . $className;
+                if (!class_exists($class)) {
+                    continue;
+                }
+                $methods = get_class_methods($class);
+                foreach ($methods as $method) {
+                    $actions[$className . '@' . $method] = $className . '@' . $method;
+                }
+            }
+            while ($file !== false);
+            closedir($dir);
+        }
+        return $actions;
     }
 }

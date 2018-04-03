@@ -1216,7 +1216,7 @@ msgid "File has been successfully uploaded."
 msgstr ""
 
 #: public_xmd/actions/modifychannel/Action_modifychannel.class.php:86
-msgid "Any change has been perfomed"
+msgid "Not any change has been performed"
 msgstr ""
 
 #: public_xmd/actions/modifychannel/Action_modifychannel.class.php:89
@@ -8741,7 +8741,5 @@ msgstr ""
 msgid "ID Node:"
 msgstr ""
 
-
-
-
-
+msgid "Render type for Web servers"
+msgstr ""
