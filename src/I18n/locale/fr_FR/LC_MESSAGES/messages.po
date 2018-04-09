@@ -1871,6 +1871,10 @@ msgstr "Modifié"
 msgid "Version"
 msgstr "Version"
 
+#: public_xmd/actions/newemptynode/Action_newemptynode.class.php:76
+msgid "You must select at least one scheme"
+msgstr "Vous devez sélectionner au moins un schéma"
+
 #: public_xmd/actions/newemptynode/Action_newemptynode.class.php:88
 #: public_xmd/actions/addfoldernode/Action_addfoldernode.class.php:368
 #, php-format
@@ -4916,13 +4920,17 @@ msgstr "Ajouter un nouveau document XML"
 msgid "Obligatory field"
 msgstr "Champ obligatoire"
 
-#: public_xmd/actions/createxmlcontainer/template/Smarty/index.tpl:58
+#: public_xmd/actions/createxmlcontainer/template/Smarty/index.tpl:69
 msgid "No schemes found"
 msgstr "Aucun schéma trouvé"
 
-#: public_xmd/actions/createxmlcontainer/template/Smarty/index.tpl:58
+#: public_xmd/actions/createxmlcontainer/template/Smarty/index.tpl:72
+msgid "You must create one in project <em>layout folder</em> or upload a new one"
+msgstr "Vous devez en créer un dans le dossier <em>layout du projet</em> ou en télécharger un nouveau"
+
+#: public_xmd/actions/createxmlcontainer/template/Smarty/index.tpl:75
 msgid "Maybe you need to set properly the type of your RNG schemes (performing the <em>Modify properties</em> action on them) or create/upload a new one"
-msgstr "Peut-être avez-vous besoin de définir correctement le type de vos schémas RNG (en exécutant l'action <em>Modifier les propriétés</em> sur eux) ou en créer / en télécharger unnouveau"
+msgstr "Peut-être avez-vous besoin de définir correctement le type de vos schémas RNG (en exécutant l'action <em>Modifier les propriétés</em> sur eux) ou en créer / en télécharger un nouveau"
 
 #: public_xmd/actions/createxmlcontainer/template/Smarty/_ximdoc_languages.tpl:43
 #: public_xmd/actions/addsectionnode/template/Smarty/index.tpl:69
@@ -6251,6 +6259,10 @@ msgstr "Ajouter une chaine"
 msgid "is going to be deleted"
 msgstr "va être supprimé"
 
+#: public_xmd/actions/deleteuser/template/Smarty/index.tpl:44
+msgid "Are you sure you want to delete this user?"
+msgstr "Êtes-vous sûr de vouloir supprimer cet utilisateur?"
+
 #: public_xmd/actions/edittext/template/Smarty/index.tpl:32
 #: modules/Xdms/actions/collaborative/template/Smarty/index.tpl:31
 msgid "Are you sure you want to save the changes?"
@@ -6971,11 +6983,11 @@ msgid "Create role"
 msgstr "Créer un rôle"
 
 #  table Actions ---------(`Name`, `Description`) -------------
-msgid "Add XML documents"
-msgstr "Ajouter des documents XML"
+msgid "Add XML or HTML documents"
+msgstr "Ajouter des documents XML ou HTML"
 
-msgid "Add new XML document"
-msgstr "Ajouter un nouveau document XML"
+msgid "Add new XML or HTML document"
+msgstr "Ajouter un nouveau document XML ou HTML"
 
 msgid "Add new HTML document"
 msgstr "Ajouter un nouveau document HTML"
@@ -8478,6 +8490,9 @@ msgstr "Racine du dossier d'image"
 
 msgid "Import folder"
 msgstr "Dossier d'importation"
+
+msgid "Root of documents folder"
+msgstr "Racine du dossier des documents"
 
 msgid "Root of import folder"
 msgstr "Racine du dossier d'importation"
