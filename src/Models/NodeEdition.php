@@ -60,7 +60,7 @@ class NodeEdition extends \Ximdex\Data\GenericData {
 	public function create($idNode, $idUser, $startTime = null) {
 
 		if (is_null($idNode) || is_null($idUser)) {
-			Logger::error(_('Params node and user are mandatory'));
+			Logger::error('Params node and user are mandatory');
 			return false;
 		}
 
@@ -72,7 +72,7 @@ class NodeEdition extends \Ximdex\Data\GenericData {
 		$nodeEditionId = $this->get('Id');
 
 		if (!($nodeEditionId > 0)) {
-			Logger::error(_("Error Adding NodeEdition"));
+			Logger::error("Error Adding NodeEdition");
 			return false;
 		}
 
@@ -117,7 +117,7 @@ class NodeEdition extends \Ximdex\Data\GenericData {
 	function deleteByNodeAndUser($idNode = null, $idUser = null) {
 		
 		if (is_null($idNode) || is_null($idUser)) {
-			Logger::error(_('Params node and user are mandatory'));
+			Logger::error('Params node and user are mandatory');
 			return false;
 		}
 
@@ -138,7 +138,7 @@ class NodeEdition extends \Ximdex\Data\GenericData {
 	function deleteByUser($idUser = null) {
 		
 		if (is_null($idUser)) {
-			Logger::error(_('Param user is mandatory'));
+			Logger::error('Param user is mandatory');
 			return false;
 		}
 

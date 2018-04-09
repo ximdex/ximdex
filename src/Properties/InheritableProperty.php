@@ -102,9 +102,8 @@ abstract class InheritableProperty
     {
         // Selected channels on the node
         $nodeProperties = $this->getProperty(false);
-        if (empty($nodeProperties)) {
+        if (empty($nodeProperties))
             $nodeProperties = array();
-        }
         if ($this->nodeTypeId != \Ximdex\NodeTypes\NodeTypeConstants::PROJECT) {
             
             // All the project properties will be the available ones

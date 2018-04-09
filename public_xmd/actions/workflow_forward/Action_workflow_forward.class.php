@@ -136,7 +136,7 @@ class Action_workflow_forward extends ActionAbstract
                 if (! $foundRol)
                     break;
             }
-            // If found the current state, we activate the flag
+            // if found the current state, we activate the flag
             if ($state == $node->GetState())
                 $find = true;
         }
@@ -160,8 +160,7 @@ class Action_workflow_forward extends ActionAbstract
         );
         
         // Only for Strdocs, goes to next state
-        if ($node->nodeType->GetID() == \Ximdex\NodeTypes\NodeTypeConstants::XML_DOCUMENT 
-                or $node->nodeType->GetID() == \Ximdex\NodeTypes\NodeTypeConstants::HTML_DOCUMENT) {
+        if ($node->nodeType->GetID() == \Ximdex\NodeTypes\NodeTypeConstants::XML_DOCUMENT) {
             if ($workflowNext->IsFinalState()) {
                 $values['go_method'] = 'publicateNode';
                 $values['hasDisabledFunctions'] = $this->hasDisabledFunctions();
@@ -253,7 +252,7 @@ class Action_workflow_forward extends ActionAbstract
                     'messages' => $this->messages->messages
                 );
                 $this->render($values, 'show_results', 'default-3.0.tpl');
-                return false;
+                return;
             }
         }
         
@@ -276,22 +275,13 @@ class Action_workflow_forward extends ActionAbstract
         } else {
             
             // If the next state is not the final, we show a success message
-            if ($node->setState($nextState) === false) {
-                $values = array(
-                    'goback' => true,
-                    'messages' => $node->messages->messages
-                );
-                $this->render($values, 'show_results', 'default-3.0.tpl');
-            }
-            else {
-                $values = array(
-                    'go_method' => 'publicateForm',
-                    'nextState' => $nextState,
-                    'currentState' => $node->GetState()
-                );
-                $this->addCss('/actions/workflow_forward/resources/css/style.css');
-                $this->render($values, 'success.tpl', 'default-3.0.tpl');
-            }
+            $node->setState($nextState);
+            $values = array(
+                'go_method' => 'publicateForm',
+                'nextState' => $nextState,
+                'currentState' => $node->GetState()
+            );
+            $this->render($values, 'success.tpl', 'default-3.0.tpl');
         }
     }
 
@@ -548,7 +538,7 @@ class Action_workflow_forward extends ActionAbstract
             , $texttosend, $lastPublished);
     }
 
-    private function sendToPublish($idNode, $up, $down, $markEnd, $force, $structure, $deepLevel, $sendNotifications, $notificableUsers
+    protected function sendToPublish($idNode, $up, $down, $markEnd, $force, $structure, $deepLevel, $sendNotifications, $notificableUsers
         , $idState, $texttosend, $lastPublished)
     {
         Logger::info("ADDSECTION publicateNode sendToPublish parent");
@@ -563,7 +553,7 @@ class Action_workflow_forward extends ActionAbstract
                     'messages' => $this->messages->messages
                 );
                 $this->render($values, 'show_results', 'default-3.0.tpl');
-                return false;
+                return;
             }
         }
         
@@ -607,14 +597,7 @@ class Action_workflow_forward extends ActionAbstract
         $node = new Node($idNode);
         $workflow = new WorkFlow($idNode);
         $firstState = $workflow->GetInitialState();
-        if ($node->setState($firstState) === false) {
-            $values = array(
-                'goback' => true,
-                'messages' => $node->messages->messages
-            );
-            $this->render($values, 'show_results', 'default-3.0.tpl');
-            return false;
-        }
+        $node->setState($firstState);
         Logger::info("ADDSECTION sendToPublish pre render");
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
             Logger::info("ADDSECTION sendToPublish pre render if");
@@ -625,6 +608,7 @@ class Action_workflow_forward extends ActionAbstract
             );
             Logger::info("ADDSECTION sendToPublish pre render else value: " . print_r($values, true));
             $this->render($values, 'show_results', 'default-3.0.tpl');
+            return;
         } else {
             $values = array(
                 'node_name' => $node->get('Name'),
@@ -635,10 +619,9 @@ class Action_workflow_forward extends ActionAbstract
             );
             $this->render($values, 'show_results', 'default-3.0.tpl');
         }
-        return true;
     }
 
-    private function buildFlagsPublication($markEnd, $structure = 1, $deepLevel = 1, $force = false, $lastPublished = 0)
+    protected function buildFlagsPublication($markEnd, $structure = 1, $deepLevel = 1, $force = false, $lastPublished = 0)
     {
         // Creating flags to publicate
         $flagsPublication = array(

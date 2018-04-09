@@ -42,7 +42,7 @@ function DoPublicate($sectionID, $recursive = false) {
 	$childList = $node->GetChildren();
 
 	if ($childList) {
-		Logger::display(_("Precalculating list of nodes to expire"));
+		Logger::info("Precalculating list of nodes to expire");
 		foreach($childList as $child) {
 			$childNode = new Node($child);
 			//It adds children nodes except it they are of section type and they have not been specified like recursives
@@ -52,9 +52,9 @@ function DoPublicate($sectionID, $recursive = false) {
 		}
 		
 		foreach($childList as $nodeID) {
-			Logger::display("");
-			Logger::display("---------------------------------------------------------------------");
-			Logger::display(_("Expiring node '").$nodeID."'");
+			Logger::info("");
+			Logger::info("---------------------------------------------------------------------");
+			Logger::info("Expiring node '".$nodeID."'");
 			$sync = new Synchronizer($nodeID);
 			$sync->DeleteFramesFromNow($nodeID);
 
@@ -66,9 +66,9 @@ function Main($argv, $argc)
 	{
 	global $config;
 	
-	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Executing: Expire section"));
-	Logger::display("---------------------------------------------------------------------");
+	Logger::info("---------------------------------------------------------------------");
+	Logger::info("Executing: Expire section");
+	Logger::info("---------------------------------------------------------------------");
 	
 	
 	$node		= new Node();
@@ -83,7 +83,7 @@ function Main($argv, $argc)
 				$config['sectionid'] = $argv[++$i];
 			else
 				{
-				Logger::display(_("Section does not exist: '").$argv[++$i]."'");
+				Logger::info("Section does not exist: '".$argv[++$i]."'");
 				exit(1);
 				}
 			}
@@ -92,24 +92,24 @@ function Main($argv, $argc)
 
 	$rec=$argv[3];
 
-	Logger::display("");
+	Logger::info("");
 	
 	if(!$config['sectionid'])
 		{
-		Logger::display(_("Uso del comando:"));
-		Logger::display(_("./expiresection_IO.php --sectionid {id de la seccion} [-r]"));
+		Logger::info("Uso del comando:");
+		Logger::info("./expiresection_IO.php --sectionid {id de la seccion} [-r]");
 		exit(1);
 		}
-	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Read parameters: "));
-	Logger::display(_("\t\tXimdex section: ").$config['sectionid'].", ".$node->GetNodeName());
-	Logger::display("---------------------------------------------------------------------");
+	Logger::info("---------------------------------------------------------------------");
+	Logger::info("Read parameters: ");
+	Logger::info("\t\tXimdex section: ".$config['sectionid'].", ".$node->GetNodeName());
+	Logger::info("---------------------------------------------------------------------");
 	//var_dump($config);
 
-	Logger::display("");
-	Logger::display(_(" Are read parameters correct?"));
-	Logger::display(_("To confirm press uppercase 'A' and then press 'Intro'."));
-	Logger::display(_(" Press Ctrl+C to exit."));
+	Logger::info("");
+	Logger::info(" Are read parameters correct?");
+	Logger::info("To confirm press uppercase 'A' and then press 'Intro'.");
+	Logger::info(" Press Ctrl+C to exit.");
 	$stdin = fopen('php://stdin', 'r');
 	do	{
 		;

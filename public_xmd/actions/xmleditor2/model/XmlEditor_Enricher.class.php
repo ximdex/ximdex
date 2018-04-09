@@ -44,7 +44,7 @@ class XmlEditor_Enricher {
     		// we should obtain the name to include it in the RNG
     		$schemaPart = self::readConfig();
     		if ($schemaPart == NULL) {
-    			Logger::error(_('Error while loading the xml enricher'));
+    			Logger::error('Error while loading the xml enricher');
     		}
 
     		//Checking that it contains a 'define' tag which we need the name of
@@ -79,7 +79,7 @@ class XmlEditor_Enricher {
     		$importedNode = $schemaDoc->importNode(self::readSchemaDefineElement(), true);
     		$inclusionList = $schemaDoc->getElementsByTagName('grammar');
     		if ($inclusionList->length != 1) {
-    			Logger::error(_('Error while enriching the scheme, a RNG grammar label'));
+    			Logger::error('Error while enriching the scheme, a RNG grammar label');
     			return $content;
     		}
     		// We already have the label imported to the destiny RNG
@@ -123,7 +123,7 @@ class XmlEditor_Enricher {
     	//Checking if a 'define' tag whome we need the name is contained
     	$nodeList = $schema->getElementsByTagName($element);
     	if ($nodeList->length != 1) {
-    		Logger::error(_("Error while enriching the scheme, a 'define' was not found in the configuration file"));
+    		Logger::error("Error while enriching the scheme, a 'define' was not found in the configuration file");
     		return $schema;
     	}
 

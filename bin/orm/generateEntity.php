@@ -59,7 +59,7 @@ $ormFile = $parameterCollector->getParameter('--ormFile');
 $className = $parameterCollector->getParameter('--className');
 
 if (!is_file($ormFile)) {
-	Logger::display('Se ha solicitado generar las vistas de un archivo inexistente ' . $ormFile);
+	Logger::info('Se ha solicitado generar las vistas de un archivo inexistente ' . $ormFile);
 	die();
 }
 
@@ -71,11 +71,11 @@ if (is_null($obj->_metaData)) {
 	var_dump($obj->_metaData);
 }
 
-Logger::display("File: " . realpath($ormFile));
-Logger::display('Class: ' . $className);
+Logger::info("File: " . realpath($ormFile));
+Logger::info('Class: ' . $className);
 $longFieldTypes = array('V', 'I', 'C', 'M', 'R');
 foreach ($obj->_metaData as $key => $fieldDescriptors) {
-	Logger::display("\t Field: " . $key);
+	Logger::info("\t Field: " . $key);
 	$fieldType = CliReader::alert(array('V', 'I', 'C', 'M', 'R', 'v', 'i', 'c', 'm', 'r'), 
 		'Seleccione tipo de campo Visible (V), Invisible (I), CreationDate (C), ModificationDate (M), Relation (R):');
 	$obj->_metaData[$key]['TYPE'] = $longFieldTypes[strtoupper($fieldType)];

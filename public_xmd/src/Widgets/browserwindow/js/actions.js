@@ -57,7 +57,7 @@
 			'linkreport', 
 			'workflow_forward',
             'workflow_backward',
-			'modifyserver',
+			//'modifyserver',
 			'modifygroupsnode',
 			'manageversions',
 			'modifygroupusers',

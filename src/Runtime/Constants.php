@@ -26,9 +26,7 @@ class Constants
     const IMPORTED_STATUS_PENDING_LINKS = 3;
 
     const EDITION_STATUS_ID = 7;
-    const PUBLICATION_STATUS_ID = 8;
-    
-    // Metatype of nodetypes
+    // metatype of nodetypes
     static $METATYPES_ARRAY = array(
         'FOLDER' => 'FOLDERNODE',
         'FOLDERNODE' => 'FOLDERNODE',

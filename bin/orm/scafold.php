@@ -59,7 +59,7 @@ $ormFile = $parameterCollector->getParameter('--entityFile');
 $className = $parameterCollector->getParameter('--className');
 
 if (!is_file($ormFile)) {
-    Logger::display('Se ha solicitado generar las vistas de un archivo inexistente ' . $ormFile);
+    Logger::info('Se ha solicitado generar las vistas de un archivo inexistente ' . $ormFile);
     die();
 }
 
@@ -71,8 +71,8 @@ if (is_null($obj->_metaData)) {
 
 $parcial = '';
 
-Logger::display("File: " . realpath($ormFile));
-Logger::display('Class: ' . $className);
+Logger::info("File: " . realpath($ormFile));
+Logger::info('Class: ' . $className);
 
 $longFieldTypes = array('K', 'V', 'I', 'C', 'M', 'R');
 $classNameForForm = str_replace('_ENTITY', '', $className);

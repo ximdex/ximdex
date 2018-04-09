@@ -31,9 +31,11 @@ use Ximdex\Logger;
 use Ximdex\Models\ORM\PipeStatusOrm;
 
 /**
+ *
  * @brief Stores the single status for a PipeTransition
  *
  * Stores the single status for a PipeTransition, this class provides just a description for the status
+ *
  */
 class PipeStatus extends PipeStatusOrm
 {
@@ -41,6 +43,7 @@ class PipeStatus extends PipeStatusOrm
 	{
 		$id = $this->find('id', 'Name = %s ', array($name), MONO);
 		if ((count($id) == 1) && ($id [0] > 0)) {
+		    
 			return $id [0];
 		}
 		return false;
@@ -54,10 +57,12 @@ class PipeStatus extends PipeStatusOrm
 	{
 		$nodes = $this->find('id', 'id = %s', array($idNode), MONO);
 		if (count($nodes) != 1) {
+		    
 			$this->messages->add(_('No se ha podido cargar el estado por su id de nodo'), MSG_TYPE_ERROR);
 			Logger::error(sprintf("No se ha podido cargar el estado por su id de nodo, se solicitó el idNode %s", print_r($idNode, true)));
 			return NULL;
 		}
+
 		parent::__construct($nodes[0]);
 		return $this->get('id');
 	}
@@ -70,10 +75,12 @@ class PipeStatus extends PipeStatusOrm
 	{
 		$nodes = $this->find('id', 'Name = %s', array($name), MONO);
 		if (count($nodes) != 1) {
+		    
 			$this->messages->add(_('No se ha podido cargar el estado por su nombre de nodo'), MSG_TYPE_ERROR);
 			Logger::error('No se ha podido cargar el estado por su nombre de nodo');
 			return NULL;
 		}
+
 		parent::__construct($nodes[0]);
 		return $this->get('id');
 	}

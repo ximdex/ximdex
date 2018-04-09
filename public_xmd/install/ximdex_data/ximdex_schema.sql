@@ -38,7 +38,6 @@ CREATE TABLE `Channels` (
   `Default_Channel` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdChannel`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Available channels used to transform content';
-ALTER TABLE `Channels` ADD `RenderType` ENUM('static','include','dynamic') NULL DEFAULT NULL AFTER `Default_Channel`;
 
 CREATE TABLE `Config` (
   `IdConfig` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -375,7 +374,6 @@ CREATE TABLE `PipeStatus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Description` varchar(250) NOT NULL,
-  `Action` varchar(255) DEFAULT NULL COMMENT 'Class and method names to call separated by @',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

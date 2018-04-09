@@ -56,12 +56,12 @@ class SynchroFacade
     {
         $targetNode = new Node(($idTargetNode));
         if (! ($targetNode->get('IdNode') > 0)) {
-            Logger::error(_('No correct node received'));
+            Logger::error('No correct node received');
             return NULL;
         }
         $server = new Server($idServer);
         if (! ($server->get('IdServer') > 0)) {
-            Logger::error(_('No correct server received'));
+            Logger::error('No correct server received');
             return NULL;
         }
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
@@ -70,14 +70,14 @@ class SynchroFacade
             $targetFrame = new ServerFrame();
             $frameID = $targetFrame->getCurrent($idTargetNode, $idTargetChannel); // esto es un idSync
             if (! ($frameID > 0)) {
-                Logger::error(_("No target frame available") . " FACADE target node: $idTargetNode target channel: $idTargetChannel server: $idServer");
+                Logger::error("No target frame available" . " FACADE target node: $idTargetNode target channel: $idTargetChannel server: $idServer");
                 return NULL;
             }
             
             // Calculating physical origin and destiny servers
             $physicalTargetServers = $targetFrame->getCompleteServerList($idTargetNode, $idTargetChannel);
             if (count($physicalTargetServers) == 0) {
-                Logger::error(_("No physical target server available"));
+                Logger::error("No physical target server available");
                 return NULL;
             }
             
@@ -90,12 +90,12 @@ class SynchroFacade
         $syncro = new Synchronizer($idTargetNode);
         $idFrame = $syncro->GetCurrentFrame($idTargetChannel);
         if (! ($idFrame > 0)) {
-            Logger::error(_("Not target frame available") . " FACADE (2)");
+            Logger::error("Not target frame available" . " FACADE (2)");
             return NULL;
         }
         $physicalTargetServers = $syncro->GetServerListOnFrame($idFrame, $idTargetChannel);
         if (count($physicalTargetServers) == 0) {
-            Logger::info(_("No physical target server available"));
+            Logger::info("No physical target server available");
             return NULL;
         }
         if (in_array($idServer, $physicalTargetServers)) {
@@ -120,9 +120,9 @@ class SynchroFacade
         $sql = "DELETE FROM $table WHERE IdServer = $physicalServerID";
         $dbObj->Execute($sql);
         if ($dbObj->numRows > 0) {
-            Logger::info(sprinf(_("Deleting frames in table %s - server %s"), $table, $physicalServerID));
+            Logger::info(sprinf("Deleting frames in table %s - server %s", $table, $physicalServerID));
         } else {
-            Logger::info(sprinft(_("No deletion in table %s - server %s"), $table, $physicalServerID));
+            Logger::info(sprinft("No deletion in table %s - server %s", $table, $physicalServerID));
         }
     }
 
@@ -212,13 +212,13 @@ class SynchroFacade
     function deleteAllTasksByNode($nodeID, $unPublish = false)
     {
         if (is_null($nodeID)) {
-            Logger::info(_("No existing node with id $nodeID"));
+            Logger::info("No existing node with id $nodeID");
             return NULL;
         }
         if (! is_null($unPublish)) {
-            Logger::info(_("Unpublish documents before deleting node"));
+            Logger::info("Unpublish documents before deleting node");
         } else {
-            Logger::info(_("Delete node and keep documents published"));
+            Logger::info("Delete node and keep documents published");
         }
         $deleteIDs = self::getAllTaskByNode($nodeID);
         foreach ($deleteIDs as $id) {
@@ -245,7 +245,7 @@ class SynchroFacade
     function getAllTaskByNode($nodeID)
     {
         if (is_null($nodeID)) {
-            Logger::info(_("No existing node with id $nodeID"));
+            Logger::info("No existing node with id $nodeID");
             return array();
         }
         $node = new Node($nodeID);
@@ -289,7 +289,7 @@ class SynchroFacade
     function getFrameState($idFrame)
     {
         if (is_null($idFrame)) {
-            Logger::error(_('Void param idFrame'));
+            Logger::error('Void param idFrame');
             return NULL;
         }
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
@@ -313,7 +313,7 @@ class SynchroFacade
     function getFramePath($idFrame)
     {
         if (is_null($idFrame)) {
-            Logger::error(_('Void param idFrame'));
+            Logger::error('Void param idFrame');
             return NULL;
         }
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
@@ -335,7 +335,7 @@ class SynchroFacade
     function getFrameName($idFrame)
     {
         if (is_null($idFrame)) {
-            Logger::error(_('Void param idFrame'));
+            Logger::error('Void param idFrame');
             return NULL;
         }
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
@@ -357,7 +357,7 @@ class SynchroFacade
     function getFrameServer($idFrame)
     {
         if (is_null($idFrame)) {
-            Logger::error(_('Void param idFrame'));
+            Logger::error('Void param idFrame');
             return NULL;
         }
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
@@ -379,7 +379,7 @@ class SynchroFacade
     function getFrameChannel($idFrame)
     {
         if (is_null($idFrame)) {
-            Logger::error(_('Void param idFrame'));
+            Logger::error('Void param idFrame');
             return NULL;
         }
         if (\Ximdex\Modules\Manager::isEnabled('ximSYNC')) {
@@ -405,7 +405,7 @@ class SynchroFacade
     function getLastPublishedNews($nodeID, $serverid, $channel)
     {
         if (is_null($nodeID)) {
-            Logger::info(_("Void node"));
+            Logger::info("Void node");
             return NULL;
         }
         $channelID = null;

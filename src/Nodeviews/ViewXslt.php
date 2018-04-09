@@ -254,7 +254,7 @@ class ViewXslt extends AbstractView
             $logMessage .= ' with version: ' . $idVersion;
         }
         $logMessage .= ' with channel: ' . $channel->GetName();
-        Logger::info($logMessage);
+        Logger::info($logMessage, true);
         Logger::setActiveLog($defaultLog);
         return $this->storeTmpContent($content);
     }

@@ -44,10 +44,9 @@ class LanguageProperty extends InheritableProperty {
 	 */
     protected function get_system_properties()
     {
-        if (!$this->language) {
+        if (!$this->language)
             $this->language = New Language();
-        }
-        return $this->language->find('IdLanguage as Id, Name, IsoName', 'Enabled = 1', NULL);
+        return $this->language->find('IdLanguage as Id, Name', 'Enabled = 1', NULL);
     }
     
     /**
@@ -57,14 +56,13 @@ class LanguageProperty extends InheritableProperty {
      */
     protected function get_inherit_properties(array $availableProperties)
     {
-        if (!$this->language) {
+        if (!$this->language)
             $this->language = New Language();
-        }
-        return $this->language->find('IdLanguage as Id, Name, IsoName', 'Enabled = 1 and IdLanguage in (%s)'
-            , array(implode(', ', $availableProperties)), MULTI, false);
+        return $this->language->find('IdLanguage as Id, Name', 'Enabled = 1 and IdLanguage in (%s)', array(implode(', ', $availableProperties)), MULTI, false);
     }
     
     protected function updateAffectedNodes($values) {
+        
         return false;
     }
 }

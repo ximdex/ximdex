@@ -40,15 +40,16 @@ function manageproperties_showDialog(messages, fn, params, callback) {
 	});
 
 	$dialog
-		.html($messagesHTML)
-		.dialog({
-			buttons: {
-				"Cancel": function() {
-					dialogCallback(false);
-				},
-				"Accept": function() {
-	  				dialogCallback(true);
-				}
+	.html($messagesHTML)
+	.dialog({
+		title: 'Ximdex Notifications',
+		buttons: {
+			_("Cancel"): function() {
+				dialogCallback(false);
+			},
+			_("Accept"): function() {
+  				dialogCallback(true);
 			}
-		});
+		}
+	});
 }

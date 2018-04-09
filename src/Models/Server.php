@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
@@ -25,9 +24,14 @@
  * @version $Revision$
  */
 
+
 namespace Ximdex\Models;
 
 use Ximdex\Models\ORM\ServersOrm;
 
+
 class Server extends ServersOrm
-{}
+{
+
+}
+

@@ -1,4 +1,9 @@
 <?php
+use Ximdex\Models\Node;
+use Ximdex\Models\Version;
+use Ximdex\MVC\ActionAbstract;
+use Ximdex\Runtime\App;
+use Ximdex\Runtime\DataFactory;
 
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
@@ -24,14 +29,6 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
-
-use Ximdex\Models\Node;
-use Ximdex\Models\Version;
-use Ximdex\MVC\ActionAbstract;
-use Ximdex\Runtime\App;
-use Ximdex\Runtime\DataFactory;
-use Ximdex\Models\NodeType;
-
 class Action_filepreview extends ActionAbstract
 {
 
@@ -41,9 +38,12 @@ class Action_filepreview extends ActionAbstract
         $this->response->set('Cache-Control',
             array('no-store, no-cache, must-revalidate', 'post-check=0, pre-check=0'));
         $this->response->set('Pragma', 'no-cache');
+
         $idNode = $this->request->getParam('nodeid');
+
         $version = $this->request->getParam('version');
         $subVersion = $this->request->getParam('sub_version');
+
         if (is_numeric($version) && is_numeric($subVersion)) {
             $dataFactory = new DataFactory($idNode);
             $selectedVersion = $dataFactory->getVersionId($version, $subVersion);
@@ -51,14 +51,13 @@ class Action_filepreview extends ActionAbstract
             $dataFactory = new DataFactory($idNode);
             $selectedVersion = $dataFactory->GetLastVersionId();
         }
-        if (!$selectedVersion) {
-            //TODO error
-        }
+
+        $version = new Version($selectedVersion);
+        $hash = $version->get('File');
         $node = new Node($idNode);
-        $nodetype = new NodeType($node->GetNodeType());
+        $nodetype = new \Ximdex\Models\NodeType($node->GetNodeType());
         $values = array('id_node' => $idNode,
-            'path' => App::getValue('UrlRoot') . '/?action=rendernode&nodeid=' . $node->GetID() . '&version=' . $version . '&sub_version=' 
-                . $subVersion,
+            'path' => App::getValue('UrlRoot') . '/data/files/' . $hash,
             'Name' => $node->get('Name'),
             'type' => $nodetype->GetName()
             );

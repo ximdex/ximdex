@@ -84,7 +84,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
 
         $node = new Node($idnode);
         if (!($node->get('IdNode') > 0)) {
-            Logger::error(_("A non-existing node cannot be obtained: ") . $node->get('IdNode'));
+            Logger::error("A non-existing node cannot be obtained: " . $node->get('IdNode'));
             return null;
         }
 
@@ -356,7 +356,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
     {
 
         if (!$this->setNode($idNode)) {
-            Logger::error(_("A non-existing node cannot be edited: ") . $idNode);
+            Logger::error("A non-existing node cannot be edited: " . $idNode);
         }
 
 
@@ -450,7 +450,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
         $tmpFilePath = XIMDEX_ROOT_PATH . App::getValue('TempRoot') . "/xedit_" . $idUser . "_" . $idNode;
 
         if (!$this->setNode($idNode)) {
-            Logger::error(_("A non-existing node cannot be saved: ") . $idNode);
+            Logger::error("A non-existing node cannot be saved: " . $idNode);
             $response['result'] = false;
         } else {
             if (!$content = FsUtils::file_get_contents($tmpFilePath)) {
@@ -476,7 +476,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
         if (!$this->setNode($idNode)) {
             $msg = _("Document cannot be saved.");
 
-            Logger::error(_("A non-existing node cannot be saved: ") . $idNode);
+            Logger::error("A non-existing node cannot be saved: " . $idNode);
 
             $response['saved'] = false;
             $response['headers'][] = 'HTTP/1.1 200 Ok';
@@ -499,7 +499,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
             } else {
                 $idUser = \Ximdex\Runtime\Session::get('userID');
                 if (!$idUser || !FsUtils::file_put_contents(XIMDEX_ROOT_PATH . App::getValue('TempRoot') . "/xedit_" . $idUser . "_" . $idNode, \Ximdex\Utils\Strings::stripslashes($xmlContent))) {
-                    Logger::error(_("The content of " . $idNode . " could not be saved"));
+                    Logger::error("The content of " . $idNode . " could not be saved");
                     return false;
                 }
             }
@@ -536,7 +536,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
     public function getXmlFile($idNode, $view = null, $content = null)
     {
         if (!$this->setNode($idNode)) {
-            Logger::error(_("A non-existing node content cannot be obtained: ") . $idNode);
+            Logger::error("A non-existing node content cannot be obtained: " . $idNode);
             return false;
         }
 
@@ -586,7 +586,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
 
         //New abstraction with php5-enchant module.
         if (!function_exists('enchant_broker_init')) {
-            Logger::error(_('The php-enchant module should be installed to use the spell checker'));
+            Logger::error('The php-enchant module should be installed to use the spell checker');
         } else {
             $chkr = enchant_broker_init();
             if (!enchant_broker_dict_exists($chkr, $langISOName)) { //english as a default dictionary
@@ -640,7 +640,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
     {
         if (\Ximdex\Modules\Manager::isEnabled('Xowl')) {
             if (App::getValue('EnricherKey') === NULL || App::getValue('EnricherKey') == '') {
-                Logger::error(_("Xowl_token configuration value has not been defined"));
+                Logger::error("Xowl_token configuration value has not been defined");
                 $resp = array("status" => "No  Xowl_token defined", "videourl" => "<center><iframe width='420' height='315' src='http://www.youtube.com/embed/xnhUzYKqJPw' frameborder='0' allowfullscreen></iframe></center>");
             } else {
                 $ontologyService = new \Ximdex\Rest\Services\Xowl\OntologyService();
@@ -652,7 +652,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
             $ximRAmsg = _("Xowl module has not been installed.<br/><br/> If you want to realize the noticeable improvements that you will obtain with Xowl, a demonstrative video is shown below (%s)<br/><br/>Also, you can test it at <a target='_blank' href='http://demo.ximdex.com'>demo.ximdex.com</a><br/><br/>");
             $videomsg = sprintf($ximRAmsg, $videolink);
             $urlvideo = "<center><iframe width='420' height='315' src='http://www.youtube.com/embed/xnhUzYKqJPw' frameborder='0' allowfullscreen></iframe></center>";
-            Logger::error(_("Xowl module has not been installed. It is included in the advanced package WIX."));
+            Logger::error("Xowl module has not been installed. It is included in the advanced package WIX.");
 
             $resp = array("status" => $videomsg,
                 "videourl" => $urlvideo);
@@ -707,7 +707,7 @@ class XmlEditor_KUPU extends XmlEditor_Abstract
                 }
             }
             if (is_null($docxapId)) {
-                Logger::error(_('docxap can not be found for node: ' . $this->node->GetNodeName()));
+                Logger::error('docxap can not be found for node: ' . $this->node->GetNodeName());
                 return false;
             }
             $xslParser = new ParsingXsl($docxapId, null, $idNode);

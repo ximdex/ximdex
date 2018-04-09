@@ -88,12 +88,12 @@ class Action_poolPreview extends ActionAbstract {
         /*
     	$idNode = $this->request->getParam('idnode');
     	if (!($idNode > 0)) {
-    		Logger::error(_("Idnode does not arrive"));
+    		Logger::error("Idnode does not arrive");
     		return NULL;
     	} else {
     		$node = new Node($idNode);
     		if (!($node->get('IdNode') > 0)) {
-    			Logger::error(_("Instantiated node has not idNode"));
+    			Logger::error("Instantiated node has not idNode");
     			return NULL;
     		}
     	}
@@ -181,11 +181,11 @@ class Action_poolPreview extends ActionAbstract {
 		$versionid = null;
 		
 		if (is_null($idNode))
-			array_push($sms, _("Label cannot be associated with version, empty idnode"));
+			array_push($sms, "Label cannot be associated with version, empty idnode");
 		else {
 		    
 			if (is_null($labels) || (!is_array($labels) && ($labels <= 0)))
-				array_push($sms, _("Wrong label value"));
+				array_push($sms, "Wrong label value");
 			else{
 				
 				if (is_null($idVersion) || (is_null($idSubVersion))){
@@ -197,16 +197,16 @@ class Action_poolPreview extends ActionAbstract {
 					$versionid = $dataFactory->getVersionId($idVersion, $idSubVersion);
 				
 				if (is_null($versionid))
-					array_push($sms, _("Id version has not been found in the association of labels with versions"));
+					array_push($sms, "Id version has not been found in the association of labels with versions");
 				
-				Logger::info(_("Labels are going to be associated with version") . $versionid);
+				Logger::info("Labels are going to be associated with version" . $versionid);
 
 				if (is_array($labels)){
 				    
 					//i have a label array, insert a relation for each
 					foreach ($labels as $key => $value) {
 					    
-						Logger::info(_("It is associated IdVersion") . $versionid . _("with label") . $value);
+						Logger::info("It is associated IdVersion" . $versionid . "with label" . $value);
 						$rel = new  \Ximdex\Models\RelVersionsLabel();
 						$rel->set('idVersion',$versionid);
 						$rel->set('idLabel', $value);
@@ -215,13 +215,13 @@ class Action_poolPreview extends ActionAbstract {
 				}else{
 				    
 					//only have a label, insert the relation 
-					Logger::info(_("It is associated IdVersion") . $versionid._("with label") . $labels);
+					Logger::info("It is associated IdVersion" . $versionid."with label" . $labels);
 					$rel = new  \Ximdex\Models\RelVersionsLabel();
 					$rel->set('idVersion',$versionid);
 					$rel->set('idLabel', $labels);
 					$rel->add();
 				}
-				array_push($sms, _("Correct association"));
+				array_push($sms, "Correct association");
 			}
 		}
 		Logger::debug(print_r($sms,true));

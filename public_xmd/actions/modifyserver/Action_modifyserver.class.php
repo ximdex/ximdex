@@ -118,7 +118,7 @@ class Action_modifyserver extends ActionAbstract
 			'id_server' => (int) $serverID,
 			'messages' => $this->messages->messages
 		);
-		$this->render($values, "index", 'default-3.0.tpl');
+		$this->render($values, 'index', 'default-3.0.tpl');
 	}
 
 	public function modify_server()
@@ -142,6 +142,8 @@ class Action_modifyserver extends ActionAbstract
 		$channels	= $this->request->getParam('channels');
 		$states		= $this->request->getParam('states');
 		$encode		= $this->request->getParam('encode');
+
+		$node = new Node($nodeID);
 		$server = new Node($nodeID);
 		$list = $server->class->GetPhysicalServerList();
 		if (is_array($list) && in_array($serverID, $list)) {
@@ -150,8 +152,7 @@ class Action_modifyserver extends ActionAbstract
 		else {
 		    $action = "new";
 		}
-		if ($this->_validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)) {
-			$node = new Node($nodeID);
+		if ($this->_validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)){
 			if ($this->request->getParam('borrar') == 1) {
 				$server = new Node($nodeID);
 				$server->class->DeletePhysicalServer($serverID);
@@ -211,14 +212,12 @@ class Action_modifyserver extends ActionAbstract
 				}
 			}
 		}
+		$this->messages->mergeMessages($node->messages);	
 		$values = array(
-			'messages' => $this->messages->messages,
-			'goback' => true,
-			'id_node' => $idNode,
-			'params' => $params,
-			'nodeURL' => App::getUrl("?actionid=$actionID&nodeid={$idNode}"),
+		    'messages' => $this->messages->messages, 
+		    'parentID' => $node->get('IdParent')
 		);
-		$this->index($action, $serverID);
+		$this->sendJSON($values);
 	}
 
 	/**
@@ -227,8 +226,12 @@ class Action_modifyserver extends ActionAbstract
 	private function _validate($serverID, $protocol,$host,$port,$initialDir,$url,$login,$password,$description, $encode, $idNode, $channels)
 	{
 		$validation = true;
-		if ($protocol == 'LOCAL') {
-			if ((!$initialDir) || ($initialDir=='')) {
+		if (empty($protocol)){
+		    $this->messages->add(_("A protocol is required"), MSG_TYPE_ERROR);
+		    $validation=false;
+		} else if ($protocol == 'LOCAL'){
+		    
+			if ((!$initialDir) || ($initialDir=='')){
 			    
 				$this->messages->add(_("A local directory is required"), MSG_TYPE_ERROR);
 				$validation=false;
@@ -238,8 +241,9 @@ class Action_modifyserver extends ActionAbstract
 				$this->messages->add(_("A local url is required"), MSG_TYPE_ERROR);
 				$validation=false;
 			}
-		} else if (($protocol == 'FTP') || ($protocol == 'SSH')) {
-			if (!$serverID and (!$password)) {
+		} else {
+		    
+			if (!$serverID and (!$password)){
 				$this->messages->add(_("A password is required"), MSG_TYPE_ERROR);
 				$validation=false;
 			}

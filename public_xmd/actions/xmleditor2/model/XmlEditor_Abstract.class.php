@@ -65,7 +65,7 @@ abstract class XmlEditor_Abstract
     {
         $node = new Node($idnode);
         if (!($node->get('IdNode') > 0)) {
-            Logger::error(_("A non-existing node cannot be obtained: ") . $node->get('IdNode'));
+            Logger::error("A non-existing node cannot be obtained: " . $node->get('IdNode'));
 
             return null;
         }
@@ -123,7 +123,7 @@ abstract class XmlEditor_Abstract
     {
         $node = new Node($idnode);
         if (!($node->get('IdNode') > 0)) {
-            Logger::error(_("A non-existing node cannot be obtained: " ) . "$idnode");
+            Logger::error("A non-existing node cannot be obtained: " . "$idnode");
 
             return null;
         }

@@ -58,7 +58,7 @@ class InheritedPropertiesManager
 		foreach (self::$properties as $prop) {
 		    $propManager = $factory->instantiate($prop . 'Property', $nodeId, '\Ximdex\Properties');
 		    if (!is_object($propManager)) {
-				Logger::error(_("Inheritable property cannot be instantiate: ") . $prop);
+				Logger::error("Inheritable property cannot be instantiate: " . $prop);
 				continue;
 			}
 			$ret[$prop] = $propManager->getValues();
@@ -126,7 +126,7 @@ class InheritedPropertiesManager
 	    $ret = array();
 	    $p = $factory->instantiate($property . 'Property', $nodeId, '\Ximdex\Properties');
 	    if (!is_object($p)) {     
-	        Logger::error(_("Inheritable property cannot be instantiate: ") . $property);
+	        Logger::error("Inheritable property cannot be instantiate: " . $property);
 	        return $ret;
 	    }
 	    $ret[$property] = $p->applyPropertyRecursively($values);

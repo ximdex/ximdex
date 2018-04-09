@@ -1,5 +1,6 @@
 <?php
 
+namespace Ximdex\Models\ORM;
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
@@ -24,20 +25,14 @@
  * @author Ximdex DevTeam <dev@ximdex.com>
  * @version $Revision$
  */
-
-namespace Ximdex\Models\ORM;
-
-use Ximdex\Data\GenericData;
-
-class PipeStatusOrm extends GenericData
+class PipeStatusOrm extends \Ximdex\Data\GenericData
 {
     var $_idField = 'id';
     var $_table = 'PipeStatus';
     var $_metaData = array(
         'id' => array('type' => "int(11)", 'not_null' => 'true', 'auto_increment' => 'true', 'primary_key' => true),
         'Name' => array('type' => "varchar(255)", 'not_null' => 'true'),
-        'Description' => array('type' => "varchar(250)", 'not_null' => 'true'),
-        'Action' => array('type' => "varchar(255)", 'not_null' => 'false'),
+        'Description' => array('type' => "varchar(250)", 'not_null' => 'true')
     );
     var $_uniqueConstraints = array();
     var $_indexes = array('id');
@@ -45,5 +40,4 @@ class PipeStatusOrm extends GenericData
     var $Name;
     var $Description;
     var $IdNode;
-    var $Action;
 }

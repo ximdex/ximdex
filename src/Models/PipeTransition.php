@@ -193,7 +193,7 @@ class PipeTransition extends PipeTransitionsOrm
 		    if (isset($args['NODENAME'])) {
 		        $msg .= ' of document: ' . $args['NODENAME'];
 		    }
-		    Logger::info($msg);
+		    Logger::info($msg, true);
 			$transformedPointer = $object->$function($idVersion, $pointer, $args);
 			if (strpos($pointer, App::getValue('TempRoot')) and file_exists($pointer)) {
 			    @unlink($pointer);
@@ -226,7 +226,7 @@ class PipeTransition extends PipeTransitionsOrm
 			}
 			else
 			{
-			    Logger::info('Cache was generated/reversed successfusly for version: ' . $idVersion);
+			    Logger::info('Cache was generated/reversed successfusly for version: ' . $idVersion, true);
 			}
 		}
 		$msg = ' for version: ' . $idVersion . ' and callback: ' . $callback;
@@ -247,7 +247,7 @@ class PipeTransition extends PipeTransitionsOrm
 		}
 		if ($transformedPointer)
 		{
-		    Logger::info('TRANSITION END: Pipeline Transition has been successfusly processed' . $msg);
+		    Logger::info('TRANSITION END: Pipeline Transition has been successfusly processed' . $msg, true);
 		}
 		else
 		{

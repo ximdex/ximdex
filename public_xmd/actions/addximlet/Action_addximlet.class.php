@@ -155,6 +155,9 @@ class Action_addximlet extends ActionAbstract
             $result = $deps->set(DepsManager::SECTION_XIMLET, $sectionId, $idXimletContainer);
             $section = new Node($sectionId);
             $sectionName = $section->get('Name');
+            $ximletContainer = new Node($idXimletContainer);
+            $ximletName = $ximletContainer->get('Name');
+            $ximlets = $ximletContainer->GetChildren();
 
             if ($result) {
                 $this->messages->add(_("Section ") . $sectionName . _(" has been succesfully associated to the ximlet ") . $ximletName, MSG_TYPE_NOTICE);
@@ -205,7 +208,7 @@ class Action_addximlet extends ActionAbstract
             foreach ($ximlets as $idXimlet) {
                 $ximletNode = new Node($idXimlet);
                 if (!($ximletNode->get('IdNode') > 0)) {
-                    Logger::warning(_("Ximlet with id ") . $idXimlet . _(" has been deleted."));
+                    Logger::warning("Ximlet with id " . $idXimlet . " has been deleted.");
                     continue;
                 }
 
@@ -264,6 +267,10 @@ class Action_addximlet extends ActionAbstract
         foreach ($sections as $sectionId) {
             $depsMngr = new DepsManager();
             $result = $depsMngr->delete(DepsManager::SECTION_XIMLET, $sectionId, $idXimletContainer);
+            $section = new Node($sectionId);
+            $sectionName = $section->get('Name');
+            $ximletContainer = new Node($idXimletContainer);
+            $ximletName = $ximletContainer->get('Name');
             if ($result) {
                 $this->messages->add(_("Section ") . $sectionName . _(" has been disassociated with the ximlet ") . $ximletName, MSG_TYPE_NOTICE);
             } else {

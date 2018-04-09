@@ -50,7 +50,7 @@ class ServerErrorByPumper extends ServerErrorByPumper_ORM {
 			$dbObj->Query($sql);
 
 			if($dbObj->numRows == 0){
-				Logger::info(sprintf(_("Pumper %s does not exist"), $pumperId));
+				Logger::info(sprintf("Pumper %s does not exist", $pumperId));
 				die();
 			}
 
@@ -79,7 +79,7 @@ class ServerErrorByPumper extends ServerErrorByPumper_ORM {
 			return $errorId;
 		}
 
-		Logger::info(_("Creating serverError"));
+		Logger::info("Creating serverError");
 		return NULL;
     }
 
@@ -91,7 +91,7 @@ class ServerErrorByPumper extends ServerErrorByPumper_ORM {
 		$counter = $this->get('UnactivityCycles');
 		$idServer = $this->get('ServerId');
 
-		Logger::info(sprintf(_("Server %d has %d cycles inactive"), $idServer, $counter));
+		Logger::info(sprintf("Server %d has %d cycles inactive", $idServer, $counter));
 
 		$this->set('UnactivityCycles',$counter + 1);
 		$this->update();

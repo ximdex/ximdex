@@ -54,11 +54,11 @@ function Main($argv, $argc)
 	{
 	global $config;
 	
-	Logger::info(_("Launching publicate section"));
+	Logger::info("Launching publicate section");
 
-	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Executing: Publicate Section"));
-	Logger::display("---------------------------------------------------------------------");
+	Logger::info("---------------------------------------------------------------------");
+	Logger::info("Executing: Publicate Section");
+	Logger::info("---------------------------------------------------------------------");
 	
 	
 	$node		= new Node();
@@ -77,7 +77,7 @@ function Main($argv, $argc)
 				$config['sectionid'] = $argv[++$i];
 			else
 				{
-				Logger::display(_("Section does not exist: '").$argv[++$i]."'");
+				Logger::info("Section does not exist: '".$argv[++$i]."'");
 				exit(1);
 				}
 			}
@@ -86,23 +86,23 @@ function Main($argv, $argc)
 	$rec=$argv[3];
 
 
-	Logger::display("");
+	Logger::info("");
 	
 	if(!$config['sectionid'])
 		{
-		Logger::display(_("Uso del comando:"));
-		Logger::display("./publicatesection_IO.php --sectionid {id de la seccion} [-r]");
+		Logger::info("Uso del comando:");
+		Logger::info("./publicatesection_IO.php --sectionid {id de la seccion} [-r]");
 		exit(1);
 		}
-	Logger::display("---------------------------------------------------------------------");
-	Logger::display(_("Read parameters: "));
-	Logger::display(_("\tXimdex section: ").$config['sectionid'].", ".$node->GetNodeName());
-	Logger::display("---------------------------------------------------------------------");
+	Logger::info("---------------------------------------------------------------------");
+	Logger::info("Read parameters: ");
+	Logger::info("\tXimdex section: ".$config['sectionid'].", ".$node->GetNodeName());
+	Logger::info("---------------------------------------------------------------------");
 
-	Logger::display("");
-	Logger::display(_(" Are read parameters corrects?"));
-	Logger::display(_("To confirm press uppercase 'A' and then press 'Intro'."));
-	Logger::display(_(" Press Ctrl+C to exit."));
+	Logger::info("");
+	Logger::info(" Are read parameters corrects?");
+	Logger::info("To confirm press uppercase 'A' and then press 'Intro'.");
+	Logger::info(" Press Ctrl+C to exit.");
 
 	session_write_close();
 	ob_flush();
@@ -130,7 +130,7 @@ function PublicateSection($sectionID,$dateUp,$recurrence) {
 
         $node = new Node($sectionID);
 	if (!($node->nodeType->GetName() == 'Section' || $node->nodeType->GetName() == 'Server')) {
-	    Logger::display(_("Aborting publication, it is just allowed to publish over sections and servers"));
+	    Logger::info("Aborting publication, it is just allowed to publish over sections and servers");
 	    die();
 	}
 

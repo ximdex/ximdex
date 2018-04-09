@@ -181,109 +181,6 @@
         ]
     },
     {
-        "name": "ximdex/plata",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/XIMDEX/plata-client.git",
-            "reference": "13fbb268894027b6ce9b06e3721eaee7acfd8a00"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/XIMDEX/plata-client/zipball/13fbb268894027b6ce9b06e3721eaee7acfd8a00",
-            "reference": "13fbb268894027b6ce9b06e3721eaee7acfd8a00",
-            "shasum": ""
-        },
-        "time": "2018-03-28 08:29:46",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Plata\\": "src\\Plata"
-            }
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Alejandro de Tovar",
-                "email": "venespana159@gmail.com"
-            }
-        ],
-        "description": "Plata translation system",
-        "support": {
-            "source": "https://github.com/XIMDEX/plata-client/tree/master",
-            "issues": "https://github.com/XIMDEX/plata-client/issues"
-        }
-    },
-    {
-        "name": "symfony/event-dispatcher",
-        "version": "v3.4.6",
-        "version_normalized": "3.4.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/event-dispatcher.git",
-            "reference": "58990682ac3fdc1f563b7e705452921372aad11d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/58990682ac3fdc1f563b7e705452921372aad11d",
-            "reference": "58990682ac3fdc1f563b7e705452921372aad11d",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8"
-        },
-        "conflict": {
-            "symfony/dependency-injection": "<3.3"
-        },
-        "require-dev": {
-            "psr/log": "~1.0",
-            "symfony/config": "~2.8|~3.0|~4.0",
-            "symfony/dependency-injection": "~3.3|~4.0",
-            "symfony/expression-language": "~2.8|~3.0|~4.0",
-            "symfony/stopwatch": "~2.8|~3.0|~4.0"
-        },
-        "suggest": {
-            "symfony/dependency-injection": "",
-            "symfony/http-kernel": ""
-        },
-        "time": "2018-02-14 10:03:57",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\EventDispatcher\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony EventDispatcher Component",
-        "homepage": "https://symfony.com"
-    },
-    {
         "name": "solarium/solarium",
         "version": "3.8.1",
         "version_normalized": "3.8.1.0",
@@ -341,45 +238,6 @@
             "php",
             "search",
             "solr"
-        ]
-    },
-    {
-        "name": "php-di/phpdoc-reader",
-        "version": "2.1.0",
-        "version_normalized": "2.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/PHP-DI/PhpDocReader.git",
-            "reference": "7d0de60b9341933c8afd172a6255cd7557601e0e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/PHP-DI/PhpDocReader/zipball/7d0de60b9341933c8afd172a6255cd7557601e0e",
-            "reference": "7d0de60b9341933c8afd172a6255cd7557601e0e",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.6"
-        },
-        "time": "2018-02-18 17:39:01",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhpDocReader\\": "src/PhpDocReader"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "PhpDocReader parses @var and @param values in PHP docblocks (supports namespaced class names with the same resolution rules as PHP)",
-        "keywords": [
-            "phpdoc",
-            "reflection"
         ]
     },
     {
@@ -630,75 +488,6 @@
         "keywords": [
             "lexer",
             "parser"
-        ]
-    },
-    {
-        "name": "doctrine/inflector",
-        "version": "v1.3.0",
-        "version_normalized": "1.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/inflector.git",
-            "reference": "5527a48b7313d15261292c149e55e26eae771b0a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/inflector/zipball/5527a48b7313d15261292c149e55e26eae771b0a",
-            "reference": "5527a48b7313d15261292c149e55e26eae771b0a",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^7.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^6.2"
-        },
-        "time": "2018-01-09 20:05:19",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
-            }
-        ],
-        "description": "Common String Manipulations with regard to casing and singular/plural rules.",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "inflection",
-            "pluralize",
-            "singularize",
-            "string"
         ]
     },
     {
@@ -992,41 +781,106 @@
         ]
     },
     {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.7.0",
-        "version_normalized": "1.7.0.0",
+        "name": "phpmailer/phpmailer",
+        "version": "v6.0.3",
+        "version_normalized": "6.0.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
+            "url": "https://github.com/PHPMailer/PHPMailer.git",
+            "reference": "44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
-            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6",
+            "reference": "44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "ext-ctype": "*",
+            "ext-filter": "*",
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "doctrine/annotations": "1.2.*",
+            "friendsofphp/php-cs-fixer": "^2.2",
+            "phpdocumentor/phpdocumentor": "2.*",
+            "phpunit/phpunit": "^4.8 || ^5.7",
+            "zendframework/zend-eventmanager": "3.0.*",
+            "zendframework/zend-i18n": "2.7.3",
+            "zendframework/zend-serializer": "2.7.*"
         },
         "suggest": {
-            "ext-mbstring": "For best performance"
+            "ext-mbstring": "Needed to send email in multibyte encoding charset",
+            "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+            "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+            "psr/log": "For optional PSR-3 debug logging",
+            "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+            "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
         },
-        "time": "2018-01-30 19:27:44",
+        "time": "2018-01-05 13:19:58",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PHPMailer\\PHPMailer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "doctrine/inflector",
+        "version": "v1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/inflector.git",
+            "reference": "5527a48b7313d15261292c149e55e26eae771b0a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/inflector/zipball/5527a48b7313d15261292c149e55e26eae771b0a",
+            "reference": "5527a48b7313d15261292c149e55e26eae771b0a",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.2"
+        },
+        "time": "2018-01-09 20:05:19",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.7-dev"
+                "dev-master": "1.3.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
+                "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1034,22 +888,86 @@
         ],
         "authors": [
             {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
             },
             {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
             }
         ],
-        "description": "Symfony polyfill for the Mbstring extension",
-        "homepage": "https://symfony.com",
+        "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+        "homepage": "http://www.doctrine-project.org",
         "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
+            "inflection",
+            "pluralize",
+            "singularize",
+            "string"
+        ]
+    },
+    {
+        "name": "kevinlebrun/colors.php",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kevinlebrun/colors.php.git",
+            "reference": "6d7140aeedef46c97c2324f09b752c599ef17dac"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kevinlebrun/colors.php/zipball/6d7140aeedef46c97c2324f09b752c599ef17dac",
+            "reference": "6d7140aeedef46c97c2324f09b752c599ef17dac",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*",
+            "satooshi/php-coveralls": "1.0.*",
+            "squizlabs/php_codesniffer": "1.*"
+        },
+        "time": "2016-04-12 20:58:34",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Colors": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kevin Le Brun",
+                "email": "lebrun.k@gmail.com",
+                "homepage": "http://kevinlebrun.fr",
+                "role": "developer"
+            }
+        ],
+        "description": "Colors for PHP CLI scripts",
+        "homepage": "https://github.com/kevinlebrun/colors.php",
+        "keywords": [
+            "cli",
+            "color",
+            "colors",
+            "console",
+            "shell"
         ]
     },
     {
@@ -1120,40 +1038,57 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "nesbot/carbon",
-        "version": "1.25.0",
-        "version_normalized": "1.25.0.0",
+        "name": "symfony/console",
+        "version": "v3.3.16",
+        "version_normalized": "3.3.16.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4"
+            "url": "https://github.com/symfony/console.git",
+            "reference": "af7ec995de93671c03cc1b4e3176c8588bc79dcc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/cbcf13da0b531767e39eb86e9687f5deba9857b4",
-            "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4",
+            "url": "https://api.github.com/repos/symfony/console/zipball/af7ec995de93671c03cc1b4e3176c8588bc79dcc",
+            "reference": "af7ec995de93671c03cc1b4e3176c8588bc79dcc",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.9",
-            "symfony/translation": "~2.6 || ~3.0 || ~4.0"
+            "php": "^5.5.9|>=7.0.8",
+            "symfony/debug": "~2.8|~3.0",
+            "symfony/polyfill-mbstring": "~1.0"
+        },
+        "conflict": {
+            "symfony/dependency-injection": "<3.3"
         },
         "require-dev": {
-            "friendsofphp/php-cs-fixer": "~2",
-            "phpunit/phpunit": "^4.8.35 || ^5.7"
+            "psr/log": "~1.0",
+            "symfony/config": "~3.3",
+            "symfony/dependency-injection": "~3.3",
+            "symfony/event-dispatcher": "~2.8|~3.0",
+            "symfony/filesystem": "~2.8|~3.0",
+            "symfony/process": "~2.8|~3.0"
         },
-        "time": "2018-03-19 15:50:49",
+        "suggest": {
+            "psr/log": "For using the console logger",
+            "symfony/event-dispatcher": "",
+            "symfony/filesystem": "",
+            "symfony/process": ""
+        },
+        "time": "2018-01-29 09:02:23",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.23-dev"
+                "dev-master": "3.3-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Carbon\\": "src/Carbon/"
-            }
+                "Symfony\\Component\\Console\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1161,49 +1096,53 @@
         ],
         "authors": [
             {
-                "name": "Brian Nesbitt",
-                "email": "brian@nesbot.com",
-                "homepage": "http://nesbot.com"
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "A simple API extension for DateTime.",
-        "homepage": "http://carbon.nesbot.com",
-        "keywords": [
-            "date",
-            "datetime",
-            "time"
-        ]
+        "description": "Symfony Console Component",
+        "homepage": "https://symfony.com"
     },
     {
-        "name": "psr/simple-cache",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/php-fig/simple-cache.git",
-            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": ">=5.3.3"
         },
-        "time": "2017-10-23 01:57:42",
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2018-01-30 19:27:44",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0.x-dev"
+                "dev-master": "1.7-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Psr\\SimpleCache\\": "src/"
-            }
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1211,17 +1150,22 @@
         ],
         "authors": [
             {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Common interfaces for simple caching",
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
         "keywords": [
-            "cache",
-            "caching",
-            "psr",
-            "psr-16",
-            "simple-cache"
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
         ]
     },
     {
@@ -1319,102 +1263,73 @@
         ]
     },
     {
-        "name": "phpmailer/phpmailer",
-        "version": "v6.0.5",
-        "version_normalized": "6.0.5.0",
+        "name": "php-di/phpdoc-reader",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/PHPMailer/PHPMailer.git",
-            "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
+            "url": "https://github.com/PHP-DI/PhpDocReader.git",
+            "reference": "7d0de60b9341933c8afd172a6255cd7557601e0e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-            "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
+            "url": "https://api.github.com/repos/PHP-DI/PhpDocReader/zipball/7d0de60b9341933c8afd172a6255cd7557601e0e",
+            "reference": "7d0de60b9341933c8afd172a6255cd7557601e0e",
             "shasum": ""
         },
         "require": {
-            "ext-ctype": "*",
-            "ext-filter": "*",
-            "php": ">=5.5.0"
+            "php": ">=5.4.0"
         },
         "require-dev": {
-            "doctrine/annotations": "1.2.*",
-            "friendsofphp/php-cs-fixer": "^2.2",
-            "phpdocumentor/phpdocumentor": "2.*",
-            "phpunit/phpunit": "^4.8 || ^5.7",
-            "zendframework/zend-eventmanager": "3.0.*",
-            "zendframework/zend-i18n": "2.7.3",
-            "zendframework/zend-serializer": "2.7.*"
+            "phpunit/phpunit": "~4.6"
         },
-        "suggest": {
-            "ext-mbstring": "Needed to send email in multibyte encoding charset",
-            "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
-            "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
-            "psr/log": "For optional PSR-3 debug logging",
-            "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
-            "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
-        },
-        "time": "2018-03-27 13:49:45",
+        "time": "2018-02-18 17:39:01",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "PHPMailer\\PHPMailer\\": "src/"
+                "PhpDocReader\\": "src/PhpDocReader"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPL-2.1"
+            "MIT"
         ],
-        "authors": [
-            {
-                "name": "Jim Jagielski",
-                "email": "jimjag@gmail.com"
-            },
-            {
-                "name": "Marcus Bointon",
-                "email": "phpmailer@synchromedia.co.uk"
-            },
-            {
-                "name": "Andy Prevost",
-                "email": "codeworxtech@users.sourceforge.net"
-            },
-            {
-                "name": "Brent R. Matzelle"
-            }
-        ],
-        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+        "description": "PhpDocReader parses @var and @param values in PHP docblocks (supports namespaced class names with the same resolution rules as PHP)",
+        "keywords": [
+            "phpdoc",
+            "reflection"
+        ]
     },
     {
-        "name": "kevinlebrun/colors.php",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "name": "psr/simple-cache",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/kevinlebrun/colors.php.git",
-            "reference": "6d7140aeedef46c97c2324f09b752c599ef17dac"
+            "url": "https://github.com/php-fig/simple-cache.git",
+            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kevinlebrun/colors.php/zipball/6d7140aeedef46c97c2324f09b752c599ef17dac",
-            "reference": "6d7140aeedef46c97c2324f09b752c599ef17dac",
+            "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+            "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*",
-            "satooshi/php-coveralls": "1.0.*",
-            "squizlabs/php_codesniffer": "1.*"
-        },
-        "time": "2016-04-12 20:58:34",
+        "time": "2017-10-23 01:57:42",
         "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Colors": "src/"
+            "psr-4": {
+                "Psr\\SimpleCache\\": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -1423,20 +1338,17 @@
         ],
         "authors": [
             {
-                "name": "Kevin Le Brun",
-                "email": "lebrun.k@gmail.com",
-                "homepage": "http://kevinlebrun.fr",
-                "role": "developer"
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
             }
         ],
-        "description": "Colors for PHP CLI scripts",
-        "homepage": "https://github.com/kevinlebrun/colors.php",
+        "description": "Common interfaces for simple caching",
         "keywords": [
-            "cli",
-            "color",
-            "colors",
-            "console",
-            "shell"
+            "cache",
+            "caching",
+            "psr",
+            "psr-16",
+            "simple-cache"
         ]
     },
     {
@@ -1498,53 +1410,48 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "symfony/console",
-        "version": "v3.3.16",
-        "version_normalized": "3.3.16.0",
+        "name": "symfony/event-dispatcher",
+        "version": "v3.4.6",
+        "version_normalized": "3.4.6.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/console.git",
-            "reference": "af7ec995de93671c03cc1b4e3176c8588bc79dcc"
+            "url": "https://github.com/symfony/event-dispatcher.git",
+            "reference": "58990682ac3fdc1f563b7e705452921372aad11d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/af7ec995de93671c03cc1b4e3176c8588bc79dcc",
-            "reference": "af7ec995de93671c03cc1b4e3176c8588bc79dcc",
+            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/58990682ac3fdc1f563b7e705452921372aad11d",
+            "reference": "58990682ac3fdc1f563b7e705452921372aad11d",
             "shasum": ""
         },
         "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "symfony/debug": "~2.8|~3.0",
-            "symfony/polyfill-mbstring": "~1.0"
+            "php": "^5.5.9|>=7.0.8"
         },
         "conflict": {
             "symfony/dependency-injection": "<3.3"
         },
         "require-dev": {
             "psr/log": "~1.0",
-            "symfony/config": "~3.3",
-            "symfony/dependency-injection": "~3.3",
-            "symfony/event-dispatcher": "~2.8|~3.0",
-            "symfony/filesystem": "~2.8|~3.0",
-            "symfony/process": "~2.8|~3.0"
+            "symfony/config": "~2.8|~3.0|~4.0",
+            "symfony/dependency-injection": "~3.3|~4.0",
+            "symfony/expression-language": "~2.8|~3.0|~4.0",
+            "symfony/stopwatch": "~2.8|~3.0|~4.0"
         },
         "suggest": {
-            "psr/log": "For using the console logger",
-            "symfony/event-dispatcher": "",
-            "symfony/filesystem": "",
-            "symfony/process": ""
+            "symfony/dependency-injection": "",
+            "symfony/http-kernel": ""
         },
-        "time": "2018-01-29 09:02:23",
+        "time": "2018-02-14 10:03:57",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.3-dev"
+                "dev-master": "3.4-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Component\\Console\\": ""
+                "Symfony\\Component\\EventDispatcher\\": ""
             },
             "exclude-from-classmap": [
                 "/Tests/"
@@ -1564,22 +1471,22 @@
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Symfony Console Component",
+        "description": "Symfony EventDispatcher Component",
         "homepage": "https://symfony.com"
     },
     {
         "name": "illuminate/contracts",
-        "version": "v5.5.40",
-        "version_normalized": "5.5.40.0",
+        "version": "v5.5.39",
+        "version_normalized": "5.5.39.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/contracts.git",
-            "reference": "04fbae936ed14e673dddd18a39662f49e7d199f5"
+            "reference": "eb9a0171866fca0669c9acab6c7441e19b4694ca"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/contracts/zipball/04fbae936ed14e673dddd18a39662f49e7d199f5",
-            "reference": "04fbae936ed14e673dddd18a39662f49e7d199f5",
+            "url": "https://api.github.com/repos/illuminate/contracts/zipball/eb9a0171866fca0669c9acab6c7441e19b4694ca",
+            "reference": "eb9a0171866fca0669c9acab6c7441e19b4694ca",
             "shasum": ""
         },
         "require": {
@@ -1587,7 +1494,7 @@
             "psr/container": "~1.0",
             "psr/simple-cache": "~1.0"
         },
-        "time": "2018-03-20 15:34:35",
+        "time": "2018-01-19 17:59:58",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1615,35 +1522,35 @@
     },
     {
         "name": "illuminate/support",
-        "version": "v5.5.40",
-        "version_normalized": "5.5.40.0",
+        "version": "v5.5.39",
+        "version_normalized": "5.5.39.0",
         "source": {
             "type": "git",
             "url": "https://github.com/illuminate/support.git",
-            "reference": "5d2ccb17e526ad537bffc16abc1d516457ae5587"
+            "reference": "7540abdf66efe232bb657b9a5982fbb0d4de428f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/support/zipball/5d2ccb17e526ad537bffc16abc1d516457ae5587",
-            "reference": "5d2ccb17e526ad537bffc16abc1d516457ae5587",
+            "url": "https://api.github.com/repos/illuminate/support/zipball/7540abdf66efe232bb657b9a5982fbb0d4de428f",
+            "reference": "7540abdf66efe232bb657b9a5982fbb0d4de428f",
             "shasum": ""
         },
         "require": {
             "doctrine/inflector": "~1.1",
             "ext-mbstring": "*",
             "illuminate/contracts": "5.5.*",
-            "nesbot/carbon": "^1.24.1",
+            "nesbot/carbon": "^1.20",
             "php": ">=7.0"
         },
         "replace": {
             "tightenco/collect": "<5.5.33"
         },
         "suggest": {
-            "illuminate/filesystem": "Required to use the composer class (5.5.*).",
+            "illuminate/filesystem": "Required to use the composer class (5.2.*).",
             "symfony/process": "Required to use the composer class (~3.3).",
             "symfony/var-dumper": "Required to use the dd function (~3.3)."
         },
-        "time": "2018-03-10 15:44:32",
+        "time": "2018-03-09 16:54:15",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1671,5 +1578,60 @@
         ],
         "description": "The Illuminate Support package.",
         "homepage": "https://laravel.com"
+    },
+    {
+        "name": "nesbot/carbon",
+        "version": "1.25.0",
+        "version_normalized": "1.25.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/briannesbitt/Carbon.git",
+            "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/cbcf13da0b531767e39eb86e9687f5deba9857b4",
+            "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9",
+            "symfony/translation": "~2.6 || ~3.0 || ~4.0"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "~2",
+            "phpunit/phpunit": "^4.8.35 || ^5.7"
+        },
+        "time": "2018-03-19 15:50:49",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.23-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Carbon\\": "src/Carbon/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Brian Nesbitt",
+                "email": "brian@nesbot.com",
+                "homepage": "http://nesbot.com"
+            }
+        ],
+        "description": "A simple API extension for DateTime.",
+        "homepage": "http://carbon.nesbot.com",
+        "keywords": [
+            "date",
+            "datetime",
+            "time"
+        ]
     }
 ]

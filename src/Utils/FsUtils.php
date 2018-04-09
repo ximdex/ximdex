@@ -108,7 +108,7 @@ class FsUtils
         }
         if ($result === false) {
             $backtrace = debug_backtrace();
-            Logger::error(sprintf(_("Error writing in file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s file: %s"),
+            Logger::error(sprintf("Error writing in file [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s file: %s",
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
                 $backtrace[0]['line'],
@@ -155,7 +155,7 @@ class FsUtils
     {
         if (!is_file($filename)) {            
             $backtrace = debug_backtrace();
-            Logger::error(sprintf(_('Trying to obtaing the content of a nonexistent file [lib/Ximdex/Utils/FsUtils.php] script: %s file: %s line: %s nonexistent_file: %s'),
+            Logger::error(sprintf('Trying to obtaing the content of a nonexistent file [lib/Ximdex/Utils/FsUtils.php] script: %s file: %s line: %s nonexistent_file: %s',
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
                 $backtrace[0]['line'],
@@ -258,13 +258,13 @@ class FsUtils
     static public function deltree($folder)
     {
         $backtrace = debug_backtrace();
-        Logger::debug(sprintf(_('It has been applied to delete recursively a folder [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s folder: %s'),
+        Logger::debug(sprintf('It has been applied to delete recursively a folder [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s folder: %s',
             $_SERVER['SCRIPT_FILENAME'],
             $backtrace[0]['file'],
             $backtrace[0]['line'],
             $folder));
         if (!is_dir($folder)) {
-            Logger::error(sprintf(_("Error estimating folder %s"), $folder));
+            Logger::error(sprintf("Error estimating folder %s", $folder));
             return false;
         }
         if (!($handler = opendir($folder))) {
@@ -299,7 +299,7 @@ class FsUtils
     {
         if (!is_file($file)) {
             $backtrace = debug_backtrace();
-            Logger::debug(sprintf(_('It has been applied to delete a nonexistent file %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s'),
+            Logger::debug(sprintf('It has been applied to delete a nonexistent file %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s',
                 $file,
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],
@@ -308,7 +308,7 @@ class FsUtils
         }
         if (!@unlink($file)) {
             $backtrace = debug_backtrace();
-            Logger::warning(sprintf(_('It has been applied to delete a file which could not been deleted %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s'),
+            Logger::warning(sprintf('It has been applied to delete a file which could not been deleted %s [inc/fsutils/FsUtils.class.php] script: %s file: %s line: %s',
                 $file,
                 $_SERVER['SCRIPT_FILENAME'],
                 $backtrace[0]['file'],

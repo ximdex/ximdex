@@ -32,12 +32,12 @@ angular.module('ximdex.common.service')
                 var $dialog = $window.jQuery('<div class="form_send_dialog"><div/>').html(xTranslate(message) || 'Are you sure');
                 
                 var buttons  = {};
-                buttons[xTranslate('ui.dialog.confirmation.accept')] = function() {
+                buttons[xTranslate('ui.dialog.confirmation.Accept')] = function() {
                     result(true)
                     $dialog.dialog('destroy');
                     $dialog.remove();
                 }.bind(this);
-                buttons[xTranslate('ui.dialog.confirmation.cancel')] = function() {
+                buttons[xTranslate('ui.dialog.confirmation.Cancel')] = function() {
                     result(false)
                     $dialog.dialog('destroy');
                     $dialog.remove();

@@ -30,7 +30,6 @@ namespace Ximdex\Parsers;
 use Ximdex\Logger;
 use Ximdex\Models\FastTraverse;
 use Ximdex\Models\Node;
-use Ximdex\Models\NodeProperty;
 use Ximdex\NodeTypes\NodeTypeConstants;
 use Ximdex\NodeTypes\XmlContainerNode;
 use Ximdex\Models\StructuredDocument;
@@ -282,25 +281,8 @@ class ParsingPathTo
                 $docContainer = new XmlContainerNode($id);
                 $id = $docContainer->GetChildByLang($language);
                 if (!$id) {
-                    Logger::warning('Cannot load the document for container: ' . $nodeId . ' and language: ' . $language 
-                        . '. Using default server one instead');
-                    
-                    // Load the default server language instead
-                    if (!$node->getServer()) {
-                        Logger::error('Cannot load the server node');
-                        return false;
-                    }
-                    $nodeProperty = new NodeProperty();
-                    $property = $nodeProperty->getProperty($node->getServer(), NodeProperty::DEFAULTSERVERLANGUAGE);
-                    if (!$property) {
-                        Logger::error('The default server language is not defined');
-                        return false;
-                    }
-                    $id = $docContainer->GetChildByLang($property[0]);
-                    if (!$id) {
-                        Logger::error('Cannot load the language version for container: ' . $nodeId . ' and language: ' . $property[0]);
-                        return false;
-                    }
+                    Logger::error('Cannot load the language version for contaniner: ' . $nodeId . ' and language: ' . $language);
+                    return false;
                 }
                 $node = new Node($id);
                 if (!$node->GetID()) {
