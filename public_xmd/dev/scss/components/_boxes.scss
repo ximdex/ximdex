@@ -1,0 +1,76 @@
+div.propertyform
+{
+	margin-bottom: 10pt;
+}
+.row 
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+.tarjeta 
+{
+
+    background-color:$color-caja;
+    padding-bottom:1em;
+    border-radius: 0 0 5px 5px;
+}
+.row::before, .row::after 
+{
+    content: ' ';
+    display: table;
+}
+fieldset 
+{
+    border: none;
+    position: relative;
+}
+.action_content h2 
+{
+    font-size: 1.06em;
+    margin-bottom: 1em;
+    padding-bottom: .5em;
+}
+.h2_general 
+{
+    background-color: $green-ligth;
+    color: white!important;
+    padding: .6em 1em .6em!important;
+    border-radius:5px 5px 0 0;
+}
+h2, h3 
+{
+    text-transform: none;
+    font-family: "Coustard";
+}
+div.manageproperties
+{
+    width: 95%;
+    margin: 0 auto;
+}
+#body .ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: "Source Sans Pro"; }
+
+input[type="checkbox"] 
+{
+    cursor: pointer;
+}
+input[type="checkbox"] + label, input[type="radio"]+ label {
+    padding-right: 8%;
+}
+    [type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label,[type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+    cursor: pointer;
+    padding-left: 32px!important;
+    position: relative;
+}
+.tarjeta hr
+{
+	border: 1px solid #ddd;
+	width: 100%;
+}
+label {
+
+    color: #606060;
+    font-family: "Source Sans Pro";
+    font-size: 1.6rem;
+}
+
