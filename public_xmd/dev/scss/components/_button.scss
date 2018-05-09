@@ -1,0 +1,22 @@
+.browser-window .btn {
+     border-color: $green-lighter;
+     font-family: "Coustard";
+     text-transform: uppercase;
+     color: $color-fondo;
+     -webkit-border-radius: $px-border;
+     -moz-border-radius: $px-border;
+     border-radius: $px-border;
+     padding: 7px 14px 5px;
+     margin: 0 0 0 10px;
+     cursor: pointer;
+     background: $green-lighter;
+     font-size: 1.2rem;
+ }
+ .btn:hover { 
+    background-color: $green-ligth;
+    transform: scale(1.1);
+ }
+ .btn:focus {
+    background-color: $green-ligth;
+    transform: scale(1.1);
+ }

@@ -1,8 +1,4 @@
 @import 'variables';
-
-body {
-	li {
-		background-color: $main-color;
-	}
-}
-
+@import './components/button';
+@import './components/messagein';
+@import './components/boxes';
