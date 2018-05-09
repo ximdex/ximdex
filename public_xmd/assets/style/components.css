@@ -1,0 +1,137 @@
+.browser-window .btn {
+  border-color: #7bcabf;
+  font-family: "Coustard";
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 2px;
+  padding: 7px 14px 5px;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+  background: #7bcabf;
+  font-size: 1.2rem;
+}
+
+.btn:hover {
+  background-color: #43a1a2;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.btn:focus {
+  background-color: #43a1a2;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.message p {
+  padding: .4em 0;
+  margin-bottom: 0;
+  text-align: center;
+  color: #e3e7e9;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.message p::before {
+  position: absolute;
+  border-radius: 50%;
+  padding: .20em;
+  margin-left: -2em;
+  margin-top: -.2em;
+  color: #4c4d57;
+}
+
+.message-success p::before {
+  background-color: #c2d43b;
+}
+
+.message-success p::after {
+  content: '';
+}
+
+div.propertyform {
+  margin-bottom: 10pt;
+}
+
+.row {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tarjeta {
+  background-color: #eee;
+  padding-bottom: 1em;
+  border-radius: 0 0 5px 5px;
+}
+
+.row::before,
+.row::after {
+  content: ' ';
+  display: table;
+}
+
+fieldset {
+  border: none;
+  position: relative;
+}
+
+.action_content h2 {
+  font-size: 1.06em;
+  margin-bottom: 1em;
+  padding-bottom: .5em;
+}
+
+.h2_general {
+  background-color: #43a1a2;
+  color: white !important;
+  padding: 0.6em 1em 0.6em !important;
+  border-radius: 5px 5px 0 0;
+}
+
+h2,
+h3 {
+  text-transform: none;
+  font-family: "Coustard";
+}
+
+div.manageproperties {
+  width: 95%;
+  margin: 0 auto;
+}
+
+#body .ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: "Source Sans Pro";
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  padding-right: 8%;
+}
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label,
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
+  cursor: pointer;
+  padding-left: 32px !important;
+  position: relative;
+}
+
+.tarjeta hr {
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+label {
+  color: #606060;
+  font-family: "Source Sans Pro";
+  font-size: 1.6rem;
+}

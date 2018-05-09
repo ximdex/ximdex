@@ -281,13 +281,6 @@ button::-moz-focus-inner {
   bottom: 0px;
   width: 100%;
   margin: 0px; }
-
-#body .ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
-  font-family: "Source Sans Pro"; }
-
-/*.browser-window {
-  height: 100%; }*/
-
 .browser-window-content {
   /*height: 100%;
   width: 100%;*/
@@ -295,7 +288,6 @@ button::-moz-focus-inner {
 
 .hidden {
   display: none !important; }
-
 .novisible {
   visibility: hidden; }
 
@@ -412,26 +404,26 @@ button::-moz-focus-inner {
       border-radius: 5px;
     }
   .user-menu li {
-    cursor: pointer;
-    position: relative; }
-    .user-menu li.selected::before {
+      cursor: pointer;
+      position: relative; }
+  .user-menu li.selected::before {
       position: absolute;
       left: 1em; }
   .user-menu li a {
-    color: black;
-    padding: 1em 1.5em 1em 3em;
-    display: block;
-    position: relative; }
-.user-menu li a:hover {
+      color: black;
+      padding: 1em 1.5em 1em 3em;
+      display: block;
+      position: relative; }
+  .user-menu li a:hover {
       color: white;
       background: #43a1a2; }
-.user-menu li:hover {
-  color: white;
-  background: #43a1a2; }
+  .user-menu li:hover {
+      color: white;
+      background: #43a1a2; }
 
   .user-menu li ul li {
-    color: black; }
-    .user-menu li ul li:hover {
+      color: black; }
+  .user-menu li ul li:hover {
       color: white; }
   .user-menu .selected::before {
     color: white; }
@@ -501,8 +493,6 @@ button::-moz-focus-inner {
   height: 41px; }
 
 #angular-content > .hbox-panel > .tabs-container > ul.ui-tabs-nav > li {
-  /*padding: 0;*/
-
   margin-bottom: 0px;
   padding: 9px 15px 10px 35px;
   border-bottom: 20px solid #43a1a2!important;

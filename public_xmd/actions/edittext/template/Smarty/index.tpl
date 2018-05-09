@@ -25,10 +25,7 @@
 
 <form id="et_form" class="text-editor-form" enctype="multipart/form-data" method="post" action="{$action_url}">
 		{include file="actions/components/title_Description.tpl"}
-		<fieldset class="buttons-form">
-            {button label="Save" type="submit" class="validate btn main_action"}{*message="{t}Are you sure you want to save the changes?{/t}"*}
-		</fieldset>
-	
+
  <div class="action_content full text-editor">
 
  	<fieldset class="editor" id="fieldset_{$id_editor}">
@@ -43,6 +40,8 @@
  	</fieldset>
  </div>
 
+ 	<fieldset class="buttons-form">
+            {button label="Save" type="submit" class="validate btn main_action"}{*message="{t}Are you sure you want to save the changes?{/t}"*}
+			<button type="button" id="" onclick="this.blur(); " class="btn main_action ui-state-default ui-corner-all button close-button ladda-button" data-style="slide-up"tabindex=""><span class="ladda-label">Cancelar</span></button>
+	</fieldset>
 </form>
-
-

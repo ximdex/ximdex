@@ -25,15 +25,15 @@
  * @version $Revision$
  */
 
-use Ximdex\Helpers\ServerConfig;
-use Ximdex\Models\Group;
 use Ximdex\Models\Node;
 use Ximdex\Models\User;
+use Ximdex\Models\Group;
+use Ximdex\Models\NodeType;
+use Ximdex\Utils\Serializer;
 use Ximdex\MVC\ActionAbstract;
 use Ximdex\Sync\SynchroFacade;
-use Ximdex\Utils\Serializer;
+use Ximdex\Helpers\ServerConfig;
 use Ximdex\NodeTypes\NodeTypeConstants;
-use Ximdex\Models\NodeType;
 
 class Action_publicatesection extends ActionAbstract
 {
@@ -45,9 +45,8 @@ class Action_publicatesection extends ActionAbstract
         $idNode = (int)$this->request->getParam("nodeid");
         $node = new Node($idNode);
         $nodeTypeName = $node->nodeType->GetName();
-        $nodeType = New NodeType();
-        $publishabledNodeTypes = $nodeType->find('IdNodeType, Description', 'IsPublishable is true and IsFolder is false'
-            , null, true, true, null, 'Description');
+        $nodeType = new NodeType();
+        $publishabledNodeTypes = $nodeType->find('IdNodeType, Description', 'IsPublishable is true and IsFolder is false', null, true, true, null, 'Description');
         $values = array(
             'go_method' => 'publicate_section',
             'publishabledtypes' => $publishabledNodeTypes,
@@ -57,6 +56,7 @@ class Action_publicatesection extends ActionAbstract
             'name' => $node->GetNodeName(),
             'timestamp_from' => time(),
             'has_unlimited_life_time' => SynchroFacade::HasUnlimitedLifeTime($idNode),
+            'node_Type' => $node->nodeType->GetName(),
             'gap_info' => $this->getPublicationIntervals($idNode)
         );
         $serverID = $node->getServer();
@@ -83,7 +83,7 @@ class Action_publicatesection extends ActionAbstract
         $this->addJs('/actions/publicatesection/resources/js/index.js');
         $this->addCss('/actions/publicatesection/resources/css/style.css');
         $this->addCss('/assets/style/jquery/ximdex_theme/widgets/calendar/calendar.css');
-        $this->render($values, NULL, 'default-3.0.tpl');
+        $this->render($values, null, 'default-3.0.tpl');
     }
 
     public function publicate_section()
@@ -95,14 +95,12 @@ class Action_publicatesection extends ActionAbstract
             // All subsections
             $level = null;
             $recurrence = true;
-        }
-        elseif ($levels == 'deep') {
+        } elseif ($levels == 'deep') {
             
             // N levels of depth
             $level = abs($this->request->getParam('deeplevel'));
             $recurrence = false;
-        }
-        else {
+        } else {
             
             // Zero levels, only the given section or node node
             $level = 1;
@@ -113,8 +111,7 @@ class Action_publicatesection extends ActionAbstract
         // Filter by specified node type
         if ($this->request->getParam('publishType')) {
             $type = (int) $this->request->getParam('types');
-        }
-        else {
+        } else {
             $type = null;
         }
         $noUseDrafts = $this->request->getParam('latest') ? false : true;
@@ -176,7 +173,7 @@ class Action_publicatesection extends ActionAbstract
     /**
      * Print a JSON object with users of the selected group
      * Called from an ajax request
-     * 
+     *
      * @return boolean
      */
     public function notificableUsers()
@@ -219,7 +216,7 @@ class Action_publicatesection extends ActionAbstract
     /**
      * Replace %doc macro in default Message.
      * The message is getted from conf/notifications.php
-     * 
+     *
      * @param string $message
      * @param string $nodeName
      * @return string with the text replaced.
@@ -321,7 +318,7 @@ class Action_publicatesection extends ActionAbstract
         $nodePath = $node->GetPath();
         $subject = _("Ximdex CMS: Published section:") . " " . $nodeName;
         $content = _("The user") . " " . $userName . " " . _("has published the section")
-            . " " . $nodeName . "\n" . "\n" . _("Full Ximdex path") . " --> " . $nodePath . "\n" . "\n" . _("Comment") . ":" 
+            . " " . $nodeName . "\n" . "\n" . _("Full Ximdex path") . " --> " . $nodePath . "\n" . "\n" . _("Comment") . ":"
             . "\n". $texttosend . "\n" . "\n";
         parent::sendNotifications($subject, $content, $userList);
         return true;

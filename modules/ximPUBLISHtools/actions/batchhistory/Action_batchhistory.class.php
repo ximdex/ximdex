@@ -24,21 +24,22 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
+use Ximdex\Models\Node;
 use Ximdex\Models\User;
-use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
-use Ximdex\Utils\Serializer;
 use Ximdex\Runtime\Session;
+use Ximdex\Utils\Serializer;
+use Ximdex\MVC\ActionAbstract;
 
 \Ximdex\Modules\Manager::file('/actions/FilterParameters.php', 'ximPUBLISHtools');
 \Ximdex\Modules\Manager::file('/inc/model/PublishingReport.class.php', 'ximSYNC');
 
-class Action_batchhistory extends ActionAbstract {
+class Action_batchhistory extends ActionAbstract
+{
+    private $params = [];
 
-    private $params = array();
-
-    private function filterParams() {
-        
+    private function filterParams()
+    {
         $this->params['idNode'] = FilterParameters::filterInteger($this->request->getParam("nodeid"));
         $this->params['idBatch'] = FilterParameters::filterInteger($this->request->getParam("idBatch"));
         $this->params['dateFrom'] = FilterParameters::filterInteger($this->request->getParam("dateFrom"));
@@ -48,7 +49,10 @@ class Action_batchhistory extends ActionAbstract {
     }
 
     // Main method: shows initial form
-    function index() {
+    public function index()
+    {
+        $nodeID = $this->request->getParam("nodeid");
+        $node = new Node($nodeID);
         $acceso = true;
         $userID = Session::get('userID');
 
@@ -71,18 +75,18 @@ class Action_batchhistory extends ActionAbstract {
             'acceso' => $acceso,
             'errorBox' => $errorMsg,
             'js_files' => $jsFiles,
+            'node_Type' => $node->nodeType->GetName(),
             'css_files' => $cssFiles
         );
-
-        $this->render($arrValores, NULL, 'default-3.0.tpl');
+        $this->render($arrValores, null, 'default-3.0.tpl');
     }
 
-    public function getFrameList() {
+    public function getFrameList()
+    {
         $this->filterParams();
         $pr = new PublishingReport();
         $frames = $pr->getReports($this->params);
         $json = Serializer::encode(SZR_JSON, $frames);
-        $this->render(array('result' => $json), NULL, "only_template.tpl");
+        $this->render(array('result' => $json), null, "only_template.tpl");
     }
-
 }
