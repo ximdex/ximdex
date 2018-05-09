@@ -22,13 +22,6 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
-
-div.manageproperties
-{
-    width: 95%;
-    margin: 0 auto;
-}
-
 div.manageproperties div.left-block {
 	float: left;
 }
@@ -38,37 +31,27 @@ div.manageproperties div.apply {
 	float: left;
 }
 
-div.manageproperties .channelsmp
-{
+div.manageproperties .channelsmp {
 	margin-bottom: 5pt;
 }
 
-div.manageproperties .languagesmp
-{
+div.manageproperties .languagesmp {
 	margin-bottom: 5pt;
 }
 
-ul.inheritlist
-{
-	margin-left: 65pt !important;
+ul.inheritlist {
+	margin-left: 60pt !important;
 	list-style: disc;
 	cursor: auto;
 }
 
-div.overwrited_properties
-{
-	margin-left: 60pt !important;
+div.overwrited_properties {
+	margin-left: 56pt !important;
 	margin-top: 5pt !important;
 	margin-bottom: 5pt !important;
 }
 
-div.propertyform
-{
-	margin-bottom: 10pt;
-}
-
-ul.inheritlist li
-{
+ul.inheritlist li {
 	float: left;
     margin-right: 50pt;
 }
