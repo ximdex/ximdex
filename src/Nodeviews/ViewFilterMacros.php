@@ -204,7 +204,14 @@ class ViewFilterMacros extends AbstractView implements IView
 
         // Check Params
         if (!isset($this->_idChannel) || !($this->_idChannel > 0)) {
-            Logger::error('VIEW FILTERMACROS: Channel not specified for node ' . $args['NODENAME']);
+            $error = 'VIEW FILTERMACROS: Channel not specified for node';
+            if (isset($args['NODENAME']) and $args['NODENAME']) {
+                $error .= ' ' . $args['NODENAME'];
+            }
+            if (isset($args['NODEID']) and $args['NODEID']) {
+                $error .= ' ' . $args['NODEID'];
+            }
+            Logger::error($error);
             return false;
         }
         return true;
