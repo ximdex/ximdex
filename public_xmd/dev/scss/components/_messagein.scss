@@ -1,0 +1,24 @@
+.message p {
+    padding: .4em 0;
+    margin-bottom: 0;
+    text-align: center;
+    color: #e3e7e9;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+.message p::before {
+    position: absolute;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    padding: .20em;
+    margin-left: -2em;
+    margin-top: -.2em;
+    color: #4c4d57;
+}
+.message-success p::before {
+    background-color: #c2d43b;
+}
+.message-success p::after {
+    content: '';
+}

@@ -22,20 +22,10 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  */
-
-
-.h2_general {
-  background: #43a1a2!important;
-  color: white!important;
-  padding: .6em 1em .6em!important;
-  border-radius:5px 5px 0 0;
-}
-
-
-hr{
+hr {
   width: 100%;
-  border: 2px solid #eee;
-}
+  border: 2px solid #eee;}
+
 
 .config_button, .document_actions .edit, .document_actions .preview, .new_item {
   border: none;
@@ -146,12 +136,6 @@ hr{
     padding: 2em 4%;
     padding-bottom: 0; }
 
-.action_content h2 {
-  font-size: 1.06em;
-  margin-bottom: 1em;
-  padding-bottom: .5em;
- }
-
 .main_content {
   width: 66%;
   display: inline-block; }
@@ -198,12 +182,12 @@ hr{
   -moz-border-radius: 50%;
   border-radius: 50%; }
   .config_button::before, .document_actions .edit::before, .document_actions .preview::before {
-    position: absolute;
-    color: #606060;
-    text-indent: 0;
-    height: 100%;
-    top: 0;
-    right: 0; }
+  position: absolute;
+  color: #606060;
+  text-indent: 0;
+  height: 100%;
+  top: 0;
+  right: 0; }
   .config_button:hover, .document_actions .edit:hover, .document_actions .preview:hover {
     background: #43a1a2; }
     .config_button:hover::before, .document_actions .edit:hover::before, .document_actions .preview:hover::before {
@@ -215,15 +199,26 @@ hr{
   top: 7.27em; }
 
 .new_item {
-  background: #7bcabf;
-  font-size: 0.81em !important;
+  border-color: #7bcabf;
+  font-family: "Coustard";
+  text-transform: uppercase;
   color: #fff;
-
-  /*padding: .5em .8em .6em;*/
-  border-radius: 5px;
+  border-radius: 2px;
+  padding: 7px 14px 5px;
+  cursor: pointer;
+  background: #7bcabf;
+  font-size: 1.2rem;
   margin: 0;
   display: block; }
   .new_item:hover {
+  background-color: #43a1a2;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+  .new_item:focus {
+  background-color: #43a1a2;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 /**************
@@ -311,15 +306,15 @@ hr{
     text-overflow: ellipsis;
     display: block;
     width: 100%; }
-    .document_item .document::before {
+  .document_item .document::before {
       font-size: 1.2em;
       padding-right: .5em; }
   .document_item .edit {
     width: 1.5em;
     height: 1.5em;
     font-size: 1.5em;
-    bottom: 5px;}
-    .document_item .edit::before {
+    bottom: 5px; }
+  .document_item .edit::before {
       right: 0;
       top: 0;
       font-size: 1.1em;
@@ -380,11 +375,6 @@ hr{
   position: absolute;
   right: 1em;
   top: 50%;
-  /*-webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);	*/
   margin-top: -.7em; }
 
 /**************

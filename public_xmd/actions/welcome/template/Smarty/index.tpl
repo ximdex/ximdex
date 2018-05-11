@@ -22,15 +22,14 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  *}
-
 <div class="welcome">
-    <div class="action_header">
-	    <h5 style="text-align: center;">{t}Welcome to Ximdex CMS{/t}, <em>{$user}</em>!</h5>
-		<hr>
-    </div>
+	<div class="action_header">
+		<h5 style="text-align: center;">{t}Welcome to Ximdex CMS{/t},
+			<em>{$user}</em>!</h5>
+	</div>
 	<div class="action_content">
-	    <div class="main_content">
-		    <div class="ximdex_projects">
+		<div class="main_content">
+			<div class="ximdex_projects">
 				<label style="margin-bottom: 10px;" class="label_general label_title">{t}Existing projects{/t}</label>
 			    {if is_array($projects_info) and $projects_info|@count gt 0}	
                     {foreach from=$projects_info key=index item=p }
@@ -57,40 +56,38 @@
                 {/if}
 				<button {if $permissionsToCreateProject == false} disabled="disabled" {/if}  class="new_item project_new">{t}Create a new project{/t}</button>			
 			</div>
-					
 			<div class="ximdex_documents">
 				<label style="margin-bottom: 10px;" class="label_general label_title">{t}Your latest documents{/t}</label>
 			    {if is_array($docs) and $docs|@count gt 0}	
                     {foreach from=$docs key=index item=d }
 				<div class="document_item">
-                    <span class="icon document">{$d.name} 
-                    	<span class="document-version">({$d.Version}.{$d.Subversion})</span>
-                    </span>
-                   
-                    <span class="document-path" data-xtooltip="{$d.path}">{$d.path}</span>
-                    <span class="nodeid hidden">{$d.IdNode}</span>
+					<span class="icon document">{$d.name}
+						<span class="document-version">({$d.Version}.{$d.Subversion})</span>
+					</span>
+					<span class="document-path" data-xtooltip="{$d.path}">{$d.path}</span>
+					<span class="nodeid hidden">{$d.IdNode}</span>
 					<div class="document_actions">
-                    {if $d.IdNodeType eq 5040}
+						{if $d.IdNodeType eq 5040}
 						<button class="preview icon">{t}Preview Image{/t}</button>
-                    {elseif $d.IdNodeType eq 5032}
+						{elseif $d.IdNodeType eq 5032}
 						<button class="edit icon xmltext">{t}Edit in XML mode{/t}</button>
-                    {elseif $d.IdNodeType eq 5028 || $d.IdNodeType eq 5077 || $d.IdNodeType eq 5078}
+						{elseif $d.IdNodeType eq 5028 || $d.IdNodeType eq 5077 || $d.IdNodeType eq 5078}
 						<button class="edit icon plaintext">{t}Edit in text mode{/t}</button>
-                    {/if}
+						{/if}
 					</div>
 				</div>
-                    {/foreach}
-                {else}
+				{/foreach} {else}
 				<div class="empty_state document_empty">
 					<ol>
-		                <li class="step_document created_project icon">{t}Create a new project from treeview or by clicking on the button above {/t}</li>
-						<li class="step_document">{t}Select the '<em>documents folder</em>' in the treeview on the left panel{/t}</li>
-						<li class="step_document">{t}Perform the '<em>Add new document</em>' action to create new documents{/t}</li>
+						<li class="step_document created_project icon">{t}Create a new project from treeview or by clicking on the button above {/t}</li>
+						<li class="step_document">{t}Select the '
+							<em>documents folder</em>' in the treeview on the left panel{/t}</li>
+						<li class="step_document">{t}Perform the '
+							<em>Add new document</em>' action to create new documents{/t}</li>
 					</ol>
 				</div>
-                {/if}
+				{/if}
 			</div>
-			
 		</div>
 		<div class="sidebar">
 			<h2 class="h2_general">{t}Learn how to{/t}...</h2>
@@ -101,22 +98,18 @@
 				<li>
 					<a href="https://github.com/XIMDEX/ximdex/wiki/Recipes#create-a-new-server-medium" target="_blank">{t}Create a new Server & publish data{/t}</a>
 				</li>
-				<li>					
+				<li>
 					<a href="https://github.com/ximdex/ximdex/wiki/Ximdex-Basics" target="_blank">{t}Ximdex CMS, the basics{/t}</a>
 				</li>
-				<li>					
+				<li>
 					<a href="https://github.com/ximdex/ximdex/wiki/Recipes" target="_blank">{t}RNG schemes & XSL templates{/t}</a>
 				</li>
-				<li>					
+				<li>
 					<a href="https://github.com/XIMDEX/ximdex/wiki/Faqs" target="_blank">{t}FAQs{/t}</a>
 				</li>
-				<li>					
+				<li>
 					<a href="mailto:help@ximdex.org">{t}Contact us{/t}</a>
 				</li>
 			</ul>
-
-		
 		</div>
 	</div>
-
-

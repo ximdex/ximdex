@@ -11,8 +11,8 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.sass('./scss/actions/infonode/resources/css/style.scss', '../actions/infonode/resources/css/style.css')
-.setPublicPath('../actions');
+mix.sass('./scss/style.scss', '../assets/style/components.css')
+//.setPublicPath('../actions');
 
 // Full API
 // mix.js(src, output);

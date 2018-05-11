@@ -26,17 +26,17 @@
  */
 
 use Ximdex\Logger;
-use Ximdex\Models\Action;
 use Ximdex\Models\Node;
-use Ximdex\Models\NodeSets;
-use Ximdex\Models\SearchFilters;
 use Ximdex\Models\User;
-use Ximdex\Models\XimLocale;
-use Ximdex\MVC\ActionAbstract;
 use Ximdex\Runtime\App;
+use Ximdex\Models\Action;
+use Ximdex\Models\NodeSets;
 use Ximdex\Runtime\Request;
-use Ximdex\Utils\Serializer;
 use Ximdex\Runtime\Session;
+use Ximdex\Models\XimLocale;
+use Ximdex\Utils\Serializer;
+use Ximdex\MVC\ActionAbstract;
+use Ximdex\Models\SearchFilters;
 
 \Ximdex\Modules\Manager::file('/actions/browser3/inc/search/QueryProcessor.class.php');
 \Ximdex\Modules\Manager::file('/actions/browser3/inc/GenericDatasource.class.php');
@@ -44,7 +44,6 @@ use Ximdex\Runtime\Session;
 
 class Action_browser3 extends ActionAbstract
 {
-
     const CSS_PATH = '/actions/browser3/resources/css';
     const JS_PATH = '/actions/browser3/resources/js';
     // Used previously for session cache
@@ -52,7 +51,7 @@ class Action_browser3 extends ActionAbstract
 
     public function index()
     {
-        if (!is_string( Session::get('activeTheme'))) {
+        if (!is_string(Session::get('activeTheme'))) {
             Session::set('activeTheme', 'ximdex_theme');
         }
 
@@ -83,7 +82,6 @@ class Action_browser3 extends ActionAbstract
         $this->addActionCss('browser.css');
         $this->addCss('/resources/css/tour.css', 'ximTOUR');
 
-
         //Old browserwindow styles
         $this->addCss('/assets/style/jquery/ximdex_theme/widgets/browserwindow/actionPanel.css');
         $this->addCss('/assets/style/jquery/ximdex_theme/widgets/browserwindow/browserwindow.css');
@@ -96,6 +94,7 @@ class Action_browser3 extends ActionAbstract
         $this->addCss('/assets/style/jquery/ximdex_theme/widgets/tabs/common_views.css');
         $this->addCss('/assets/style/jquery/ximdex_theme/widgets/tabs/tabs-container.css');
         $this->addCss('/assets/style/jquery/ximdex_theme/widgets/tabs/tabs.css');
+        $this->addCss('/assets/style/components.css');
 
         $this->addJs('/assets/js/helpers.js');
         $this->addJs('/assets/js/collection.js');
@@ -131,12 +130,12 @@ class Action_browser3 extends ActionAbstract
         $this->addJs(Extensions::JQUERY_PATH . '/plugins/jquery-file-upload/js/jquery.fileupload-angular.js');
         $this->addJs('/vendors/d3js/d3.v3.min.js');
         $this->addJs('/vendors/codemirror/Codemirror/lib/codemirror.js');
-
+        
         //Old browserwindow js
         $this->addJs('/src/Widgets/browserwindow/js/browserwindow.js');
         $this->addJs('/src/Widgets/browserwindow/js/dialogs.js');
         $this->addJs('/src/Widgets/browserwindow/js/actions.js');
-
+        
         //Old listview js
         $this->addJs('/src/Widgets/listview/js/fix.jquery.events.js');
         $this->addJs('/src/Widgets/listview/js/listview.js');
@@ -147,8 +146,6 @@ class Action_browser3 extends ActionAbstract
         $this->addJs('/src/Widgets/listview/js/listviewRenderer_List.js');
         $this->addJs('/src/Widgets/listview/js/selections.js');
         $this->addJs('/src/Widgets/listview/js/jquery.fixheadertable.js');
-
-
         $this->addJs('/assets/js/angular/app.js');
         $this->addJs('/assets/js/angular/animations/slide.js');
         $this->addJs('/assets/js/angular/services/xTranslate.js');
@@ -180,7 +177,6 @@ class Action_browser3 extends ActionAbstract
         $this->addJs('/assets/js/angular/directives/ximTabs.js');
         $this->addJs('/assets/js/angular/directives/treeAssocNodes.jsx.js');
         $this->addJs('/assets/js/angular/directives/treeNode.jsx.js');
-
         $this->addJs('/assets/js/angular/filters/xFilters.js');
         $this->addJs('/assets/js/angular/controllers/XTagsCtrl.js');
         $this->addJs('/assets/js/angular/controllers/XModifyUserGroupsCtrl.js');
@@ -198,7 +194,8 @@ class Action_browser3 extends ActionAbstract
 
         /*         * ********************************** SPLASH ************************************** */
         define("REMOTE_WELCOME", STATS_SERVER . "/stats/getsplash.php");
-        $ctx = stream_context_create(array(
+        $ctx = stream_context_create(
+            array(
                 'http' => array(
                     'timeout' => 2
                 )
@@ -248,7 +245,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function actionTemplate()
     {
-
         $template = $this->request->getParam('template');
         $template = sprintf('actionPanel%s', ($template === null ? 'Main' : ucfirst(strtolower($template))));
 
@@ -299,7 +295,6 @@ class Action_browser3 extends ActionAbstract
      */
     protected function checkNodeAction(&$nodes)
     {
-
         $db = new \Ximdex\Runtime\Db();
         $sql = 'select count(1) as total from Actions a left join Nodes n using(IdNodeType) where IdNode = %s and a.Sort > 0';
         $sql2 = $sql . " AND a.Command='fileupload_common_multiple' ";
@@ -358,7 +353,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function search()
     {
-
         $handler = strtoupper($this->request->getParam('handler'));
         $handler = empty($handler) ? 'SQL' : $handler;
         $output = strtoupper($this->request->getParam('output'));
@@ -386,7 +380,6 @@ class Action_browser3 extends ActionAbstract
      */
     protected function _search($handler, $output, $query)
     {
-
         $request = new Request();
         $request->setParameters(array(
             'handler' => $handler,
@@ -407,7 +400,6 @@ class Action_browser3 extends ActionAbstract
             $ret['query'] = $query;
             $ret = $this->resultsHierarchy($view, isset($query['parentid']) ? $query['parentid'] : null, $ret, $queryHandler);
         } else {
-
             return $ret;
         }
 
@@ -416,18 +408,18 @@ class Action_browser3 extends ActionAbstract
 
     protected function resultsHierarchy($view, $parentId, $results, $handler)
     {
-
-        if ($view != 'treeview')
+        if ($view != 'treeview') {
             return $results;
+        }
 
         $results = $results['data'];
         $data = array();
 
         foreach ($results as $item) {
-
             $node = new Node($item['nodeid']);
-            if (!($node->get('IdNode') > 0))
+            if (!($node->get('IdNode') > 0)) {
                 continue;
+            }
 
             $ancestors = $node->getAncestors();
             $p = null;
@@ -442,8 +434,9 @@ class Action_browser3 extends ActionAbstract
                 $i++;
             }
 
-            if ($p !== null)
+            if ($p !== null) {
                 $data[] = $p;
+            }
         }
 
         $data = array_unique($data);
@@ -492,7 +485,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function listSets()
     {
-
         $idUser = \Ximdex\Runtime\Session::get('userID');
 
         $sets = array();
@@ -518,7 +510,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function getSet()
     {
-
         $setid = $this->request->getParam('setid');
         $set = new NodeSets($setid);
 
@@ -546,7 +537,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function addSet()
     {
-
         $name = $this->request->getParam('name');
         $nodes = $this->request->getParam('nodes');
         $nodes = GenericDatasource::normalizeEntities($nodes);
@@ -570,8 +560,11 @@ class Action_browser3 extends ActionAbstract
 
         $sessionUser = \Ximdex\Runtime\Session::get('userID');
         $errors = array_merge(
-            $errors, $this->addUserToSet(
-            $set->getId(), $sessionUser, RelNodeSetsUsers::OWNER_YES
+            $errors,
+            $this->addUserToSet(
+            $set->getId(),
+                $sessionUser,
+                RelNodeSetsUsers::OWNER_YES
         )
         );
 
@@ -622,12 +615,14 @@ class Action_browser3 extends ActionAbstract
         $set = new NodeSets($idSet);
         foreach ($nodes as $idNode) {
             $rel = $set->addNode($idNode);
-            if ($rel->getId() > 0)
+            if ($rel->getId() > 0) {
                 $addedNodes++;
+            }
             $errors = array_merge($errors, $rel->messages->messages);
         }
         $errors = array_merge(
-            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Nodes has been added correctly.") . $addedNodes)), $errors
+            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Nodes has been added correctly.") . $addedNodes)),
+            $errors
         );
 
         if ($returnJSON) {
@@ -668,13 +663,15 @@ class Action_browser3 extends ActionAbstract
         foreach ($users as $idUser) {
             if (!empty($idUser) && $idUser > 0) {
                 $rel = $set->addUser($idUser, $owner);
-                if ($rel->getId() > 0)
+                if ($rel->getId() > 0) {
                     $addedUsers++;
+                }
                 $errors = array_merge($errors, $rel->messages->messages);
             }
         }
         $errors = array_merge(
-            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Users have been added correctly.") . $addedUsers)), $errors
+            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Users have been added correctly.") . $addedUsers)),
+            $errors
         );
 
         if ($returnJSON) {
@@ -733,12 +730,14 @@ class Action_browser3 extends ActionAbstract
         $set = new NodeSets($setid);
         foreach ($nodes as $idNode) {
             $rel = $set->deleteNode($idNode);
-            if (count($rel->messages->messages) == 0)
+            if (count($rel->messages->messages) == 0) {
                 $deletedNodes++;
+            }
             $errors = array_merge($errors, $rel->messages->messages);
         }
         $errors = array_merge(
-            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Nodes have been deleted successfully.") . $deletedNodes)), $errors
+            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Nodes have been deleted successfully.") . $deletedNodes)),
+            $errors
         );
         $this->sendJSON($errors);
     }
@@ -749,7 +748,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function deleteUserFromSet()
     {
-
         $sessionUser = \Ximdex\Runtime\Session::get('userID');
         $setid = $this->request->getParam('setid');
         $users = $this->request->getParam('users');
@@ -767,23 +765,23 @@ class Action_browser3 extends ActionAbstract
 
             // Don't delete my own set subscription
             if ($idUser != $sessionUser->getIdUser()) {
-
                 $user = RelNodeSetsUsers::getByUserId($setid, $idUser);
                 // Don't allow a not owner to delete the owner subscription
                 if (
                 !($sessionUser->getOwner() == RelNodeSetsUsers::OWNER_NO &&
                     $user->getOwner() == RelNodeSetsUsers::OWNER_YES)
                 ) {
-
                     $rel = $set->deleteUser($idUser);
-                    if (count($rel->messages->messages) == 0)
+                    if (count($rel->messages->messages) == 0) {
                         $deletedUsers++;
+                    }
                     $errors = array_merge($errors, $rel->messages->messages);
                 }
             }
         }
         $errors = array_merge(
-            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Users have been deleted successfully.") . $deletedUsers)), $errors
+            array(array('type' => MSG_TYPE_NOTICE, 'message' => _("Users have been deleted successfully.") . $deletedUsers)),
+            $errors
         );
         $this->sendJSON($errors);
     }
@@ -806,7 +804,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function getUsers()
     {
-
         $sessionUser = \Ximdex\Runtime\Session::get('userID');
         $idSet = $this->request->getParam('setid');
 
@@ -831,7 +828,6 @@ class Action_browser3 extends ActionAbstract
         }
 
         if (!empty($idSet)) {
-
             $users = new RelNodeSetsUsers();
             $users = $users->find(ALL, 'IdSet = %s', array($idSet));
             
@@ -857,7 +853,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function listFilters()
     {
-
         $filters = array();
         $it = SearchFilters::getFilters();
         while ($filter = $it->next()) {
@@ -879,7 +874,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function getFilter()
     {
-
         $filterid = $this->request->getParam('filterid');
         $output = $this->request->getParam('output');
         $output = $output !== null ? $output : 'JSON';
@@ -908,7 +902,6 @@ class Action_browser3 extends ActionAbstract
      */
     public function addFilter()
     {
-
         $name = $this->request->getParam('name');
         $name = $this->validateFieldName($name);
         if ($name === false) {
@@ -994,8 +987,7 @@ class Action_browser3 extends ActionAbstract
     {
         $idUser = \Ximdex\Runtime\Session::get('userID');
         $nodes = $nodes !== null ? $nodes : $this->request->getParam('nodes');
-        if (!is_array($nodes))
-        {
+        if (!is_array($nodes)) {
             $nodes = array($nodes);
         }
         $actions=[6000];
@@ -1003,8 +995,7 @@ class Action_browser3 extends ActionAbstract
         $actions = array_merge($actions, $this->getActionsOnNodeList($idUser, $nodes));
 
         // Users can modify their account
-        if (is_array($nodes) && count($nodes) == 1 && $nodes[0] == $idUser && !in_array(6002, $actions))
-        {
+        if (is_array($nodes) && count($nodes) == 1 && $nodes[0] == $idUser && !in_array(6002, $actions)) {
             $actions[] = 6002;
         }
         return $actions;
@@ -1044,7 +1035,6 @@ class Action_browser3 extends ActionAbstract
      */
     protected function getSetsIntersection($nodes = null)
     {
-
         $nodes = $nodes !== null ? $nodes : $this->request->getParam('nodes');
         $nodes = !is_array($nodes) ? array() : array_unique($nodes);
 
@@ -1084,15 +1074,13 @@ class Action_browser3 extends ActionAbstract
         $arrayActionsParams = array();
         
         //For every action, build the params for json response
-        foreach ($actions as $idAction)
-        {
+        foreach ($actions as $idAction) {
             $actionsParamsAux = array();
             $action = new Action($idAction);
             $name = $action->get("Name");
 
             //Changing name when node sets
-            if (count($nodes) > 1)
-            {
+            if (count($nodes) > 1) {
                 $auxName = explode(" ", $name);
                 $name = $auxName[0] . " " . _("selection");
             }
@@ -1117,17 +1105,14 @@ class Action_browser3 extends ActionAbstract
     {
         $request = $this->request->getRequests();
         $method = $this->request->getParam('validationMethod');
-        if (empty($method))
-        {
+        if (empty($method)) {
             $request_content = file_get_contents("php://input");
             $request = (array)json_decode($request_content);
-            if (array_key_exists('validationMethod', $request))
-            {
+            if (array_key_exists('validationMethod', $request)) {
                 $method = $request['validationMethod'];
             }
         }
-        if (method_exists("FormValidation", $method))
-        {
+        if (method_exists("FormValidation", $method)) {
             FormValidation::$method($request);
         }
         die("false");
@@ -1136,7 +1121,7 @@ class Action_browser3 extends ActionAbstract
     /**
      * Disables the tour pop-up
      */
-    function disableTour()
+    public function disableTour()
     {
         $numRep = $this->request->getParam('numRep');
         App::setValue('ximTourRep', $numRep, true);
@@ -1149,12 +1134,12 @@ class Action_browser3 extends ActionAbstract
     /**
      * Return preferences like MaxItemsPerGroup as JSON
      */
-    function getPreferences()
+    public function getPreferences()
     {
         $res["preferences"] = array("MaxItemsPerGroup" => App::getValue("MaxItemsPerGroup"));
         $this->sendJSON($res);
     }
-	
+    
     protected function actionIsExcluded($idAction, $idNode)
     {
         $node = new Node($idNode);
@@ -1166,7 +1151,7 @@ class Action_browser3 extends ActionAbstract
             $action = new Action($idAction);
             $command = $action->GetCommand();
 
-            if ( $command == 'deletenode') {
+            if ($command == 'deletenode') {
                 $ret = false;
             }
         }
