@@ -44,7 +44,7 @@ angular.module('ximdex.main.controller').controller 'AssocNodesCtrl', [
                 action =
                     command: 'infonode'
                     method: 'index'
-                    name: _("Node Info")
+                    name: _("Node information")
                 loadAction action, [node]
                 return
             ###if not $window.com.ximdex.nodeActions[node.nodeid]?
@@ -174,7 +174,7 @@ angular.module('ximdex.main.controller').controller 'AssocNodesCtrl', [
                 action =
                     command: 'infonode'
                     method: 'index'
-                    name: _("Node Info")
+                    name: _("Node information")
                 loadAction action, [n]
                 return
             ### Open the first action in menu

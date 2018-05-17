@@ -33,7 +33,7 @@
           action = {
             command: 'infonode',
             method: 'index',
-            name: _("Node Info")
+            name: _("Node information")
           };
           loadAction(action, [node]);
           return;
@@ -197,7 +197,7 @@
           action = {
             command: 'infonode',
             method: 'index',
-            name: _("Node Info")
+            name: _("Node Information")
           };
           loadAction(action, [n]);
           return;

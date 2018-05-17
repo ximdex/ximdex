@@ -482,7 +482,6 @@ h2.nodo_path {
    /* border-top: 2px solid#43A1A3;*/
 }
 fieldset.buttons-form, div.buttonset, .ui-dialog .ui-dialog-buttonpane {
-    background: #f9f9f9;
     text-align: right;
     order: 3;
     margin-top: 2px;
