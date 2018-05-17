@@ -29,15 +29,17 @@
 }
 
 fieldset.editor{
-    height: 100%;
-    width: 100%;
+    flex-grow: 1;
 }
 
 .text-editor{
 	background:#fff;
 	padding: 0;
 	position: relative;
-    width: 100%;
+	width: 100%;
+	flex-grow: 1;
+	display: flex;
+	align-items: stretch;
 }
 
 .CodeMirror {
