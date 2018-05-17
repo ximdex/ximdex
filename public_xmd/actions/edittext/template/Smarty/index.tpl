@@ -26,7 +26,9 @@
 <form id="et_form" class="text-editor-form" enctype="multipart/form-data" method="post" action="{$action_url}">
 		{include file="actions/components/title_Description.tpl"}
 		<fieldset class="buttons-form">
+			<hr>
             {button label="Save" type="submit" class="validate btn main_action"}{*message="{t}Are you sure you want to save the changes?{/t}"*}
+			{button label="Cancel" type="button" class="btn main_action ui-state-default ui-corner-all button close-button ladda-button" onclick="this.blur();"}
 		</fieldset>
 	
  <div class="action_content full text-editor">
