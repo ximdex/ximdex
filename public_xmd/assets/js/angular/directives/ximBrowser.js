@@ -269,7 +269,7 @@
                   action = {
                     command: 'infonode',
                     method: 'index',
-                    name: _("Node Info")
+                    name: _("Node information")
                   };
                   ref = $scope.selectedNodes;
                   for (j = 0, len = ref.length; j < len; j++) {
@@ -299,7 +299,7 @@
                 action = {
                   command: 'infonode',
                   method: 'index',
-                  name: _("Node Info")
+                  name: _("Node information")
                 };
                 loadAction(action, [node]);
                 return;
@@ -451,7 +451,7 @@
                 action = {
                   command: 'infonode',
                   method: 'index',
-                  name: _("Node Info")
+                  name: _("Node information")
                 };
                 loadAction(action, [n]);
                 return;

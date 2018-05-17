@@ -248,7 +248,7 @@ angular.module("ximdex.common.directive").directive "ximBrowser", [
                             action =
                                 command: 'infonode'
                                 method: 'index'
-                                name: _("Node Info")
+                                name: _("Node information")
                             for n in $scope.selectedNodes
                                 xTabs.pushTab action, [n] if n.nodeid? && n.nodeid != "0"
                             allowedHotkey = false
@@ -270,7 +270,7 @@ angular.module("ximdex.common.directive").directive "ximBrowser", [
                         action =
                             command: 'infonode'
                             method: 'index'
-                            name: _("Node Info")
+                            name: _("Node information")
                         loadAction action, [node]
                         return
                         ###if not $window.com.ximdex.nodeActions[node.nodeid]?
@@ -398,7 +398,7 @@ angular.module("ximdex.common.directive").directive "ximBrowser", [
                         action =
                             command: 'infonode'
                             method: 'index'
-                            name: _("Node Info")
+                            name: _("Node Information")
                         loadAction action, [n]
                         return
                         ### Open the first action in menu
