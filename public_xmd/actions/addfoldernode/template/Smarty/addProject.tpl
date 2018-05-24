@@ -104,7 +104,7 @@
             
             <div class="small-12 columns">
                 <fieldset class="buttons-form ">
-                    {button label="{t}Create project{/t}" class='validate btn main_action' }
+                    {button label="Create Project" class="validate btn main_action"}
                 </fieldset>
             </div>
 		</div>

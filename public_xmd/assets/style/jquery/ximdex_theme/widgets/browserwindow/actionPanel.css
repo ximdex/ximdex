@@ -476,15 +476,16 @@ h2.nodo_path {
     position: relative;
 }
 .action_container> form {
+    display: flex;
     height: 100%;
+    flex-direction: column;
    /* border-top: 2px solid#43A1A3;*/
 }
 fieldset.buttons-form, div.buttonset, .ui-dialog .ui-dialog-buttonpane {
-    background: none;
     text-align: right;
-    /* margin-bottom: 40px; */
-    margin-right: 2%;
-    margin-left: 2%;
+    order: 3;
+    margin-top: 2px;
+    padding: 5px 20px;
 }
 .positioned_btn {
     position: absolute;
