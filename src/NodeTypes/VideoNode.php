@@ -1,5 +1,7 @@
-{**
- *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
+<?php
+
+/**
+ *  \details &copy; 2018  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
  *  Ximdex a Semantic Content Management System (CMS)
  *
@@ -19,8 +21,27 @@
  *
  *  If not, visit http://gnu.org/licenses/agpl-3.0.html.
  *
- *  @author Ximdex DevTeam <dev@ximdex.com>
- *  @version $Revision$
- *}
-<h2>{t}Expire section{/t}</h2>
-<p>{t section_name=$section_name}Section %1 has been successfully expired{/t}</p>
+ * @author Ximdex DevTeam <dev@ximdex.com>
+ * @version $Revision$
+ */
+
+namespace Ximdex\NodeTypes;
+
+use Ximdex\Runtime\Constants;
+
+/***
+ * Class for NodeType Video
+ */
+class VideoNode extends FileNode
+{
+    /**
+     * Build a new video node file
+     * Use parent CreateNode method and generate a new metadata document for the new video node created
+     * 
+     * @return bool
+     */
+    function CreateNode($name = null, $parentID = null, $nodeTypeID = null, $stateID = Constants::EDITION_STATUS_ID, $sourcePath = "")
+    {
+        parent::CreateNode($name, $parentID, $nodeTypeID, $stateID, $sourcePath);
+    }
+}

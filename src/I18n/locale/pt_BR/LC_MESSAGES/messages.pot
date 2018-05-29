@@ -5676,6 +5676,9 @@ msgstr ""
 msgid "Add a new language"
 msgstr ""
 
+msgid "Add a new empty layout"
+msgstr ""
+
 msgid "Add a document with different language"
 msgstr ""
 

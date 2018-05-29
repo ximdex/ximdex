@@ -35,6 +35,8 @@ use Ximdex\Utils\Serializer;
 use Ximdex\NodeTypes\NodeTypeConstants;
 use Ximdex\Models\NodeType;
 
+Ximdex\Modules\Manager::file('/inc/model/NodesToPublish.class.php', 'ximSYNC');
+
 class Action_publicatesection extends ActionAbstract
 {
     /**
@@ -42,7 +44,7 @@ class Action_publicatesection extends ActionAbstract
      */
     public function index()
     {
-        $idNode = (int)$this->request->getParam("nodeid");
+        $idNode = (int) $this->request->getParam("nodeid");
         $node = new Node($idNode);
         $nodeTypeName = $node->nodeType->GetName();
         $nodeType = new NodeType();
@@ -78,7 +80,8 @@ class Action_publicatesection extends ActionAbstract
             'required' => $conf['required'] === true ? 1 : 0,
             'defaultMessage' => $defaultMessage,
             'idNode' => $idNode,
-            'name' => $node->GetNodeName()
+            'name' => $node->GetNodeName(),
+            'node_Type' => $node->nodeType->GetName()
         );
         $this->addJs('/actions/publicatesection/resources/js/index.js');
         $this->addCss('/actions/publicatesection/resources/css/style.css');
@@ -88,8 +91,8 @@ class Action_publicatesection extends ActionAbstract
 
     public function publicate_section()
     {
-        $idNode = (int)$this->request->getParam('nodeid');
-        $levels = $this->request->getParam('levels');
+        $idNode = (int) $this->request->getParam('nodeid');
+        $levels = (int) $this->request->getParam('levels');
         if ($levels == 'all') {
             
             // All subsections
@@ -178,8 +181,8 @@ class Action_publicatesection extends ActionAbstract
      */
     public function notificableUsers()
     {
-        $idGroup = $this->request->getParam('groupid');
-        $idNode = $this->request->getParam('nodeid');
+        $idGroup = (int) $this->request->getParam('groupid');
+        $idNode = (int) $this->request->getParam('nodeid');
         $group = new Group($idGroup);
         $values = array('messages' => array(_('You do not belong to any group with publication privileges')));
         $validateInGroup = $this->validateInSelectedGroup($group, $idGroup);

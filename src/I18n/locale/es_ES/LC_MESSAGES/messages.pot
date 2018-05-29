@@ -5689,6 +5689,9 @@ msgstr ""
 msgid "Add a new channel to Ximdex"
 msgstr ""
 
+msgid "Add a new empty layout""
+msgstr ""
+
 msgid "Associated groups"
 msgstr ""
 
