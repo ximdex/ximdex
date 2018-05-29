@@ -22,14 +22,17 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  *}
+
 {include file="actions/components/title_Description.tpl"}
-<div class="action_content image-preview">
-	{if $type eq 'XSIRVideoFile' or $type eq 'VideoFile'}
-		<video controls autoplay>
-			<source src="{$path}">
-			Your browser does not support the video tag.
-		</video>
-	{else}
-		<img src="{$path}" alt="preview"/>
-	{/if}
+<div class="message message-success">
+    <p>{t}The document has been moved to the next state.{/t}</p>
+</div>
+<div class="small-12 columns">
+    <fieldset class="buttons-form">
+        {if ($goback)}
+            {button class="goback-button btn main_action" label="Go back"}
+        {else}
+            {button class="close-button btn main_action" label="Close"}
+        {/if}
+    </fieldset>
 </div>

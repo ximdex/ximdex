@@ -58,22 +58,25 @@ class PublishingReport extends PublishingReport_ORM
         'Due2Out_' => '40',
         'Due2Out' => '60',
         'Pumped' => '80',
-        'In' => '100',
+        ServerFrame::IN => '100',
         'Out' => '100',
         'Canceled' => '100',
         'Replaced' => '100',
         'Removed' => '100',
         'Error' => '100',
-        'Warning' => '100'
+        'Warning' => '100',
+        'Due2InWithError' => '100',
+        'Due2OutWithError' => '100'
     );
 
     function create($idSection, $idNode, $idChannel, $idSyncServer, $idPortalVersion
-        , $pubTime, $state, $progress, $fileName, $filePath, $idSync, $idBatch, $idParentServer) {
+        , $pubTime, $state, $progress, $fileName, $filePath, $idSync, $idBatch, $idParentServer)
+    {
         if ($idSection != null && $idNode != null) {
             $dbObj = new \Ximdex\Runtime\Db();
             $sql = "SELECT * " .
                     "FROM PublishingReport " .
-                    "WHERE IdNode = " . $idNode . //" AND IdSection=" . $idSection .
+                    "WHERE IdNode = " . $idNode . 
                     " AND IdSyncServer = " . $idSyncServer .
                     " AND IdChannel " . (empty($idChannel) ? "IS NULL" : ("=" .$idChannel)) .
                     " LIMIT 1";
@@ -93,8 +96,6 @@ class PublishingReport extends PublishingReport_ORM
                     'IdParentServer' => $idParentServer,
                 );
                 $searchFields = array(
-                    
-                    //'IdSection' => $idSection,
                     'IdNode' => $idNode,
                     'IdSyncServer' => $idSyncServer,
                     'IdChannel' => empty($idChannel) ? NULL : $idChannel
@@ -126,7 +127,8 @@ class PublishingReport extends PublishingReport_ORM
      *  @param array arrayFields
      *  @return array|null
      */
-    function updateReportByField($updateFields, $searchFields, $fromCreate = false) {
+    function updateReportByField($updateFields, $searchFields, $fromCreate = false)
+    {
         $whereClause = " WHERE TRUE";
         if (is_array($searchFields) && count($searchFields) >= 0) {
             foreach ($searchFields as $fieldName => $fieldValue) {
@@ -153,13 +155,14 @@ class PublishingReport extends PublishingReport_ORM
         return null;
     }
 
-    function getReports($params) {
+    function getReports($params)
+    {
         $dbObj = new \Ximdex\Runtime\Db();
         $sql = "SELECT * " .
                 "FROM PublishingReport pr INNER JOIN Nodes n on pr.IdNode = n.IdNode inner join
                  NodeTypes nt on n.IdNodeType = nt.IdNodeType ";
         if ($params['finished']) {
-            $sql .= "WHERE State IN ('In','Out')";
+            $sql .= "WHERE State IN ('" . ServerFrame::IN . "','" . ServerFrame::OUT . "')";
         }
         if ($params['idNode'] !== null && $params['idNode'] !== 0) {
             $sql .= " AND IdParentServer = " . $params['idNode'];
@@ -247,7 +250,7 @@ class PublishingReport extends PublishingReport_ORM
             $frame["IdPortal"] = $k;
             $numSuccess = $numErrors = $numWarnings = 0;
             $numOfElements = count($frame['elements']);
-            if($numOfElements > 0) {
+            if ($numOfElements > 0) {
                 $acumProgress = 0;
                 $acumSuccess = 0;
                 $acumWarning = 0;

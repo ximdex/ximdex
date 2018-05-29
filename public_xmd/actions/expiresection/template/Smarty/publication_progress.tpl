@@ -22,14 +22,5 @@
  *  @author Ximdex DevTeam <dev@ximdex.com>
  *  @version $Revision$
  *}
-{include file="actions/components/title_Description.tpl"}
-<div class="action_content image-preview">
-	{if $type eq 'XSIRVideoFile' or $type eq 'VideoFile'}
-		<video controls autoplay>
-			<source src="{$path}">
-			Your browser does not support the video tag.
-		</video>
-	{else}
-		<img src="{$path}" alt="preview"/>
-	{/if}
-</div>
+
+{$text}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  \details &copy; 2011  Open Ximdex Evolution SL [http://www.ximdex.org]
  *
@@ -25,80 +26,20 @@
  */
 
 namespace Ximdex\NodeTypes;
-use DOMDocument;
-use Ximdex\Models\Node;
-
 
 /***
  * Class for NodeType Image
  */
 class ImageNode extends FileNode
 {
-
     /**
-     * Build a new image node file.
-     * Use parent CreateNode method and generate a new metadata document for the new image node created.
-     * @return boolean true.
+     * Build a new image node file
+     * Use parent CreateNode method and generate a new metadata document for the new image node created
+     * 
+     * @return bool
      */
     function CreateNode($name = null, $parentID = null, $nodeTypeID = null, $stateID = 7, $sourcePath = "")
     {
         parent::CreateNode($name, $parentID, $nodeTypeID, $stateID, $sourcePath);
-        /*
-        $mm = new \Ximdex\Metadata\MetadataManager($this->nodeID);
-        $mm->generateMetadata();
-        $mm->updateSystemMetadata();
-        */
     }
-
-    /**
-     * Delete image node and the metadata asociated.
-     */
-    function DeleteNode()
-    {
-        parent::DeleteNode();
-        $mm = new \Ximdex\Metadata\MetadataManager($this->nodeID);
-        $mm->deleteMetadata();
-    }
-
-
-    function RenameNode($name = null)
-    {
-        $mm = new \Ximdex\Metadata\MetadataManager($this->nodeID);
-        $mm->updateSystemMetadata();
-    }
-
-
-    function SetContent($content, $commitNode = NULL, Node $node = null)
-    {
-        parent::SetContent($content, $commitNode, $node);
-        $mm = new \Ximdex\Metadata\MetadataManager($this->nodeID);
-        $mm->updateSystemMetadata();
-    }
-
-    function GetCustomMetadata(){
-        $domNode = new DOMDocument('1.0', 'utf-8');
-        $domNode->formatOutput = true;
-        $domNode->preserveWhiteSpace = false;
-
-        $width = $domNode->createElement("width");
-        $height = $domNode->createElement('height');
-
-        $node = new Node($this->nodeID);
-        $info = $node->GetLastVersion();
-        /*
-        $pathToFile = XIMDEX_ROOT_PATH . '/data/files/' . $info['File'];
-        list($w, $h) =  getimagesize($pathToFile);
-        $width->nodeValue = $w;
-        $height->nodeValue = $h;
-
-
-        */
-
-        $fileData = $domNode->createElement("file_data");
-        $fileData->appendChild($width);
-        $fileData->appendChild($height);
-        $domNode->appendChild($fileData);
-        return $fileData;
-    }
-
 }

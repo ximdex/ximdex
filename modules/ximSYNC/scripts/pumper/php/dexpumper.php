@@ -141,7 +141,7 @@ class DexPumper
 					$this->activeWaiting();
 					
 					// Manual stop for pumpers in sleeping mode
-					$stopper_file_path = XIMDEX_ROOT_PATH . App::getValue("TempRoot") . "/pumper.stop";
+					$stopper_file_path = XIMDEX_ROOT_PATH . App::getValue("TempRoot") . "/pumpers.stop";
 					if (file_exists($stopper_file_path)) {
 					    Logger::warning('[PUMPERS] ' . "STOP: Detected file" . " $stopper_file_path");
 					    $this->unRegisterPumper();
@@ -201,9 +201,12 @@ class DexPumper
 		$initialDirectory = $this->server->get('InitialDirectory');
 		$fileName = $this->serverFrame->get('FileName');
 		$remotePath = $this->serverFrame->get('RemotePath');
-		$this->info("ServerFrame $IdSync DUE2OUT: download file from server ");
+		$this->info("ServerFrame $IdSync DUE2OUT: Download file from server");
 		$targetFile = "{$initialDirectory}{$remotePath}/{$fileName}";
 		$removing = $this->taskDelete($targetFile);
+		if ($removing) {
+		    Logger::info('Successfusly removed file ' . $fileName . ' from server', true);
+		}
 		$this->updateTask($removing, ServerFrame::OUT);
 	}
 
@@ -236,7 +239,7 @@ class DexPumper
 	private function updateStateFiles($IdBatchUp, $IdServer)
 	{
 		$table = "ServerFrames";
-		$stateToIn = " state = 'In' ";
+		$stateToIn = " state = '" . ServerFrame::IN . "' ";
 		$state_pumped = " state = 'Pumped' ";
 		$conditions = "{$state_pumped} AND IdBatchUp = '{$IdBatchUp}' AND IdServer = '{$IdServer}'";
 		$this->info("UPDATE TO  {$stateToIn} : {$conditions} ");
@@ -264,13 +267,12 @@ class DexPumper
                          $this->finishTask($file["IdSync"]);
 					 } elseif ($renameResult === false) {
 					     
-					     //TODO check the conflict with process
                          // If this rename task does not work, generates a infinite loop
-                         $this->updateTask(0, ServerFrame::DUE2OUTWITHERROR);
+                         $this->updateTask(false, ServerFrame::DUE2OUTWITHERROR);
 					 } else {
 					     
 					     // If this rename task does not work, generates a infinite loop
-					     $this->updateTask(0, ServerFrame::IN);
+					     $this->updateTask(false, ServerFrame::IN);
 					 }
 				}
 			}
@@ -302,30 +304,37 @@ class DexPumper
 			}
 			$this->connection = \Ximdex\IO\Connection\ConnectionManager::getConnection($idProtocol, $this->server);
 		}
+		$res = true;
 		if (!$this->connection->isConnected()) {
 			if ($this->connection->connect($host, $port)) {
 			    if (!$this->connection->login($login, $passwd))
 			    {
 			        $this->error('Can\'t log the user into host: ' . $host);
+			        $res = false;
 			    }
 			}
 			else
 			{
 			    $this->error('Can\'t connect to host: ' . $host);
+			    $res = false;
 			}
 		}
 		if ($this->connection->getError()) {
 		    $this->error($this->connection->getError());
 		}
 		if (!$this->connection->isConnected()) {
-			$msg_error = sprintf('Fail to connect o wrong login credentials for server: %s:%s with user: %s',  $host, $port, $login);
+			$msg_error = sprintf('Fail to connect or wrong login credentials for server: %s:%s with user: %s',  $host, $port, $login);
 			$this->fatal($msg_error);
+			$this->updateTask(false);
 			$this->updateServerState('Failed to connect');
+			/*
 			$this->unRegisterPumper();
 			exit(200);
+			*/
+			$res = false;
 		}
 		$this->updateTimeInPumper();
-		return true;
+		return $res;
 	}
 
 	private function taskBasic($baseRemoteFolder, $relativeRemoteFolder)
@@ -346,6 +355,10 @@ class DexPumper
 
 	private function taskUpload($localFile, $baseRemoteFolder, $relativeRemoteFolder, $remoteFile)
 	{
+	    if (!file_exists($localFile)) {
+	        $this->error('The sync file: ' . $localFile . ' does not exist');
+	        return false;
+	    }
         $this->getHostConnection();
 		if (!$this->taskBasic($baseRemoteFolder, $relativeRemoteFolder)) {
 			return false;
@@ -416,8 +429,9 @@ class DexPumper
 		if (!$result) {
 			$retries = $this->serverFrame->get('Retry');
 			$this->serverFrame->set('Retry', $retries);
-			if ($retries > self::RETRIES_TO_FATAL_ERROR) {
-			    $this->error('Maximum of retries reached (' . self::RETRIES_TO_FATAL_ERROR . ') for server frame: ' . $this->serverFrame->IdSync . '. Marked as errored');
+			if ($retries >= self::RETRIES_TO_FATAL_ERROR) {
+			    $this->error('Maximum of retries reached (' . self::RETRIES_TO_FATAL_ERROR . ') for server frame: ' 
+			        . $this->serverFrame->IdSync . '. Marked as errored');
 				$this->serverFrame->set('State', ServerFrame::DUE2INWITHERROR);
 			}
 			else {
@@ -435,7 +449,7 @@ class DexPumper
 		}
 		$this->updateTimeInPumper();
 	}
-        
+    
     private function finishTask($idSync)
     {
         $serverFrame = new ServerFrame($idSync);
@@ -447,7 +461,8 @@ class DexPumper
 	private function updateServerState($status)
 	{
 		if (!empty($status)) {
-		    $sql = 'UPDATE ServerErrorByPumper SET WithError = 1, Error = \'' . $status . '\' WHERE ServerId = ' . $this->server->get('IdServer');
+		    $sql = 'UPDATE ServerErrorByPumper SET WithError = 1, Error = \'' . $status . '\' WHERE ServerId = ' 
+		        . $this->server->get('IdServer');
 		    $this->server->query($sql);
 			$this->server->set('ActiveForPumping', 1);
 			$this->server->update();
