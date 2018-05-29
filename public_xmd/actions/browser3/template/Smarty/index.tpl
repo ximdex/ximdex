@@ -94,7 +94,7 @@
                             {/section}
                         </ul>
                     </li>
-                  <!--  <li class="icon config" ng-click="modifyAccount('{$userID}', '{t}Modify your account{/t}')">
+                  <li class="icon config" ng-click="modifyAccount('{$userID}', '{t}Modify your account{/t}')">
                         <a href="#">{t}Modify your account{/t}</a>
                     </li>
                     <li class="icon help">
@@ -102,7 +102,7 @@
                     </li>
                     <li class="icon contact">
                         <a target="_blank" href="mailto:help@ximdex.org">{t}Contact us{/t}</a>
-                    </li> -->
+                    </li> 
                 </ul>
             </div>
         </div>

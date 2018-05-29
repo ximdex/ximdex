@@ -5683,6 +5683,9 @@ msgstr "Adicionar novo idioma"
 msgid "Add a new language"
 msgstr "Adicionar um novo idioma"
 
+msgid "Add a new empty layout"
+msgstr "Adicionar um novo layout vazio"
+
 msgid "Add a document with different language"
 msgstr "Adicionar um documento em um idioma diferente"
 

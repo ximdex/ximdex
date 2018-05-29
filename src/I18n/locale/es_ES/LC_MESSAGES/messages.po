@@ -6866,6 +6866,9 @@ msgstr "Mostrar un informe de acciones"
 msgid "Add a new workflow"
 msgstr "Añade un nuevo workflow"
 
+msgid "Add a new empty layout""
+msgstr "Añadir un nuevo layout vacio"
+
 msgid "Edit RNG"
 msgstr "Editar RNG"
 
